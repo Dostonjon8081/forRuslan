@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_navigation"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        tools:layout="@layout/fragment_splash"
+        android:id="@+id/splashFragment"
+        android:name="com.softdata.dyhxx.splash.SplashFragment"
+         >
+        <action
+            android:id="@+id/action_splashFragment_to_selectLanguageFragment"
+            app:destination="@id/selectLanguageFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popExitAnim="@anim/slide_out_bottom" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/home_fragment"
+            app:enterAnim="@anim/coming"
+            app:exitAnim="@anim/out"
+            app:popEnterAnim="@anim/coming"
+            app:popExitAnim="@anim/out" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_auth"
+        android:id="@+id/authFragment"
+        android:name="com.softdata.dyhxx.init.AuthFragment"
+        android:label="AuthFragment" >
+        <action
+            android:id="@+id/action_authFragment_to_homeFragment"
+            app:destination="@id/home_fragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_select_language"
+        android:id="@+id/selectLanguageFragment"
+        android:name="com.softdata.dyhxx.init.SelectLanguageFragment"
+        android:label="SelectLanguageFragment" >
+        <action
+            android:id="@+id/action_selectLanguageFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_home"
+        android:id="@+id/home_fragment"
+        android:name="com.softdata.dyhxx.home.HomeFragment"
+        android:label="@string/home" />
+    <fragment
+        tools:layout="@layout/fragment_notification"
+        android:id="@+id/notification_fragment"
+        android:name="com.softdata.dyhxx.notification.Notification"
+        android:label="@string/notification" />
+    <fragment
+        tools:layout="@layout/fragment_account"
+        android:id="@+id/account_fragment"
+        android:name="com.softdata.dyhxx.account.Account"
+        android:label="@string/account" />
+</navigation>

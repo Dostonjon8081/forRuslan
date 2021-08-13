@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">DYHXX</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="notification" translatable="false">Notification</string>
+    <string name="account" translatable="false">Account</string>
+
+    <string name="ozbek" translatable="false">O\'zbek</string>
+    <string name="russian" translatable="false">Русский</string>
+    <string name="english" translatable="false">English</string>
+
+    <string name="look" >look</string>
+    <string name="check_fine">DYHXX check the fine</string>
+    <string name="auth_description">To take full advantage of the program, sign up by telegram.</string>
+</resources>

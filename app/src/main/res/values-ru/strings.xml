@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DYHXX</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="notification" translatable="false">Notification</string>
+    <string name="account" translatable="false">Account</string>
+
+    <string name="ozbek" translatable="false">O\'zbek</string>
+    <string name="russian" translatable="false">Русский</string>
+    <string name="english" translatable="false">English</string>
+
+    <string name="look" >smotri</string>
+    <string name="check_fine">УБДД проверить штраф</string>
+    <string name="auth_description">Чтобы воспользоваться всеми преимуществами программы, зарегистрируйтесь по телеграмме.</string>
+</resources>
