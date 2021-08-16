@@ -12,4 +12,17 @@
     <string name="look">qara</string>
     <string name="check_fine">DYHXX jarimasini tekshirish</string>
     <string name="auth_description">Dasturdan to\'liq foydalanish uchun telegram orqali ro\'yhatdan o\'ting</string>
+
+    <string name="auth_by_telegram">Telegram orqali bog\'lanish</string>
+    <string name="add_car">Avtomobil qo\'shish</string>
+
+    <string name="car_number">Avtomobil raqami</string>
+    <string name="tex_pas_series">Tex.pas. seriyasi</string>
+    <string name="tex_pass_number">Tex.pass raqam</string>
+    <string name="car_mark">Avtomobil markasi</string>
+    <string name="car_models">Avtomobile modeli</string>
+    <string name="select">Tanlash</string>
+    <string name="save">Tasdiqlash</string>
+    <string name="close">Yopish</string>
+
 </resources>

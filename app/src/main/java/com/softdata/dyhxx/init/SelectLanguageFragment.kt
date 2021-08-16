@@ -46,8 +46,6 @@ class SelectLanguageFragment : Fragment() {
 
 
     private fun loadPref() {
-
-
 //        pref?.edit()?.putString("key", "uz")?.apply()
         val lang = pref?.getString("key", "eng")
         loge(lang)

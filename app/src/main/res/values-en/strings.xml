@@ -12,4 +12,16 @@
     <string name="look" >look</string>
     <string name="check_fine">DYHXX check the fine</string>
     <string name="auth_description">To take full advantage of the program, sign up by telegram.</string>
+    <string name="auth_by_telegram">Auth by telegram</string>
+    <string name="add_car">Add Car</string>
+
+    <string name="car_number">Car number</string>
+    <string name="tex_pas_series">Tex.pas. series</string>
+    <string name="tex_pass_number">Tex.pass number</string>
+    <string name="car_mark">Car marks</string>
+    <string name="car_models">Car models</string>
+    <string name="select">Select</string>
+    <string name="save">Save</string>
+    <string name="close">Cancel</string>
+
 </resources>

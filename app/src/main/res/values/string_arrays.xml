@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="car_marks">
+        <item>Audi</item>
+
+       <item>Daewoo</item>
+       <item>Chevrolet</item>
+       <item>Acura</item>
+       <item>Aston Martin</item>
+       <item>Alfa Romeo</item>
+       <item>Bentley</item>
+       <item>BMW</item>
+       <item>Buick</item>
+       <item>Mercedes Benz</item>
+
+    </string-array>
+</resources>

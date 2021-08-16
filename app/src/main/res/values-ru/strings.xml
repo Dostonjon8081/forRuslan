@@ -12,4 +12,16 @@
     <string name="look" >smotri</string>
     <string name="check_fine">УБДД проверить штраф</string>
     <string name="auth_description">Чтобы воспользоваться всеми преимуществами программы, зарегистрируйтесь по телеграмме.</string>
+
+    <string name="auth_by_telegram">Telegram соединение</string>
+    <string name="add_car">Добавить машину</string>
+
+    <string name="car_number">Номер автомобиля</string>
+    <string name="tex_pas_series">Теx.пас серия</string>
+    <string name="tex_pass_number">Теx.пас номер</string>
+    <string name="car_mark">Марка машины</string>
+    <string name="car_models">Модель автомобиля</string>
+    <string name="select">Выбор</string>
+    <string name="save">Cохранять</string>
+    <string name="close">Закрыть</string>
 </resources>
