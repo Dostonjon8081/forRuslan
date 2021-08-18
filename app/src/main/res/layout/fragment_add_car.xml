@@ -31,6 +31,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
+            android:id="@+id/add_car_fragment_et_car_number"
             android:layout_height="wrap_content"
             android:background="@drawable/background_white_gray_stoke"
             android:fontFamily="@font/gilroy_medium"
@@ -68,6 +69,7 @@
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
+                android:id="@+id/add_car_fragment_tex_pass_series"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_white_gray_stoke"
                 android:fontFamily="@font/gilroy_medium"
@@ -97,6 +99,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/add_car_fragment_tex_pass_number"
                 android:background="@drawable/background_white_gray_stoke"
                 android:fontFamily="@font/gilroy_medium"
                 android:hint="01234567"

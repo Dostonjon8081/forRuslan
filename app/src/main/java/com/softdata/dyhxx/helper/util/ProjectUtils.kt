@@ -1,4 +1,4 @@
-package com.softdata.dyhxx.util
+package com.softdata.dyhxx.helper.util
 
 import android.app.Activity
 import android.content.Context

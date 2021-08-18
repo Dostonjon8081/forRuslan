@@ -1,4 +1,4 @@
-package com.softdata.dyhxx.notification
+package com.softdata.dyhxx.core_fragment.notification
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.softdata.dyhxx.databinding.FragmentNotificationBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class Notification : Fragment() {
 
     private var _binding: FragmentNotificationBinding? = null

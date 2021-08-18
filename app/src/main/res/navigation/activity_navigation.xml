@@ -46,7 +46,7 @@
     <fragment
         tools:layout="@layout/fragment_home"
         android:id="@+id/home_fragment"
-        android:name="com.softdata.dyhxx.home.HomeFragment"
+        android:name="com.softdata.dyhxx.core_fragment.home.HomeFragment"
         android:label="@string/home" >
         <action
             android:id="@+id/action_home_fragment_to_addCarFragment"
@@ -56,18 +56,18 @@
     <fragment
         tools:layout="@layout/fragment_add_car"
         android:id="@+id/addCarFragment"
-        android:name="com.softdata.dyhxx.home.AddCarFragment"
+        android:name="com.softdata.dyhxx.core_fragment.home.AddCarFragment"
         android:label="AddCarFragment" />
 
     <fragment
         tools:layout="@layout/fragment_notification"
         android:id="@+id/notification_fragment"
-        android:name="com.softdata.dyhxx.notification.Notification"
+        android:name="com.softdata.dyhxx.core_fragment.notification.Notification"
         android:label="@string/notification" />
     <fragment
         tools:layout="@layout/fragment_account"
         android:id="@+id/account_fragment"
-        android:name="com.softdata.dyhxx.account.Account"
+        android:name="com.softdata.dyhxx.core_fragment.account.Account"
         android:label="@string/account" />
 
 </navigation>

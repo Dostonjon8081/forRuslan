@@ -1,12 +1,9 @@
-package com.softdata.dyhxx.db
+package com.softdata.dyhxx.helper.util.db
 
 import androidx.room.Database
+import androidx.room.RoomDatabase
 
 @Database(entities = [CarEntity::class], version = 1, exportSchema = false)
-abstract class CarDataBase {
+abstract class CarDataBase : RoomDatabase() {
     abstract fun dao(): CarDao
-
-    companion object {
-        const val DB_NAME = "car_db"
     }
-}

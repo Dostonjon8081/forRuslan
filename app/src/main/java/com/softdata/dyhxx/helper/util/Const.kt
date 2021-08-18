@@ -1,4 +1,4 @@
-package com.softdata.dyhxx.util
+package com.softdata.dyhxx.helper.util
 
 const val CONST_PREF = "CONST_PREF"
 

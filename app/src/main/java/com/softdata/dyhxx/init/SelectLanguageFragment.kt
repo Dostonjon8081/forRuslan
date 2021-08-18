@@ -10,10 +10,13 @@ import androidx.fragment.app.Fragment
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.databinding.FragmentSelectLanguageBinding
-import com.softdata.dyhxx.util.getPref
-import com.softdata.dyhxx.util.loge
+import com.softdata.dyhxx.helper.util.getPref
+import com.softdata.dyhxx.helper.util.loge
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+
+@AndroidEntryPoint
 class SelectLanguageFragment : Fragment() {
 
 

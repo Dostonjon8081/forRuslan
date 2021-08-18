@@ -9,9 +9,12 @@ import androidx.fragment.app.Fragment
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.databinding.FragmentAuthBinding
-import com.softdata.dyhxx.util.FIRST_INIT
-import com.softdata.dyhxx.util.getPref
+import com.softdata.dyhxx.helper.util.FIRST_INIT
+import com.softdata.dyhxx.helper.util.getPref
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class AuthFragment : Fragment() {
 
     private var pref: SharedPreferences? = null
