@@ -24,6 +24,7 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: CarRvAdapter
 
     private val viewModel: CarViewModel by activityViewModels()
 
@@ -53,10 +54,24 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.idHomeFragmentButtonAddCar.setOnClickListener { addCar() }
+        binding.homeFragmentButtonAddCar.setOnClickListener { addCar() }
 
-        viewModel.allCar.observe(viewLifecycleOwner,  object :Observer<List<CarEntity>>{
+        viewModel.allCar.observe(viewLifecycleOwner, object : Observer<List<CarEntity>> {
             override fun onChanged(t: List<CarEntity>?) {
+                if (t?.size!! > 0) {
+                    adapter = CarRvAdapter(t)
+                    binding.homeFragmentDescription.visibility = View.GONE
+                    binding.homeFragmentRv.visibility = View.VISIBLE
+                    binding.homeFragmentRv.adapter = adapter
+                    binding.homeFragmentButtonAddCar.visibility = if (t.size>=8){
+                         View.GONE
+                    } else {
+                         View.VISIBLE
+                    }
+                } else{
+                    binding.homeFragmentDescription.visibility = View.VISIBLE
+                    binding.homeFragmentRv.visibility = View.GONE
+                }
                 Log.d("holt", "onViewCreated: $t")
             }
 //            Log.d("holt", "onViewCreated: $it")

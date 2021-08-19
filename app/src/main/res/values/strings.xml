@@ -19,12 +19,16 @@
     <string name="tex_pas_series">Tex.pas. seriyasi</string>
     <string name="tex_pass_number">Tex.pass raqam</string>
     <string name="car_mark">Avtomobil markasi</string>
-    <string name="car_models">Avtomobile modeli</string>
+    <string name="car_models">Avtomobil modeli</string>
     <string name="select">Tanlash</string>
     <string name="save">Tasdiqlash</string>
     <string name="close">Yopish</string>
+    <string name="car_model">Avtomobil turi:</string>
+    <string name="car_marks">Avotomobil_markasi:</string>
+    <string name="text_pass_series_numbers">Tex.pass. seriyasi va raqami:</string>
+    <string name="avtomobil_raqami">Avtomobil raqami:</string>
 
-<!--    <string-array name="car_markss">-->
+    <!--    <string-array name="car_markss">-->
 <!--        <item>Audi</item>-->
 <!--        <item>Daewoo</item>-->
 <!--        <item>Chevrolet</item>-->

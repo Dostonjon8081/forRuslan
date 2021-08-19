@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +11,26 @@
         android:layout_height="@android:dimen/app_icon_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/add_car_fragment_arrow_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="6dp"
+            android:src="@drawable/ic_arrow_left" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/add_car"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gilroy_bold"
+            android:textSize="18sp"
+            tools:ignore="RtlSymmetry" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/add_car_fragment_container_add_car"
@@ -30,9 +50,12 @@
             android:textSize="12sp" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="match_parent"
             android:id="@+id/add_car_fragment_et_car_number"
+            android:layout_width="match_parent"
+            android:drawableEnd="@drawable/ic_about"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:maxLength="9"
             android:background="@drawable/background_white_gray_stoke"
             android:fontFamily="@font/gilroy_medium"
             android:hint="00 A 000 AA"
@@ -47,6 +70,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
         android:weightSum="2"
         app:layout_constraintStart_toStartOf="@id/add_car_fragment_container_add_car"
         app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_add_car">
@@ -62,20 +86,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroy_medium"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:paddingBottom="4dp"
                 android:text="@string/tex_pas_series"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:layout_width="match_parent"
                 android:id="@+id/add_car_fragment_tex_pass_series"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_white_gray_stoke"
                 android:fontFamily="@font/gilroy_medium"
                 android:hint="AAA"
-                android:textColorHint="@color/pale_text"
-                android:padding="12dp" />
+                android:maxLength="3"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:textColorHint="@color/pale_text" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -83,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_weight="0.6"
+            android:layout_weight="0.5"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/add_car_fragment_toolBar">
 
@@ -91,19 +120,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroy_medium"
+                android:lines="1"
                 android:paddingBottom="4dp"
                 android:text="@string/tex_pass_number"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/add_car_fragment_tex_pass_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/add_car_fragment_tex_pass_number"
                 android:background="@drawable/background_white_gray_stoke"
                 android:fontFamily="@font/gilroy_medium"
                 android:hint="01234567"
+                android:maxLines="1"
+                android:inputType="number"
                 android:padding="12dp"
+                android:drawableEnd="@drawable/ic_about"
                 android:textColorHint="@color/pale_text" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -130,13 +163,13 @@
             android:textSize="12sp" />
 
         <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/add_car_fragment_spinner_car_marks"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:prompt="@string/select"
-            android:id="@+id/add_car_fragment_spinner_car_marks"
             android:background="@drawable/background_white_gray_stoke"
             android:fontFamily="@font/gilroy_medium"
             android:padding="12dp"
+            android:prompt="@string/select"
             android:textColor="@color/pale_text" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -159,13 +192,14 @@
             android:textSize="12sp" />
 
         <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/add_car_fragment_spinner_car_models"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+
             android:background="@drawable/background_white_gray_stoke"
             android:fontFamily="@font/gilroy_medium"
             android:hint="@string/select"
             android:padding="12dp"
-            android:id="@+id/add_car_fragment_spinner_car_models"
             android:textColor="@color/pale_text" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

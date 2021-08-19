@@ -2,27 +2,28 @@ package com.softdata.dyhxx.helper.util.db.dataRepository
 
 import com.softdata.dyhxx.helper.util.db.CarDataBase
 import com.softdata.dyhxx.helper.util.db.CarEntity
+import com.softdata.dyhxx.helper.util.db.dataSource.CarDataSourceImpl
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CarRepositoryImpl @Inject constructor(val db :CarDataBase) : ICarRepository {
+class CarRepositoryImpl @Inject constructor(val sourceImpl: CarDataSourceImpl) : ICarRepository {
 
 
 
     override suspend fun insertCar(carEntity: CarEntity): Long {
-        return db.dao().insertCar(carEntity)
+        return sourceImpl.insertCar(carEntity)
     }
 
     override suspend fun deleteCar(id: Long): Int {
-        return db.dao().deleteCar(id)
+        return sourceImpl.deleteCar(id)
     }
 
     override  fun getCar(id: Long): Flow<CarEntity> {
-        return db.dao().getCar(id)
+        return sourceImpl.getCar(id)
     }
 
     override fun allCar(): Flow<List<CarEntity>> {
-        return db.dao().allCars()
+        return sourceImpl.allCar()
     }
 //
 //    override suspend fun insertCar(carEntity: CarEntity): Long {

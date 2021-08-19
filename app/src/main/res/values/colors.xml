@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bottom_select_color">#219EBC</color>
     <color name="pale_text">#AFAFAF</color>
+    <color name="item_rv_color">#E2EFF6</color>
 
 </resources>
