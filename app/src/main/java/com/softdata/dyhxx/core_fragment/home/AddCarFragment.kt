@@ -102,9 +102,9 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString()
         val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString()
 
-        if (carNumber.isNotEmpty()
-            && carTexPasNumber.isNotEmpty()
-            && carTexPasSeries.isNotEmpty()
+        if (carNumber.length>=8
+            && carTexPasNumber.length>5
+            && carTexPasSeries.length>=3
             && carMark.isNotEmpty()
             && carModel.isNotEmpty()
         ) {

@@ -43,9 +43,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/rv_item_car_mark_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/car_marks"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toStartOf="@id/rv_item_edit"
         android:layout_marginStart="30dp"
         android:fontFamily="@font/gilroy_regular"
         android:textColor="@color/black"
@@ -100,25 +103,27 @@
 
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rv_item_car_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rv_item_car_number_title"
-        app:layout_constraintStart_toStartOf="@id/rv_item_car_model_title"
-        android:text=" 01   0 741 JB"
-        android:padding="4dp"
-        android:fontFamily="@font/gilroy_bold"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:id="@+id/rv_item_car_number"
-        android:textColor="@color/black"
         android:background="@drawable/ic_number_plate_"
-        android:paddingTop="10dp"/>
-
+        android:fontFamily="@font/gilroy_bold"
+        android:padding="4dp"
+        android:paddingTop="10dp"
+        android:text=" 01   0 741 JB"
+        android:paddingEnd="30dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/rv_item_car_number_title"
+        app:layout_constraintTop_toBottomOf="@id/rv_item_car_number_title" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/anonym_car"
+        android:id="@+id/rv_item_car_image"
         app:layout_constraintStart_toEndOf="@id/rv_item_car_tex_pass_title"
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingEnd="18dp"

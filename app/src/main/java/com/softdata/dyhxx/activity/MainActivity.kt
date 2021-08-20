@@ -1,7 +1,9 @@
 package com.softdata.dyhxx.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -34,6 +36,13 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController!!)
 
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode==1001){
+            Toast.makeText(this,"$data", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
