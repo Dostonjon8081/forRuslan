@@ -1,4 +1,4 @@
-package com.softdata.dyhxx.helper.util.db
+package com.softdata.dyhxx.helper.db
 
 import androidx.room.Dao
 import androidx.room.Insert

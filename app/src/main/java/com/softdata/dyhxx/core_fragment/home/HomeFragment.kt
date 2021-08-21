@@ -14,8 +14,8 @@ import androidx.lifecycle.Observer
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.databinding.FragmentHomeBinding
-import com.softdata.dyhxx.helper.util.db.CarEntity
-import com.softdata.dyhxx.helper.util.db.carViewModel.CarViewModel
+import com.softdata.dyhxx.helper.db.CarEntity
+import com.softdata.dyhxx.helper.db.carViewModel.CarViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

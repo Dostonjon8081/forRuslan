@@ -1,7 +1,7 @@
-package com.softdata.dyhxx.helper.util.db.dataSource
+package com.softdata.dyhxx.helper.db.dataSource
 
-import com.softdata.dyhxx.helper.util.db.CarDataBase
-import com.softdata.dyhxx.helper.util.db.CarEntity
+import com.softdata.dyhxx.helper.db.CarDataBase
+import com.softdata.dyhxx.helper.db.CarEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

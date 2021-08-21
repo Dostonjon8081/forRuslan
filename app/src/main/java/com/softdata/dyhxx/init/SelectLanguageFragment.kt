@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.databinding.FragmentSelectLanguageBinding
+import com.softdata.dyhxx.helper.util.PREF_LANG_KEY
 import com.softdata.dyhxx.helper.util.getPref
 import com.softdata.dyhxx.helper.util.loge
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,21 +44,16 @@ class SelectLanguageFragment : Fragment() {
 
         pref = getPref(requireActivity())
         loadPref()
-
-
     }
 
 
     private fun loadPref() {
-//        pref?.edit()?.putString("key", "uz")?.apply()
-        val lang = pref?.getString("key", "eng")
+        val lang = pref?.getString(PREF_LANG_KEY, "eng")
         loge(lang)
         setLocate(lang!!)
     }
 
     private fun setLocate(lang: String) {
-        Log.d("selected", "setLocate: $lang")
-        Log.d("selected", resources.getString(R.string.look))
         val locale = Locale(lang)
         val config = resources.configuration
         Locale.setDefault(locale)
@@ -65,10 +61,8 @@ class SelectLanguageFragment : Fragment() {
         resources.updateConfiguration(config, requireContext().resources.displayMetrics)
 
         val editor = pref?.edit()
-        editor?.putString("key", lang)
+        editor?.putString(PREF_LANG_KEY, lang)
         editor?.apply()
-
-        Log.d("selected", resources.getString(R.string.look))
     }
 
     private fun onSelectLanguage(v: View) {

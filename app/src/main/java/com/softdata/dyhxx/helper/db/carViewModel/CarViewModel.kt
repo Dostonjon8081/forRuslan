@@ -1,15 +1,20 @@
-package com.softdata.dyhxx.helper.util.db.carViewModel
+package com.softdata.dyhxx.helper.db.carViewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.softdata.dyhxx.helper.util.db.CarEntity
-import com.softdata.dyhxx.helper.util.db.dataRepository.ICarRepository
+import com.softdata.dyhxx.helper.db.CarEntity
+import com.softdata.dyhxx.helper.db.dataRepository.ICarRepository
+import com.softdata.dyhxx.helper.network.NetworkResult
+import com.softdata.dyhxx.helper.network.model.UserAuthIDModel
+import com.softdata.dyhxx.helper.util.PREF_TOKEN_KEY
+import com.softdata.dyhxx.helper.util.getPref
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.security.PrivateKey
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,7 +25,6 @@ class CarViewModel @Inject constructor(
 
     private val _allCar = MutableLiveData<List<CarEntity>>()
     val allCar: LiveData<List<CarEntity>> = _allCar
-
 
     fun allCars() {
         viewModelScope.launch {

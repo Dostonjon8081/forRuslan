@@ -1,9 +1,9 @@
-package com.softdata.dyhxx.helper.util.db.dataSource
+package com.softdata.dyhxx.helper.db.dataRepository
 
-import com.softdata.dyhxx.helper.util.db.CarEntity
+import com.softdata.dyhxx.helper.db.CarEntity
 import kotlinx.coroutines.flow.Flow
 
-interface ICarDataSource {
+interface ICarRepository {
     suspend fun insertCar(carEntity: CarEntity): Long
 
     suspend fun deleteCar(id: Long): Int

@@ -39,24 +39,11 @@ class SplashFragment : Fragment() {
         activity?.window?.statusBarColor =
             ContextCompat.getColor(requireContext(), R.color.bottom_select_color)
 
-
-//        navController = Navigation.findNavController(requireView())
-
         Handler().postDelayed({
             if (getPref(requireActivity()).getBoolean(FIRST_INIT, true)) {
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    requireActivity(),
-                    UtilPair.create(View(requireContext()), "hero_image")
-                )
-                val extras = ActivityNavigatorExtras(options)
-
-                (activity as MainActivity).navController!!.navigate(
-                    R.id.action_splashFragment_to_selectLanguageFragment,
-                    null,
-                    null,
-                    extras
-                )
+                (activity as MainActivity).navController!!.navigate(R.id.action_splashFragment_to_selectLanguageFragment)
             } else {
+
                 (activity as MainActivity).navController!!.navigate(R.id.action_splashFragment_to_homeFragment)
             }
         }, 2000)

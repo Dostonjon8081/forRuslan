@@ -1,4 +1,4 @@
-package com.softdata.dyhxx.helper.util.db
+package com.softdata.dyhxx.helper.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

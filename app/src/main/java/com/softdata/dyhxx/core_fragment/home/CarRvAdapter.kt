@@ -1,13 +1,12 @@
 package com.softdata.dyhxx.core_fragment.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.softdata.dyhxx.R
-import com.softdata.dyhxx.helper.util.db.CarEntity
+import com.softdata.dyhxx.helper.db.CarEntity
 
 class CarRvAdapter(val list: List<CarEntity>) : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
