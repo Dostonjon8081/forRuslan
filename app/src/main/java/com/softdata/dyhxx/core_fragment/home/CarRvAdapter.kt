@@ -31,7 +31,7 @@ class CarRvAdapter(val list: List<CarEntity>) : RecyclerView.Adapter<CarRvAdapte
             number.text = numberString
 
             //tex pass series and number
-            texPasSer.text = "${list[position].tex_pass_series}  ${list[position].texPassNumber}"
+            texPasSer.text = "${list[position].texPass.substring(0,3)}  ${list[position].texPass.substring(3)}"
 
             model.text = list[position].carModel
         }

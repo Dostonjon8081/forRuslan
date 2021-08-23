@@ -8,7 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.softdata.dyhxx.R
+import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.databinding.FragmentAuthBinding
+import com.softdata.dyhxx.helper.util.PREF_TOKEN_KEY
+import com.softdata.dyhxx.helper.util.TELEGRAM_AUTH_URL
 import com.softdata.dyhxx.helper.util.getPref
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +36,14 @@ class AuthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.idAuthFragmentButtonTelegram.setOnClickListener {
 
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/dyhxxuz_auth_bot")))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_AUTH_URL)))
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (!getPref(requireActivity()).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()) {
+            (activity as MainActivity).navController?.navigate(R.id.action_authFragment_to_homeFragment)
         }
     }
 

@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -76,10 +77,23 @@ dependencies {
     def fragment_version = "1.4.0-alpha05"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
+//    //navigation
+//    def navVersion = "2.3.5"
+//    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+//    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+    //navigation
+    def navigation_version = "2.4.0-alpha05"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
 
 
+    //RxBinding
+    def rxbinding_version = "4.0.0"
+    implementation "com.jakewharton.rxbinding4:rxbinding-core:$rxbinding_version"
 }

@@ -11,18 +11,36 @@ import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
+import com.jakewharton.rxbinding4.widget.textChanges
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.databinding.FragmentAddCarBinding
-import com.softdata.dyhxx.helper.util.carToast
 import com.softdata.dyhxx.helper.db.CarEntity
 import com.softdata.dyhxx.helper.db.carViewModel.CarViewModel
+import com.softdata.dyhxx.helper.network.model.SaveCarModel
+import com.softdata.dyhxx.helper.network.viewModel.ApiViewModel
+import com.softdata.dyhxx.helper.util.PREF_USER_ID_KEY
+import com.softdata.dyhxx.helper.util.carToast
+import com.softdata.dyhxx.helper.util.getPref
+import com.softdata.dyhxx.helper.util.isOnline
 import dagger.hilt.android.AndroidEntryPoint
+import hilt_aggregated_deps._com_softdata_dyhxx_core_fragment_home_AddCarFragment_GeneratedInjector
+import io.reactivex.rxjava3.core.Observable
 
 @AndroidEntryPoint
 class AddCarFragment : Fragment(), SpinnerItemClick {
 
     private val viewModel: CarViewModel by activityViewModels()
+    private val apiViewModel: ApiViewModel by activityViewModels()
+    private val navController: NavController by lazy(LazyThreadSafetyMode.NONE) {
+        (activity as MainActivity).findNavController(R.id.container_main_navigation)
+    }
+
+    private val addCarFragment: AddCarFragmentArgs by navArgs()
+
     private val carMarks = mutableListOf(
         "Select",
         "Daewoo",
@@ -59,8 +77,6 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
     ): View? {
         _binding = FragmentAddCarBinding.inflate(inflater, container, false)
         return binding.root
-
-//        requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,9 +86,29 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
 
         setupSpinner()
 
+        setup()
+
         binding.addCarFragmentButtonCancel.setOnClickListener { clickButton(binding.addCarFragmentButtonCancel.id) }
         binding.addCarFragmentButtonSave.setOnClickListener { clickButton(binding.addCarFragmentButtonSave.id) }
         binding.addCarFragmentArrowBack.setOnClickListener { clickButton(binding.addCarFragmentArrowBack.id) }
+    }
+
+    private fun setup() {
+        binding.apply {
+        val d = Observable.combineLatest(
+            addCarFragmentEtCarNumber.textChanges().skipInitialValue(),
+            addCarFragmentTexPassSeries.textChanges().skipInitialValue(),
+            addCarFragmentTexPassNumber.textChanges().skipInitialValue(),
+            {carNumber,texPassSeries,texPassNumber->
+
+//                carNumber.toString() != .task.title ||
+//                        description.toString() != task.description ||
+//                        date.toString() != task.time.date ||
+//                        time.toString() != task.time.hour ||
+//                        alarm.toString() != AlarmTypes.getByValue(task.alarmTime).title
+            }
+        ).doOnNext {  }
+            .subscribe()}
     }
 
     private fun setupSpinner() {
@@ -91,20 +127,20 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
     private fun clickButton(id: Int) {
         when (id) {
             R.id.add_car_fragment_button_cancel -> (activity as MainActivity).onBackPressed()
-            R.id.add_car_fragment_button_save -> writeToDB()
+            R.id.add_car_fragment_button_save -> saveCar()
             R.id.add_car_fragment_arrow_back -> (activity as MainActivity).onBackPressed()
         }
     }
 
-    private fun writeToDB() {
+    private fun saveCar() {
 
-        val carNumber = binding.addCarFragmentEtCarNumber.text.toString()
-        val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString()
+        val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
+        val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
         val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString()
 
-        if (carNumber.length>=8
-            && carTexPasNumber.length>5
-            && carTexPasSeries.length>=3
+        if (carNumber.length >= 8
+            && carTexPasNumber.length == 7
+            && carTexPasSeries.length >= 3
             && carMark.isNotEmpty()
             && carModel.isNotEmpty()
         ) {
@@ -112,16 +148,39 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
                 CarEntity(
                     0,
                     carNumber,
-                    carTexPasSeries,
-                    carTexPasNumber,
+                    carTexPasSeries +
+                            carTexPasNumber,
                     carMark,
                     carModel
                 )
 
-            viewModel.insertCar(carEntity)
-            (activity as MainActivity).onBackPressed()
+            if (isOnline(requireContext())) {
+
+
+                apiViewModel.saveCar(
+                    SaveCarModel(
+                        getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!, carNumber,
+                        carTexPasSeries + carTexPasNumber
+                    )
+                )
+
+                apiViewModel.responseSaveCar.observe(viewLifecycleOwner) {
+                    when (it.data?.status) {
+                        200 -> {
+                            viewModel.insertCar(carEntity)
+                            (activity as MainActivity).onBackPressed()
+                        }
+                        401 -> carToast(requireContext(), getString(R.string.car_exist))
+                        400 -> carToast(requireContext(), getString(R.string.bad_request))
+                    }
+                }
+
+
+            } else {
+                carToast(requireContext(), getString(R.string.not_ethernet))
+            }
         } else {
-            carToast(requireContext(), "wrong something")
+            carToast(requireContext(), getString(R.string.wrong))
         }
     }
 

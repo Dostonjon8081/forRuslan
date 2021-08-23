@@ -13,6 +13,8 @@ import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.databinding.FragmentSplashBinding
 import com.softdata.dyhxx.helper.util.FIRST_INIT
+import com.softdata.dyhxx.helper.util.PREF_TOKEN_KEY
+import com.softdata.dyhxx.helper.util.PREF_USER_ID_KEY
 import com.softdata.dyhxx.helper.util.getPref
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.util.Pair as UtilPair
@@ -40,10 +42,9 @@ class SplashFragment : Fragment() {
             ContextCompat.getColor(requireContext(), R.color.bottom_select_color)
 
         Handler().postDelayed({
-            if (getPref(requireActivity()).getBoolean(FIRST_INIT, true)) {
+            if (getPref(requireActivity()).getString(PREF_USER_ID_KEY, "").isNullOrEmpty()) {
                 (activity as MainActivity).navController!!.navigate(R.id.action_splashFragment_to_selectLanguageFragment)
             } else {
-
                 (activity as MainActivity).navController!!.navigate(R.id.action_splashFragment_to_homeFragment)
             }
         }, 2000)

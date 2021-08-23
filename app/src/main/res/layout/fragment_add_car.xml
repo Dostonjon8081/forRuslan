@@ -55,6 +55,7 @@
             android:drawableEnd="@drawable/ic_about"
             android:layout_height="wrap_content"
             android:maxLines="1"
+            android:inputType="textCapCharacters"
             android:maxLength="9"
             android:background="@drawable/background_white_gray_stoke"
             android:fontFamily="@font/gilroy_medium"
@@ -101,7 +102,7 @@
                 android:fontFamily="@font/gilroy_medium"
                 android:hint="AAA"
                 android:maxLength="3"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
                 android:maxLines="1"
                 android:padding="12dp"
                 android:textColorHint="@color/pale_text" />

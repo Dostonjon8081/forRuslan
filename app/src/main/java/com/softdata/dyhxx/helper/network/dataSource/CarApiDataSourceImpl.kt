@@ -2,9 +2,7 @@ package com.softdata.dyhxx.helper.network.dataSource
 
 import android.util.Log
 import com.softdata.dyhxx.helper.network.CarApiService
-import com.softdata.dyhxx.helper.network.model.CheckLimitModel
-import com.softdata.dyhxx.helper.network.model.CheckLimitModelResponse
-import com.softdata.dyhxx.helper.network.model.UserAuthIDModel
+import com.softdata.dyhxx.helper.network.model.*
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -18,6 +16,14 @@ class CarApiDataSourceImpl @Inject constructor(private val carApiService: CarApi
 
     override suspend fun checkLimit(checkLimitModel: CheckLimitModel): Response<CheckLimitModelResponse> {
         return carApiService.checkLimit(checkLimitModel)
+    }
+
+    override suspend fun saveCar(saveCarModel: SaveCarModel): Response<SaveCarResponse> {
+        return carApiService.saveCar(saveCarModel)
+    }
+
+    override suspend fun allCars(allCars: AllCars): Response<AllCarsResponse> {
+        return carApiService.allCars(allCars)
     }
 
 

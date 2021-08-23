@@ -1,15 +1,12 @@
 package com.softdata.dyhxx.helper.network.viewModel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.softdata.dyhxx.helper.network.NetworkResult
-import com.softdata.dyhxx.helper.network.model.CheckLimitModel
-import com.softdata.dyhxx.helper.network.model.CheckLimitModelResponse
-import com.softdata.dyhxx.helper.network.model.UserAuthIDModel
+import com.softdata.dyhxx.helper.network.model.*
 import com.softdata.dyhxx.helper.network.repository.ICarApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -24,20 +21,42 @@ class ApiViewModel @Inject constructor(
     private val _responseUserId: MutableLiveData<NetworkResult<UserAuthIDModel>> = MutableLiveData()
     val responseUserId: LiveData<NetworkResult<UserAuthIDModel>> = _responseUserId
 
-    fun getUserId(token:String) = viewModelScope.launch {
+    fun getUserId(token: String) = viewModelScope.launch {
         repository.getUserId(token).collect { values ->
 
             _responseUserId.postValue(values)
         }
     }
 
-     private val _responseCheckLimit: MutableLiveData<NetworkResult<CheckLimitModelResponse>> = MutableLiveData()
+    private val _responseCheckLimit: MutableLiveData<NetworkResult<CheckLimitModelResponse>> =
+        MutableLiveData()
     val responseCheckLimit: LiveData<NetworkResult<CheckLimitModelResponse>> = _responseCheckLimit
 
     fun checkLimit(checkLimitModel: CheckLimitModel) = viewModelScope.launch {
         repository.checkLimit(checkLimitModel).collect { values ->
 
             _responseCheckLimit.postValue(values)
+        }
+    }
+
+    private val _responseSaveCar: MutableLiveData<NetworkResult<SaveCarResponse>> =
+        MutableLiveData()
+    val responseSaveCar: LiveData<NetworkResult<SaveCarResponse>> = _responseSaveCar
+
+    fun saveCar(saveCarModel: SaveCarModel) = viewModelScope.launch {
+        repository.saveCar(saveCarModel).collect { values ->
+            _responseSaveCar.postValue(values)
+        }
+    }
+
+
+    private val _responseAllCars: MutableLiveData<NetworkResult<AllCarsResponse>> =
+        MutableLiveData()
+    val responseAllCars: LiveData<NetworkResult<AllCarsResponse>> = _responseAllCars
+
+    fun allCars(allCars: AllCars) = viewModelScope.launch {
+        repository.allCars(allCars).collect { values ->
+            _responseAllCars.postValue(values)
         }
     }
 

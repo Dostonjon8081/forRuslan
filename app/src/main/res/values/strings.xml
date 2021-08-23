@@ -23,21 +23,14 @@
     <string name="select">Tanlash</string>
     <string name="save">Tasdiqlash</string>
     <string name="close">Yopish</string>
+
     <string name="car_model">Avtomobil turi:</string>
     <string name="car_marks">Avotomobil markasi:</string>
     <string name="text_pass_series_numbers">Tex.pass. seriyasi va raqami:</string>
     <string name="avtomobil_raqami">Avtomobil raqami:</string>
+    <string name="not_ethernet">Tarmoqqa ulanmagan</string>
+    <string name="wrong">wrong something</string>
+    <string name="car_exist">Avval ro\'yxatga olingan</string>
+    <string name="bad_request">Ro\'yhatdan o\'tilman foydalanuvchi</string>
 
-    <!--    <string-array name="car_markss">-->
-<!--        <item>Audi</item>-->
-<!--        <item>Daewoo</item>-->
-<!--        <item>Chevrolet</item>-->
-<!--        <item>Acura</item>-->
-<!--        <item>Aston Martin</item>-->
-<!--        <item>Alfa Romeo</item>-->
-<!--        <item>Bentley</item>-->
-<!--        <item>BMW</item>-->
-<!--        <item>Buick</item>-->
-<!--        <item>Mercedes Benz</item>-->
-<!--    </string-array>-->
 </resources>

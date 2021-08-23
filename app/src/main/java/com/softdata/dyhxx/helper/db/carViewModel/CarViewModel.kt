@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.softdata.dyhxx.helper.db.CarEntity
 import com.softdata.dyhxx.helper.db.dataRepository.ICarRepository
 import com.softdata.dyhxx.helper.network.NetworkResult
+import com.softdata.dyhxx.helper.network.model.AllCars
 import com.softdata.dyhxx.helper.network.model.UserAuthIDModel
 import com.softdata.dyhxx.helper.util.PREF_TOKEN_KEY
 import com.softdata.dyhxx.helper.util.getPref
