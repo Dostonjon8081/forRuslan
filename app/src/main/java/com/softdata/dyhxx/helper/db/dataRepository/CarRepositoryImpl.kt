@@ -13,7 +13,7 @@ class CarRepositoryImpl @Inject constructor(val sourceImpl: CarDataSourceImpl) :
         return sourceImpl.insertCar(carEntity)
     }
 
-    override suspend fun deleteCar(id: Long): Int {
+    override suspend fun deleteCar(id: Int): Int {
         return sourceImpl.deleteCar(id)
     }
 

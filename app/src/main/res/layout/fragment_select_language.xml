@@ -16,6 +16,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/id_button_uz"
             style="@style/ButtonStyle"
+            android:padding="10dp"
             android:background="@drawable/button_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/id_button_ru"
             style="@style/ButtonStyle"
+            android:padding="10dp"
             android:background="@drawable/button_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,6 +34,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/id_button_en"
             style="@style/ButtonStyle"
+            android:padding="10dp"
             android:background="@drawable/button_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

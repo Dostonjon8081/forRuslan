@@ -11,10 +11,7 @@ import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import com.jakewharton.rxbinding4.widget.textChanges
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.databinding.FragmentAddCarBinding
@@ -27,19 +24,14 @@ import com.softdata.dyhxx.helper.util.carToast
 import com.softdata.dyhxx.helper.util.getPref
 import com.softdata.dyhxx.helper.util.isOnline
 import dagger.hilt.android.AndroidEntryPoint
-import hilt_aggregated_deps._com_softdata_dyhxx_core_fragment_home_AddCarFragment_GeneratedInjector
-import io.reactivex.rxjava3.core.Observable
 
 @AndroidEntryPoint
 class AddCarFragment : Fragment(), SpinnerItemClick {
 
     private val viewModel: CarViewModel by activityViewModels()
     private val apiViewModel: ApiViewModel by activityViewModels()
-    private val navController: NavController by lazy(LazyThreadSafetyMode.NONE) {
-        (activity as MainActivity).findNavController(R.id.container_main_navigation)
-    }
 
-    private val addCarFragment: AddCarFragmentArgs by navArgs()
+    private val args: AddCarFragmentArgs by navArgs()
 
     private val carMarks = mutableListOf(
         "Select",
@@ -85,31 +77,26 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
         binding.addCarFragmentToolBar.title = getString(R.string.add_car)
 
         setupSpinner()
-
         setup()
 
-        binding.addCarFragmentButtonCancel.setOnClickListener { clickButton(binding.addCarFragmentButtonCancel.id) }
-        binding.addCarFragmentButtonSave.setOnClickListener { clickButton(binding.addCarFragmentButtonSave.id) }
-        binding.addCarFragmentArrowBack.setOnClickListener { clickButton(binding.addCarFragmentArrowBack.id) }
+        binding.apply {
+            addCarFragmentButtonCancel.setOnClickListener { clickButton(binding.addCarFragmentButtonCancel.id) }
+            addCarFragmentButtonSave.setOnClickListener { clickButton(binding.addCarFragmentButtonSave.id) }
+            addCarFragmentArrowBack.setOnClickListener { clickButton(binding.addCarFragmentArrowBack.id) }
+        }
     }
 
     private fun setup() {
-        binding.apply {
-        val d = Observable.combineLatest(
-            addCarFragmentEtCarNumber.textChanges().skipInitialValue(),
-            addCarFragmentTexPassSeries.textChanges().skipInitialValue(),
-            addCarFragmentTexPassNumber.textChanges().skipInitialValue(),
-            {carNumber,texPassSeries,texPassNumber->
-
-//                carNumber.toString() != .task.title ||
-//                        description.toString() != task.description ||
-//                        date.toString() != task.time.date ||
-//                        time.toString() != task.time.hour ||
-//                        alarm.toString() != AlarmTypes.getByValue(task.alarmTime).title
+        val carArgs = args.carArgs
+        if (carArgs != null) {
+            with(binding) {
+                addCarFragmentEtCarNumber.setText(carArgs.carNumber)
+                addCarFragmentTexPassSeries.setText(carArgs.texPass.substring(0,3))
+                addCarFragmentTexPassNumber.setText(carArgs.texPass.substring(3))
             }
-        ).doOnNext {  }
-            .subscribe()}
+        }
     }
+
 
     private fun setupSpinner() {
         val spinnerAdapter =
@@ -191,6 +178,12 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
         } else {
             carModel = carMarks[position]
         }
+    }
+
+
+    override fun onDetach() {
+        super.onDetach()
+        _binding = null
     }
 
 }

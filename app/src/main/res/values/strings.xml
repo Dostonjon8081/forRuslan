@@ -32,5 +32,8 @@
     <string name="wrong">wrong something</string>
     <string name="car_exist">Avval ro\'yxatga olingan</string>
     <string name="bad_request">Ro\'yhatdan o\'tilman foydalanuvchi</string>
+    <string name="delete_dialog_title">siz rostan ham ushbu avtomobilni o\'chirmoqchisiz</string>
+    <string name="yes">ha</string>
+    <string name="no">yo\'q</string>
 
 </resources>

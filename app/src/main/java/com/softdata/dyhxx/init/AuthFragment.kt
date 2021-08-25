@@ -47,4 +47,10 @@ class AuthFragment : Fragment() {
         }
     }
 
+
+    override fun onDetach() {
+        super.onDetach()
+        _binding = null
+    }
+
 }

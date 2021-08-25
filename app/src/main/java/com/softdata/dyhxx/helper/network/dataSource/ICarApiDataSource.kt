@@ -10,4 +10,5 @@ interface ICarApiDataSource {
     suspend fun checkLimit(checkLimitModel: CheckLimitModel):Response<CheckLimitModelResponse>
     suspend fun saveCar(saveCarModel: SaveCarModel):Response<SaveCarResponse>
     suspend fun allCars(allCars: AllCars):Response<AllCarsResponse>
+    suspend fun removeCar(removeCarModel: RemoveCarModel):Response<RemoveCarModelResponse>
 }

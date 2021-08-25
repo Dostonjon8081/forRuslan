@@ -26,7 +26,6 @@ class CarViewModel @Inject constructor(
 
     private val _allCar = MutableLiveData<List<CarEntity>>()
     val allCar: LiveData<List<CarEntity>> = _allCar
-
     fun allCars() {
         viewModelScope.launch {
             repository.allCar().collect {
@@ -37,7 +36,6 @@ class CarViewModel @Inject constructor(
 
     private val _getCar = MutableLiveData<CarEntity>()
     val getCar: LiveData<CarEntity> = _getCar
-
     fun getCar(id: Long) {
         viewModelScope.launch {
 
@@ -50,7 +48,6 @@ class CarViewModel @Inject constructor(
 
     private val _insertCar = MutableLiveData<Long>()
     val insertCar: LiveData<Long> = _insertCar
-
     fun insertCar(carEntity: CarEntity) {
         viewModelScope.launch {
             repository.insertCar(carEntity)
@@ -58,12 +55,12 @@ class CarViewModel @Inject constructor(
     }
 
 
-    private val _deleteCar = MutableLiveData<Long>()
-    val deleteCar: LiveData<Long> = _deleteCar
-
-    fun deleteCar(id: Long) {
+    private val _removeCar = MutableLiveData<Long>()
+    val removeCar: LiveData<Long> = _removeCar
+    fun removeCar(id: Int) {
         viewModelScope.launch {
             repository.deleteCar(id)
+            allCars()
         }
     }
 

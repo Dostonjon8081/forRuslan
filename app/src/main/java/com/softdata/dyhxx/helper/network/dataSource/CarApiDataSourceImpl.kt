@@ -3,6 +3,7 @@ package com.softdata.dyhxx.helper.network.dataSource
 import android.util.Log
 import com.softdata.dyhxx.helper.network.CarApiService
 import com.softdata.dyhxx.helper.network.model.*
+import com.softdata.dyhxx.helper.util.logd
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -24,6 +25,12 @@ class CarApiDataSourceImpl @Inject constructor(private val carApiService: CarApi
 
     override suspend fun allCars(allCars: AllCars): Response<AllCarsResponse> {
         return carApiService.allCars(allCars)
+    }
+
+    override suspend fun removeCar(removeCarModel: RemoveCarModel): Response<RemoveCarModelResponse> {
+        logd("datasource $removeCarModel")
+        return carApiService.removeCar(removeCarModel)
+
     }
 
 

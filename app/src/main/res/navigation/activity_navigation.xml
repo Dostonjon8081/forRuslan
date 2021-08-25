@@ -50,6 +50,9 @@
         <action
             android:id="@+id/action_home_fragment_to_addCarFragment"
             app:destination="@id/add_car_fragment" />
+        <action
+            android:id="@+id/action_home_fragment_to_violationFragment"
+            app:destination="@id/violationFragment" />
     </fragment>
 
     <fragment
@@ -71,8 +74,20 @@
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/account_fragment"
-        android:name="com.softdata.dyhxx.core_fragment.account.Account"
+        android:name="com.softdata.dyhxx.core_fragment.account.AccountFragment"
         android:label="@string/account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account"/>
+
+    <fragment
+        tools:layout="@layout/fragment_violation"
+        android:id="@+id/violationFragment"
+        android:name="com.softdata.dyhxx.violation.ViolationFragment"
+        android:label="ViolationFragment" >
+        <argument
+            android:name="violationArgs"
+            app:argType="com.softdata.dyhxx.helper.db.CarEntity"
+            app:nullable="false" />
+    </fragment>
+
 
 </navigation>

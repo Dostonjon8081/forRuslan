@@ -9,4 +9,5 @@ interface ICarApiRepository {
     suspend fun checkLimit(checkLimitModel: CheckLimitModel): Flow<NetworkResult<CheckLimitModelResponse>>
     suspend fun saveCar(saveCarModel: SaveCarModel): Flow<NetworkResult<SaveCarResponse>>
     suspend fun allCars(allCars: AllCars): Flow<NetworkResult<AllCarsResponse>>
+    suspend fun removeCar(removeCarModel: RemoveCarModel): Flow<NetworkResult<RemoveCarModelResponse>>
 }

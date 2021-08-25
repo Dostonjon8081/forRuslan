@@ -1,12 +1,16 @@
 package com.softdata.dyhxx.core_fragment.home
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -16,14 +20,16 @@ import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.databinding.FragmentHomeBinding
 import com.softdata.dyhxx.helper.db.CarEntity
 import com.softdata.dyhxx.helper.db.carViewModel.CarViewModel
+import com.softdata.dyhxx.helper.network.model.RemoveCarModel
 import com.softdata.dyhxx.helper.network.viewModel.ApiViewModel
-import com.softdata.dyhxx.helper.util.isOnline
-import com.softdata.dyhxx.helper.util.logd
+import com.softdata.dyhxx.helper.util.PREF_USER_ID_KEY
+import com.softdata.dyhxx.helper.util.getPref
+import com.softdata.dyhxx.helper.util.loge
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), RvItemClick {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -31,6 +37,7 @@ class HomeFragment : Fragment() {
 
     private val carViewModel: CarViewModel by activityViewModels()
     private val apiViewModel: ApiViewModel by activityViewModels()
+    private var listCarEntity = listOf<CarEntity>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,7 +51,6 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,7 +69,8 @@ class HomeFragment : Fragment() {
         carViewModel.allCar.observe(viewLifecycleOwner, object : Observer<List<CarEntity>> {
             override fun onChanged(t: List<CarEntity>?) {
                 if (t?.size!! > 0) {
-                    adapter = CarRvAdapter(t)
+                    listCarEntity = t
+                    adapter = CarRvAdapter(t, this@HomeFragment)
                     binding.homeFragmentDescription.visibility = View.GONE
                     binding.homeFragmentRv.visibility = View.VISIBLE
                     binding.homeFragmentRv.adapter = adapter
@@ -82,7 +89,39 @@ class HomeFragment : Fragment() {
     }
 
     private fun addCar() {
-        (activity as MainActivity).navController?.navigate(R.id.action_home_fragment_to_addCarFragment)
+        (activity as MainActivity).navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment())
+    }
+
+
+    @SuppressLint("ResourceType")
+    override fun clickedItemDelete(position: Int) {
+//        (activity as MainActivity).navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment(carEntity))
+
+        val builder = AlertDialog.Builder(requireContext())
+            .setMessage(R.string.delete_dialog_title)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                deleteCar(position)
+            }
+            .setNegativeButton(R.string.no) { _, _ ->
+            }
+        builder.create()
+        builder.show()
+
+    }
+
+    override fun clickedItem(position: Int) {
+        (activity as MainActivity).navController?.navigate(HomeFragmentDirections.actionHomeFragmentToViolationFragment(listCarEntity[position]))
+    }
+
+    private fun deleteCar(position: Int) {
+        val removeCarModel = RemoveCarModel(getPref(requireActivity()).getString(PREF_USER_ID_KEY,"")!!,listCarEntity[position].carNumber)
+        loge(listCarEntity[position].toString())
+        apiViewModel.removeCar(removeCarModel)
+        apiViewModel.responseRemoveCar.observe(viewLifecycleOwner){
+            if (it.data!=null && it.data.status == 200){
+                carViewModel.removeCar(position+1)
+            }
+        }
     }
 
     override fun onDetach() {

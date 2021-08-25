@@ -13,7 +13,7 @@ class CarDataSourceImpl @Inject constructor(val db: CarDataBase) : ICarDataSourc
         return dao.insertCar(carEntity)
     }
 
-    override suspend fun deleteCar(id: Long): Int {
+    override suspend fun deleteCar(id: Int): Int {
         return dao.deleteCar(id)
     }
 

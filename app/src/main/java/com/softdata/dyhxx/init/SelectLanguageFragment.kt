@@ -75,4 +75,9 @@ class SelectLanguageFragment : Fragment() {
         (activity as MainActivity).navController?.navigate(R.id.action_selectLanguageFragment_to_authFragment)
     }
 
+
+    override fun onDetach() {
+        super.onDetach()
+        _binding = null
+    }
 }

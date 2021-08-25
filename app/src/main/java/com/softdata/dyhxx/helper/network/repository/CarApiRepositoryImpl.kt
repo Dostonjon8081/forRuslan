@@ -3,6 +3,7 @@ package com.softdata.dyhxx.helper.network.repository
 import com.softdata.dyhxx.helper.network.NetworkResult
 import com.softdata.dyhxx.helper.network.dataSource.ICarApiDataSource
 import com.softdata.dyhxx.helper.network.model.*
+import com.softdata.dyhxx.helper.util.logd
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -40,6 +41,16 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
         return flow {
             emit(safeApiCall {
                 iCarApiDataSource.allCars(allCars)
+            })
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun removeCar(removeCarModel: RemoveCarModel): Flow<NetworkResult<RemoveCarModelResponse>> {
+        return  flow {
+            emit( safeApiCall {
+                logd("repository $removeCarModel")
+
+                iCarApiDataSource.removeCar(removeCarModel)
             })
         }.flowOn(Dispatchers.IO)
     }

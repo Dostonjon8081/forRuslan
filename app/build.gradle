@@ -92,8 +92,4 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
 
-
-    //RxBinding
-    def rxbinding_version = "4.0.0"
-    implementation "com.jakewharton.rxbinding4:rxbinding-core:$rxbinding_version"
 }

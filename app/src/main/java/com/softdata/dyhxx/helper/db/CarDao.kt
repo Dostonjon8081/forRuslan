@@ -17,7 +17,7 @@ interface CarDao {
 
 
     @Query("delete from car_entity  where _id=:id")
-    suspend fun deleteCar(id: Long): Int
+    suspend fun deleteCar(id: Int): Int
 
     @Query("select * from car_entity")
     fun allCars(): Flow<List<CarEntity>>

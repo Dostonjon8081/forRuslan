@@ -20,4 +20,7 @@ interface CarApiService {
     @POST("carlist/")
     suspend fun allCars(@Body allCars: AllCars): Response<AllCarsResponse>
 
+    @POST("carlist/remove")
+    suspend fun removeCar(@Body removeCarModel: RemoveCarModel): Response<RemoveCarModelResponse>
+
 }

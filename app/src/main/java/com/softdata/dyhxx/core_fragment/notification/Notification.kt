@@ -23,4 +23,10 @@ class Notification : Fragment() {
         _binding = FragmentNotificationBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+
+    override fun onDetach() {
+        super.onDetach()
+        _binding = null
+    }
 }

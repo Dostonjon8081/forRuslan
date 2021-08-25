@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.helper.db.CarEntity
 
-class CarRvAdapter(val list: List<CarEntity>) : RecyclerView.Adapter<CarRvAdapter.VH>() {
+class CarRvAdapter(val list: List<CarEntity>, private val rvItemClick: RvItemClick) : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return VH(
@@ -34,6 +35,9 @@ class CarRvAdapter(val list: List<CarEntity>) : RecyclerView.Adapter<CarRvAdapte
             texPasSer.text = "${list[position].texPass.substring(0,3)}  ${list[position].texPass.substring(3)}"
 
             model.text = list[position].carModel
+
+            rvItemEdit.setOnClickListener { rvItemClick.clickedItemDelete(position) }
+            this.view.setOnClickListener { rvItemClick.clickedItem(position) }
         }
     }
 
@@ -44,6 +48,7 @@ class CarRvAdapter(val list: List<CarEntity>) : RecyclerView.Adapter<CarRvAdapte
         var model: TextView = view.findViewById(R.id.rv_item_car_model)
         var texPasSer: TextView = view.findViewById(R.id.rv_item_car_tex_pass)
         var number: TextView = view.findViewById(R.id.rv_item_car_number)
+        var rvItemEdit: AppCompatImageView = view.findViewById(R.id.rv_item_edit)
     }
 
 
