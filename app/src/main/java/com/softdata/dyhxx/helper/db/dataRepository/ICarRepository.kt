@@ -10,5 +10,5 @@ interface ICarRepository {
 
     fun getCar(id: Long): Flow<CarEntity>
 
-    fun allCar(): Flow<List<CarEntity>>
+    fun allCar(): Flow<MutableList<CarEntity>>
 }

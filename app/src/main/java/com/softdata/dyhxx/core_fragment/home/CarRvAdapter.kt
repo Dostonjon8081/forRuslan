@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.helper.db.CarEntity
 
-class CarRvAdapter(val list: List<CarEntity>, private val rvItemClick: RvItemClick) : RecyclerView.Adapter<CarRvAdapter.VH>() {
+class CarRvAdapter() : RecyclerView.Adapter<CarRvAdapter.VH>() {
+
+    private val list = mutableListOf<CarEntity>()
+    private var rvItemClick: RvItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return VH(
@@ -24,25 +27,47 @@ class CarRvAdapter(val list: List<CarEntity>, private val rvItemClick: RvItemCli
             //car number
             val numberText = list[position].carNumber
             val numberString =
-                if (numberIsPersonal(numberText.substring( 5,6))) {
-                    " ${numberText.substring(0, 2)}  ${numberText.substring(2, 3).uppercase()} ${numberText.substring(3, 6)} ${numberText.substring(6).uppercase()}"
+                if (numberIsPersonal(numberText.substring(5, 6))) {
+                    " ${numberText.substring(0, 2)}  ${
+                        numberText.substring(2, 3).uppercase()
+                    } ${numberText.substring(3, 6)} ${numberText.substring(6).uppercase()}"
                 } else {
-                    " ${numberText.substring(0, 2)}  ${numberText.substring(2,5)} ${numberText.substring(5).uppercase()}"
+                    " ${numberText.substring(0, 2)}  ${
+                        numberText.substring(
+                            2,
+                            5
+                        )
+                    } ${numberText.substring(5).uppercase()}"
                 }
             number.text = numberString
 
             //tex pass series and number
-            texPasSer.text = "${list[position].texPass.substring(0,3)}  ${list[position].texPass.substring(3)}"
+            texPasSer.text =
+                "${list[position].texPass.substring(0, 3)}  ${list[position].texPass.substring(3)}"
 
             model.text = list[position].carModel
 
-            rvItemEdit.setOnClickListener { rvItemClick.clickedItemDelete(list[position].id.toInt()) }
-            this.view.setOnClickListener { rvItemClick.clickedItem(position) }
+            rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].id.toInt()) }
+            this.view.setOnClickListener { rvItemClick!!.clickedItem(position) }
         }
     }
 
     override fun getItemCount() = list.size
 
+    fun rvClickListener(rvItemClick: RvItemClick){
+        this.rvItemClick = rvItemClick
+    }
+
+    fun submitList(list: List<CarEntity>) {
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun addCar(carEntity: CarEntity, position: Int) {
+        list.add(carEntity)
+        notifyItemInserted(position)
+    }
 
     class VH(val view: View) : RecyclerView.ViewHolder(view) {
         var model: TextView = view.findViewById(R.id.rv_item_car_model)
@@ -50,7 +75,6 @@ class CarRvAdapter(val list: List<CarEntity>, private val rvItemClick: RvItemCli
         var number: TextView = view.findViewById(R.id.rv_item_car_number)
         var rvItemEdit: AppCompatImageView = view.findViewById(R.id.rv_item_edit)
     }
-
 
     private fun numberIsPersonal(substring: String): Boolean {
         return try {

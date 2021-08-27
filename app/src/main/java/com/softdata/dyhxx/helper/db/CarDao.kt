@@ -20,6 +20,6 @@ interface CarDao {
     suspend fun deleteCar(carNumber:String): Int
 
     @Query("select * from car_entities")
-    fun allCars(): Flow<List<CarEntity>>
+    fun allCars(): Flow<MutableList<CarEntity>>
 
 }

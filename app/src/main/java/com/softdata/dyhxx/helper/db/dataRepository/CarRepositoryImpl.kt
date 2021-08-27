@@ -21,7 +21,7 @@ class CarRepositoryImpl @Inject constructor(private val sourceImpl: CarDataSourc
         return sourceImpl.getCar(id)
     }
 
-    override fun allCar(): Flow<List<CarEntity>> {
+    override fun allCar(): Flow<MutableList<CarEntity>> {
         return sourceImpl.allCar()
     }
 //

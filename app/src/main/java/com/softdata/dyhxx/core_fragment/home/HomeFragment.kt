@@ -3,12 +3,9 @@ package com.softdata.dyhxx.core_fragment.home
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.softdata.dyhxx.R
@@ -25,16 +22,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate), RvItemClick {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate), RvItemClick {
 
-//    private var _binding: FragmentHomeBinding? = null
-//    private val binding get() = _binding!!
-    private lateinit var adapter: CarRvAdapter
+//    private lateinit var adapter: CarRvAdapter
 
-//    private val carViewModel: CarViewModel by activityViewModels()
     private val viewModel: HomeViewModel by activityViewModels()
-
     private var listCarEntity = listOf<CarEntity>()
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) { CarRvAdapter() }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -54,15 +48,17 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
 
         binding.homeFragmentButtonAddCar.setOnClickListener { addCar() }
 
-        viewModel.allCarDB.observe(viewLifecycleOwner, object : Observer<List<CarEntity>> {
-            override fun onChanged(t: List<CarEntity>?) {
+        viewModel.allCarDB.observe(viewLifecycleOwner, object : Observer<MutableList<CarEntity>> {
+            override fun onChanged(t: MutableList<CarEntity>?) {
                 if (t?.size!! > 0) {
                     logd(t)
+                    adapter.rvClickListener(this@HomeFragment)
                     listCarEntity = t
-                    adapter = CarRvAdapter(t, this@HomeFragment)
+//                    adapter = CarRvAdapter( t,this@HomeFragment)
                     binding.homeFragmentDescription.visibility = View.GONE
                     binding.homeFragmentRv.visibility = View.VISIBLE
                     binding.homeFragmentRv.adapter = adapter
+                    adapter.submitList(t)
                     binding.homeFragmentButtonAddCar.visibility = if (t.size >= 8) {
                         View.GONE
                     } else {

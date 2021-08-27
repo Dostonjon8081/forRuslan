@@ -71,8 +71,8 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private val _allCarDB = MutableLiveData<List<CarEntity>>()
-    val allCarDB: LiveData<List<CarEntity>> = _allCarDB
+    private val _allCarDB = MutableLiveData<MutableList<CarEntity>>()
+    val allCarDB: LiveData<MutableList<CarEntity>> = _allCarDB
     fun allCarsDB() {
         viewModelScope.launch {
             dbRepository.allCar().collect {
