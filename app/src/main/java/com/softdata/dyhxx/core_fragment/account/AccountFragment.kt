@@ -10,24 +10,14 @@ import android.view.WindowManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.softdata.dyhxx.base.BaseFragment
 import com.softdata.dyhxx.databinding.FragmentAccountBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class AccountFragment : BottomSheetDialogFragment(){
+class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBinding::inflate){
 
-    private var _binding: FragmentAccountBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentAccountBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
  /*   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)

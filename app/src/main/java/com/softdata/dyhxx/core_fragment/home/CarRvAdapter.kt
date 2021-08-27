@@ -36,7 +36,7 @@ class CarRvAdapter(val list: List<CarEntity>, private val rvItemClick: RvItemCli
 
             model.text = list[position].carModel
 
-            rvItemEdit.setOnClickListener { rvItemClick.clickedItemDelete(position) }
+            rvItemEdit.setOnClickListener { rvItemClick.clickedItemDelete(list[position].id.toInt()) }
             this.view.setOnClickListener { rvItemClick.clickedItem(position) }
         }
     }

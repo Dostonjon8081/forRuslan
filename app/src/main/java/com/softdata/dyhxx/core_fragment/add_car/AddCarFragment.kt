@@ -1,4 +1,4 @@
-package com.softdata.dyhxx.core_fragment.home
+package com.softdata.dyhxx.core_fragment.add_car
 
 import android.content.Context
 import android.os.Bundle
@@ -14,11 +14,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
+import com.softdata.dyhxx.base.BaseFragment
+import com.softdata.dyhxx.core_fragment.home.HomeViewModel
+import com.softdata.dyhxx.core_fragment.home.SpinnerItemClick
 import com.softdata.dyhxx.databinding.FragmentAddCarBinding
 import com.softdata.dyhxx.helper.db.CarEntity
-import com.softdata.dyhxx.helper.db.carViewModel.CarViewModel
 import com.softdata.dyhxx.helper.network.model.SaveCarModel
-import com.softdata.dyhxx.helper.network.viewModel.ApiViewModel
 import com.softdata.dyhxx.helper.util.PREF_USER_ID_KEY
 import com.softdata.dyhxx.helper.util.carToast
 import com.softdata.dyhxx.helper.util.getPref
@@ -26,10 +27,9 @@ import com.softdata.dyhxx.helper.util.isOnline
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddCarFragment : Fragment(), SpinnerItemClick {
+class AddCarFragment :BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate), SpinnerItemClick {
 
-    private val viewModel: CarViewModel by activityViewModels()
-    private val apiViewModel: ApiViewModel by activityViewModels()
+    private val viewModel: AddCarViewModel by activityViewModels()
 
     private val args: AddCarFragmentArgs by navArgs()
 
@@ -46,8 +46,8 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
         "BMW", "Buick"
     )
 
-    private var _binding: FragmentAddCarBinding? = null
-    private val binding get() = _binding!!
+//    private var _binding: FragmentAddCarBinding? = null
+//    private val binding get() = _binding!!
 
     private var carMark = ""
     private var carModel = ""
@@ -62,14 +62,6 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
         })
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentAddCarBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -144,17 +136,17 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
             if (isOnline(requireContext())) {
 
 
-                apiViewModel.saveCar(
+                viewModel.saveCarApi(
                     SaveCarModel(
                         getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!, carNumber,
                         carTexPasSeries + carTexPasNumber
                     )
                 )
 
-                apiViewModel.responseSaveCar.observe(viewLifecycleOwner) {
+               viewModel.responseSaveCarApi.observe(viewLifecycleOwner) {
                     when (it.data?.status) {
                         200 -> {
-                            viewModel.insertCar(carEntity)
+                            viewModel.insertCarDB(carEntity)
                             (activity as MainActivity).onBackPressed()
                         }
                         401 -> carToast(requireContext(), getString(R.string.car_exist))
@@ -178,12 +170,6 @@ class AddCarFragment : Fragment(), SpinnerItemClick {
         } else {
             carModel = carMarks[position]
         }
-    }
-
-
-    override fun onDetach() {
-        super.onDetach()
-        _binding = null
     }
 
 }

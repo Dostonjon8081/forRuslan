@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/add_car_fragment"
-        android:name="com.softdata.dyhxx.core_fragment.home.AddCarFragment"
+        android:name="com.softdata.dyhxx.core_fragment.add_car.AddCarFragment"
         android:label="AddCarFragment"
         tools:layout="@layout/fragment_add_car">
         <argument

@@ -11,13 +11,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.softdata.dyhxx.R
+import com.softdata.dyhxx.base.BaseActivity
 import com.softdata.dyhxx.core_fragment.account.AccountFragment
+import com.softdata.dyhxx.core_fragment.home.HomeViewModel
 import com.softdata.dyhxx.databinding.ActivityMainBinding
 import com.softdata.dyhxx.helper.db.CarEntity
-import com.softdata.dyhxx.helper.db.carViewModel.CarViewModel
-import com.softdata.dyhxx.helper.network.NetworkResult
 import com.softdata.dyhxx.helper.network.model.AllCars
-import com.softdata.dyhxx.helper.network.viewModel.ApiViewModel
 import com.softdata.dyhxx.helper.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -26,23 +25,17 @@ import kotlinx.coroutines.async
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
-    private val apiViewModel: ApiViewModel by viewModels()
-    private val carViewModel: CarViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
 
-    var navController: NavController? = null
-    lateinit var binding: ActivityMainBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+     override fun setupItems() {
 
         navController = findNavController(R.id.container_main_navigation)
         val navView: BottomNavigationView = binding.idBottomNavigation
         navView.setupWithNavController(navController!!)
-//        navView.menu.findItem(R.id.account_fragment).isCheckable = false
 
         if (intent.data != null) {
             authentication(intent)
@@ -74,19 +67,19 @@ class MainActivity : AppCompatActivity() {
                     .commit()
             }.onAwait
 
-            apiViewModel.getUserId(getPref(this).getString(PREF_TOKEN_KEY, "")!!)
-            apiViewModel.responseUserId.observe(this) {
+            viewModel.getUserIdApi(getPref(this).getString(PREF_TOKEN_KEY, "")!!)
+            viewModel.responseUserIdApi.observe(this) {
                 try {
                     editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).commit()
 
-                    apiViewModel.allCars(AllCars(getPref(this).getString(PREF_USER_ID_KEY, "")!!))
-                    apiViewModel.responseAllCars.observe(this) { data ->
+                    viewModel.allCarsApi(AllCars(getPref(this).getString(PREF_USER_ID_KEY, "")!!))
+                    viewModel.responseAllCarsApi.observe(this) { data ->
                         val listCars = mutableListOf<CarEntity>()
 
                         if (data.data != null && data.data.status != 404) {
                             for (item in data.data.data) {
                                 listCars.add(CarEntity(0, item.passport, item.tex_passport))
-                                carViewModel.insertCar(
+                                viewModel.insertCarDB(
                                     CarEntity(
                                         0,
                                         item.passport,

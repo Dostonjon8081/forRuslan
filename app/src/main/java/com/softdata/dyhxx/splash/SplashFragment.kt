@@ -46,9 +46,9 @@ class SplashFragment : Fragment() {
             try {
 
             if (getPref(requireActivity()).getString(PREF_USER_ID_KEY, "").isNullOrEmpty()) {
-                (activity as MainActivity).navController!!.navigate(R.id.action_splashFragment_to_selectLanguageFragment)
+                (activity as MainActivity).navController?.navigate(R.id.action_splashFragment_to_selectLanguageFragment)
             } else {
-                (activity as MainActivity).navController!!.navigate(R.id.action_splashFragment_to_homeFragment)
+                (activity as MainActivity).navController?.navigate(R.id.action_splashFragment_to_homeFragment)
             }}catch (e:Exception){
 
             }
