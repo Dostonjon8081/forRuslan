@@ -48,8 +48,6 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
     override suspend fun removeCar(removeCarModel: RemoveCarModel): Flow<NetworkResult<RemoveCarModelResponse>> {
         return  flow {
             emit( safeApiCall {
-                logd("repository $removeCarModel")
-
                 iCarApiDataSource.removeCar(removeCarModel)
             })
         }.flowOn(Dispatchers.IO)

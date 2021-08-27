@@ -83,8 +83,6 @@ class MainActivity : AppCompatActivity() {
                     apiViewModel.responseAllCars.observe(this) { data ->
                         val listCars = mutableListOf<CarEntity>()
 
-                        logd(data?.toString())
-                        logd(data?.data.toString())
                         if (data.data != null && data.data.status != 404) {
                             for (item in data.data.data) {
                                 listCars.add(CarEntity(0, item.passport, item.tex_passport))

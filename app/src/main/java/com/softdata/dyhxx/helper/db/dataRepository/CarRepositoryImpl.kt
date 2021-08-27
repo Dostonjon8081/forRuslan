@@ -5,7 +5,7 @@ import com.softdata.dyhxx.helper.db.dataSource.CarDataSourceImpl
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CarRepositoryImpl @Inject constructor(val sourceImpl: CarDataSourceImpl) : ICarRepository {
+class CarRepositoryImpl @Inject constructor(private val sourceImpl: CarDataSourceImpl) : ICarRepository {
 
 
 
@@ -13,8 +13,8 @@ class CarRepositoryImpl @Inject constructor(val sourceImpl: CarDataSourceImpl) :
         return sourceImpl.insertCar(carEntity)
     }
 
-    override suspend fun deleteCar(id: Int): Int {
-        return sourceImpl.deleteCar(id)
+    override suspend fun deleteCar(carNumber:String): Int {
+        return sourceImpl.deleteCar(carNumber)
     }
 
     override  fun getCar(id: Long): Flow<CarEntity> {

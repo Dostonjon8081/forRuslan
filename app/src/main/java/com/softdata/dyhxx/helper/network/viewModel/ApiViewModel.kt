@@ -62,10 +62,8 @@ class ApiViewModel @Inject constructor(
         MutableLiveData()
     val responseRemoveCar: LiveData<NetworkResult<RemoveCarModelResponse>> = _responseRemoveCar
     fun removeCar(removeCarModel: RemoveCarModel) = viewModelScope.launch {
-        logd("vm remove car $removeCarModel")
         repository.removeCar(removeCarModel).collect { values ->
             _responseRemoveCar.postValue(values)
-            logd("vm remove car ${values.data.toString()}")
         }
 
     }

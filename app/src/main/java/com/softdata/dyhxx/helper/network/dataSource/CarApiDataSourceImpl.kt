@@ -28,7 +28,6 @@ class CarApiDataSourceImpl @Inject constructor(private val carApiService: CarApi
     }
 
     override suspend fun removeCar(removeCarModel: RemoveCarModel): Response<RemoveCarModelResponse> {
-        logd("datasource $removeCarModel")
         return carApiService.removeCar(removeCarModel)
 
     }

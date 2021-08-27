@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface ICarRepository {
     suspend fun insertCar(carEntity: CarEntity): Long
 
-    suspend fun deleteCar(id: Int): Int
+    suspend fun deleteCar(carNumber:String): Int
 
     fun getCar(id: Long): Flow<CarEntity>
 

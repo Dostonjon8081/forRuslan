@@ -7,14 +7,14 @@ import javax.inject.Inject
 
 class CarDataSourceImpl @Inject constructor(val db: CarDataBase) : ICarDataSource {
 
-    val dao = db.dao()
+    private val dao = db.dao()
 
     override suspend fun insertCar(carEntity: CarEntity): Long {
         return dao.insertCar(carEntity)
     }
 
-    override suspend fun deleteCar(id: Int): Int {
-        return dao.deleteCar(id)
+    override suspend fun deleteCar(carNumber:String): Int {
+        return dao.deleteCar(carNumber)
     }
 
     override fun getCar(id: Long): Flow<CarEntity> {

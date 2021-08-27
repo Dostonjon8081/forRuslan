@@ -12,16 +12,14 @@ interface CarDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCar(carEntity: CarEntity): Long
 
-    @Query("select * from car_entity where _id=:id")
+    @Query("select * from car_entities where _id=:id")
     fun getCar(id: Long): Flow<CarEntity>
 
 
-    @Query("delete from car_entity  where _id=:id")
-    suspend fun deleteCar(id: Int): Int
+    @Query("DELETE FROM car_entities  WHERE car_number=:carNumber")
+    suspend fun deleteCar(carNumber:String): Int
 
-    @Query("select * from car_entity")
+    @Query("select * from car_entities")
     fun allCars(): Flow<List<CarEntity>>
-
-
 
 }

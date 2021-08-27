@@ -55,11 +55,11 @@ class CarViewModel @Inject constructor(
     }
 
 
-    private val _removeCar = MutableLiveData<Long>()
-    val removeCar: LiveData<Long> = _removeCar
-    fun removeCar(id: Int) {
+    private val _removeCar = MutableLiveData<String>()
+    val removeCar: LiveData<String> = _removeCar
+    fun removeCar(carNumber:String) {
         viewModelScope.launch {
-            repository.deleteCar(id)
+            repository.deleteCar(carNumber)
             allCars()
         }
     }
