@@ -10,6 +10,7 @@ import com.softdata.dyhxx.helper.db.dataRepository.ICarRepository
 import com.softdata.dyhxx.helper.network.NetworkResult
 import com.softdata.dyhxx.helper.network.model.*
 import com.softdata.dyhxx.helper.network.repository.ICarApiRepository
+import com.softdata.dyhxx.helper.util.Event
 import com.softdata.dyhxx.helper.util.logd
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -61,12 +62,12 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private val _responseRemoveCarApi: MutableLiveData<NetworkResult<RemoveCarModelResponse>> =
+    private val _responseRemoveCarApi: MutableLiveData<Event<NetworkResult<RemoveCarModelResponse>>> =
         MutableLiveData()
-    val responseRemoveCarApi: LiveData<NetworkResult<RemoveCarModelResponse>> = _responseRemoveCarApi
+    val responseRemoveCarApi: LiveData<Event<NetworkResult<RemoveCarModelResponse>>> = _responseRemoveCarApi
     fun removeCarApi(removeCarModel: RemoveCarModel) = viewModelScope.launch {
         apiRepository.removeCar(removeCarModel).collect { values ->
-            _responseRemoveCarApi.postValue(values)
+            _responseRemoveCarApi.postValue(Event(values))
         }
     }
 

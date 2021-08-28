@@ -13,11 +13,9 @@ import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.base.BaseFragment
 import com.softdata.dyhxx.databinding.FragmentHomeBinding
 import com.softdata.dyhxx.helper.db.CarEntity
+import com.softdata.dyhxx.helper.network.NetworkResult
 import com.softdata.dyhxx.helper.network.model.RemoveCarModel
-import com.softdata.dyhxx.helper.util.PREF_USER_ID_KEY
-import com.softdata.dyhxx.helper.util.getPref
-import com.softdata.dyhxx.helper.util.logd
-import com.softdata.dyhxx.helper.util.loge
+import com.softdata.dyhxx.helper.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -107,11 +105,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         loge(listCarEntity[position].toString())
         viewModel.removeCarApi(removeCarModel)
-        viewModel.responseRemoveCarApi.observe(viewLifecycleOwner) {
-            if (it.data != null) {
-                viewModel.removeCarDB(listCarEntity[position].carNumber)
+        viewModel.responseRemoveCarApi.observe(viewLifecycleOwner, EventObserver {
+//            if (it.data != null) {
+            when (it) {
+                is NetworkResult.Loading -> {
+                }
+                is NetworkResult.Success -> {
+                    viewModel.removeCarDB(listCarEntity[position].carNumber)
+                }
+                is NetworkResult.Error -> {
+                }
+//                }
             }
-        }
+
+        })
     }
 
 }
