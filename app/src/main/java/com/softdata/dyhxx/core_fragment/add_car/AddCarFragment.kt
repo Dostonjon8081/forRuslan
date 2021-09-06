@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.base.BaseFragment
+import com.softdata.dyhxx.core_fragment.home.CarRvAdapter
 import com.softdata.dyhxx.core_fragment.home.HomeViewModel
 import com.softdata.dyhxx.core_fragment.home.SpinnerItemClick
 import com.softdata.dyhxx.databinding.FragmentAddCarBinding
@@ -32,6 +33,7 @@ class AddCarFragment :BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding:
     private val viewModel: AddCarViewModel by activityViewModels()
 
     private val args: AddCarFragmentArgs by navArgs()
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) { CarRvAdapter() }
 
     private val carMarks = mutableListOf(
         "Select",
@@ -57,7 +59,8 @@ class AddCarFragment :BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding:
 
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                (activity as MainActivity).navController?.popBackStack()
+                getBaseActivity {
+                    it.navController?.popBackStack()}
             }
         })
     }
@@ -148,6 +151,7 @@ class AddCarFragment :BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding:
                         200 -> {
                             viewModel.insertCarDB(carEntity)
                             (activity as MainActivity).onBackPressed()
+                            adapter.addCar(carEntity)
                         }
                         401 -> carToast(requireContext(), getString(R.string.car_exist))
                         400 -> carToast(requireContext(), getString(R.string.bad_request))

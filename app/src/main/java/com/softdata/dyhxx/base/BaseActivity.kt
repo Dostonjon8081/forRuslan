@@ -11,12 +11,17 @@ abstract class BaseActivity <B : ViewBinding>(val bindingFactory: (LayoutInflate
     lateinit var binding: B
     var navController: NavController? = null
 
+    var baseActivity:BaseActivity<B>?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = bindingFactory(layoutInflater)
         setContentView(binding.root)
         setupItems()
+
+        baseActivity = this
     }
 
     abstract fun setupItems()
+
 }

@@ -4,7 +4,7 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 
 @Entity(tableName = "car_entities")
@@ -18,7 +18,7 @@ data class CarEntity(
     @ColumnInfo(name = "tex_pass")
     val texPass: String,
     @ColumnInfo(name = "car_mark")
-    val carMark: String="",
+    val carMark: String = "",
     @ColumnInfo(name = "car_model")
-    val carModel: String=""
+    val carModel: String = ""
 ) : Parcelable

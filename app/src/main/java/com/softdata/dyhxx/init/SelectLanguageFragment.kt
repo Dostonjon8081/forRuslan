@@ -2,13 +2,9 @@ package com.softdata.dyhxx.init
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.softdata.dyhxx.R
-import com.softdata.dyhxx.activity.MainActivity
+import com.softdata.dyhxx.base.BaseFragment
 import com.softdata.dyhxx.databinding.FragmentSelectLanguageBinding
 import com.softdata.dyhxx.helper.util.PREF_LANG_KEY
 import com.softdata.dyhxx.helper.util.getPref
@@ -18,22 +14,10 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class SelectLanguageFragment : Fragment() {
+class SelectLanguageFragment :
+    BaseFragment<FragmentSelectLanguageBinding>(FragmentSelectLanguageBinding::inflate) {
 
-
-    private var _binding: FragmentSelectLanguageBinding? = null
-    private val binding get() = _binding!!
     private var pref: SharedPreferences? = null
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSelectLanguageBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,12 +56,9 @@ class SelectLanguageFragment : Fragment() {
             R.id.id_button_en -> setLocate("en")
         }
 
-        (activity as MainActivity).navController?.navigate(R.id.action_selectLanguageFragment_to_authFragment)
+        getBaseActivity {
+            it.navController?.navigate(R.id.action_selectLanguageFragment_to_authFragment)
+        }
     }
-
-
-    override fun onDetach() {
-        super.onDetach()
-        _binding = null
-    }
+    
 }

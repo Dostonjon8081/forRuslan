@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.helper.db.CarEntity
 
-class CarRvAdapter() : RecyclerView.Adapter<CarRvAdapter.VH>() {
+class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
     private val list = mutableListOf<CarEntity>()
     private var rvItemClick: RvItemClick? = null
@@ -47,7 +47,7 @@ class CarRvAdapter() : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
             model.text = list[position].carModel
 
-            rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].id.toInt()) }
+            rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
             this.view.setOnClickListener { rvItemClick!!.clickedItem(position) }
         }
     }
@@ -64,9 +64,9 @@ class CarRvAdapter() : RecyclerView.Adapter<CarRvAdapter.VH>() {
         notifyDataSetChanged()
     }
 
-    fun addCar(carEntity: CarEntity, position: Int) {
+    fun addCar(carEntity: CarEntity) {
         list.add(carEntity)
-        notifyItemInserted(position)
+        notifyItemInserted(list.size)
     }
 
     class VH(val view: View) : RecyclerView.ViewHolder(view) {

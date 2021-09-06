@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
@@ -25,6 +26,21 @@ abstract class BaseFragment<VB : ViewBinding>(
         return binding.root
     }
 
+
+/*        fun getBaseActivity():BaseActivity<VB> {
+            val act by lazy (LazyThreadSafetyMode.NONE){ BaseActivity.getBaseActivity()  }
+          return
+
+    }*/
+
+
+    fun getBaseActivity(run: (BaseActivity<*>) -> Unit) {
+        (activity as BaseActivity<*>).let {
+            it.let {
+                run(it)
+            }
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

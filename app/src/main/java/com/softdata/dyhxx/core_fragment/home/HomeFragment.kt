@@ -71,16 +71,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun addCar() {
-        (activity as MainActivity).navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment())
+        getBaseActivity {
+            it.navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment())
+        }
     }
 
-    override fun clickedItemDelete(position: Int) {
+    override fun clickedItemDelete(carNumber: String) {
 //        (activity as MainActivity).navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment(carEntity))
 
         val builder = AlertDialog.Builder(requireContext())
             .setMessage(R.string.delete_dialog_title)
             .setPositiveButton(R.string.yes) { _, _ ->
-                deleteCar(position)
+                deleteCar(carNumber)
             }
             .setNegativeButton(R.string.no) { _, _ ->
             }
@@ -97,13 +99,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         )
     }
 
-    private fun deleteCar(position: Int) {
+    private fun deleteCar(carNumber: String) {
         val removeCarModel = RemoveCarModel(
             getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!,
-            listCarEntity[position].carNumber
+            carNumber
         )
 
-        loge(listCarEntity[position].toString())
+        loge(carNumber)
         viewModel.removeCarApi(removeCarModel)
         viewModel.responseRemoveCarApi.observe(viewLifecycleOwner, EventObserver {
 //            if (it.data != null) {
@@ -111,7 +113,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 is NetworkResult.Loading -> {
                 }
                 is NetworkResult.Success -> {
-                    viewModel.removeCarDB(listCarEntity[position].carNumber)
+                    viewModel.removeCarDB(carNumber)
                 }
                 is NetworkResult.Error -> {
                 }

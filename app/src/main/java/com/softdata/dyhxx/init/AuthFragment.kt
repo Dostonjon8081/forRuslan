@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
+import com.softdata.dyhxx.base.BaseFragment
 import com.softdata.dyhxx.databinding.FragmentAuthBinding
 import com.softdata.dyhxx.helper.util.PREF_TOKEN_KEY
 import com.softdata.dyhxx.helper.util.TELEGRAM_AUTH_URL
@@ -18,19 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class AuthFragment : Fragment() {
-
-    private var _binding: FragmentAuthBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentAuthBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,9 +37,5 @@ class AuthFragment : Fragment() {
     }
 
 
-    override fun onDetach() {
-        super.onDetach()
-        _binding = null
-    }
 
 }

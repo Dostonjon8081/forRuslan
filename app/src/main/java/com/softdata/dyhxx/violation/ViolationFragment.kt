@@ -8,12 +8,10 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.softdata.dyhxx.activity.MainActivity
+import com.softdata.dyhxx.base.BaseFragment
 import com.softdata.dyhxx.databinding.FragmentViolationBinding
 
-class ViolationFragment : Fragment() {
-
-    private var _binding: FragmentViolationBinding? = null
-    private val binding get() =  _binding
+class ViolationFragment : BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -24,15 +22,5 @@ class ViolationFragment : Fragment() {
             }
         })
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentViolationBinding.inflate(inflater,container,false)
-        return binding!!.root
-    }
-
 
 }
