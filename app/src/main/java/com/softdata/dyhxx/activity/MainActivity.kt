@@ -1,18 +1,14 @@
 package com.softdata.dyhxx.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.base.BaseActivity
-import com.softdata.dyhxx.core_fragment.account.AccountFragment
 import com.softdata.dyhxx.core_fragment.home.HomeViewModel
 import com.softdata.dyhxx.databinding.ActivityMainBinding
 import com.softdata.dyhxx.helper.db.CarEntity
@@ -30,8 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private val viewModel: HomeViewModel by viewModels()
 
 
-
-     override fun setupItems() {
+    override fun setupItems() {
 
         navController = findNavController(R.id.container_main_navigation)
         val navView: BottomNavigationView = binding.idBottomNavigation
@@ -40,20 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         if (intent.data != null) {
             authentication(intent)
         }
-
-/*        navView.setOnItemSelectedListener(
-            object : BottomNavigationView.OnNavigationItemSelectedListener {
-                override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                    when (item.itemId) {
-                        R.id.account_fragment -> AccountFragment().show(supportFragmentManager,"ACCOUNT")
-                        R.id.notification_fragment -> navController!!.navigate(R.id.notification_fragment)
-                        R.id.home_fragment -> navController!!.navigate(R.id.home_fragment)
-                    }
-                    return true
-                }
-            }
-        )*/
-
+//        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
     }
 
     private fun authentication(intent: Intent) {

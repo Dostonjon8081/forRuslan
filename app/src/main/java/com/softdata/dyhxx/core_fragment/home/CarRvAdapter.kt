@@ -17,44 +17,17 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return VH(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_rv_home_fragment, parent, false)
+                .inflate(R.layout.item_rv_home_fragment_twoo, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.apply {
-
-            //car number
-            val numberText = list[position].carNumber
-            val numberString =
-                if (numberIsPersonal(numberText.substring(5, 6))) {
-                    " ${numberText.substring(0, 2)}  ${
-                        numberText.substring(2, 3).uppercase()
-                    } ${numberText.substring(3, 6)} ${numberText.substring(6).uppercase()}"
-                } else {
-                    " ${numberText.substring(0, 2)}  ${
-                        numberText.substring(
-                            2,
-                            5
-                        )
-                    } ${numberText.substring(5).uppercase()}"
-                }
-            number.text = numberString
-
-            //tex pass series and number
-            texPasSer.text =
-                "${list[position].texPass.substring(0, 3)}  ${list[position].texPass.substring(3)}"
-
-            model.text = list[position].carModel
-
-            rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
-            this.view.setOnClickListener { rvItemClick!!.clickedItem(position) }
-        }
+        holder.onBind(list[position], position)
     }
 
     override fun getItemCount() = list.size
 
-    fun rvClickListener(rvItemClick: RvItemClick){
+    fun rvClickListener(rvItemClick: RvItemClick) {
         this.rvItemClick = rvItemClick
     }
 
@@ -69,14 +42,47 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
         notifyItemInserted(list.size)
     }
 
-    class VH(val view: View) : RecyclerView.ViewHolder(view) {
+    inner class VH(val view: View) : RecyclerView.ViewHolder(view) {
+
         var model: TextView = view.findViewById(R.id.rv_item_car_model)
-        var texPasSer: TextView = view.findViewById(R.id.rv_item_car_tex_pass)
+//        var texPasSer: TextView = view.findViewById(R.id.rv_item_car_tex_pass)
         var number: TextView = view.findViewById(R.id.rv_item_car_number)
         var rvItemEdit: AppCompatImageView = view.findViewById(R.id.rv_item_edit)
+
+        fun onBind(model: CarEntity, position: Int) {
+            //car number
+            val numberText = model.carNumber
+            val numberString =
+                if (numberIsPersonal(numberText.substring(5, 6))) {
+                    " ${numberText.substring(0, 2)}  ${
+                        numberText.substring(2, 3).uppercase()
+                    } ${numberText.substring(3, 6)} ${numberText.substring(6).uppercase()}"
+                } else {
+                    " ${numberText.substring(0, 2)}  ${
+                        numberText.substring(2, 5)
+                    } ${numberText.substring(5).uppercase()}"
+                }
+            number.text = numberString
+
+            //tex pass series and number
+//            texPasSer.text =
+//                "${list[position].texPass.substring(0, 3)}  ${list[position].texPass.substring(3)}"
+
+            this.model.text = model.carModel
+
+            rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
+            view.setOnClickListener { rvItemClick!!.clickedItem(position) }
+
+            if (position == list.size - 1) {
+                val params = this.itemView.layoutParams as RecyclerView.LayoutParams
+                params.bottomMargin = 200
+                this.itemView.layoutParams = params;
+            }
+
+        }
     }
 
-    private fun numberIsPersonal(substring: String): Boolean {
+    fun numberIsPersonal(substring: String): Boolean {
         return try {
             substring.toInt() is Int
         } catch (e: Exception) {

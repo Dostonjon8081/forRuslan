@@ -55,6 +55,7 @@ class ViolationFragment :
     private fun loadData() {
 
         binding.violationFragmentTitle.text = arg!!.carNumber.substring(0,2) + " "+ arg!!.carNumber.substring(2)
+
         viewModel.responseViolationApiApi.observe(viewLifecycleOwner, EventObserver {
             when (it) {
                 is NetworkResult.Success -> {

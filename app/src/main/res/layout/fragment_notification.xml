@@ -5,14 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/notification"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/notification_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_notification_error"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/notification_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="18dp"
+        android:fontFamily="@font/gilroy_bold"
+        android:textColor="@color/black"
+        android:text="@string/will_be_soon_notification"
+        android:textSize="24sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/notification_img"
+        app:layout_constraintStart_toStartOf="@id/notification_img"
+        app:layout_constraintTop_toBottomOf="@id/notification_img" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/notification_subtext_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroy_medium"
+        android:textColor="@color/gray"
+        android:text="Noqulayliklar uchun uzr so'raymiz"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/notification_img"
+        app:layout_constraintStart_toStartOf="@id/notification_img"
+        app:layout_constraintTop_toBottomOf="@id/notification_text" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

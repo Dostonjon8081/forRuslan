@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/background_white_gray_stoke"
+    android:padding="8dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/rv_item_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_delete_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rv_item_car_model_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:fontFamily="@font/gilroy_regular"
+        android:text="@string/car_model"
+        android:textColor="@color/gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rv_item_car_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroy_semibold"
+        android:paddingTop="10dp"
+        android:text="Malibu"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/rv_item_car_model_title"
+        app:layout_constraintTop_toBottomOf="@id/rv_item_car_model_title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rv_item_car_mark_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/gilroy_regular"
+        android:maxLines="1"
+        android:paddingTop="14dp"
+        android:text="@string/car_marks"
+        android:textColor="@color/gray"
+        app:layout_constraintStart_toStartOf="@id/rv_item_car_model"
+        app:layout_constraintTop_toBottomOf="@id/rv_item_car_model" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rv_item_car_mark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/gilroy_semibold"
+        android:text="Chevrolet"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/rv_item_car_mark_title"
+        app:layout_constraintTop_toBottomOf="@id/rv_item_car_mark_title" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rv_item_car_number_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroy_regular"
+        android:paddingTop="14dp"
+        android:text="@string/avtomobil_raqami"
+        android:textColor="@color/gray"
+        app:layout_constraintStart_toStartOf="@id/rv_item_car_model"
+        app:layout_constraintTop_toBottomOf="@id/rv_item_car_mark"
+        tools:layout_editor_absoluteY="143dp" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rv_item_car_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/ic_number_plate_"
+        android:fontFamily="@font/gilroy_bold"
+        android:padding="4dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="30dp"
+        android:text=" 01   0 741 JB"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/rv_item_car_number_title"
+        app:layout_constraintTop_toBottomOf="@id/rv_item_car_number_title" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/rv_item_car_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="18dp"
+        android:src="@drawable/ic_car"
+        app:layout_constraintBottom_toBottomOf="@id/rv_item_car_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rv_item_car_number"
+        app:layout_constraintTop_toTopOf="@+id/rv_item_car_mark_title" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,6 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     binding.homeFragmentDescription.visibility = View.VISIBLE
                     binding.homeFragmentRv.visibility = View.GONE
                 }
+//                 binding.homeFragmentRv.addItemDecoration(BottomPaddingDecoration(20))
             }
         })
     }
@@ -77,8 +78,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun clickedItemDelete(carNumber: String) {
-//        (activity as MainActivity).navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment(carEntity))
-
         val builder = AlertDialog.Builder(requireContext())
             .setMessage(R.string.delete_dialog_title)
             .setPositiveButton(R.string.yes) { _, _ ->

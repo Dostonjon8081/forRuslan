@@ -41,5 +41,6 @@
     <string name="violation_location">Qayd etilgan hudud:</string>
     <string name="violation_sum">To\'lov miqdori:</string>
     <string name="no_violation">Jarimalar mavjud emas!</string>
+    <string name="will_be_soon_notification">Ushbu bo’lim tez orada ishga tushadi</string>
 
 </resources>
