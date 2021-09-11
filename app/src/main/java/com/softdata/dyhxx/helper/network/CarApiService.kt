@@ -1,6 +1,8 @@
 package com.softdata.dyhxx.helper.network
 
 import com.softdata.dyhxx.helper.network.model.*
+import com.softdata.dyhxx.violation.ViolationCarApiModel
+import com.softdata.dyhxx.violation.ViolationCarApiModelResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -22,5 +24,8 @@ interface CarApiService {
 
     @POST("carlist/remove")
     suspend fun removeCar(@Body removeCarModel: RemoveCarModel): Response<RemoveCarModelResponse>
+
+    @POST("violation/list")
+    suspend fun getViolation(@Body model: ViolationCarApiModel): Response<ViolationCarApiModelResponse>
 
 }

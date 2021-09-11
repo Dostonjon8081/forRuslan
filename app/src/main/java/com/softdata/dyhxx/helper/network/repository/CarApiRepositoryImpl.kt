@@ -3,7 +3,8 @@ package com.softdata.dyhxx.helper.network.repository
 import com.softdata.dyhxx.helper.network.NetworkResult
 import com.softdata.dyhxx.helper.network.dataSource.ICarApiDataSource
 import com.softdata.dyhxx.helper.network.model.*
-import com.softdata.dyhxx.helper.util.logd
+import com.softdata.dyhxx.violation.ViolationCarApiModel
+import com.softdata.dyhxx.violation.ViolationCarApiModelResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -46,9 +47,17 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
     }
 
     override suspend fun removeCar(removeCarModel: RemoveCarModel): Flow<NetworkResult<RemoveCarModelResponse>> {
-        return  flow {
-            emit( safeApiCall {
+        return flow {
+            emit(safeApiCall {
                 iCarApiDataSource.removeCar(removeCarModel)
+            })
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getViolation(model: ViolationCarApiModel): Flow<NetworkResult<ViolationCarApiModelResponse>> {
+        return flow {
+            emit(safeApiCall {
+                iCarApiDataSource.getViolation(model)
             })
         }.flowOn(Dispatchers.IO)
     }

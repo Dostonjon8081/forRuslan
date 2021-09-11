@@ -9,6 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bottom_select_color">#219EBC</color>
     <color name="pale_text">#AFAFAF</color>
+    <color name="gray">#AFAFAF</color>
     <color name="item_rv_color">#E2EFF6</color>
+    <color name="red">#EC1000</color>
+    <color name="green">#13601A</color>
 
 </resources>

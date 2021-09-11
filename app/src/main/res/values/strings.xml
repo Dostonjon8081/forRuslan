@@ -35,5 +35,11 @@
     <string name="delete_dialog_title">siz rostan ham ushbu avtomobilni o\'chirmoqchisiz</string>
     <string name="yes">ha</string>
     <string name="no">yo\'q</string>
+    <string name="fine_time">Jarima vaqti:</string>
+    <string name="violation_act">Qaror:</string>
+    <string name="violation_type">Jarima:</string>
+    <string name="violation_location">Qayd etilgan hudud:</string>
+    <string name="violation_sum">To\'lov miqdori:</string>
+    <string name="no_violation">Jarimalar mavjud emas!</string>
 
 </resources>

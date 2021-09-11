@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="12dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/violation_fragment_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/violation_fragment_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_bold"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="75 F 453 DA" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/violation_no_fine_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_backet_with_clock"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/violation_no_fine_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="18dp"
+        android:fontFamily="@font/gilroy_bold"
+        android:textColor="@color/black"
+        android:text="@string/no_violation"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@id/violation_no_fine_img"
+        app:layout_constraintStart_toStartOf="@id/violation_no_fine_img"
+        app:layout_constraintTop_toBottomOf="@id/violation_no_fine_img" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/violation_fragment_rv"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/violation_fragment_tool_bar"
+        tools:listitem="@layout/item_rv_violation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

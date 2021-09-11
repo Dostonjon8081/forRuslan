@@ -26,14 +26,6 @@ abstract class BaseFragment<VB : ViewBinding>(
         return binding.root
     }
 
-
-/*        fun getBaseActivity():BaseActivity<VB> {
-            val act by lazy (LazyThreadSafetyMode.NONE){ BaseActivity.getBaseActivity()  }
-          return
-
-    }*/
-
-
     fun getBaseActivity(run: (BaseActivity<*>) -> Unit) {
         (activity as BaseActivity<*>).let {
             it.let {

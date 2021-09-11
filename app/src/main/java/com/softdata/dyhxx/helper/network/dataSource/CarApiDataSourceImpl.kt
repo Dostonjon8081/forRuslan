@@ -1,9 +1,9 @@
 package com.softdata.dyhxx.helper.network.dataSource
 
-import android.util.Log
 import com.softdata.dyhxx.helper.network.CarApiService
 import com.softdata.dyhxx.helper.network.model.*
-import com.softdata.dyhxx.helper.util.logd
+import com.softdata.dyhxx.violation.ViolationCarApiModel
+import com.softdata.dyhxx.violation.ViolationCarApiModelResponse
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -30,6 +30,10 @@ class CarApiDataSourceImpl @Inject constructor(private val carApiService: CarApi
     override suspend fun removeCar(removeCarModel: RemoveCarModel): Response<RemoveCarModelResponse> {
         return carApiService.removeCar(removeCarModel)
 
+    }
+
+    override suspend fun getViolation(model: ViolationCarApiModel): Response<ViolationCarApiModelResponse> {
+        return carApiService.getViolation(model)
     }
 
 

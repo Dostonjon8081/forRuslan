@@ -55,17 +55,6 @@
             app:destination="@id/violationFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/add_car_fragment"
-        android:name="com.softdata.dyhxx.core_fragment.add_car.AddCarFragment"
-        android:label="AddCarFragment"
-        tools:layout="@layout/fragment_add_car">
-        <argument
-            android:name="carArgs"
-            app:argType="com.softdata.dyhxx.helper.db.CarEntity"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </fragment>
 
     <fragment
         android:id="@+id/notification_fragment"
@@ -77,6 +66,18 @@
         android:name="com.softdata.dyhxx.core_fragment.account.AccountFragment"
         android:label="@string/account"
         tools:layout="@layout/fragment_account"/>
+
+    <fragment
+        android:id="@+id/add_car_fragment"
+        android:name="com.softdata.dyhxx.core_fragment.add_car.AddCarFragment"
+        android:label="AddCarFragment"
+        tools:layout="@layout/fragment_add_car">
+        <argument
+            android:name="carArgs"
+            app:argType="com.softdata.dyhxx.helper.db.CarEntity"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
     <fragment
         tools:layout="@layout/fragment_violation"
