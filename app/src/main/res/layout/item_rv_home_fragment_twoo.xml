@@ -19,9 +19,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/rv_item_car_model_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
+        app:layout_constraintEnd_toStartOf="@id/rv_item_car_image"
+        app:layout_constraintBottom_toTopOf="@id/rv_item_car_model"
         android:fontFamily="@font/gilroy_regular"
         android:text="@string/car_model"
         android:textColor="@color/gray"
@@ -31,13 +33,15 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/rv_item_car_model"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gilroy_semibold"
         android:paddingTop="10dp"
         android:text="Malibu"
         android:textColor="@color/black"
         android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/rv_item_car_image"
+        app:layout_constraintBottom_toTopOf="@id/rv_item_car_mark_title"
         app:layout_constraintStart_toStartOf="@id/rv_item_car_model_title"
         app:layout_constraintTop_toBottomOf="@id/rv_item_car_model_title" />
 
@@ -51,30 +55,36 @@
         android:paddingTop="14dp"
         android:text="@string/car_marks"
         android:textColor="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/rv_item_car_mark"
+        app:layout_constraintEnd_toStartOf="@+id/rv_item_car_image"
         app:layout_constraintStart_toStartOf="@id/rv_item_car_model"
         app:layout_constraintTop_toBottomOf="@id/rv_item_car_model" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/rv_item_car_mark"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/gilroy_semibold"
         android:text="Chevrolet"
         android:textColor="@color/black"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/rv_item_car_number_title"
+        app:layout_constraintEnd_toStartOf="@+id/rv_item_car_image"
         app:layout_constraintStart_toStartOf="@id/rv_item_car_mark_title"
         app:layout_constraintTop_toBottomOf="@id/rv_item_car_mark_title" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/rv_item_car_number_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gilroy_regular"
         android:paddingTop="14dp"
+        app:layout_constraintEnd_toStartOf="@id/rv_item_car_image"
         android:text="@string/avtomobil_raqami"
         android:textColor="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/rv_item_car_number"
         app:layout_constraintStart_toStartOf="@id/rv_item_car_model"
         app:layout_constraintTop_toBottomOf="@id/rv_item_car_mark"
         tools:layout_editor_absoluteY="143dp" />
@@ -87,8 +97,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/ic_number_plate_"
-        android:fontFamily="@font/gilroy_bold"
+        android:fontFamily="@font/cargo2"
         android:padding="4dp"
+        app:layout_constraintEnd_toStartOf="@id/rv_item_car_image"
         android:paddingTop="10dp"
         android:paddingEnd="30dp"
         android:text=" 01   0 741 JB"
@@ -102,14 +113,16 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/rv_item_car_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="18dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="24dp"
+        android:paddingBottom="0dp"
         android:src="@drawable/ic_car"
         app:layout_constraintBottom_toBottomOf="@id/rv_item_car_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rv_item_car_number"
-        app:layout_constraintTop_toTopOf="@+id/rv_item_car_mark_title" />
-
+        app:layout_constraintTop_toBottomOf="@id/rv_item_edit"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

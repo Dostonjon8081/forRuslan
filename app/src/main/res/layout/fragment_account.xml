@@ -2,27 +2,136 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/item_rv_color">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="500dp"
-        android:text="Account"
-        app:layout_constraintBottom_toTopOf="@id/textView"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/account_fragment_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="500dp"
-        android:text="Account"
-        app:layout_constraintTop_toBottomOf="@id/textView3"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logo_toolbar" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/account_fragment_toolbar">
+
+        <View
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/account_fragment_img"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/ic_launcher_foreground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/account_fragment_welcome"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/gilroy_semibold"
+                android:maxLines="1"
+                android:text="@string/welcome"
+                android:textSize="12sp"
+                android:gravity="bottom"
+                app:layout_constraintEnd_toStartOf="@id/account_fragment_logout"
+                app:layout_constraintBottom_toTopOf="@id/account_fragment_name"
+                app:layout_constraintStart_toEndOf="@id/account_fragment_img"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/account_fragment_name"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/gilroy_semibold"
+                android:text="Xurshid Istamov"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:maxLines="1"
+                app:layout_constraintEnd_toStartOf="@id/account_fragment_logout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/account_fragment_img"
+                app:layout_constraintTop_toBottomOf="@id/account_fragment_welcome" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_logout"
+                android:layout_margin="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/account_fragment_logout"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:padding="10dp"
+            android:layout_marginTop="18dp"
+            android:textColor="@color/dark_blue"
+            android:drawablePadding="14dp"
+            android:text="@string/my_profile"
+            android:drawableStart="@drawable/ic_profile_account"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:padding="10dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/dark_blue"
+            android:drawablePadding="14dp"
+            android:text="@string/language"
+            android:drawableStart="@drawable/ic_globe"/>
+
+        <View
+            android:layout_marginTop="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:padding="10dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/dark_blue"
+            android:drawablePadding="14dp"
+            android:text="@string/about_app"
+            android:drawableStart="@drawable/ic_paper"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

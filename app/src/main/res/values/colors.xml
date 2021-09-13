@@ -13,5 +13,6 @@
     <color name="item_rv_color">#E2EFF6</color>
     <color name="red">#EC1000</color>
     <color name="green">#098115</color>
+    <color name="dark_blue">#023047</color>
 
 </resources>

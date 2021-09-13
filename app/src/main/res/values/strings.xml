@@ -42,5 +42,9 @@
     <string name="violation_sum">To\'lov miqdori:</string>
     <string name="no_violation">Jarimalar mavjud emas!</string>
     <string name="will_be_soon_notification">Ushbu bo’lim tez orada ishga tushadi</string>
+    <string name="welcome">Xush kelibsiz</string>
+    <string name="my_profile">Mening profilim</string>
+    <string name="language">Til</string>
+    <string name="about_app">Dastur haqida</string>
 
 </resources>
