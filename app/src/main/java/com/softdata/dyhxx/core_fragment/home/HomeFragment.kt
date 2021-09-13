@@ -49,7 +49,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         viewModel.allCarDB.observe(viewLifecycleOwner, object : Observer<MutableList<CarEntity>> {
             override fun onChanged(t: MutableList<CarEntity>?) {
                 if (t?.size!! > 0) {
-                    logd(t)
                     adapter.rvClickListener(this@HomeFragment)
                     listCarEntity = t
 //                    adapter = CarRvAdapter( t,this@HomeFragment)

@@ -24,4 +24,6 @@
     <string name="select">Выбор</string>
     <string name="save">Cохранять</string>
     <string name="close">Закрыть</string>
+
+    <string name="welcome">Добро пожаловать</string>
 </resources>
