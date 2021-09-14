@@ -26,4 +26,8 @@
     <string name="close">Yopish</string>
 
     <string name="welcome">Xush kelibsiz</string>
+    <string name="my_profile">Mening profilim</string>
+    <string name="language">Til</string>
+    <string name="about_app">Dastur haqida</string>
+    <string name="will_be_soon_notification">Ushbu bo’lim tez orada ishga tushadi</string>
 </resources>

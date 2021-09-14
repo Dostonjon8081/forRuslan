@@ -3,10 +3,8 @@ package com.softdata.dyhxx.activity
 import android.content.Intent
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.base.BaseActivity
 import com.softdata.dyhxx.core_fragment.home.HomeViewModel
@@ -27,15 +25,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
 
     override fun setupItems() {
+        setLocale(LocaleHelper.getLanguage(this))
 
         navController = findNavController(R.id.container_main_navigation)
-        val navView: BottomNavigationView = binding.idBottomNavigation
+        val navView = binding.idBottomNavigation
         navView.setupWithNavController(navController!!)
 
         if (intent.data != null) {
             authentication(intent)
         }
-//        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
     }
 
     private fun authentication(intent: Intent) {
@@ -80,5 +78,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
     }
 
+    fun setLocale(language: String = "uz") {
+        LocaleHelper.setLocale(this, language)
+    }
 
 }

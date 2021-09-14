@@ -41,6 +41,8 @@ android {
     kapt {
         correctErrorTypes true
     }
+//    density { enableSplit true }
+//    language { enableSplit false }
 }
 
 dependencies {

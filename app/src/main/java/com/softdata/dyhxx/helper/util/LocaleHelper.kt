@@ -29,8 +29,9 @@ object LocaleHelper {
         return if (lang == "uz") R.string.ozbek else R.string.russian
     }
 
-    fun getCurrentLocale(activity: Activity) = getPersistedData(activity)
-
+    fun getCurrentLocale(activity: Activity) {
+        setLocale(activity,getPersistedData(activity))
+    }
     private fun getPersistedData(activity: Activity): String {
         return getPref(activity).getString(PREF_LANG_KEY,"uz")!!
     }
@@ -49,7 +50,8 @@ object LocaleHelper {
         Locale.setDefault(locale)
         val configuration: Configuration = context.resources.configuration
         configuration.setLocale(locale)
-        context.createConfigurationContext(configuration)
+//        context.createConfigurationContext(configuration)
+        context.resources.updateConfiguration(configuration,context.resources.displayMetrics)
     }
 
     private fun updateResourcesLegacy(context: Context, language: String) {

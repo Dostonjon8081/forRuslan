@@ -26,4 +26,8 @@
     <string name="close">Закрыть</string>
 
     <string name="welcome">Добро пожаловать</string>
+    <string name="my_profile">Мой профиль</string>
+    <string name="language">Язык</string>
+    <string name="about_app">О приложении</string>
+    <string name = "will_be_soon_notification"> Этот раздел скоро будет запущен </string>
 </resources>

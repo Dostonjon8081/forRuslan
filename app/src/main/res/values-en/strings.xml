@@ -25,4 +25,8 @@
     <string name="close">Cancel</string>
 
     <string name="welcome">Welcome</string>
+    <string name="my_profile">My profile</string>
+    <string name="language">Language</string>
+    <string name="about_app">About</string>
+    <string name = "will_be_soon_notification"> This section will be up and running soon </string>
 </resources>
