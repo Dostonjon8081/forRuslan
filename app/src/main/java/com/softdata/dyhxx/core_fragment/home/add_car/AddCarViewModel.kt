@@ -1,4 +1,4 @@
-package com.softdata.dyhxx.core_fragment.add_car
+package com.softdata.dyhxx.core_fragment.home.add_car
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -10,7 +10,6 @@ import com.softdata.dyhxx.helper.db.dataRepository.ICarRepository
 import com.softdata.dyhxx.helper.network.NetworkResult
 import com.softdata.dyhxx.helper.network.model.*
 import com.softdata.dyhxx.helper.network.repository.ICarApiRepository
-import com.softdata.dyhxx.helper.util.logd
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

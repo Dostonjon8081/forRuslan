@@ -1,22 +1,18 @@
-package com.softdata.dyhxx.core_fragment.add_car
+package com.softdata.dyhxx.core_fragment.home.add_car
 
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.activity.MainActivity
 import com.softdata.dyhxx.base.BaseFragment
 import com.softdata.dyhxx.core_fragment.home.CarRvAdapter
-import com.softdata.dyhxx.core_fragment.home.HomeViewModel
 import com.softdata.dyhxx.core_fragment.home.SpinnerItemClick
 import com.softdata.dyhxx.databinding.FragmentAddCarBinding
 import com.softdata.dyhxx.helper.db.CarEntity

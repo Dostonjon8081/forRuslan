@@ -45,38 +45,40 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
     inner class VH(val view: View) : RecyclerView.ViewHolder(view) {
 
         var model: TextView = view.findViewById(R.id.rv_item_car_model)
-//        var texPasSer: TextView = view.findViewById(R.id.rv_item_car_tex_pass)
+        var mark: TextView = view.findViewById(R.id.rv_item_car_mark)
+        var modelTitle: TextView = view.findViewById(R.id.rv_item_car_model_title)
+
+        //        var texPasSer: TextView = view.findViewById(R.id.rv_item_car_tex_pass)
         var number: TextView = view.findViewById(R.id.rv_item_car_number)
+        var numbe: TextView = view.findViewById(R.id.rv_item_car_numbe)
         var rvItemEdit: AppCompatImageView = view.findViewById(R.id.rv_item_edit)
 
         fun onBind(model: CarEntity, position: Int) {
             //car number
             val numberText = model.carNumber
-            val numberString =
+
                 if (numberIsPersonal(numberText.substring(5, 6))) {
-                    " ${numberText.substring(0, 2)}  ${
-                        numberText.substring(2, 3).uppercase()
-                    } ${numberText.substring(3, 6)} ${numberText.substring(6).uppercase()}"
+                    numbe.text = " ${numberText.substring(0, 2)}"
                 } else {
-                    " ${numberText.substring(0, 2)}  ${
-                        numberText.substring(2, 5)
-                    } ${numberText.substring(5).uppercase()}"
+                    number.text = " ${numberText.substring(2, 5)} ${numberText.substring(5)}"
                 }
-            number.text = numberString
-
-            //tex pass series and number
-//            texPasSer.text =
-//                "${list[position].texPass.substring(0, 3)}  ${list[position].texPass.substring(3)}"
-
-            this.model.text = model.carModel
 
             rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
             view.setOnClickListener { rvItemClick!!.clickedItem(position) }
 
-            if (position == list.size - 1) {
-                val params = this.itemView.layoutParams as RecyclerView.LayoutParams
-                params.bottomMargin = 200
-                this.itemView.layoutParams = params;
+            if (model.carMark.isNotEmpty()) mark.text = model.carMark
+            addCarModel(model.carModel, this.itemView)
+
+            bottomMargin(position, this.itemView)
+        }
+    }
+
+    private fun addCarModel(model: String, view: View) {
+        if (model.isNotEmpty()) {
+            this.VH(view).apply {
+                this.model.visibility = View.VISIBLE
+                modelTitle.visibility = View.VISIBLE
+                this.model.text = model
             }
 
         }
@@ -87,6 +89,14 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
             substring.toInt() is Int
         } catch (e: Exception) {
             false
+        }
+    }
+
+    fun bottomMargin(position: Int, itemView: View) {
+        if (position == list.size - 1) {
+            val params = itemView.layoutParams as RecyclerView.LayoutParams
+            params.bottomMargin = 200
+            itemView.layoutParams = params;
         }
     }
 }
