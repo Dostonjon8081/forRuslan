@@ -120,7 +120,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
             if (isOnline(requireContext())) {
 
-
                 viewModel.saveCarApi(
                     SaveCarModel(
                         getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!, carNumber,
@@ -162,191 +161,64 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun setupModelSpinner() {
-        var arrayRes: Int? = R.array.Chevrolet
-        when (carMark) {
-            "Daewoo" -> {
-                arrayRes = R.array.Daewoo
-            }
-            "Chevrolet" -> {
-                arrayRes = R.array.Chevrolet
-            }
-            "Audi" -> {
-                arrayRes = R.array.Audi
-            }
-            "Baic" -> {
-                arrayRes = R.array.Baic
-            }
-            "BMW" -> {
-                R.array.BMW
-            }
-            "Ford" -> {
-            }
-            "GAC" -> {
-            }
-            "Haval" -> {
-            }
-            "Hyundai" -> {
-            }
-            "Lada(ВАЗ)" -> {
-            }
-            "ГАЗ" -> {
-            }
-            "Зил" -> {
-            }
-            "Москвич" -> {
-            }
-            "Isuzu" -> {
-            }
-            "Mercedes-Benz" -> {
-            }
-            "Уаз" -> {
-            }
-            "Howo" -> {
-            }
-            "MAN" -> {
-            }
-            "KIA" -> {
-            }
-            "Маз" -> {
-            }
-            "Changan" -> {
-            }
-            "Dongfeng" -> {
-            }
-            "Shacman" -> {
-            }
-            "Foton" -> {
-            }
-            "Geely" -> {
-            }
-            "Genesis" -> {
-            }
-            "Hafei" -> {
-            }
-            "Honda" -> {
-            }
-            "Hummer" -> {
-            }
-            "Infiniti" -> {
-            }
-            "JAC" -> {
-            }
-            "Jaguar" -> {
-            }
-            "Jeep" -> {
-            }
-            "King Long" -> {
-            }
-            "Land Rover" -> {
-            }
-            "Lexus" -> {
-            }
-            "Lifan" -> {
-            }
-            "Lincoln" -> {
-            }
-            "Maybach" -> {
-            }
-            "Mazda" -> {
-            }
-            "Mini" -> {
-            }
-            "Mitsubishi" -> {
-            }
-            "Nio" -> {
-            }
-            "Nissan" -> {
-            }
-            "Opel" -> {
-            }
-            "Peugeot" -> {
-            }
-            "Porsche" -> {
-            }
-            "Ravon" -> {
-            }
-            "Renault" -> {
-            }
-            "Samsung" -> {
-            }
-            "Rolls-Royce" -> {
-            }
-            "Rover" -> {
-            }
-            "Saab" -> {
-            }
-            "Shuanghuan" -> {
-            }
-            "Skoda" -> {
-            }
-            "Smart" -> {
-            }
-            "SsangYong" -> {
-            }
-            "Suzuki" -> {
-            }
-            "Tatra" -> {
-            }
-            "Tesla" -> {
-            }
-            "Tofas" -> {
-            }
-            "Toyota" -> {
-            }
-            "Volkswagen" -> {
-            }
-            "Volvo" -> {
-            }
-            "Wuling" -> {
-            }
-            "Заз" -> {
-            }
-            "Иж" -> {
-            }
-            "Луаз" -> {
-            }
-            "Раф" -> {
-            }
-            "DAF" -> {
-            }
-            "GMC" -> {
-            }
-            "Shaanxi" -> {
-            }
-            "Sinotruk" -> {
-            }
-            "Урал" -> {
-            }
-            "Alfa-Romeo" -> {
-            }
-            "Chana" -> {
-            }
-            "Chrysler" -> {
-            }
-            "Chery" -> {
-            }
-            "Citreon" -> {
-            }
-            "Dodge" -> {
-            }
-            "Fiat" -> {
-            }
-            "Force" -> {
-            }
+//        var arrayRes: Int? = R.array.Chevrolet
+        val arrayRes = when (carMark) {
+            "Daewoo" -> R.array.Daewoo
+            "Chevrolet" -> R.array.Chevrolet
+            "Audi" -> R.array.Audi
+            "Baic" -> R.array.Baic
+            "BMW" -> R.array.BMW
+            "Fiat" -> R.array.Fiat
+            "Ford" -> R.array.Ford
+            "Hyundai" -> R.array.Hyundai
+            "Lada(ВАЗ)" -> R.array.Lada
+            "ГАЗ" -> R.array.ГАЗ
+            "Москвич" -> R.array.Москвич
+            "Isuzu" -> R.array.Isuzu
+            "Mercedes-Benz" -> R.array.Mercedes
+            "Уаз" -> R.array.Уаз
+            "KIA" -> R.array.KIA
+            "Infiniti" -> R.array.Infiniti
+            "Lexus" -> R.array.Lexus
+            "Mazda" -> R.array.Mazda
+            "Mitsubishi" -> R.array.Mitsubishi
+            "Nissan" -> R.array.Nissan
+            "Opel" -> R.array.Opel
+            "Peugeot" -> R.array.Peugeot
+            "Porsche" -> R.array.Porsche
+            "Tesla" -> R.array.Tesla
+            "Toyota" -> R.array.Toyota
+            "Volkswagen" -> R.array.Volkswagen
+            "Заз" -> R.array.Заз
+            else -> null
         }
 
-        ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            resources.getStringArray(arrayRes!!).sortedBy { it }
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.addCarFragmentSpinnerCarModels.adapter = adapter
-            binding.addCarFragmentContainerCarModel.visibility = View.VISIBLE
-            binding.addCarFragmentSpinnerCarModels.visibility = View.VISIBLE
-            binding.addCarFragmentSpinnerCarModels.onItemSelectedListener = this
+        if (arrayRes != null) {
+            val arrayMarks = resources.getStringArray(arrayRes)
+//            arrayMarks[arrayMarks.size] = getString(R.string.other)
 
-            binding.addCarFragmentEditTextCarModels.setText("")
+//            val position = arrayMarks.size
+//            arrayMarks[position] = getString(R.string.other)
+
+            ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                resources.getStringArray(arrayRes).sortedBy { it }
+            ).also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.addCarFragmentSpinnerCarModels.adapter = adapter
+                binding.addCarFragmentContainerCarModel.visibility = View.VISIBLE
+                binding.addCarFragmentSpinnerCarModels.visibility = View.VISIBLE
+                binding.addCarFragmentEditTextCarModels.visibility = View.GONE
+                binding.addCarFragmentSpinnerCarModels.onItemSelectedListener = this
+
+                binding.addCarFragmentEditTextCarModels.setText("")
+            }
+        } else {
+
+            binding.addCarFragmentContainerCarModel.visibility = View.VISIBLE
+            binding.addCarFragmentSpinnerCarModels.visibility = View.GONE
+            binding.addCarFragmentEditTextCarModels.visibility = View.VISIBLE
         }
     }
 

@@ -2,6 +2,9 @@ package com.softdata.dyhxx.activity
 
 import android.content.Intent
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -34,6 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         if (intent.data != null) {
             authentication(intent)
         }
+
     }
 
     private fun authentication(intent: Intent) {

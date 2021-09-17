@@ -15,7 +15,11 @@ buildscript {
         //dagger-hilt
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.38.1'
         //navigation safe args
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.0-alpha07"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.0-alpha08"
+        //gms service
+        classpath 'com.google.gms:google-services:4.3.10'
+        //firebase crash
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
 
 
     }
@@ -24,8 +28,9 @@ buildscript {
 allprojects {
     repositories {
         google()
+//        maven { url 'https://jitpack.io' }
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
+//        jcenter() // Warning: this repository is going to shut down soon
     }
 }
 
