@@ -23,10 +23,10 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_bold"
             android:gravity="center_horizontal"
             android:text="@string/add_car"
             android:textColor="@color/black"
-            android:fontFamily="@font/gilroy_bold"
             android:textSize="18sp"
             tools:ignore="RtlSymmetry" />
 
@@ -52,14 +52,14 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/add_car_fragment_et_car_number"
             android:layout_width="match_parent"
-            android:drawableEnd="@drawable/ic_about"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:inputType="textCapCharacters"
-            android:maxLength="9"
             android:background="@drawable/background_white_gray_stoke"
+            android:drawableEnd="@drawable/ic_about"
             android:fontFamily="@font/gilroy_medium"
             android:hint="00 A 000 AA"
+            android:inputType="textCapCharacters"
+            android:maxLength="9"
+            android:maxLines="1"
             android:padding="12dp"
             android:textColorHint="@color/pale_text" />
 
@@ -71,8 +71,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
         android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/add_car_fragment_container_add_car"
         app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_add_car">
 
@@ -86,9 +86,9 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/gilroy_medium"
                 android:maxLines="1"
-                android:ellipsize="end"
                 android:paddingBottom="4dp"
                 android:text="@string/tex_pas_series"
                 android:textColor="@color/black"
@@ -101,8 +101,8 @@
                 android:background="@drawable/background_white_gray_stoke"
                 android:fontFamily="@font/gilroy_medium"
                 android:hint="AAA"
-                android:maxLength="3"
                 android:inputType="textCapCharacters"
+                android:maxLength="3"
                 android:maxLines="1"
                 android:padding="12dp"
                 android:textColorHint="@color/pale_text" />
@@ -132,12 +132,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_white_gray_stoke"
+                android:drawableEnd="@drawable/ic_about"
                 android:fontFamily="@font/gilroy_medium"
                 android:hint="01234567"
-                android:maxLines="1"
                 android:inputType="number"
+                android:maxLines="1"
                 android:padding="12dp"
-                android:drawableEnd="@drawable/ic_about"
                 android:textColorHint="@color/pale_text" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -181,6 +181,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="14dp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_car_mark">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -196,12 +197,23 @@
             android:id="@+id/add_car_fragment_spinner_car_models"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-
             android:background="@drawable/background_white_gray_stoke"
             android:fontFamily="@font/gilroy_medium"
             android:hint="@string/select"
             android:padding="12dp"
-            android:textColor="@color/pale_text" />
+            android:textColor="@color/pale_text"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/add_car_fragment_edit_text_car_models"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/background_white_gray_stoke"
+            android:fontFamily="@font/gilroy_medium"
+            android:hint="@string/typing_model"
+            android:padding="12dp"
+            android:visibility="gone"
+            android:textColor="@color/pale_text"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

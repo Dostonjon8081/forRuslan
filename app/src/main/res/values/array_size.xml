@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="text_size">
+        <item>14sp</item>
+        <item>18sp</item>
+        <item>22sp</item>
+        <item>40sp</item>
+        <item>100sp</item>
+    </array>
+    <array name="text_size_">
+        <item>14sp</item>
+        <item>18sp</item>
+        <item>18sp</item>
+        <item>20sp</item>
+        <item>22sp</item>
+        <item>24sp</item>
+    </array>
+</resources>

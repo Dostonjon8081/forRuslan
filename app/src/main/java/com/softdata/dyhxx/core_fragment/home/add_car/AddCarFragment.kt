@@ -2,7 +2,6 @@ package com.softdata.dyhxx.core_fragment.home.add_car
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -24,28 +23,13 @@ import com.softdata.dyhxx.helper.util.isOnline
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddCarFragment :BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate), SpinnerItemClick {
+class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
+    SpinnerItemClick {
 
     private val viewModel: AddCarViewModel by activityViewModels()
 
     private val args: AddCarFragmentArgs by navArgs()
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { CarRvAdapter() }
-
-    private val carMarks = mutableListOf(
-        "Select",
-        "Daewoo",
-        "Chevrolet",
-        "Abarth",
-        "Acura",
-        "Alfa Romeo",
-        "Aston Martin",
-        "Audi",
-        "Bentley",
-        "BMW", "Buick"
-    )
-
-//    private var _binding: FragmentAddCarBinding? = null
-//    private val binding get() = _binding!!
 
     private var carMark = ""
     private var carModel = ""
@@ -56,11 +40,11 @@ class AddCarFragment :BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding:
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 getBaseActivity {
-                    it.navController?.popBackStack()}
+                    it.navController?.popBackStack()
+                }
             }
         })
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,24 +66,23 @@ class AddCarFragment :BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding:
         if (carArgs != null) {
             with(binding) {
                 addCarFragmentEtCarNumber.setText(carArgs.carNumber)
-                addCarFragmentTexPassSeries.setText(carArgs.texPass.substring(0,3))
+                addCarFragmentTexPassSeries.setText(carArgs.texPass.substring(0, 3))
                 addCarFragmentTexPassNumber.setText(carArgs.texPass.substring(3))
             }
         }
     }
 
-
     private fun setupSpinner() {
-        val spinnerAdapter =
-            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, carMarks)
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            resources.getStringArray(R.array.car_marks).sortedBy { it }).also { adapter ->
 
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        binding.addCarFragmentSpinnerCarMarks.adapter = spinnerAdapter
-        binding.addCarFragmentSpinnerCarModels.adapter = spinnerAdapter
-        binding.addCarFragmentSpinnerCarMarks.onItemSelectedListener = this
-        binding.addCarFragmentSpinnerCarModels.onItemSelectedListener = this
-
+            binding.addCarFragmentSpinnerCarMarks.adapter = adapter
+            binding.addCarFragmentSpinnerCarMarks.onItemSelectedListener = this
+        }
     }
 
     private fun clickButton(id: Int) {
@@ -116,11 +99,14 @@ class AddCarFragment :BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding:
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
         val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString()
 
+        if (!binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
+            carModel = binding.addCarFragmentEditTextCarModels.text.toString()
+        }
+
         if (carNumber.length >= 8
             && carTexPasNumber.length == 7
             && carTexPasSeries.length >= 3
             && carMark.isNotEmpty()
-            && carModel.isNotEmpty()
         ) {
             val carEntity =
                 CarEntity(
@@ -142,7 +128,7 @@ class AddCarFragment :BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding:
                     )
                 )
 
-               viewModel.responseSaveCarApi.observe(viewLifecycleOwner) {
+                viewModel.responseSaveCarApi.observe(viewLifecycleOwner) {
                     when (it.data?.status) {
                         200 -> {
                             viewModel.insertCarDB(carEntity)
@@ -164,11 +150,203 @@ class AddCarFragment :BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding:
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        Log.d("parent", "onItemSelected: ${parent?.id}")
         if (parent?.id == R.id.add_car_fragment_spinner_car_marks) {
-            carMark = carMarks[position]
+
+            carMark = binding.addCarFragmentSpinnerCarMarks.selectedItem.toString()
+            if (carMark.isNotEmpty()) {
+                setupModelSpinner()
+            }
         } else {
-            carModel = carMarks[position]
+            carMark = binding.addCarFragmentSpinnerCarModels.selectedItem.toString()
+        }
+    }
+
+    private fun setupModelSpinner() {
+        var arrayRes: Int? = R.array.Chevrolet
+        when (carMark) {
+            "Daewoo" -> {
+                arrayRes = R.array.Daewoo
+            }
+            "Chevrolet" -> {
+                arrayRes = R.array.Chevrolet
+            }
+            "Audi" -> {
+                arrayRes = R.array.Audi
+            }
+            "Baic" -> {
+                arrayRes = R.array.Baic
+            }
+            "BMW" -> {
+                R.array.BMW
+            }
+            "Ford" -> {
+            }
+            "GAC" -> {
+            }
+            "Haval" -> {
+            }
+            "Hyundai" -> {
+            }
+            "Lada(ВАЗ)" -> {
+            }
+            "ГАЗ" -> {
+            }
+            "Зил" -> {
+            }
+            "Москвич" -> {
+            }
+            "Isuzu" -> {
+            }
+            "Mercedes-Benz" -> {
+            }
+            "Уаз" -> {
+            }
+            "Howo" -> {
+            }
+            "MAN" -> {
+            }
+            "KIA" -> {
+            }
+            "Маз" -> {
+            }
+            "Changan" -> {
+            }
+            "Dongfeng" -> {
+            }
+            "Shacman" -> {
+            }
+            "Foton" -> {
+            }
+            "Geely" -> {
+            }
+            "Genesis" -> {
+            }
+            "Hafei" -> {
+            }
+            "Honda" -> {
+            }
+            "Hummer" -> {
+            }
+            "Infiniti" -> {
+            }
+            "JAC" -> {
+            }
+            "Jaguar" -> {
+            }
+            "Jeep" -> {
+            }
+            "King Long" -> {
+            }
+            "Land Rover" -> {
+            }
+            "Lexus" -> {
+            }
+            "Lifan" -> {
+            }
+            "Lincoln" -> {
+            }
+            "Maybach" -> {
+            }
+            "Mazda" -> {
+            }
+            "Mini" -> {
+            }
+            "Mitsubishi" -> {
+            }
+            "Nio" -> {
+            }
+            "Nissan" -> {
+            }
+            "Opel" -> {
+            }
+            "Peugeot" -> {
+            }
+            "Porsche" -> {
+            }
+            "Ravon" -> {
+            }
+            "Renault" -> {
+            }
+            "Samsung" -> {
+            }
+            "Rolls-Royce" -> {
+            }
+            "Rover" -> {
+            }
+            "Saab" -> {
+            }
+            "Shuanghuan" -> {
+            }
+            "Skoda" -> {
+            }
+            "Smart" -> {
+            }
+            "SsangYong" -> {
+            }
+            "Suzuki" -> {
+            }
+            "Tatra" -> {
+            }
+            "Tesla" -> {
+            }
+            "Tofas" -> {
+            }
+            "Toyota" -> {
+            }
+            "Volkswagen" -> {
+            }
+            "Volvo" -> {
+            }
+            "Wuling" -> {
+            }
+            "Заз" -> {
+            }
+            "Иж" -> {
+            }
+            "Луаз" -> {
+            }
+            "Раф" -> {
+            }
+            "DAF" -> {
+            }
+            "GMC" -> {
+            }
+            "Shaanxi" -> {
+            }
+            "Sinotruk" -> {
+            }
+            "Урал" -> {
+            }
+            "Alfa-Romeo" -> {
+            }
+            "Chana" -> {
+            }
+            "Chrysler" -> {
+            }
+            "Chery" -> {
+            }
+            "Citreon" -> {
+            }
+            "Dodge" -> {
+            }
+            "Fiat" -> {
+            }
+            "Force" -> {
+            }
+        }
+
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            resources.getStringArray(arrayRes!!).sortedBy { it }
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.addCarFragmentSpinnerCarModels.adapter = adapter
+            binding.addCarFragmentContainerCarModel.visibility = View.VISIBLE
+            binding.addCarFragmentSpinnerCarModels.visibility = View.VISIBLE
+            binding.addCarFragmentSpinnerCarModels.onItemSelectedListener = this
+
+            binding.addCarFragmentEditTextCarModels.setText("")
         }
     }
 

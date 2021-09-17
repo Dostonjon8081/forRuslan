@@ -47,5 +47,6 @@
     <string name="my_profile">Mening profilim</string>
     <string name="language">Til</string>
     <string name="about_app">Dastur haqida</string>
+    <string name="typing_model">Modelni kiriting</string>
 
 </resources>

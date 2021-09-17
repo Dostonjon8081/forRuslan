@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="8dp"
     android:background="@drawable/background_white_gray_stoke"
     android:padding="8dp">
@@ -90,43 +91,49 @@
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/ic_number_plate_"
-            android:layout_height="wrap_content">
+            android:background="@drawable/ic_number_plate_">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/rv_item_car_numbe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:fontFamily="@font/cargo2"
                 android:padding="4dp"
+                android:textSize="16sp"
                 android:paddingTop="10dp"
-                android:text=" 01"
-                android:textColor="@color/black"
-                android:textSize="16sp"/>
+                tools:text=" 01"
+                android:textColor="@color/black"/>
 
+<!--            app:autoSizePresetSizes="@array/text_size_"-->
+<!--            app:autoSizeTextType="uniform"-->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/rv_item_car_number"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:fontFamily="@font/cargo2"
+                android:maxLines="1"
                 android:padding="4dp"
+                android:textSize="18sp"
+                android:layout_marginEnd="22dp"
                 android:paddingTop="10dp"
-                android:paddingEnd="30dp"
-                android:text=" 0 741 JB"
-                android:textColor="@color/black"
-                android:textSize="18sp"/>
+                tools:text=" 0 741 JB"
+                android:textColor="@color/black" />
+
+<!--            app:autoSizePresetSizes="@array/text_size"-->
+<!--            app:autoSizeTextType="uniform"-->
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/rv_item_car_image"
-        android:layout_width="170dp"
-        android:layout_height="169dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:paddingEnd="10dp"
-        android:paddingBottom="0dp"
+        android:paddingBottom="10dp"
         android:src="@drawable/ic_car"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

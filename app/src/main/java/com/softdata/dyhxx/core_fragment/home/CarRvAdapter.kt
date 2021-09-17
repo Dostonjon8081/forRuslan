@@ -58,9 +58,9 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
             val numberText = model.carNumber
 
                 if (numberIsPersonal(numberText.substring(5, 6))) {
-                    numbe.text = " ${numberText.substring(0, 2)}"
+                    numbe.text = " ${numberText.substring(0, 2)}  ${numberText.substring(2,3)} ${numberText.substring(3,6)} ${numberText.substring(6)}"
                 } else {
-                    number.text = " ${numberText.substring(2, 5)} ${numberText.substring(5)}"
+                    number.text = "${numberText.substring(0, 2)}  ${numberText.substring(2, 5)} ${numberText.substring(5)}"
                 }
 
             rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
