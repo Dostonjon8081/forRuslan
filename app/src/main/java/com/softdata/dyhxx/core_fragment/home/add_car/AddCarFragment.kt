@@ -16,10 +16,7 @@ import com.softdata.dyhxx.core_fragment.home.SpinnerItemClick
 import com.softdata.dyhxx.databinding.FragmentAddCarBinding
 import com.softdata.dyhxx.helper.db.CarEntity
 import com.softdata.dyhxx.helper.network.model.SaveCarModel
-import com.softdata.dyhxx.helper.util.PREF_USER_ID_KEY
-import com.softdata.dyhxx.helper.util.carToast
-import com.softdata.dyhxx.helper.util.getPref
-import com.softdata.dyhxx.helper.util.isOnline
+import com.softdata.dyhxx.helper.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -73,10 +70,18 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun setupSpinner() {
+        val mutableListMarks = mutableListOf<String>()
+        mutableListMarks.apply {
+            addAll(resources.getStringArray(R.array.car_marks))
+            sort()
+            add(getString(R.string.other))
+        }
+
         ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            resources.getStringArray(R.array.car_marks).sortedBy { it }).also { adapter ->
+            mutableListMarks
+        ).also { adapter ->
 
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
@@ -151,17 +156,17 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (parent?.id == R.id.add_car_fragment_spinner_car_marks) {
 
-            carMark = binding.addCarFragmentSpinnerCarMarks.selectedItem.toString()
+            carMark = parent.selectedItem.toString()
             if (carMark.isNotEmpty()) {
                 setupModelSpinner()
             }
-        } else {
-            carMark = binding.addCarFragmentSpinnerCarModels.selectedItem.toString()
         }
     }
 
     private fun setupModelSpinner() {
-//        var arrayRes: Int? = R.array.Chevrolet
+        binding.addCarFragmentContainerCarModel.visibility = View.VISIBLE
+
+        logd(carMark)
         val arrayRes = when (carMark) {
             "Daewoo" -> R.array.Daewoo
             "Chevrolet" -> R.array.Chevrolet
@@ -194,29 +199,31 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         }
 
         if (arrayRes != null) {
-            val arrayMarks = resources.getStringArray(arrayRes)
-//            arrayMarks[arrayMarks.size] = getString(R.string.other)
 
-//            val position = arrayMarks.size
-//            arrayMarks[position] = getString(R.string.other)
+            val arrayModels = resources.getStringArray(arrayRes)
+            val mutableListModels = mutableListOf<String>()
+            mutableListModels.addAll(arrayModels)
+            mutableListModels.sort()
+            mutableListModels.add(getString(R.string.other))
 
             ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
-                resources.getStringArray(arrayRes).sortedBy { it }
+                mutableListModels
             ).also { adapter ->
+
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.addCarFragmentSpinnerCarModels.adapter = adapter
-                binding.addCarFragmentContainerCarModel.visibility = View.VISIBLE
+
                 binding.addCarFragmentSpinnerCarModels.visibility = View.VISIBLE
                 binding.addCarFragmentEditTextCarModels.visibility = View.GONE
+
+                binding.addCarFragmentSpinnerCarModels.adapter = adapter
                 binding.addCarFragmentSpinnerCarModels.onItemSelectedListener = this
 
                 binding.addCarFragmentEditTextCarModels.setText("")
             }
         } else {
 
-            binding.addCarFragmentContainerCarModel.visibility = View.VISIBLE
             binding.addCarFragmentSpinnerCarModels.visibility = View.GONE
             binding.addCarFragmentEditTextCarModels.visibility = View.VISIBLE
         }
