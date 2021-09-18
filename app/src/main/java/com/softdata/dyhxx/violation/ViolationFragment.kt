@@ -48,6 +48,7 @@ class ViolationFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.wp7progressBar.showProgressBar()
         loadData()
 
     }
@@ -61,9 +62,11 @@ class ViolationFragment :
                 is NetworkResult.Success -> {
                     if (it.data?.status == 200) {
                         initDataToRv(it.data.data)
+                        binding.wp7progressBar.hideProgressBar()
                     }
                 }
                 is NetworkResult.Error -> {
+                    binding.wp7progressBar.hideProgressBar()
                 }
                 is NetworkResult.Loading -> {
                 }

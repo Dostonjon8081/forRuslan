@@ -10,6 +10,7 @@
         android:id="@+id/home_fragment_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/toolbar_color"
         android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +65,8 @@
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="36dp" />
+        app:maxImageSize="36dp"
+        app:tint="@color/white" />
 
     <!--
             <androidx.appcompat.widget.AppCompatButton

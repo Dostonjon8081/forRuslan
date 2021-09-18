@@ -107,4 +107,8 @@ dependencies {
     //firebase crash
     implementation 'com.google.firebase:firebase-database-ktx'
 
+    //progressbar
+    implementation 'com.github.shadowalker77:wp7progressbar:1.1.0'
+
+
 }

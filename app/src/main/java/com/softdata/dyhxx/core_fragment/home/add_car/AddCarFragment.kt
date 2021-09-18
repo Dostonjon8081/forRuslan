@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isNotEmpty
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.softdata.dyhxx.R
@@ -155,11 +156,12 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (parent?.id == R.id.add_car_fragment_spinner_car_marks) {
-
             carMark = parent.selectedItem.toString()
             if (carMark.isNotEmpty()) {
                 setupModelSpinner()
             }
+        } else{
+            carModel = parent?.selectedItem.toString()
         }
     }
 

@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.softdata.dyhxx.R
 import com.softdata.dyhxx.helper.db.CarEntity
+import com.softdata.dyhxx.helper.util.logd
 
 class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
@@ -59,20 +60,15 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
             if (numberIsPersonal(numberText.substring(5, 6))) {
                 numbe.text = "${numberText.substring(0, 2)}"
-                        number.text="${
+                number.text = "${numberText.substring(2, 3)} ${
                     numberText.substring(
-                        2,
-                        3
+                        3,
+                        6
                     )
-                } ${numberText.substring(3, 6)} ${numberText.substring(6)}"
+                } ${numberText.substring(6)}"
             } else {
                 numbe.text = "${numberText.substring(0, 2)}"
-                number.text = "${
-                    numberText.substring(
-                        2,
-                        5
-                    )
-                } ${numberText.substring(5)}"
+                number.text = "${numberText.substring(2, 5)} ${numberText.substring(5)}"
             }
 
             rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
@@ -86,7 +82,11 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
     }
 
     private fun addCarModel(model: String, view: View) {
+
+        logd("in model")
+        logd(model)
         if (model.isNotEmpty()) {
+            logd("in model if")
             this.VH(view).apply {
                 this.model.visibility = View.VISIBLE
                 modelTitle.visibility = View.VISIBLE

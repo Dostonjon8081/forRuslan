@@ -24,10 +24,10 @@
     <string name="save">Tasdiqlash</string>
     <string name="close">Yopish</string>
 
-    <string name="car_model">Avtomobil turi:</string>
-    <string name="car_marks">Avotomobil markasi:</string>
+    <string name="car_model">Turi:</string>
+    <string name="car_marks">Markasi:</string>
     <string name="text_pass_series_numbers">Tex.pass. seriyasi va raqami:</string>
-    <string name="avtomobil_raqami">Avtomobil raqami:</string>
+    <string name="avtomobil_raqami">Davlat raqami:</string>
     <string name="not_ethernet">Tarmoqqa ulanmagan</string>
     <string name="wrong">wrong something</string>
     <string name="car_exist">Avval ro\'yxatga olingan</string>
