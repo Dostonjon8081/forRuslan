@@ -40,9 +40,10 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/account_fragment_img"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@drawable/ic_launcher_foreground"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_person"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,6 +52,7 @@
                 android:id="@+id/account_fragment_welcome"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:layout_constraintVertical_weight="0.40"
                 android:fontFamily="@font/gilroy_semibold"
                 android:gravity="bottom"
                 android:maxLines="1"
@@ -64,8 +66,8 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/account_fragment_name"
                 android:layout_width="0dp"
+                app:layout_constraintVertical_weight="0.6"
                 android:layout_height="0dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/gilroy_semibold"
                 android:maxLines="1"
                 android:text="Xurshid Istamov"
