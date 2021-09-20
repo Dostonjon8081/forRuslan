@@ -22,4 +22,5 @@ interface CarDao {
     @Query("select * from car_entities")
     fun allCars(): Flow<MutableList<CarEntity>>
 
+
 }

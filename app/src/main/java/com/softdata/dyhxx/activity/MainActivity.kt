@@ -1,10 +1,6 @@
 package com.softdata.dyhxx.activity
 
 import android.content.Intent
-import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -51,35 +47,39 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     .commit()
             }.onAwait
 
-            viewModel.getUserIdApi(getPref(this).getString(PREF_TOKEN_KEY, "")!!)
-            viewModel.responseUserIdApi.observe(this) {
-                try {
-                    editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).commit()
+            loadDataFromApi()
+        }
+    }
 
-                    viewModel.allCarsApi(AllCars(getPref(this).getString(PREF_USER_ID_KEY, "")!!))
-                    viewModel.responseAllCarsApi.observe(this) { data ->
-                        val listCars = mutableListOf<CarEntity>()
+    fun loadDataFromApi(){
+        val editPref = getPref(this@MainActivity).edit()
+        viewModel.getUserIdApi(getPref(this).getString(PREF_TOKEN_KEY, "")!!)
+        viewModel.responseUserIdApi.observe(this) {
+            try {
+                editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).commit()
 
-                        if (data.data != null && data.data.status != 404) {
-                            for (item in data.data.data) {
-                                listCars.add(CarEntity(0, item.passport, item.tex_passport))
-                                viewModel.insertCarDB(
-                                    CarEntity(
-                                        0,
-                                        item.passport,
-                                        item.tex_passport
-                                    )
+                viewModel.allCarsApi(AllCars(getPref(this).getString(PREF_USER_ID_KEY, "")!!))
+                viewModel.responseAllCarsApi.observe(this) { data ->
+                    val listCars = mutableListOf<CarEntity>()
+
+                    if (data.data != null && data.data.status != 404) {
+                        for (item in data.data.data) {
+                            listCars.add(CarEntity(0, item.passport, item.tex_passport))
+                            viewModel.insertCarDB(
+                                CarEntity(
+                                    0,
+                                    item.passport,
+                                    item.tex_passport
                                 )
-                            }
+                            )
                         }
                     }
-                } catch (e: Exception) {
-                    carToast(this, e.toString())
                 }
-                Log.d("AllIntent", it.data.toString())
+            } catch (e: Exception) {
+                carToast(this, e.toString())
             }
-
         }
+
     }
 
     fun setLocale(language: String = "uz") {

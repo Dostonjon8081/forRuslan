@@ -16,8 +16,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.window?.statusBarColor =
-            ContextCompat.getColor(requireContext(), R.color.bottom_select_color)
+//        activity?.window?.statusBarColor =
+//            ContextCompat.getColor(requireContext(), R.color.toolbar_color)
 
         Handler().postDelayed({
             try {

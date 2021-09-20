@@ -7,7 +7,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.softdata.dyhxx.activity.MainActivity
+import com.softdata.dyhxx.R
 import com.softdata.dyhxx.base.BaseFragment
 import com.softdata.dyhxx.databinding.FragmentViolationBinding
 import com.softdata.dyhxx.helper.db.CarEntity
@@ -29,7 +29,9 @@ class ViolationFragment :
 
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                (activity as MainActivity).navController?.popBackStack()
+                getBaseActivity {
+                    it.navController?.popBackStack()
+                }
             }
         })
 
@@ -49,24 +51,33 @@ class ViolationFragment :
         super.onViewCreated(view, savedInstanceState)
 
         binding.wp7progressBar.showProgressBar()
+        binding.violationFragmentArrowBack.setOnClickListener { activity?.onBackPressed() }
+
+//        binding.violationsContainerTotalSum.visibility = binding.violationFragmentRv.visibility
         loadData()
 
     }
 
     private fun loadData() {
 
-        binding.violationFragmentTitle.text = arg!!.carNumber.substring(0,2) + " "+ arg!!.carNumber.substring(2)
+        binding.violationFragmentTitle.text =
+            arg!!.carNumber.substring(0, 2) + " " + arg!!.carNumber.substring(2)
 
         viewModel.responseViolationApiApi.observe(viewLifecycleOwner, EventObserver {
             when (it) {
                 is NetworkResult.Success -> {
                     if (it.data?.status == 200) {
                         initDataToRv(it.data.data)
+                        binding.violationFragmentCountFines.text = it.data.count.toString()
                         binding.wp7progressBar.hideProgressBar()
+                    } else {
+                        binding.wp7progressBar.hideProgressBar()
+                        binding.violationFragmentContainerNoViolation.visibility = View.VISIBLE
                     }
                 }
                 is NetworkResult.Error -> {
                     binding.wp7progressBar.hideProgressBar()
+                    binding.violationFragmentContainerNoConnect.visibility = View.VISIBLE
                 }
                 is NetworkResult.Loading -> {
                 }
@@ -84,11 +95,20 @@ class ViolationFragment :
                 it.sum, it.location
             )
         }
+
         violationRvAdapter.submitList(list)
 
         binding.violationFragmentRv.visibility = View.VISIBLE
         binding.violationFragmentRv.layoutManager = LinearLayoutManager(requireContext())
         binding.violationFragmentRv.adapter = violationRvAdapter
+        binding.violationsContainerTotalSum.visibility = binding.violationFragmentRv.visibility
+
+        var totalSum=0
+        for(item in list){
+            totalSum+=item.sum.toInt()
+        }
+
+        binding.violationTotalSum.text = totalSum.toString().substring(0,3)+" "+totalSum.toString().substring(4) + ",00 "+getString(R.string.sum)
 
     }
 

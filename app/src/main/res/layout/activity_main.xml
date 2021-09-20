@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:elevation="3dp"
         android:visibility="gone"
-        app:itemBackground="@drawable/bottom_line_selector"
+        app:itemBackground="@color/bottom_navigation_color"
         app:itemIconTint="@drawable/bottom_icon_selector"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"

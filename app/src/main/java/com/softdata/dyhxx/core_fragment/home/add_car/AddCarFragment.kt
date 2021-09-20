@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
-import androidx.core.view.isNotEmpty
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.softdata.dyhxx.R
@@ -47,7 +46,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.addCarFragmentToolBar.title = getString(R.string.add_car)
+//        binding.addCarFragmentToolBar.title = getString(R.string.add_car)
 
         setupSpinner()
         setup()
@@ -92,10 +91,12 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun clickButton(id: Int) {
-        when (id) {
-            R.id.add_car_fragment_button_cancel -> (activity as MainActivity).onBackPressed()
-            R.id.add_car_fragment_button_save -> saveCar()
-            R.id.add_car_fragment_arrow_back -> (activity as MainActivity).onBackPressed()
+        getBaseActivity {
+            when (id) {
+                R.id.add_car_fragment_button_cancel -> it.onBackPressed()
+                R.id.add_car_fragment_button_save -> saveCar()
+                R.id.add_car_fragment_arrow_back -> it.onBackPressed()
+            }
         }
     }
 
@@ -160,7 +161,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             if (carMark.isNotEmpty()) {
                 setupModelSpinner()
             }
-        } else{
+        } else {
             carModel = parent?.selectedItem.toString()
         }
     }

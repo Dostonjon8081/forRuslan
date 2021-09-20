@@ -24,4 +24,5 @@ class CarDataSourceImpl @Inject constructor(val db: CarDataBase) : ICarDataSourc
     override fun allCar(): Flow<MutableList<CarEntity>> {
         return dao.allCars()
     }
+
 }

@@ -15,7 +15,7 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return VH(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_rv_violation, parent, false)
+                .inflate(R.layout.item_rv_violation_twoo, parent, false)
         )
     }
 

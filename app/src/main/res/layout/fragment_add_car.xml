@@ -6,9 +6,11 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
+        android:orientation="horizontal"
         android:id="@+id/add_car_fragment_toolBar"
         android:layout_width="match_parent"
         android:layout_height="@android:dimen/app_icon_size"
+        android:background="@color/toolbar_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -17,16 +19,18 @@
             android:id="@+id/add_car_fragment_arrow_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="6dp"
+            android:padding="8dp"
             android:src="@drawable/ic_arrow_left" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="@font/gilroy_bold"
             android:gravity="center_horizontal"
             android:text="@string/add_car"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"
             tools:ignore="RtlSymmetry" />
 
@@ -212,8 +216,8 @@
             android:fontFamily="@font/gilroy_medium"
             android:hint="@string/typing_model"
             android:padding="12dp"
-            android:visibility="gone"
-            android:textColor="@color/pale_text"/>
+            android:textColor="@color/pale_text"
+            android:visibility="gone" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

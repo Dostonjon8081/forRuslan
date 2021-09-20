@@ -18,7 +18,7 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return VH(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_rv_home_fragment_twoo, parent, false)
+                .inflate(R.layout.item_rv_home_fragment, parent, false)
         )
     }
 

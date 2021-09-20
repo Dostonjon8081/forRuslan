@@ -11,4 +11,5 @@ interface ICarDataSource {
     fun getCar(id: Long): Flow<CarEntity>
 
     fun allCar(): Flow<List<CarEntity>>
+
 }

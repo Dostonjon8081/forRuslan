@@ -1,137 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:layout_marginTop="8dp"
-    android:background="@drawable/rv_item_background">
+    android:layout_marginTop="16dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="6dp"
+    android:layerType="software"
+    android:padding="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/rv_item_edit"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:src="@drawable/ic_delete"
-        android:padding="8dp"
-        android:background="@drawable/ic_delete_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/rv_item_car_model_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/car_model"
-        android:layout_margin="12dp"
-        android:fontFamily="@font/gilroy_regular"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rv_item_car_model_title"
-        app:layout_constraintStart_toStartOf="@id/rv_item_car_model_title"
-        android:text="Malibu"
-        android:fontFamily="@font/gilroy_semibold"
-        android:textSize="18sp"
-        android:id="@+id/rv_item_car_model"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/rv_item_car_mark_title"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/home_fragment_data_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/car_marks"
-        android:maxLines="1"
-        android:ellipsize="end"
-        app:layout_constraintEnd_toStartOf="@id/rv_item_edit"
-        android:layout_marginStart="30dp"
-        android:fontFamily="@font/gilroy_regular"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toTopOf="@id/rv_item_car_model_title"
-        app:layout_constraintStart_toEndOf="@id/rv_item_car_model_title"/>
+        android:layout_margin="14dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rv_item_car_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rv_item_car_mark_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:fontFamily="@font/gilroy_regular"
+            android:maxLines="1"
+            android:gravity="center_vertical"
+            android:text="@string/car_marks"
+            android:textColor="@color/gray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rv_item_car_mark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_semibold"
+            android:text="Chevrolet"
+            android:textColor="@color/home_text_color"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/rv_item_car_model_title"
+            app:layout_constraintEnd_toStartOf="@+id/rv_item_car_image"
+            app:layout_constraintStart_toStartOf="@id/rv_item_car_mark_title"
+            app:layout_constraintTop_toBottomOf="@id/rv_item_car_mark_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rv_item_car_model_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_regular"
+            android:paddingTop="14dp"
+            android:text="@string/car_model"
+            android:textColor="@color/gray"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rv_item_car_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gilroy_semibold"
+            android:text="Malibu"
+            android:textColor="@color/home_text_color"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/rv_item_car_number_title"
+            app:layout_constraintEnd_toStartOf="@id/rv_item_car_image"
+            app:layout_constraintStart_toStartOf="@id/rv_item_car_model_title"
+            app:layout_constraintTop_toBottomOf="@id/rv_item_car_model_title" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rv_item_car_number_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_regular"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingTop="14dp"
+            android:text="@string/avtomobil_raqami"
+            android:textColor="@color/gray" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_number_plate_"
+            android:orientation="horizontal"
+            app:divider="@color/black"
+            app:showDividers="middle">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/rv_item_car_numbe"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/gilroy_bold"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:autoSizeTextType="uniform"
+                tools:text="50" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="29dp"
+                android:background="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/rv_item_car_number"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:fontFamily="@font/gilroy_bold"
+                android:gravity="start|center_vertical"
+                android:paddingStart="4dp"
+                android:paddingEnd="26dp"
+                android:textAlignment="textStart"
+
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:autoSizeTextType="uniform"
+                app:fontFamily="@font/cargo2"
+                tools:text="S 577 JA" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="60dp"
-        android:layout_height="24dp"
-        app:layout_constraintTop_toBottomOf="@id/rv_item_car_mark_title"
-        app:layout_constraintStart_toStartOf="@id/rv_item_car_mark_title"
-        android:src="@drawable/chevrolet_logo"
-        android:fontFamily="@font/gilroy_semibold"
-        android:id="@+id/rv_item_car_mark"
-        android:layout_marginTop="10dp"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/rv_item_car_tex_pass_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/text_pass_series_numbers"
-        android:fontFamily="@font/gilroy_regular"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/rv_item_car_model"
-        app:layout_constraintStart_toStartOf="@id/rv_item_car_model"/>
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rv_item_car_tex_pass_title"
-        app:layout_constraintStart_toStartOf="@id/rv_item_car_model_title"
-        android:text="AAC 1234567"
-        android:fontFamily="@font/gilroy_semibold"
-        android:textSize="18sp"
-        android:id="@+id/rv_item_car_tex_pass"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"/>
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/rv_item_car_number_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/avtomobil_raqami"
-        android:fontFamily="@font/gilroy_regular"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/rv_item_car_tex_pass"
-        app:layout_constraintStart_toStartOf="@id/rv_item_car_model"/>
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/rv_item_car_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_number_plate_"
-        android:fontFamily="@font/gilroy_bold"
-        android:padding="4dp"
-        android:paddingTop="10dp"
-        android:text=" 01   0 741 JB"
-        android:paddingEnd="30dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/rv_item_car_number_title"
-        app:layout_constraintTop_toBottomOf="@id/rv_item_car_number_title" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_car"
-        android:scaleType="fitXY"
         android:id="@+id/rv_item_car_image"
-        app:layout_constraintStart_toEndOf="@id/rv_item_car_tex_pass_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintTop_toBottomOf="@id/rv_item_edit"
+        android:paddingBottom="10dp"
+        android:src="@drawable/ic_car"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:paddingEnd="18dp"
-        app:layout_constraintBottom_toBottomOf="@id/rv_item_car_number"/>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toEndOf="@id/home_fragment_data_container" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

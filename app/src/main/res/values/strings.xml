@@ -49,5 +49,8 @@
     <string name="about_app">Dastur haqida</string>
     <string name="typing_model">Modelni kiriting</string>
     <string name="other">Boshqa</string>
+    <string name="no_connect">Internetga ulanishda xatolik sodir bo’ldi</string>
+    <string name="total_violation">Jarimalar umumiy miqdori so\'mda</string>
+<string name="sum">so\'m</string>
 
 </resources>
