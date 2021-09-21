@@ -45,20 +45,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         binding.homeFragmentButtonAddCar.setOnClickListener { addCar() }
+        binding.homeFragmentButtonAddCarBtn.setOnClickListener { addCar() }
 
         viewModel.allCarDB.observe(viewLifecycleOwner, object : Observer<MutableList<CarEntity>> {
             override fun onChanged(t: MutableList<CarEntity>?) {
                 if (t?.size!! > 0) {
-                    if (t.size>=8){
-                        binding.homeFragmentButtonAddCar.visibility=View.GONE
-                    } else{
-                        binding.homeFragmentButtonAddCar.visibility=View.VISIBLE
+                    binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
+                    if (t.size >= 8) {
+                        binding.homeFragmentButtonAddCar.visibility = View.GONE
+                    } else {
+                        binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
                     }
                     adapter.rvClickListener(this@HomeFragment)
                     listCarEntity = t
-//                    adapter = CarRvAdapter( t,this@HomeFragment)
-                    binding.homeFragmentDescription.visibility = View.GONE
                     binding.homeFragmentRv.visibility = View.VISIBLE
+                    binding.homeFragmentNoCarContainer.visibility = View.GONE
                     binding.homeFragmentRv.adapter = adapter
                     adapter.submitList(t)
                     binding.homeFragmentButtonAddCar.visibility = if (t.size >= 8) {
@@ -67,10 +68,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         View.VISIBLE
                     }
                 } else {
-                    binding.homeFragmentDescription.visibility = View.VISIBLE
+                    binding.homeFragmentNoCarContainer.visibility = View.VISIBLE
+                    binding.homeFragmentButtonAddCar.visibility = View.GONE
                     binding.homeFragmentRv.visibility = View.GONE
                 }
-//                 binding.homeFragmentRv.addItemDecoration(BottomPaddingDecoration(20))
             }
         })
     }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -36,10 +35,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_fragment_tool_bar"
-        />
+        app:layout_constraintTop_toBottomOf="@id/home_fragment_tool_bar" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+ <!--   <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/home_fragment_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/home_fragment_button_add_car"
         android:layout_width="wrap_content"
@@ -68,23 +66,59 @@
         app:maxImageSize="36dp"
         app:tint="@color/white" />
 
-    <!--
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/home_fragment_button_add_car"
-                style="@style/ButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
-                android:layout_marginBottom="60dp"
-                android:background="@drawable/button_background"
-                android:fontFamily="@font/gilroy_semibold"
-                android:gravity="center"
-                android:text="@string/add_car"
-                android:textSize="14sp"
-                android:layout_marginTop="12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:visibility="gone"
+        android:id="@+id/home_fragment_no_car_container"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/notification_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_car_home"/>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/notification_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_bold"
+            android:textColor="@color/black"
+            android:text="@string/you_no_cars"
+            android:textSize="24sp"
+            android:gravity="center"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/notification_subtext_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_medium"
+            android:textColor="@color/gray"
+            android:text="@string/pls_add_car"
+            android:textSize="12sp"
+            android:paddingTop="10dp"
+            android:layout_gravity="center"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="32dp"
+            android:id="@+id/home_fragment_button_add_car_btn"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/gilroy_semibold"
+            android:gravity="center"
+            android:text="@string/add_car"
+            android:textSize="12sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

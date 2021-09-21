@@ -17,6 +17,10 @@ class CarDataSourceImpl @Inject constructor(val db: CarDataBase) : ICarDataSourc
         return dao.deleteCar(carNumber)
     }
 
+    override suspend fun deleteAll() {
+        return dao.deleteAll()
+    }
+
     override fun getCar(id: Long): Flow<CarEntity> {
         return dao.getCar(id)
     }

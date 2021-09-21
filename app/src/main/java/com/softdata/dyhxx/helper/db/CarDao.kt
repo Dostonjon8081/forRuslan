@@ -1,9 +1,7 @@
 package com.softdata.dyhxx.helper.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import kotlinx.coroutines.CompletableJob
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -23,4 +21,6 @@ interface CarDao {
     fun allCars(): Flow<MutableList<CarEntity>>
 
 
+    @Query("delete from car_entities")
+    fun deleteAll()
 }

@@ -25,6 +25,7 @@ class RepositoryModule {
     fun provideDataBase(@ApplicationContext context: Context): CarDataBase =
         Room.databaseBuilder(context, CarDataBase::class.java, "car.db")
             .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
             .build()
 
     @Singleton

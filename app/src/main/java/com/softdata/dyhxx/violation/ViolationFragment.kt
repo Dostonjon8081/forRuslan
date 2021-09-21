@@ -15,6 +15,7 @@ import com.softdata.dyhxx.helper.network.NetworkResult
 import com.softdata.dyhxx.helper.util.EventObserver
 import com.softdata.dyhxx.helper.util.PREF_USER_ID_KEY
 import com.softdata.dyhxx.helper.util.getPref
+import com.softdata.dyhxx.helper.util.logd
 
 class ViolationFragment :
     BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate) {
@@ -103,12 +104,36 @@ class ViolationFragment :
         binding.violationFragmentRv.adapter = violationRvAdapter
         binding.violationsContainerTotalSum.visibility = binding.violationFragmentRv.visibility
 
-        var totalSum=0
-        for(item in list){
-            totalSum+=item.sum.toInt()
+        initTotalSum(list)
+    }
+
+    private fun initTotalSum(list: List<ViolationCarModel>) {
+        var totalSum = 0
+
+        for (item in list) {
+            totalSum += item.sum.toInt()
         }
 
-        binding.violationTotalSum.text = totalSum.toString().substring(0,3)+" "+totalSum.toString().substring(4) + ",00 "+getString(R.string.sum)
+        val totalSumStringList = mutableListOf<String>()
+        val totalSumString = StringBuilder()
+
+        while (totalSum > 1000) {
+            totalSumStringList.add((totalSum % 1000).toString())
+            totalSumStringList.add(" ")
+            totalSum /= 1000
+        }
+        totalSumStringList.add(totalSum.toString())
+
+        for (item in totalSumStringList.size-1 downTo 0){
+            logd(item)
+            totalSumString.append(totalSumStringList[item])
+        }
+
+        totalSumString.append(",00 ")
+        totalSumString.append(getString(R.string.sum))
+        binding.violationTotalSum.text = totalSumString.toString()
+        logd(totalSumString)
+        logd(totalSumStringList)
 
     }
 

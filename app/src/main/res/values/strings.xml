@@ -52,5 +52,8 @@
     <string name="no_connect">Internetga ulanishda xatolik sodir bo’ldi</string>
     <string name="total_violation">Jarimalar umumiy miqdori so\'mda</string>
 <string name="sum">so\'m</string>
+    <string name="log_out_massege">Sir rosdan ham chiqmoqchimisiz?</string>
+    <string name="you_no_cars">Sizda avtomobil mavud emas</string>
+    <string name="pls_add_car">Iltimos avtomobil qo\'shing</string>
 
 </resources>

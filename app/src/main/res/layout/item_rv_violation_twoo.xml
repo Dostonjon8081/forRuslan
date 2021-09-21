@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="10dp"
-            android:src="@drawable/ic_policeman"
+            tools:src="@drawable/ic_policeman"
             app:layout_constraintBottom_toTopOf="@id/violation_location_title"
             app:layout_constraintEnd_toStartOf="@id/violation_type"
             app:layout_constraintStart_toStartOf="parent"

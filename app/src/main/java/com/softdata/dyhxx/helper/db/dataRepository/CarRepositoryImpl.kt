@@ -17,6 +17,10 @@ class CarRepositoryImpl @Inject constructor(private val sourceImpl: CarDataSourc
         return sourceImpl.deleteCar(carNumber)
     }
 
+    override suspend fun deleteAll() {
+        return sourceImpl.deleteAll()
+    }
+
 
     override  fun getCar(id: Long): Flow<CarEntity> {
         return sourceImpl.getCar(id)

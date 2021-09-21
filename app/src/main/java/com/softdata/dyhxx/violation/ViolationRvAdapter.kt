@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.softdata.dyhxx.R
@@ -37,14 +38,14 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
         notifyDataSetChanged()
     }
 
-
     class VH(val view: View) : RecyclerView.ViewHolder(view) {
 
-        var violation_time: TextView = view.findViewById(R.id.violation_time)
-        var violation_act: TextView = view.findViewById(R.id.violation_act)
-        var violation_type: TextView = view.findViewById(R.id.violation_type)
-        var violation_locatoin: TextView = view.findViewById(R.id.violation_location)
-        var violation_sum: TextView = view.findViewById(R.id.violation_sum)
+        private var violation_time: TextView = view.findViewById(R.id.violation_time)
+        private var violation_act: TextView = view.findViewById(R.id.violation_act)
+        private var violation_type: TextView = view.findViewById(R.id.violation_type)
+        private var violation_locatoin: TextView = view.findViewById(R.id.violation_location)
+        private var violation_sum: TextView = view.findViewById(R.id.violation_sum)
+        private var violation_img: ImageView = view.findViewById(R.id.violation_img)
 
         @SuppressLint("SetTextI18n")
         fun onBind(model: ViolationCarModel) {
@@ -53,6 +54,12 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
             violation_type.text = model.violationType
             violation_locatoin.text = model.location
             violation_sum.text = model.sum
+
+            violation_img.setImageResource(when(model.qarorSery){
+                "KV"->R.drawable.ic_policeman
+                "RR"->R.drawable.ic_artist
+                else->R.drawable.ic_radar
+            })
         }
     }
 

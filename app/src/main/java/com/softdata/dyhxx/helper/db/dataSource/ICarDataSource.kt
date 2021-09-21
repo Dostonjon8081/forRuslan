@@ -8,6 +8,8 @@ interface ICarDataSource {
 
     suspend fun deleteCar(carNumber:String): Int
 
+    suspend fun deleteAll()
+
     fun getCar(id: Long): Flow<CarEntity>
 
     fun allCar(): Flow<List<CarEntity>>
