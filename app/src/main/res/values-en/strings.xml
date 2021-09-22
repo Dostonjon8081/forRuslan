@@ -29,4 +29,33 @@
     <string name="language">Language</string>
     <string name="about_app">About</string>
     <string name = "will_be_soon_notification"> This section will be up and running soon </string>
+
+    <string name="car_model">Model:</string>
+    <string name="car_marks">Brand:</string>
+    <string name="text_pass_series_numbers">Tex.pass. series and number:</string>
+    <string name="country_number">Country number:</string>
+    <string name="not_ethernet">No connection</string>
+    <string name="wrong">something wrong</string>
+    <string name="car_exist">Already  registered</string>
+    <string name="bad_request">Unregistered user</string>
+    <string name="delete_dialog_title">Do you really want to delete this car?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="fine_time">Penalty time:</string>
+    <string name="violation_act">Act:</string>
+    <string name="violation_type">Fine:</string>
+    <string name="violation_location">Area:</string>
+    <string name="violation_sum">Amount:</string>
+    <string name="no_violation">There are no fines!</string>
+    <string name="typing_model">Enter model</string>
+    <string name="other">Other</string>
+    <string name="no_connect">Network error</string>
+    <string name="total_violation">Total cost of fines</string>
+    <string name="sum">sum</string>
+    <string name="log_out_massege">Do you really want to logout?</string>
+    <string name="you_no_cars">No cars</string>
+    <string name="pls_add_car">Please add car</string>
+    <string name="we_happy">We are happy</string>
+    <string name="inconvenience">Sorry for the inconvenience</string>
+
 </resources>

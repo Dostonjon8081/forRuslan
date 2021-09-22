@@ -30,4 +30,34 @@
     <string name="language">Язык</string>
     <string name="about_app">О приложении</string>
     <string name = "will_be_soon_notification"> Этот раздел скоро будет запущен </string>
+
+
+    <string name="car_model">Модел:</string>
+    <string name="car_marks">Марка:</string>
+    <string name="text_pass_series_numbers">Тех. пасс. серия и номер:</string>
+    <string name="country_number">Гос номер:</string>
+    <string name="not_ethernet">Нет связи</string>
+    <string name="wrong">Что-то не так</string>
+    <string name="car_exist">Ранее зарегистрированный</string>
+    <string name="bad_request">Незарегистрированный пользователь</string>
+    <string name="delete_dialog_title">Вы действительно хотите удалить эту машину?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="fine_time">Штрафное время:</string>
+    <string name="violation_act">Решение:</string>
+    <string name="violation_type">Штраф:</string>
+    <string name="violation_location">Место штраф:</string>
+    <string name="violation_sum">Сумма оплаты:</string>
+    <string name="no_violation">Нет штрафы!</string>
+
+    <string name="typing_model">Введите модель</string>
+    <string name="other">Другой</string>
+    <string name="no_connect">Произошла ошибка при подключении к Интернету</string>
+    <string name="total_violation">Штрафы на сум:</string>
+    <string name="sum">сум</string>
+    <string name="log_out_massege">Вы действительно хотите выйти?</string>
+    <string name="you_no_cars">У вас нет машины</string>
+    <string name="pls_add_car">Пожалуйста, добавьте машину</string>
+    <string name="we_happy">Мы рады</string>
+    <string name="inconvenience">Извините за неудобство</string>
 </resources>

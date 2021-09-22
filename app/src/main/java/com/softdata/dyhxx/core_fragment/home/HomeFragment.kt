@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -14,18 +15,18 @@ import com.softdata.dyhxx.base.BaseFragment
 import com.softdata.dyhxx.databinding.FragmentHomeBinding
 import com.softdata.dyhxx.helper.db.CarEntity
 import com.softdata.dyhxx.helper.network.NetworkResult
+import com.softdata.dyhxx.helper.network.model.AllCars
 import com.softdata.dyhxx.helper.network.model.RemoveCarModel
 import com.softdata.dyhxx.helper.util.*
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.Executors
 
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate), RvItemClick {
 
-//    private lateinit var adapter: CarRvAdapter
-
     private val viewModel: HomeViewModel by activityViewModels()
-    private var listCarEntity = listOf<CarEntity>()
+    private var listCarEntity = mutableListOf<CarEntity>()
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { CarRvAdapter() }
 
     override fun onAttach(context: Context) {
@@ -35,18 +36,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Handler().postDelayed({
         (activity as MainActivity).apply {
             if (!this.binding.idBottomNavigation.isVisible) {
-                Handler().postDelayed({
+
                     binding.idBottomNavigation.visibility = View.VISIBLE
-                }, 400)
+                }
             }
-        }
+        }, 400)
 
         binding.homeFragmentButtonAddCar.setOnClickListener { addCar() }
         binding.homeFragmentButtonAddCarBtn.setOnClickListener { addCar() }
+        binding.homeFragmentSwipeRefresh.setColorSchemeColors(ContextCompat.getColor(requireContext(),R.color.toolbar_color))
+        binding.homeFragmentSwipeRefresh.setOnRefreshListener(this::swipeRefresh)
 
+        loadData()
+    }
+
+    private fun loadData() {
         viewModel.allCarDB.observe(viewLifecycleOwner, object : Observer<MutableList<CarEntity>> {
             override fun onChanged(t: MutableList<CarEntity>?) {
                 if (t?.size!! > 0) {
@@ -57,7 +64,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
                     }
                     adapter.rvClickListener(this@HomeFragment)
-                    listCarEntity = t
+                    listCarEntity.clear()
+                    listCarEntity.addAll(t)
+                    logd(t)
                     binding.homeFragmentRv.visibility = View.VISIBLE
                     binding.homeFragmentNoCarContainer.visibility = View.GONE
                     binding.homeFragmentRv.adapter = adapter
@@ -73,6 +82,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     binding.homeFragmentRv.visibility = View.GONE
                 }
             }
+        })
+    }
+
+    private fun swipeRefresh() {
+        logd("in swipe")
+        viewModel.allCarsApi(AllCars(getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!))
+        viewModel.responseAllCarsApi.observe(this, EventObserver { result ->
+            logd(result)
+            when (result) {
+                is NetworkResult.Loading -> {
+                    logd("in loading")
+                }
+                is NetworkResult.Success -> {
+                    binding.homeFragmentSwipeRefresh.isRefreshing = false
+                    logd("in success")
+                    Executors.newSingleThreadExecutor().execute {
+                        if (result.data?.status == 200)
+                            for (resultItem in result.data.data) {
+                                logd("in for 1")
+                                if (listCarEntity.all { it.carNumber != resultItem.passport }) {
+                                    logd("in if")
+                                    viewModel.insertCarDB(
+                                        CarEntity(
+                                            0,
+                                            resultItem.passport,
+                                            resultItem.tex_passport
+                                        )
+                                    )
+                                }
+                            }
+                    }
+                }
+                is NetworkResult.Error -> {
+                    logd("in error")
+                }
+            }
+            navigateToHome()
         })
     }
 
@@ -118,6 +164,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
                 is NetworkResult.Success -> {
                     viewModel.removeCarDB(carNumber)
+                    navigateToHome()
                 }
                 is NetworkResult.Error -> {
                 }
@@ -125,6 +172,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
         })
+    }
+
+    private fun navigateToHome() {
+        getBaseActivity {
+            it.navController!!.navigate(R.id.home_fragment)
+        }
     }
 
 }

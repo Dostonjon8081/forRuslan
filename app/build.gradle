@@ -25,7 +25,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
+//            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -109,6 +110,9 @@ dependencies {
 
     //progressbar
     implementation 'com.github.shadowalker77:wp7progressbar:1.1.0'
+
+    //swipe refresh
+    implementation('androidx.swiperefreshlayout:swiperefreshlayout:1.1.0')
 
 
 }

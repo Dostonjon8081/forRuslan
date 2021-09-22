@@ -3,6 +3,7 @@ package com.softdata.dyhxx.base
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.viewbinding.ViewBinding
 
@@ -15,6 +16,7 @@ abstract class BaseActivity <B : ViewBinding>(val bindingFactory: (LayoutInflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         binding = bindingFactory(layoutInflater)
         setContentView(binding.root)
         setupItems()
@@ -24,4 +26,7 @@ abstract class BaseActivity <B : ViewBinding>(val bindingFactory: (LayoutInflate
 
     abstract fun setupItems()
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }

@@ -83,8 +83,6 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
     private fun addCarModel(model: String, view: View) {
 
-
-        logd(model)
         if (model.isNotEmpty()) {
             this.VH(view).apply {
                 this.model.visibility = View.VISIBLE

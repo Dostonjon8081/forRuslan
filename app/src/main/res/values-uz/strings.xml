@@ -29,5 +29,34 @@
     <string name="my_profile">Mening profilim</string>
     <string name="language">Til</string>
     <string name="about_app">Dastur haqida</string>
+
+    <string name="car_model">Turi:</string>
+    <string name="car_marks">Markasi:</string>
+    <string name="text_pass_series_numbers">Tex.pass. seriyasi va raqami:</string>
+    <string name="country_number">Davlat raqami:</string>
+    <string name="not_ethernet">Tarmoqqa ulanmagan</string>
+    <string name="wrong">Qarorlarda xotolik</string>
+    <string name="car_exist">Avval ro\'yxatga olingan</string>
+    <string name="bad_request">Ro\'yhatdan o\'tmagan foydalanuvchi</string>
+    <string name="delete_dialog_title">Siz rostan ham ushbu avtomobilni o\'chirmoqchisiz?</string>
+    <string name="yes">ha</string>
+    <string name="no">yo\'q</string>
+    <string name="fine_time">Jarima vaqti:</string>
+    <string name="violation_act">Qaror:</string>
+    <string name="violation_type">Jarima:</string>
+    <string name="violation_location">Qayd etilgan hudud:</string>
+    <string name="violation_sum">To\'lov miqdori:</string>
+    <string name="no_violation">Jarimalar mavjud emas!</string>
     <string name="will_be_soon_notification">Ushbu bo’lim tez orada ishga tushadi</string>
+    <string name="typing_model">Modelni kiriting</string>
+    <string name="other">Boshqa</string>
+    <string name="no_connect">Internetga ulanishda xatolik sodir bo’ldi</string>
+    <string name="total_violation">Jarimalar umumiy miqdori so\'mda</string>
+    <string name="sum">so\'m</string>
+    <string name="log_out_massege">Siz rosdan ham tizim chiqmoqchimisiz?</string>
+    <string name="you_no_cars">Sizda avtomobil mavud emas</string>
+    <string name="pls_add_car">Iltimos avtomobil qo\'shing</string>
+    <string name="we_happy">Tashrifingizdan mamnunmiz</string>
+    <string name="inconvenience">Noqulayliklar uchun uzr so\'raymiz</string>
+
 </resources>

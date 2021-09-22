@@ -12,10 +12,7 @@ import com.softdata.dyhxx.base.BaseFragment
 import com.softdata.dyhxx.databinding.FragmentViolationBinding
 import com.softdata.dyhxx.helper.db.CarEntity
 import com.softdata.dyhxx.helper.network.NetworkResult
-import com.softdata.dyhxx.helper.util.EventObserver
-import com.softdata.dyhxx.helper.util.PREF_USER_ID_KEY
-import com.softdata.dyhxx.helper.util.getPref
-import com.softdata.dyhxx.helper.util.logd
+import com.softdata.dyhxx.helper.util.*
 
 class ViolationFragment :
     BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate) {
@@ -37,7 +34,10 @@ class ViolationFragment :
         })
 
         arg = args.violationArgs
+        requestData()
+    }
 
+    private fun requestData() {
         viewModel.getViolationApi(
             ViolationCarApiModel(
                 getPref(requireActivity())
@@ -54,9 +54,18 @@ class ViolationFragment :
         binding.wp7progressBar.showProgressBar()
         binding.violationFragmentArrowBack.setOnClickListener { activity?.onBackPressed() }
 
-//        binding.violationsContainerTotalSum.visibility = binding.violationFragmentRv.visibility
+        binding.violationFragmentSwipeRefresh.setOnRefreshListener(this::swipeRefresh)
         loadData()
 
+    }
+
+    private fun swipeRefresh() {
+        binding.wp7progressBar.showProgressBar()
+        binding.violationFragmentRv.visibility = View.GONE
+        binding.violationsContainerTotalSum.visibility = View.GONE
+        requestData()
+        loadData()
+        binding.violationFragmentSwipeRefresh.isRefreshing = false
     }
 
     private fun loadData() {
@@ -125,16 +134,12 @@ class ViolationFragment :
         totalSumStringList.add(totalSum.toString())
 
         for (item in totalSumStringList.size-1 downTo 0){
-            logd(item)
             totalSumString.append(totalSumStringList[item])
         }
 
         totalSumString.append(",00 ")
         totalSumString.append(getString(R.string.sum))
         binding.violationTotalSum.text = totalSumString.toString()
-        logd(totalSumString)
-        logd(totalSumStringList)
-
     }
 
 }

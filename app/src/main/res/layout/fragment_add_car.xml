@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
@@ -56,6 +57,7 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/add_car_fragment_et_car_number"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
             android:background="@drawable/background_white_gray_stoke"
             android:drawableEnd="@drawable/ic_about"
@@ -63,6 +65,7 @@
             android:hint="00 A 000 AA"
             android:inputType="textCapCharacters"
             android:maxLength="9"
+            android:textColor="@color/black"
             android:maxLines="1"
             android:padding="12dp"
             android:textColorHint="@color/pale_text" />
@@ -105,6 +108,7 @@
                 android:background="@drawable/background_white_gray_stoke"
                 android:fontFamily="@font/gilroy_medium"
                 android:hint="AAA"
+                android:textColor="@color/black"
                 android:inputType="textCapCharacters"
                 android:maxLength="3"
                 android:maxLines="1"
@@ -141,6 +145,7 @@
                 android:hint="01234567"
                 android:inputType="number"
                 android:maxLines="1"
+                android:textColor="@color/black"
                 android:padding="12dp"
                 android:textColorHint="@color/pale_text" />
 
@@ -216,7 +221,8 @@
             android:fontFamily="@font/gilroy_medium"
             android:hint="@string/typing_model"
             android:padding="12dp"
-            android:textColor="@color/pale_text"
+            android:textColorHint="@color/pale_text"
+            android:textColor="@color/black"
             android:visibility="gone" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -30,7 +30,6 @@
             </intent-filter>
 
         </activity>
-
       <!--  <activity android:name=".activity.MyBrowserActivity">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />

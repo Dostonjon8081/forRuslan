@@ -13,6 +13,7 @@ import com.softdata.dyhxx.helper.network.repository.ICarApiRepository
 import com.softdata.dyhxx.helper.util.Event
 import com.softdata.dyhxx.helper.util.logd
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -52,12 +53,12 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private val _responseAllCarsApi: MutableLiveData<NetworkResult<AllCarsResponse>> =
+    private val _responseAllCarsApi: MutableLiveData<Event<NetworkResult<AllCarsResponse>>> =
         MutableLiveData()
-    val responseAllCarsApi: LiveData<NetworkResult<AllCarsResponse>> = _responseAllCarsApi
+    val responseAllCarsApi: LiveData<Event<NetworkResult<AllCarsResponse>>> = _responseAllCarsApi
     fun allCarsApi(allCars: AllCars) = viewModelScope.launch {
         apiRepository.allCars(allCars).collect { values ->
-            _responseAllCarsApi.postValue(values)
+            _responseAllCarsApi.postValue(Event(values))
         }
     }
 
@@ -65,7 +66,7 @@ class HomeViewModel @Inject constructor(
     private val _responseRemoveCarApi: MutableLiveData<Event<NetworkResult<RemoveCarModelResponse>>> =
         MutableLiveData()
     val responseRemoveCarApi: LiveData<Event<NetworkResult<RemoveCarModelResponse>>> = _responseRemoveCarApi
-    fun removeCarApi(removeCarModel: RemoveCarModel) = viewModelScope.launch {
+    fun removeCarApi(removeCarModel: RemoveCarModel) = viewModelScope.launch(Dispatchers.IO) {
         apiRepository.removeCar(removeCarModel).collect { values ->
             _responseRemoveCarApi.postValue(Event(values))
         }
@@ -106,7 +107,7 @@ class HomeViewModel @Inject constructor(
     private val _removeCarDB = MutableLiveData<String>()
     val removeCarDB: LiveData<String> = _removeCarDB
     fun removeCarDB(carNumber:String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             dbRepository.deleteCar(carNumber)
 //            allCars()
         }

@@ -169,7 +169,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     private fun setupModelSpinner() {
         binding.addCarFragmentContainerCarModel.visibility = View.VISIBLE
 
-        logd(carMark)
         val arrayRes = when (carMark) {
             "Daewoo" -> R.array.Daewoo
             "Chevrolet" -> R.array.Chevrolet

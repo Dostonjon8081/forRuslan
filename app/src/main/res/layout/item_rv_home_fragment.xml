@@ -7,11 +7,13 @@
     android:layout_marginTop="16dp"
     app:cardCornerRadius="14dp"
     app:cardElevation="6dp"
+    android:background="@color/white"
     android:layerType="software"
     android:padding="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+       android:background="@color/white"
         android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -92,7 +94,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:paddingTop="14dp"
-            android:text="@string/avtomobil_raqami"
+            android:text="@string/country_number"
             android:textColor="@color/gray" />
 
         <androidx.appcompat.widget.LinearLayoutCompat

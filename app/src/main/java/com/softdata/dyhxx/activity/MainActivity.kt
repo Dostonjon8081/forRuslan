@@ -51,7 +51,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
     }
 
-    fun loadDataFromApi(){
+    fun loadDataFromApi() {
         val editPref = getPref(this@MainActivity).edit()
         viewModel.getUserIdApi(getPref(this).getString(PREF_TOKEN_KEY, "")!!)
         viewModel.responseUserIdApi.observe(this) {
@@ -59,12 +59,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).commit()
 
                 viewModel.allCarsApi(AllCars(getPref(this).getString(PREF_USER_ID_KEY, "")!!))
-                viewModel.responseAllCarsApi.observe(this) { data ->
-                    val listCars = mutableListOf<CarEntity>()
+                viewModel.responseAllCarsApi.observe(this, EventObserver { data ->
+//                    val listCars = mutableListOf<CarEntity>()
 
-                    if (data.data != null && data.data.status != 404) {
+                    if (data.data!!.data != null && data.data.status != 404) {
                         for (item in data.data.data) {
-                            listCars.add(CarEntity(0, item.passport, item.tex_passport))
+//                            listCars.add(CarEntity(0, item.passport, item.tex_passport))
                             viewModel.insertCarDB(
                                 CarEntity(
                                     0,
@@ -73,8 +73,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                                 )
                             )
                         }
+
                     }
-                }
+                })
             } catch (e: Exception) {
                 carToast(this, e.toString())
             }
