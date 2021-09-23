@@ -92,17 +92,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             logd(result)
             when (result) {
                 is NetworkResult.Loading -> {
-                    logd("in loading")
                 }
                 is NetworkResult.Success -> {
                     binding.homeFragmentSwipeRefresh.isRefreshing = false
-                    logd("in success")
                     Executors.newSingleThreadExecutor().execute {
-                        if (result.data?.status == 200)
+                        if (result.data?.status == 200) {
                             for (resultItem in result.data.data) {
-                                logd("in for 1")
                                 if (listCarEntity.all { it.carNumber != resultItem.passport }) {
-                                    logd("in if")
                                     viewModel.insertCarDB(
                                         CarEntity(
                                             0,
@@ -112,6 +108,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                                     )
                                 }
                             }
+
+                            if (result.data.data.size<listCarEntity.size){
+                                for (listItem in listCarEntity) {
+                                    if (result.data.data.all { it.passport!=listItem.carNumber }){
+                                        viewModel.removeCarDB(listItem.carNumber)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 is NetworkResult.Error -> {
@@ -120,6 +125,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
             navigateToHome()
         })
+        binding.homeFragmentSwipeRefresh.isRefreshing = false
     }
 
     private fun addCar() {
@@ -164,14 +170,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
                 is NetworkResult.Success -> {
                     viewModel.removeCarDB(carNumber)
-                    navigateToHome()
+
                 }
                 is NetworkResult.Error -> {
                 }
 //                }
             }
-
+            navigateToHome()
         })
+
     }
 
     private fun navigateToHome() {

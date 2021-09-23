@@ -10,6 +10,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
+            storePassword '987654321'
+            keyAlias 'key0'
+            keyPassword '987654321'
+        }
+        release {
+            storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
+            storePassword '987654321'
+            keyAlias 'key0'
+            keyPassword '987654321'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -19,8 +33,11 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
+        proguardFiles
     }
 
     buildTypes {
@@ -44,8 +61,6 @@ android {
     kapt {
         correctErrorTypes true
     }
-//    density { enableSplit true }
-//    language { enableSplit false }
 }
 
 dependencies {
@@ -108,11 +123,16 @@ dependencies {
     //firebase crash
     implementation 'com.google.firebase:firebase-database-ktx'
 
+    //firebase deep link
+//    implementation 'com.google.firebase:firebase-dynamic-links-ktx'
+
     //progressbar
     implementation 'com.github.shadowalker77:wp7progressbar:1.1.0'
 
     //swipe refresh
     implementation('androidx.swiperefreshlayout:swiperefreshlayout:1.1.0')
 
-
+    //multidex
+    def multidex_version = "2.0.1"
+    implementation("androidx.multidex:multidex:$multidex_version")
 }
