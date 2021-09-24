@@ -31,6 +31,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         navView.setupWithNavController(navController!!)
 
         if (intent.data != null) {
+            logd("in main load intent nut null")
             authentication(intent)
         }
 
@@ -40,6 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         if (getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
             && isOnline(this)
         ) {
+            logd("in main auth")
             val editPref = getPref(this@MainActivity).edit()
 
             CoroutineScope(Dispatchers.IO).async {
@@ -52,12 +54,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     fun loadDataFromApi() {
+        logd("in main load api")
         val editPref = getPref(this@MainActivity).edit()
         viewModel.getUserIdApi(getPref(this).getString(PREF_TOKEN_KEY, "")!!)
         viewModel.responseUserIdApi.observe(this) {
             try {
                 editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).commit()
-
+logd("in main load api response")
                 viewModel.allCarsApi(AllCars(getPref(this).getString(PREF_USER_ID_KEY, "")!!))
                 viewModel.responseAllCarsApi.observe(this, EventObserver { data ->
 //                    val listCars = mutableListOf<CarEntity>()
