@@ -1,9 +1,12 @@
 package uz.fizmasoft.dyhxx.violation
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +15,9 @@ import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentViolationBinding
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
-import uz.fizmasoft.dyhxx.helper.util.*
+import uz.fizmasoft.dyhxx.helper.util.EventObserver
+import uz.fizmasoft.dyhxx.helper.util.PREF_USER_ID_KEY
+import uz.fizmasoft.dyhxx.helper.util.getPref
 
 class ViolationFragment :
     BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate) {
@@ -54,6 +59,7 @@ class ViolationFragment :
         binding.wp7progressBar.showProgressBar()
         binding.violationFragmentArrowBack.setOnClickListener { activity?.onBackPressed() }
 
+        binding.violationFragmentSwipeRefresh.setColorSchemeColors(ContextCompat.getColor(requireContext(),R.color.toolbar_color))
         binding.violationFragmentSwipeRefresh.setOnRefreshListener(this::swipeRefresh)
         loadData()
 
@@ -78,7 +84,7 @@ class ViolationFragment :
                 is NetworkResult.Success -> {
                     if (it.data?.status == 200) {
                         initDataToRv(it.data.data)
-                        binding.violationFragmentCountFines.text = it.data.count.toString()
+                        binding.violationFragmentCountFines.text = it.data.data.size.toString()
                         binding.wp7progressBar.hideProgressBar()
                     } else {
                         binding.wp7progressBar.hideProgressBar()
@@ -122,18 +128,20 @@ class ViolationFragment :
         for (item in list) {
             totalSum += item.sum.toInt()
         }
-
         val totalSumStringList = mutableListOf<String>()
         val totalSumString = StringBuilder()
 
         while (totalSum > 1000) {
-            totalSumStringList.add((totalSum % 1000).toString())
+            totalSumStringList.add(
+                (if ((totalSum % 1000) == 0) "000"
+                else totalSum % 1000).toString()
+            )
             totalSumStringList.add(" ")
             totalSum /= 1000
         }
         totalSumStringList.add(totalSum.toString())
 
-        for (item in totalSumStringList.size-1 downTo 0){
+        for (item in totalSumStringList.size - 1 downTo 0) {
             totalSumString.append(totalSumStringList[item])
         }
 
