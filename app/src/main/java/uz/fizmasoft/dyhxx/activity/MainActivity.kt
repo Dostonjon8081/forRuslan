@@ -48,7 +48,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(22))
                     .commit()
             }.onAwait
-
             loadDataFromApi()
         }
     }

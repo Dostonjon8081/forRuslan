@@ -8,7 +8,7 @@
     <string name="russian" translatable="false">Русский</string>
     <string name="english" translatable="false">English</string>
 
-    <string name="look" >look</string>
+    <string name="look">look</string>
     <string name="check_fine">DYHXX jarimasini tekshirish</string>
     <string name="auth_description">Dasturdan to\'liq foydalanish uchun telegram orqali ro\'yhatdan o\'ting</string>
     <string name="auth_by_telegram">Telegram orqali bog\'lanish</string>
@@ -34,7 +34,7 @@
     <string name="text_pass_series_numbers">Tex.pass. seriyasi va raqami:</string>
     <string name="country_number">Davlat raqami:</string>
     <string name="not_ethernet">Tarmoqqa ulanmagan</string>
-    <string name="wrong">Qarorlarda xotolik</string>
+    <string name="wrong">Qatorlarda xotolik</string>
     <string name="car_exist">Avval ro\'yxatga olingan</string>
     <string name="bad_request">Ro\'yhatdan o\'tmagan foydalanuvchi</string>
     <string name="delete_dialog_title">Siz rostan ham ushbu avtomobilni o\'chirmoqchisiz?</string>
@@ -51,7 +51,7 @@
     <string name="other">Boshqa</string>
     <string name="no_connect">Internetga ulanishda xatolik sodir bo’ldi</string>
     <string name="total_violation">Jarimalar umumiy miqdori so\'mda</string>
-<string name="sum">so\'m</string>
+    <string name="sum">so\'m</string>
     <string name="log_out_massege">Siz rosdan ham tizim chiqmoqchimisiz?</string>
     <string name="you_no_cars">Sizda avtomobil mavud emas</string>
     <string name="pls_add_car">Iltimos avtomobil qo\'shing</string>
