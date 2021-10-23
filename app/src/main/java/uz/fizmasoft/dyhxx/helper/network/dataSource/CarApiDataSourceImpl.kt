@@ -1,10 +1,12 @@
 package uz.fizmasoft.dyhxx.helper.network.dataSource
 
+import retrofit2.Response
 import uz.fizmasoft.dyhxx.helper.network.CarApiService
 import uz.fizmasoft.dyhxx.helper.network.model.*
 import uz.fizmasoft.dyhxx.violation.ViolationCarApiModel
 import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
-import retrofit2.Response
+import uz.fizmasoft.dyhxx.violation.ViolationPDFModel
+import uz.fizmasoft.dyhxx.violation.ViolationPDFResponseModel
 import javax.inject.Inject
 
 
@@ -34,6 +36,10 @@ class CarApiDataSourceImpl @Inject constructor(private val carApiService: CarApi
 
     override suspend fun getViolation(model: ViolationCarApiModel): Response<ViolationCarApiModelResponse> {
         return carApiService.getViolation(model)
+    }
+
+    override suspend fun getPdfFile(violationPDFModel: ViolationPDFModel): Response<ViolationPDFResponseModel> {
+        return carApiService.getPdfFile(violationPDFModel)
     }
 
 

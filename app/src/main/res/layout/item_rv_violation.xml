@@ -13,8 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
         android:background="@color/white"
+        android:elevation="4dp"
         android:orientation="vertical"
         android:paddingStart="14dp"
         android:paddingTop="20dp"
@@ -26,11 +26,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="10dp"
-            tools:src="@drawable/ic_policeman"
             app:layout_constraintBottom_toTopOf="@id/violation_location_title"
             app:layout_constraintEnd_toStartOf="@id/violation_type"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_policeman" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/violation_act"
@@ -113,7 +113,6 @@
             android:paddingTop="6dp"
             android:textColor="@color/violation_text_color"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/violation_time_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/violation_time_title"
@@ -128,11 +127,11 @@
             android:text="@string/fine_time"
             android:textColor="@color/violation_text_gray_color"
             android:textSize="10sp"
-           app:layout_constraintTop_toTopOf="@id/violation_time_title"
             app:layout_constraintEnd_toEndOf="@id/violation_type"
             app:layout_constraintHorizontal_weight="0.4"
             app:layout_constraintStart_toEndOf="@id/violation_time_title"
-            app:layout_constraintTop_toBottomOf="@id/violation_time_title" />
+            app:layout_constraintTop_toBottomOf="@id/violation_time_title"
+            app:layout_constraintTop_toTopOf="@id/violation_time_title" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -144,11 +143,28 @@
             android:paddingTop="6dp"
             android:textColor="@color/green"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/violation_sum_title"
             app:layout_constraintStart_toStartOf="@id/violation_sum_title"
             app:layout_constraintTop_toBottomOf="@id/violation_sum_title"
             tools:text="250 000 so'm" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/violation_save_file"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/gilroy_semibold"
+            android:gravity="center"
+            android:text="@string/save_file"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/violation_sum"
+            app:layout_constraintStart_toStartOf="@id/violation_time"
+
+            app:layout_constraintTop_toBottomOf="@id/violation_sum" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

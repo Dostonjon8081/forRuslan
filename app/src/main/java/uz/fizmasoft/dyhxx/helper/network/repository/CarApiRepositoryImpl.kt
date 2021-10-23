@@ -9,6 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import okhttp3.ResponseBody
+import uz.fizmasoft.dyhxx.violation.ViolationPDFModel
+import uz.fizmasoft.dyhxx.violation.ViolationPDFResponseModel
 import javax.inject.Inject
 
 class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: ICarApiDataSource) :
@@ -58,6 +61,14 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
         return flow {
             emit(safeApiCall {
                 iCarApiDataSource.getViolation(model)
+            })
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getPdfFile(violationPDFModel: ViolationPDFModel): Flow<NetworkResult<ViolationPDFResponseModel>> {
+        return flow {
+            emit(safeApiCall {
+                iCarApiDataSource.getPdfFile(violationPDFModel)
             })
         }.flowOn(Dispatchers.IO)
     }

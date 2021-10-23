@@ -4,6 +4,10 @@ import android.content.Intent
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseActivity
 import uz.fizmasoft.dyhxx.core_fragment.home.HomeViewModel
@@ -11,10 +15,6 @@ import uz.fizmasoft.dyhxx.databinding.ActivityMainBinding
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.model.AllCars
 import uz.fizmasoft.dyhxx.helper.util.*
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 
 
 @AndroidEntryPoint
@@ -31,7 +31,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         navView.setupWithNavController(navController!!)
 
         if (intent.data != null) {
-            logd("in main load intent nut null")
             authentication(intent)
         }
 
@@ -41,8 +40,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         if (getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
             && isOnline(this)
         ) {
-            logd("in main auth")
             val editPref = getPref(this@MainActivity).edit()
+            PDFUtils.checkStoragePermission(this)
 
             CoroutineScope(Dispatchers.IO).async {
                 editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(22))
@@ -52,14 +51,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
     }
 
-    fun loadDataFromApi() {
-        logd("in main load api")
+    private fun loadDataFromApi() {
         val editPref = getPref(this@MainActivity).edit()
         viewModel.getUserIdApi(getPref(this).getString(PREF_TOKEN_KEY, "")!!)
         viewModel.responseUserIdApi.observe(this) {
             try {
                 editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).commit()
-logd("in main load api response")
+
                 viewModel.allCarsApi(AllCars(getPref(this).getString(PREF_USER_ID_KEY, "")!!))
                 viewModel.responseAllCarsApi.observe(this, EventObserver { data ->
 //                    val listCars = mutableListOf<CarEntity>()

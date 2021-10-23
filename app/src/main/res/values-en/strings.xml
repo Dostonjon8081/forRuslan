@@ -57,5 +57,6 @@
     <string name="pls_add_car">Please add car</string>
     <string name="we_happy">We are happy</string>
     <string name="inconvenience">Sorry for the inconvenience</string>
+    <string name="save_file">save file</string>
 
 </resources>
