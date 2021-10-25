@@ -1,0 +1,2 @@
+com/rajat/pdfviewer/test/BuildConfig.java
+ com.rajat.pdfviewer.test.BuildConfig

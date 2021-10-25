@@ -1,0 +1,45 @@
+R_DEF: Internal format may change without notice
+local
+attr pdfView_actionBarTint
+attr pdfView_backIcon
+attr? pdfView_divider
+attr pdfView_downloadIcon
+attr pdfView_downloadIconTint
+attr? pdfView_engine
+attr pdfView_progressBar
+attr? pdfView_quality
+attr? pdfView_showDivider
+attr pdfView_titleTextStyle
+drawable divider
+drawable ic_arrow_back
+drawable ic_arrow_back_alt
+drawable page_counter
+id download
+id enhanced
+id fast
+id google
+id internal
+id mainLayout
+id normal
+id pageNo
+id pageView
+id pdfView
+id progressBar
+id recyclerView
+id toolbar
+id tvAppBarTitle
+id webView
+layout activity_pdf_viewer
+layout list_item_pdf_page
+layout pdf_rendererview
+layout pdf_view_tool_bar
+menu menu
+string content_des
+string pdfView_appName
+style Theme.PdfView.Dark
+style Theme.PdfView.Light
+style Theme.PdfView.SelectedTheme
+style pdfView_progressBarStyle
+style pdfView_titleTextAppearance
+style pdfView_titleTextAppearanceDark
+styleable PdfRendererView pdfView_quality pdfView_engine pdfView_showDivider pdfView_divider
