@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -159,28 +160,22 @@ class ViolationFragment :
     }
 
     override fun violationFileID(id: String) {
-//        logd("keldi $id")
-        if (PDFUtils.checkStoragePermission(requireActivity())) {
             violationPDFModel = ViolationPDFModel(id)
             viewModel.getPdfFile(violationPDFModel!!)
             viewModel.responseViolationPDF.observe(viewLifecycleOwner, EventObserver {
 
                 when (it) {
                     is NetworkResult.Success -> {
-//                    writeToPDF(it.data!!.pdf,violationPDFModel!!.id)
 
                         PDFUtils.createPdf(
-//                            Environment.getExternalStorageDirectory().absolutePath,
-                            getExternalStoragePublicDirectory(DIRECTORY_DCIM).parent,
+                            requireActivity().filesDir.absolutePath,
                             it.data!!.pdf,
                             violationPDFModel!!.id
                         )
 
-                        PDFUtils.openPDF(
-                            requireActivity(),
-                            Environment.getExternalStoragePublicDirectory("Download").parent + "/dyhxx/"+violationPDFModel!!.id+".pdf",
-                            violationPDFModel!!.id
-                        )
+                        PDFUtils.openPDF(requireActivity(),
+                        requireActivity().filesDir.absolutePath,violationPDFModel!!.id)
+
                         violationPDFModel = null
                     }
                     is NetworkResult.Error -> {
@@ -192,6 +187,5 @@ class ViolationFragment :
                 }
 
             })
-        }
     }
 }

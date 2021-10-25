@@ -58,5 +58,6 @@
     <string name="we_happy">Tashrifingizdan mamnunmiz</string>
     <string name="inconvenience">Noqulayliklar uchun uzr so\'raymiz</string>
     <string name="save_file">Yuklash</string>
+    <string name="content_des" translatable="false">PDF PAGE</string>
 
 </resources>

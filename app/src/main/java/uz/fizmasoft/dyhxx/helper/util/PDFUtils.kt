@@ -11,12 +11,14 @@ import android.os.Environment
 import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.rajat.pdfviewer.PdfViewerActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.launch
+import uz.fizmasoft.dyhxx.helper.pdfviewer.PdfViewerActivity
 import java.io.File
 import java.io.FileOutputStream
+import java.util.concurrent.Executors
 
 
 object PDFUtils {
@@ -59,63 +61,42 @@ object PDFUtils {
     }
 
     fun createPdf(dirPath: String, pdf: String, id: String) {
-
         CoroutineScope(Dispatchers.IO).launch {
-            val dir = File("$dirPath/dyhxx")
-
-            if (!dir.exists()) {
-                dir.mkdir()
-            }
+            val dir = File("$dirPath")
 
             val idPdf = File(dir, "$id.pdf")
+
             if (!idPdf.exists()) {
                 idPdf.createNewFile()
             }
 
             try {
-                val downloadsPath = File("$dir/$id.pdf")
                 val pdfAsBytes: ByteArray? =
                     android.util.Base64.decode(pdf, android.util.Base64.DEFAULT)
-                val os = FileOutputStream(downloadsPath, false)
+                val os = FileOutputStream(idPdf, false)
 
                 os.write(pdfAsBytes)
                 os.flush()
                 os.close()
+
+
             } catch (e: Exception) {
+                logd("catch da")
             }
-        }
+        }.cancel()
     }
 
     fun openPDF(activity: Activity, dirPath: String, id: String) {
-
-        activity.startActivity(
-            PdfViewerActivity.launchPdfFromPath(
-                activity, dirPath, id, "dyhxx", true
+        logd(dirPath)
+        val executors = Executors.newFixedThreadPool(1)
+        executors.submit(Runnable {
+            activity.startActivity(
+                PdfViewerActivity.launchPdfFromPath(
+                    activity, "$dirPath/$id.pdf", id, "files", true
+                )
             )
-        )
-//        val browseStorage = Intent(Intent.ACTION_GET_CONTENT)
-//        browseStorage.type = "application/pdf"
-//        browseStorage.addCategory(Intent.ACTION_OPEN_DOCUMENT)
-//        activity.startActivity(
-//            Intent.createChooser(browseStorage, "Select PDF")
-//        )
-
-//        ----------------------------------------------------------------------------------------------
-//        var file: File? = null
-//        file = File("$dirPath/$id.pdf")
-//
-//        if (file.exists()) {
-//            val target = Intent(Intent.ACTION_VIEW)
-//            target.setDataAndType(Uri.fromFile(file), "dyhxx/$id.pdf")
-//            target.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-//
-//            val intent = Intent.createChooser(target, "Open File")
-//            try {
-//                context.startActivity(intent)
-//            } catch (e: ActivityNotFoundException) {
-//                // Instruct the user to install a PDF reader here, or something
-//            }
-//        }
+        })
+        executors.shutdown()
     }
 
 }

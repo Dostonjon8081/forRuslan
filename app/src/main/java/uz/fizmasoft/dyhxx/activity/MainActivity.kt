@@ -41,8 +41,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             && isOnline(this)
         ) {
             val editPref = getPref(this@MainActivity).edit()
-            PDFUtils.checkStoragePermission(this)
-
             CoroutineScope(Dispatchers.IO).async {
                 editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(22))
                     .commit()
