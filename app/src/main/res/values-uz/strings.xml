@@ -35,7 +35,7 @@
     <string name="text_pass_series_numbers">Tex.pass. seriyasi va raqami:</string>
     <string name="country_number">Davlat raqami:</string>
     <string name="not_ethernet">Tarmoqqa ulanmagan</string>
-    <string name="wrong">Qarorlarda xotolik</string>
+    <string name="wrong">Qatorlarda xotolik</string>
     <string name="car_exist">Avval ro\'yxatga olingan</string>
     <string name="bad_request">Ro\'yhatdan o\'tmagan foydalanuvchi</string>
     <string name="delete_dialog_title">Siz rostan ham ushbu avtomobilni o\'chirmoqchisiz?</string>
@@ -58,5 +58,6 @@
     <string name="pls_add_car">Iltimos avtomobil qo\'shing</string>
     <string name="we_happy">Tashrifingizdan mamnunmiz</string>
     <string name="inconvenience">Noqulayliklar uchun uzr so\'raymiz</string>
+    <string name="save_file">Yuklash</string>
 
 </resources>

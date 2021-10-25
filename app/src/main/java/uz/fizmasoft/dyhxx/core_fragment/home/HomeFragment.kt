@@ -86,26 +86,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun swipeRefresh() {
-        logd("in swipe")
+
         if (requireActivity().intent.data==null){
         viewModel.allCarsApi(AllCars(getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!))}
         viewModel.responseAllCarsApi.observe(this, EventObserver { result ->
-//            logd(result)
+
             when (result) {
                 is NetworkResult.Loading -> {
-                    logd("loading")
                 }
                 is NetworkResult.Success -> {
                     binding.homeFragmentSwipeRefresh.isRefreshing = false
                     Executors.newSingleThreadExecutor().execute {
                         if (result.data?.status == 200) {
-                            logd(result.data.status)
-//                            logd(result)
                             for (resultItem in result.data.data) {
-//                                logd("in for")
-                                logd(listCarEntity.all { it.carNumber != resultItem.passport })
+
                                 if (listCarEntity.all { it.carNumber != resultItem.passport }) {
-                                    logd("in if")
+
                                     viewModel.insertCarDB(
                                         CarEntity(
                                             0,
@@ -127,7 +123,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     }
                 }
                 is NetworkResult.Error -> {
-                    logd("in error")
                 }
             }
             navigateToHome()

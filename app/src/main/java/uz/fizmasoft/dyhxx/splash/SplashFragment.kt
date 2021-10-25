@@ -1,5 +1,6 @@
 package uz.fizmasoft.dyhxx.splash
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -25,6 +26,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
                     if (getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")
                             .isNullOrEmpty()
                     ) {
+//                        if (Build.VERSION == Build.VERSION_CODES)
                         it.navController?.navigate(R.id.action_splashFragment_to_selectLanguageFragment)
                     } else {
                         it.navController?.navigate(R.id.action_splashFragment_to_homeFragment)

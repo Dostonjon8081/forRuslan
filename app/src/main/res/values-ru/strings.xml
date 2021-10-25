@@ -60,4 +60,5 @@
     <string name="pls_add_car">Пожалуйста, добавьте машину</string>
     <string name="we_happy">Мы рады</string>
     <string name="inconvenience">Извините за неудобство</string>
+    <string name="save_file">Загрузит</string>
 </resources>

@@ -1,12 +1,14 @@
 package uz.fizmasoft.dyhxx.violation
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.os.Environment.*
+import android.provider.MediaStore
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,18 +17,18 @@ import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentViolationBinding
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
-import uz.fizmasoft.dyhxx.helper.util.EventObserver
-import uz.fizmasoft.dyhxx.helper.util.PREF_USER_ID_KEY
-import uz.fizmasoft.dyhxx.helper.util.getPref
+import uz.fizmasoft.dyhxx.helper.util.*
+import java.util.*
+
 
 class ViolationFragment :
-    BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate) {
+    BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate), ClickViolationRv {
 
     private val viewModel: ViolationViewModel by activityViewModels()
     private val args: ViolationFragmentArgs by navArgs()
     private var arg: CarEntity? = null
     private val violationRvAdapter by lazy(LazyThreadSafetyMode.NONE) { ViolationRvAdapter() }
-
+    private var violationPDFModel: ViolationPDFModel? = null
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -59,7 +61,12 @@ class ViolationFragment :
         binding.wp7progressBar.showProgressBar()
         binding.violationFragmentArrowBack.setOnClickListener { activity?.onBackPressed() }
 
-        binding.violationFragmentSwipeRefresh.setColorSchemeColors(ContextCompat.getColor(requireContext(),R.color.toolbar_color))
+        binding.violationFragmentSwipeRefresh.setColorSchemeColors(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.toolbar_color
+            )
+        )
         binding.violationFragmentSwipeRefresh.setOnRefreshListener(this::swipeRefresh)
         loadData()
 
@@ -86,6 +93,7 @@ class ViolationFragment :
                         initDataToRv(it.data.data)
                         binding.violationFragmentCountFines.text = it.data.data.size.toString()
                         binding.wp7progressBar.hideProgressBar()
+
                     } else {
                         binding.wp7progressBar.hideProgressBar()
                         binding.violationFragmentContainerNoViolation.visibility = View.VISIBLE
@@ -113,6 +121,7 @@ class ViolationFragment :
         }
 
         violationRvAdapter.submitList(list)
+        violationRvAdapter.rvClick(this@ViolationFragment)
 
         binding.violationFragmentRv.visibility = View.VISIBLE
         binding.violationFragmentRv.layoutManager = LinearLayoutManager(requireContext())
@@ -150,4 +159,33 @@ class ViolationFragment :
         binding.violationTotalSum.text = totalSumString.toString()
     }
 
+    override fun violationFileID(id: String) {
+            violationPDFModel = ViolationPDFModel(id)
+            viewModel.getPdfFile(violationPDFModel!!)
+            viewModel.responseViolationPDF.observe(viewLifecycleOwner, EventObserver {
+
+                when (it) {
+                    is NetworkResult.Success -> {
+
+                        PDFUtils.createPdf(
+                            requireActivity().filesDir.absolutePath,
+                            it.data!!.pdf,
+                            violationPDFModel!!.id
+                        )
+
+                        PDFUtils.openPDF(requireActivity(),
+                        requireActivity().filesDir.absolutePath,violationPDFModel!!.id)
+
+                        violationPDFModel = null
+                    }
+                    is NetworkResult.Error -> {
+
+                    }
+                    is NetworkResult.Loading -> {
+
+                    }
+                }
+
+            })
+    }
 }

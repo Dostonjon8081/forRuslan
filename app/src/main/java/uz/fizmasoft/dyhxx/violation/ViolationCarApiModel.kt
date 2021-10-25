@@ -26,3 +26,15 @@ class ViolationCarApiModelResponseData(
     @SerializedName("sum") val sum: String,
     @SerializedName("location") val location: String,
 )
+
+class ViolationPDFModel(
+    @SerializedName("id") val id: String
+)
+
+class ViolationPDFResponseModel(
+    @SerializedName("status") val status: Int,
+    @SerializedName("pdf") val pdf: String,
+    @SerializedName("id") val id: String
+)
+
+

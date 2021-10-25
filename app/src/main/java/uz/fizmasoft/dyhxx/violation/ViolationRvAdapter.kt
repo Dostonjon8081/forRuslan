@@ -4,15 +4,17 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
 import uz.fizmasoft.dyhxx.R
+import uz.fizmasoft.dyhxx.helper.util.logd
 
 class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
 
     private val list = mutableListOf<ViolationCarModel>()
+    private var violationRvClick: ClickViolationRv? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return VH(
@@ -39,16 +41,22 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
         notifyDataSetChanged()
     }
 
-    class VH(val view: View) : RecyclerView.ViewHolder(view) {
+    fun rvClick(clickViolationRv: ClickViolationRv) {
+        this.violationRvClick = clickViolationRv
+    }
+
+    inner class VH(val view: View) : RecyclerView.ViewHolder(view) {
 
         private var violationTimeTitle: TextView = view.findViewById(R.id.violation_time_title)
         private var violationTime: TextView = view.findViewById(R.id.violation_time)
         private var violationAct: TextView = view.findViewById(R.id.violation_act)
         private var violationType: TextView = view.findViewById(R.id.violation_type)
-        private var violationLocationTitle: TextView = view.findViewById(R.id.violation_location_title)
+        private var violationLocationTitle: TextView =
+            view.findViewById(R.id.violation_location_title)
         private var violationLocation: TextView = view.findViewById(R.id.violation_location)
         private var violationSum: TextView = view.findViewById(R.id.violation_sum)
         private var violationImg: ImageView = view.findViewById(R.id.violation_img)
+        private var violationSaveFile: Button = view.findViewById(R.id.violation_save_file)
 
         @SuppressLint("SetTextI18n")
         fun onBind(model: ViolationCarModel) {
@@ -56,25 +64,29 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
             violationAct.text = model.qarorSery + " " + model.qarorNumber
             violationType.text = model.violationType
 
-//            (violationLocationTitle.height+violationLocation.height).also { violationTimeTitle.marginTop = it }
-
             violationLocation.text = model.location
-            if (model.location.isEmpty()){
+            if (model.location.isEmpty()) {
                 violationLocation.visibility = View.GONE
                 violationLocationTitle.visibility = View.GONE
             }
-//            violationSum.text = model.sum+" "+view.context.resources.getString(R.string.sum)
+
             violationSum.text = getSum(model.sum.toInt())
 
-            violationImg.setImageResource(when(model.qarorSery){
-                "KV"->R.drawable.ic_policeman
-                "RR"->R.drawable.ic_artist
-                else->R.drawable.ic_radar
-            })
+            violationImg.setImageResource(
+                when (model.qarorSery) {
+                    "KV" -> R.drawable.ic_policeman
+                    "RR" -> R.drawable.ic_artist
+                    else -> R.drawable.ic_radar
+                }
+            )
+             if (model.qarorSery != "KV") {
+                 violationSaveFile.visibility = View.VISIBLE
+                 violationSaveFile.setOnClickListener { violationRvClick!!.violationFileID(model.id) }
+            }
         }
 
 
-        private fun getSum(sum:Int):String{
+        private fun getSum(sum: Int): String {
             var suma = sum
             val sumStringList = mutableListOf<String>()
             val sumString = StringBuilder()

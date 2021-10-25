@@ -5,13 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import uz.fizmasoft.dyhxx.helper.db.dataRepository.ICarRepository
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.network.repository.ICarApiRepository
 import uz.fizmasoft.dyhxx.helper.util.Event
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import uz.fizmasoft.dyhxx.helper.util.logd
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +30,18 @@ class ViolationViewModel @Inject constructor(
     fun getViolationApi(model: ViolationCarApiModel) = viewModelScope.launch {
         apiRepository.getViolation(model).collect { values ->
             _responseViolationApiApi.postValue(Event(values))
+        }
+    }
+
+
+    private val _responseViolationPdf: MutableLiveData<Event<NetworkResult<ViolationPDFResponseModel>>> =
+        MutableLiveData()
+    val responseViolationPDF: LiveData<Event<NetworkResult<ViolationPDFResponseModel>>> =
+        _responseViolationPdf
+
+    fun getPdfFile(violationPDFModel: ViolationPDFModel) = viewModelScope.launch {
+        apiRepository.getPdfFile(violationPDFModel).collect { value ->
+            _responseViolationPdf.postValue(Event(value))
         }
     }
 

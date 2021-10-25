@@ -1,5 +1,6 @@
 package uz.fizmasoft.dyhxx.helper.network
 
+import okhttp3.ResponseBody
 import uz.fizmasoft.dyhxx.helper.network.model.*
 import uz.fizmasoft.dyhxx.violation.ViolationCarApiModel
 import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
@@ -7,6 +8,8 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
+import uz.fizmasoft.dyhxx.violation.ViolationPDFModel
+import uz.fizmasoft.dyhxx.violation.ViolationPDFResponseModel
 
 interface CarApiService {
 
@@ -27,5 +30,8 @@ interface CarApiService {
 
     @POST("violation/list")
     suspend fun getViolation(@Body model: ViolationCarApiModel): Response<ViolationCarApiModelResponse>
+
+    @POST("violation/pdf")
+    suspend fun getPdfFile(@Body violationPDFModel: ViolationPDFModel): Response<ViolationPDFResponseModel>
 
 }

@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="uz.fizmasoft.dyhxx">
+    package="uz.fizmasoft.dyhxx"
+    android:installLocation="preferExternal">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <application
+    <uses-permission android:name="android.permission.INTERNET" />
 
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"-->
+<!--        android:maxSdkVersion="29"/>-->
+<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+<!--    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />-->
+
+    <application
         android:name="uz.fizmasoft.dyhxx.App"
         android:allowBackup="true"
+        android:configChanges="locale"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:configChanges="locale"
         android:theme="@style/Theme.DYHXX">
+
         <activity
-            android:exported="true"
             android:name="uz.fizmasoft.dyhxx.activity.MainActivity"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,20 +32,26 @@
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
-                <data android:scheme="https" android:host="abc.xyz"/>
+                <data
+                    android:host="abc.xyz"
+                    android:scheme="https" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
 
         </activity>
-      <!--  <activity android:name=".activity.MyBrowserActivity">
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="https" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-        </activity>-->
+        <activity
+            android:name=".helper.pdfviewer.PdfViewerActivity"
+            android:theme="@style/Theme.PdfView.SelectedTheme" />
+        <!--  <activity android:name=".activity.MyBrowserActivity">
+              <intent-filter android:autoVerify="true">
+                  <action android:name="android.intent.action.VIEW" />
+                  <data android:scheme="https" />
+                  <category android:name="android.intent.category.DEFAULT" />
+                  <category android:name="android.intent.category.BROWSABLE" />
+              </intent-filter>
+          </activity>-->
     </application>
 
 </manifest>

@@ -10,3 +10,4 @@ class ViolationCarModel(
      val sum: String,
      val location: String,
 )
+
