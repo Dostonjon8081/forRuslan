@@ -37,4 +37,8 @@ class ViolationPDFResponseModel(
     @SerializedName("id") val id: String
 )
 
+class ViolationPDFQaror(
+    val qaror:String
+)
+
 

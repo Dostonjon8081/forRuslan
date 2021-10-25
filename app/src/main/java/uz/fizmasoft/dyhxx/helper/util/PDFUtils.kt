@@ -11,14 +11,10 @@ import android.os.Environment
 import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Runnable
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import uz.fizmasoft.dyhxx.helper.pdfviewer.PdfViewerActivity
 import java.io.File
 import java.io.FileOutputStream
-import java.util.concurrent.Executors
 
 
 object PDFUtils {
@@ -60,46 +56,48 @@ object PDFUtils {
         return bol
     }
 
-    fun createPdf(dirPath: String, pdf: String, id: String) {
-        val scopeComplete = CoroutineScope(Dispatchers.IO).launch {
-            val dir = File("$dirPath")
+    fun createPdf(activity: Activity, dirPath: String, pdf: String, id: String) {
 
-            val idPdf = File(dir, "$id.pdf")
+        val dir = File(dirPath)
+        val idPdf = File(dir, "$id.pdf")
+//        val scopeComplete = CoroutineScope(Dispatchers.IO).launch {
+//            val dir = File("$dirPath")
+//            val idPdf = File(dir, "$id.pdf")
 
             if (!idPdf.exists()) {
                 idPdf.createNewFile()
+
+                try {
+                    val pdfAsBytes: ByteArray? =
+                        android.util.Base64.decode(pdf, android.util.Base64.DEFAULT)
+                    val os = FileOutputStream(idPdf, false)
+
+                    os.write(pdfAsBytes)
+                    os.flush()
+                    os.close()
+                    // openPDF(activity,dirPath,id)
+
+                } catch (e: Exception) {
+                }
+            } else {
+//                openPDF(activity, dirPath, id)
             }
-
-            try {
-                val pdfAsBytes: ByteArray? =
-                    android.util.Base64.decode(pdf, android.util.Base64.DEFAULT)
-                val os = FileOutputStream(idPdf, false)
-
-                os.write(pdfAsBytes)
-                os.flush()
-                os.close()
-
-
-            } catch (e: Exception) {
-                logd("catch da")
-            }
-        }
-        if (scopeComplete.isCompleted){
-            scopeComplete.cancel()
-        }
+//        }
+//        if (scopeComplete.isCompleted) {
+//            scopeComplete.cancel()
+//        }
     }
 
-    fun openPDF(activity: Activity, dirPath: String, id: String) {
-        logd(dirPath)
-        val executors = Executors.newFixedThreadPool(1)
-        executors.submit(Runnable {
-            activity.startActivity(
-                PdfViewerActivity.launchPdfFromPath(
-                    activity, "$dirPath/$id.pdf", id, "files", true
-                )
+    fun openPDF(activity: Activity, dirPath: String, id: String, qaror: String = "DYHXX") {
+      //        val executors = Executors.newFixedThreadPool(1)
+//        executors.submit(Runnable {
+        activity.startActivity(
+            PdfViewerActivity.launchPdfFromPath(
+                activity, "$dirPath/$id.pdf", qaror, "files", true
             )
-        })
-        executors.shutdown()
+        )
+//        })
+//        executors.shutdown()
     }
 
 }

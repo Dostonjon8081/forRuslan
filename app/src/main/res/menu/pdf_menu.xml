@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/download"
-        android:icon="?pdfView_downloadIcon"
-        android:title="Download"
-        app:iconTint="?attr/pdfView_downloadIconTint"
+        android:id="@+id/sharePdf"
+        android:icon="@drawable/ic_share"
+        android:title="Share"
         app:showAsAction="always" />
 </menu>

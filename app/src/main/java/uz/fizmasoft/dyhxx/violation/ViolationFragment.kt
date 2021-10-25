@@ -2,13 +2,10 @@ package uz.fizmasoft.dyhxx.violation
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Environment
 import android.os.Environment.*
-import android.provider.MediaStore
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +26,8 @@ class ViolationFragment :
     private var arg: CarEntity? = null
     private val violationRvAdapter by lazy(LazyThreadSafetyMode.NONE) { ViolationRvAdapter() }
     private var violationPDFModel: ViolationPDFModel? = null
+    private var violationPDFQaror: ViolationPDFQaror? = null
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -76,6 +75,8 @@ class ViolationFragment :
         binding.wp7progressBar.showProgressBar()
         binding.violationFragmentRv.visibility = View.GONE
         binding.violationsContainerTotalSum.visibility = View.GONE
+        binding.violationFragmentContainerNoConnect.visibility = View.GONE
+        binding.violationFragmentContainerNoViolation.visibility = View.GONE
         requestData()
         loadData()
         binding.violationFragmentSwipeRefresh.isRefreshing = false
@@ -93,14 +94,17 @@ class ViolationFragment :
                         initDataToRv(it.data.data)
                         binding.violationFragmentCountFines.text = it.data.data.size.toString()
                         binding.wp7progressBar.hideProgressBar()
+                        binding.wp7progressBar.visibility = View.GONE
 
                     } else {
                         binding.wp7progressBar.hideProgressBar()
+                        binding.wp7progressBar.visibility = View.GONE
                         binding.violationFragmentContainerNoViolation.visibility = View.VISIBLE
                     }
                 }
                 is NetworkResult.Error -> {
                     binding.wp7progressBar.hideProgressBar()
+                    binding.wp7progressBar.visibility = View.GONE
                     binding.violationFragmentContainerNoConnect.visibility = View.VISIBLE
                 }
                 is NetworkResult.Loading -> {
@@ -159,33 +163,46 @@ class ViolationFragment :
         binding.violationTotalSum.text = totalSumString.toString()
     }
 
-    override fun violationFileID(id: String) {
-            violationPDFModel = ViolationPDFModel(id)
-            viewModel.getPdfFile(violationPDFModel!!)
-            viewModel.responseViolationPDF.observe(viewLifecycleOwner, EventObserver {
+    override fun violationFileID(id: String, qaror: String) {
 
-                when (it) {
-                    is NetworkResult.Success -> {
+        binding.wp7progressBar.visibility = View.VISIBLE
+        binding.wp7progressBar.showProgressBar()
 
-                        PDFUtils.createPdf(
-                            requireActivity().filesDir.absolutePath,
-                            it.data!!.pdf,
-                            violationPDFModel!!.id
-                        )
+        violationPDFModel = ViolationPDFModel(id)
+        violationPDFQaror = ViolationPDFQaror(qaror)
 
-                        PDFUtils.openPDF(requireActivity(),
-                        requireActivity().filesDir.absolutePath,violationPDFModel!!.id)
+        viewModel.getPdfFile(violationPDFModel!!)
+        viewModel.responseViolationPDF.observe(viewLifecycleOwner, EventObserver {
 
-                        violationPDFModel = null
-                    }
-                    is NetworkResult.Error -> {
+            when (it) {
+                is NetworkResult.Success -> {
 
-                    }
-                    is NetworkResult.Loading -> {
+                    PDFUtils.createPdf(
+                        requireActivity(),
+                        requireActivity().filesDir.absolutePath,
+                        it.data!!.pdf,
+                        violationPDFModel!!.id
+                    )
 
-                    }
+                    PDFUtils.openPDF(
+                        requireActivity(),
+                        requireActivity().filesDir.absolutePath,
+                        violationPDFModel!!.id,
+                        violationPDFQaror!!.qaror
+                    )
+
+                    violationPDFModel = null
+                    binding.wp7progressBar.visibility = View.GONE
                 }
+                is NetworkResult.Error -> {
 
-            })
+                }
+                is NetworkResult.Loading -> {
+
+                }
+            }
+
+        })
     }
+
 }

@@ -11,7 +11,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.os.Environment
 import android.text.TextUtils
 import android.util.Log
@@ -19,22 +18,24 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
-import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseActivity
 import uz.fizmasoft.dyhxx.databinding.ActivityPdfViewerBinding
 import uz.fizmasoft.dyhxx.helper.pdfviewer.util.FileUtils
+import uz.fizmasoft.dyhxx.helper.util.logd
 import java.io.File
+
 
 /**
  * Created by Doston on 11,July,2020
  */
 
-class PdfViewerActivity :BaseActivity<ActivityPdfViewerBinding>(ActivityPdfViewerBinding::inflate) {
+class PdfViewerActivity :
+    BaseActivity<ActivityPdfViewerBinding>(ActivityPdfViewerBinding::inflate) {
 
     private var permissionGranted: Boolean? = false
     private var menuItem: MenuItem? = null
@@ -173,36 +174,56 @@ class PdfViewerActivity :BaseActivity<ActivityPdfViewerBinding>(ActivityPdfViewe
     }
 
     private fun setUpToolbar(toolbarTitle: String) {
-//        setSupportActionBar(binding.mainLayout.toolbar)
-//        supportActionBar?.apply {
-//            setDisplayHomeAsUpEnabled(true)
-//            setDisplayShowHomeEnabled(true)
-//            if(binding.mainLayout.tvAppBarTitle!=null) {
-//                binding.mainLayout.tvAppBarTitle?.text = toolbarTitle
-//                setDisplayShowTitleEnabled(false)
-//            }else{
-//                setDisplayShowTitleEnabled(true)
-//                title = toolbarTitle
-//            }
-//        }
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            binding.tvAppBarTitle?.text = toolbarTitle
+            setDisplayShowTitleEnabled(false)
+        }
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.pdf_menu, menu)
-        menuItem = menu?.findItem(R.id.download)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.pdf_menu, menu)
+//        menuItem = menu?.findItem(R.id.sharePdf)
+//        return true
+//    }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menuItem?.isVisible = enableDownload
-        return true
-    }
+//    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+//        menuItem?.isVisible = enableDownload
+//        return true
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.download) checkPermission(PERMISSION_CODE)
+//        if (item.itemId == R.id.sharePdf) checkPermission(PERMISSION_CODE)
         if (item.itemId == android.R.id.home) {
             finish() // close this activity and return to preview activity (if there is any)
+        } else {
+            logd("share file")
+
+//           val intent = Intent(Intent.ACTION_SEND)
+//                .setType("application/pdf")
+//                .createChooserIntent()
+//                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            startActivity(intent)
+//_______________________________________________________________________
+//            val shareIntent = Intent(Intent.ACTION_SEND)
+//                .setType("application/pdf")
+//
+//            val pdfFile = File(filesDir, this.intent!!.getStringExtra(FILE_URL) ?: "")
+//            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pdfFile))
+//            startActivity(Intent.createChooser(shareIntent, "Share pdf using"))
+//            ________________________________________________________________________
+//            val path = FileProvider.getUriForFile(
+//                this,
+//                File(filesDir.absolutePath)
+//            )
+//            val i = Intent(Intent.ACTION_SEND)
+//            i.type = "application/pdf"
+//            i.putExtra(Intent.ACTION_OPEN_DOCUMENT, this.intent.extras!!.getString(FILE_URL) ?: "")
+//            i.putExtra(Intent.EXTRA_STREAM, filesDir.absolutePath)
+//            startActivity(i)
         }
         return super.onOptionsItemSelected(item)
     }

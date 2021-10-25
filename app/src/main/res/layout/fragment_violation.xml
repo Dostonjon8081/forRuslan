@@ -67,18 +67,23 @@
 
         <ir.alirezabdn.wp7progress.WP7ProgressBar
             android:id="@+id/wp7progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_centerVertical="true"
+            android:background="@color/white"
             android:elevation="2dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:touchscreenBlocksFocus="true"
             app:animationDuration="2300"
             app:indicatorColor="@color/progressbar_color"
             app:indicatorHeight="7"
             app:indicatorRadius="5"
             app:interval="100"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/violation_fragment_tool_bar" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/violations_container_total_sum"
@@ -191,5 +196,8 @@
                 android:textSize="24sp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -4,12 +4,10 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import uz.fizmasoft.dyhxx.R
-import uz.fizmasoft.dyhxx.helper.util.logd
 
 class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
 
@@ -56,7 +54,7 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
         private var violationLocation: TextView = view.findViewById(R.id.violation_location)
         private var violationSum: TextView = view.findViewById(R.id.violation_sum)
         private var violationImg: ImageView = view.findViewById(R.id.violation_img)
-        private var violationSaveFile: Button = view.findViewById(R.id.violation_save_file)
+        private var violationSaveFile: ImageView = view.findViewById(R.id.violation_save_file)
 
         @SuppressLint("SetTextI18n")
         fun onBind(model: ViolationCarModel) {
@@ -81,7 +79,7 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
             )
              if (model.qarorSery != "KV") {
                  violationSaveFile.visibility = View.VISIBLE
-                 violationSaveFile.setOnClickListener { violationRvClick!!.violationFileID(model.id) }
+                 view.setOnClickListener { violationRvClick!!.violationFileID(model.id,model.qarorSery+model.qarorNumber) }
             }
         }
 

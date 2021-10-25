@@ -60,7 +60,6 @@ class PdfRendererView @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-
         pageNo= findViewById(R.id.pageNo)
         webView= findViewById(R.id.pdfVebView)
     }

@@ -134,9 +134,9 @@
                 android:fontFamily="@font/gilroy_bold"
                 android:gravity="start|center_vertical"
                 android:paddingStart="4dp"
+                android:lines="1"
                 android:paddingEnd="26dp"
                 android:textAlignment="textStart"
-
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:autoSizeTextType="uniform"
