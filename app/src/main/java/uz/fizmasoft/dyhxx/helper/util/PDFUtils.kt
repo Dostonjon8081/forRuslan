@@ -61,7 +61,7 @@ object PDFUtils {
     }
 
     fun createPdf(dirPath: String, pdf: String, id: String) {
-        CoroutineScope(Dispatchers.IO).launch {
+        val scopeComplete = CoroutineScope(Dispatchers.IO).launch {
             val dir = File("$dirPath")
 
             val idPdf = File(dir, "$id.pdf")
@@ -83,7 +83,10 @@ object PDFUtils {
             } catch (e: Exception) {
                 logd("catch da")
             }
-        }.cancel()
+        }
+        if (scopeComplete.isCompleted){
+            scopeComplete.cancel()
+        }
     }
 
     fun openPDF(activity: Activity, dirPath: String, id: String) {
