@@ -15,7 +15,7 @@ buildscript {
         //dagger-hilt
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.38.1'
         //navigation safe args
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.0-alpha08"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.0-alpha10"
         //gms service
         classpath 'com.google.gms:google-services:4.3.10'
         //firebase crash

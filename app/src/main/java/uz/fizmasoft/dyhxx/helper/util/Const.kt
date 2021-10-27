@@ -21,3 +21,4 @@ const val TELEGRAM_AUTH_URL = "https://t.me/dyhxxuz_auth_bot"
  */
 
 const val STORAGE_REQUEST_CODE = 1001
+const val IN_APP_UPDATE_REQUEST_CODE = 4040

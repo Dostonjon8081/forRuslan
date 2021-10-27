@@ -134,11 +134,11 @@
                 android:fontFamily="@font/gilroy_bold"
                 android:gravity="start|center_vertical"
                 android:paddingStart="4dp"
-                android:lines="1"
+                android:maxLines="1"
                 android:paddingEnd="26dp"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 app:autoSizeTextType="uniform"
                 app:fontFamily="@font/cargo2"
                 tools:text="S 577 JA" />
