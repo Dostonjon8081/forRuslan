@@ -3,12 +3,14 @@ package uz.fizmasoft.dyhxx.core_fragment.home
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.activity.MainActivity
 import uz.fizmasoft.dyhxx.base.BaseFragment
@@ -18,7 +20,6 @@ import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.network.model.AllCars
 import uz.fizmasoft.dyhxx.helper.network.model.RemoveCarModel
 import uz.fizmasoft.dyhxx.helper.util.*
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 
 
@@ -36,18 +37,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Handler().postDelayed({
-        (activity as uz.fizmasoft.dyhxx.activity.MainActivity).apply {
-            if (!this.binding.idBottomNavigation.isVisible) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            (activity as? MainActivity)?.let {
+                if (!it.binding.idBottomNavigation.isVisible) {
 
-                    binding.idBottomNavigation.visibility = View.VISIBLE
+                    it.binding.idBottomNavigation.visibility = View.VISIBLE
                 }
             }
         }, 400)
 
         binding.homeFragmentButtonAddCar.setOnClickListener { addCar() }
         binding.homeFragmentButtonAddCarBtn.setOnClickListener { addCar() }
-        binding.homeFragmentSwipeRefresh.setColorSchemeColors(ContextCompat.getColor(requireContext(),R.color.toolbar_color))
+        binding.homeFragmentSwipeRefresh.setColorSchemeColors(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.toolbar_color
+            )
+        )
         binding.homeFragmentSwipeRefresh.setOnRefreshListener(this::swipeRefresh)
 
         loadData()
@@ -87,8 +93,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun swipeRefresh() {
 
-        if (requireActivity().intent.data==null){
-        viewModel.allCarsApi(AllCars(getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!))}
+        if (requireActivity().intent.data == null) {
+            viewModel.allCarsApi(
+                AllCars(
+                    getPref(requireActivity()).getString(
+                        PREF_USER_ID_KEY,
+                        ""
+                    )!!
+                )
+            )
+        }
         viewModel.responseAllCarsApi.observe(this, EventObserver { result ->
 
             when (result) {
@@ -112,9 +126,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                                 }
                             }
 
-                            if (result.data.data.size<listCarEntity.size){
+                            if (result.data.data.size < listCarEntity.size) {
                                 for (listItem in listCarEntity) {
-                                    if (result.data.data.all { it.passport!=listItem.carNumber }){
+                                    if (result.data.data.all { it.passport != listItem.carNumber }) {
                                         viewModel.removeCarDB(listItem.carNumber)
                                     }
                                 }
@@ -150,7 +164,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun clickedItem(position: Int) {
-        (activity as uz.fizmasoft.dyhxx.activity.MainActivity).navController?.navigate(
+        (activity as MainActivity).navController?.navigate(
             HomeFragmentDirections.actionHomeFragmentToViolationFragment(
                 listCarEntity[position]
             )
@@ -184,7 +198,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun navigateToHome() {
         getBaseActivity {
-            it.navController!!.navigate(R.id.home_fragment)
+            it.navController?.navigate(R.id.home_fragment)
         }
     }
 

@@ -12,13 +12,13 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
+            storeFile file('D:\\for android\\dyhxx\\dyhxx.jks')
             storePassword '987654321'
             keyAlias 'key0'
             keyPassword '987654321'
         }
         release {
-            storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
+            storeFile file('D:\\for android\\dyhxx\\dyhxx.jks')
             storePassword '987654321'
             keyAlias 'key0'
             keyPassword '987654321'
@@ -120,6 +120,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
 
     //firebase crash
     implementation platform('com.google.firebase:firebase-bom:28.4.1')

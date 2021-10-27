@@ -4,7 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 
 
 fun getPref(activity: Activity): SharedPreferences {
@@ -30,13 +33,4 @@ fun Any.logd(message: Any?) = message?.let {
         messageText,
         if (message is Throwable) message else null
     )
-}
-
-fun Any.isOnline(context: Context): Boolean {
-    val cm =
-        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-//    return cm.isActiveNetworkMetered
-    val networkInfo = cm.activeNetworkInfo
-    return networkInfo != null && networkInfo.isConnected
-
 }

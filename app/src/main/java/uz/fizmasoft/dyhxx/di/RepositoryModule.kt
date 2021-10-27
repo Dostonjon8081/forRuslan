@@ -2,17 +2,18 @@ package uz.fizmasoft.dyhxx.di
 
 import android.content.Context
 import androidx.room.Room
-import uz.fizmasoft.dyhxx.helper.db.CarDataBase
-import uz.fizmasoft.dyhxx.helper.network.CarApiService
-import uz.fizmasoft.dyhxx.helper.util.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import uz.fizmasoft.dyhxx.helper.db.CarDataBase
+import uz.fizmasoft.dyhxx.helper.network.CarApiService
+import uz.fizmasoft.dyhxx.helper.util.BASE_URL
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -31,9 +32,13 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideHttpClient(): OkHttpClient {
+        val logging = HttpLoggingInterceptor()
+        logging.setLevel(HttpLoggingInterceptor.Level.HEADERS)
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient
             .Builder()
             .readTimeout(15, TimeUnit.SECONDS)
+            .addInterceptor(logging)
             .connectTimeout(15, TimeUnit.SECONDS)
             .build()
     }
