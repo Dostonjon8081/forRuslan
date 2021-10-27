@@ -61,11 +61,23 @@
         android:name="uz.fizmasoft.dyhxx.core_fragment.notification.Notification"
         android:label="@string/notification"
         tools:layout="@layout/fragment_notification" />
+
     <fragment
         android:id="@+id/account_fragment"
         android:name="uz.fizmasoft.dyhxx.core_fragment.account.AccountFragment"
         android:label="@string/account"
-        tools:layout="@layout/fragment_account"/>
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/action_account_fragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+
+
+    <fragment
+        tools:layout="@layout/fragment_about"
+        android:id="@+id/aboutFragment"
+        android:name="uz.fizmasoft.dyhxx.core_fragment.account.about_app.AboutFragment"
+        android:label="AboutFragment" />
 
     <fragment
         android:id="@+id/add_car_fragment"
