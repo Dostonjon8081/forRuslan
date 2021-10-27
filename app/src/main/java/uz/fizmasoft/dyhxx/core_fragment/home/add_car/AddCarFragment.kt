@@ -18,6 +18,7 @@ import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.model.SaveCarModel
 import uz.fizmasoft.dyhxx.helper.util.*
 import dagger.hilt.android.AndroidEntryPoint
+import uz.fizmasoft.dyhxx.activity.MainActivity
 
 @AndroidEntryPoint
 class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
@@ -46,8 +47,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.addCarFragmentToolBar.title = getString(R.string.add_car)
-
         setupSpinner()
         setup()
 
@@ -59,14 +58,14 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun setup() {
-        val carArgs = args.carArgs
-        if (carArgs != null) {
-            with(binding) {
-                addCarFragmentEtCarNumber.setText(carArgs.carNumber)
-                addCarFragmentTexPassSeries.setText(carArgs.texPass.substring(0, 3))
-                addCarFragmentTexPassNumber.setText(carArgs.texPass.substring(3))
-            }
-        }
+//        val carArgs = args.carArgs
+//        if (carArgs != null) {
+//            with(binding) {
+//                addCarFragmentEtCarNumber.setText(carArgs.carNumber)
+//                addCarFragmentTexPassSeries.setText(carArgs.texPass.substring(0, 3))
+//                addCarFragmentTexPassNumber.setText(carArgs.texPass.substring(3))
+//            }
+//        }
     }
 
     private fun setupSpinner() {
@@ -139,7 +138,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                     when (it.data?.status) {
                         200 -> {
                             viewModel.insertCarDB(carEntity)
-                            (activity as uz.fizmasoft.dyhxx.activity.MainActivity).onBackPressed()
+                            (activity as MainActivity).onBackPressed()
                             adapter.addCar(carEntity)
                         }
                         401 -> carToast(requireContext(), getString(R.string.car_exist))

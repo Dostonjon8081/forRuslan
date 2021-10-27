@@ -229,7 +229,7 @@ class PdfViewerActivity :
         startActivity(
             Intent.createChooser(
                 intentShareFile,
-                "Share ...."
+                "Share PDF"
             )
         )
     }

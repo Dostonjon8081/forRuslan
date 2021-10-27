@@ -41,10 +41,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             && isOnline(this)
         ) {
             val editPref = getPref(this@MainActivity).edit()
-            CoroutineScope(Dispatchers.IO).async {
+//            CoroutineScope(Dispatchers.IO).async {
                 editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(22))
                     .commit()
-            }.onAwait
+//            }.onAwait
             loadDataFromApi()
         }
     }
@@ -58,11 +58,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
                 viewModel.allCarsApi(AllCars(getPref(this).getString(PREF_USER_ID_KEY, "")!!))
                 viewModel.responseAllCarsApi.observe(this, EventObserver { data ->
-//                    val listCars = mutableListOf<CarEntity>()
 
                     if (data.data?.data != null && data.data.status != 404) {
                         for (item in data.data.data) {
-//                            listCars.add(CarEntity(0, item.passport, item.tex_passport))
                             viewModel.insertCarDB(
                                 CarEntity(
                                     0,
