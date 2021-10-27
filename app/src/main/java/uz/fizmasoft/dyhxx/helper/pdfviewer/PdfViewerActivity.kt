@@ -98,7 +98,6 @@ class PdfViewerActivity :
     }
 
     override fun setupItems() {
-//        pdfView = findViewById(R.id.pdfView)
         setUpToolbar(
             intent.extras!!.getString(
                 FILE_TITLE,
