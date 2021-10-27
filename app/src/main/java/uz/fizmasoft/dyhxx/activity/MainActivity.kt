@@ -28,7 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
         navController = findNavController(R.id.container_main_navigation)
         val navView = binding.idBottomNavigation
-        navView.setupWithNavController(navController!!)
+        navController?.let { navView.setupWithNavController(it) }
 
         if (intent.data != null) {
             authentication(intent)
@@ -60,7 +60,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 viewModel.responseAllCarsApi.observe(this, EventObserver { data ->
 //                    val listCars = mutableListOf<CarEntity>()
 
-                    if (data.data!!.data != null && data.data.status != 404) {
+                    if (data.data?.data != null && data.data.status != 404) {
                         for (item in data.data.data) {
 //                            listCars.add(CarEntity(0, item.passport, item.tex_passport))
                             viewModel.insertCarDB(

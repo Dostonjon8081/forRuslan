@@ -2,6 +2,7 @@ package uz.fizmasoft.dyhxx.core_fragment.home.add_car
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -9,7 +10,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import uz.fizmasoft.dyhxx.R
-import uz.fizmasoft.dyhxx.activity.MainActivity
 import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.core_fragment.home.CarRvAdapter
 import uz.fizmasoft.dyhxx.core_fragment.home.SpinnerItemClick
@@ -101,6 +101,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun saveCar() {
+        Log.d("TAGTAG", "saveCar: ")
 
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
