@@ -11,6 +11,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.Environment
 import android.text.TextUtils
 import android.util.Log
@@ -26,8 +27,9 @@ import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseActivity
 import uz.fizmasoft.dyhxx.databinding.ActivityPdfViewerBinding
 import uz.fizmasoft.dyhxx.helper.pdfviewer.util.FileUtils
-import uz.fizmasoft.dyhxx.helper.util.logd
+import uz.fizmasoft.dyhxx.helper.util.carToast
 import java.io.File
+import java.net.URLConnection
 
 
 /**
@@ -41,9 +43,11 @@ class PdfViewerActivity :
     private var menuItem: MenuItem? = null
     private var fileUrl: String? = null
 //    private lateinit var pdfView:FrameLayout
+    private lateinit var extrasPdf :Bundle
 
     companion object {
         const val FILE_URL = "pdf_file_url"
+        const val FILE_ID = "pdf_file_id"
         const val FILE_DIRECTORY = "pdf_file_directory"
         const val FILE_TITLE = "pdf_file_title"
         const val ENABLE_FILE_DOWNLOAD = "enable_download"
@@ -74,6 +78,7 @@ class PdfViewerActivity :
         fun launchPdfFromPath(
             context: Context?,
             path: String?,
+            pdfId: String,
             pdfTitle: String?,
             directoryName: String?,
             enableDownload: Boolean = true,
@@ -81,6 +86,7 @@ class PdfViewerActivity :
         ): Intent {
             val intent = Intent(context, PdfViewerActivity::class.java)
             intent.putExtra(FILE_URL, path)
+            intent.putExtra(FILE_ID, "/$pdfId")
             intent.putExtra(FILE_TITLE, pdfTitle)
             intent.putExtra(FILE_DIRECTORY, directoryName)
             intent.putExtra(ENABLE_FILE_DOWNLOAD, enableDownload)
@@ -116,19 +122,19 @@ class PdfViewerActivity :
     }
 
     private fun init() {
-        if (intent.extras!!.containsKey(FILE_URL)) {
-            fileUrl = intent.extras!!.getString(FILE_URL)
+        extrasPdf = intent.extras!!
+        if (extrasPdf.containsKey(FILE_URL)) {
+            fileUrl = extrasPdf.getString(FILE_URL) + extrasPdf.getString(FILE_ID)
             if (isPDFFromPath) {
                 initPdfViewerWithPath(this.fileUrl)
             } else {
                 if (checkInternetConnection(this)) {
                     loadFileFromNetwork(this.fileUrl)
                 } else {
-                    Toast.makeText(
+                    carToast(
                         this,
-                        "No Internet Connection. Please Check your internet connection.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        "No Internet Connection. Please Check your internet connection."
+                    )
                 }
             }
         }
@@ -184,11 +190,11 @@ class PdfViewerActivity :
 
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.pdf_menu, menu)
-//        menuItem = menu?.findItem(R.id.sharePdf)
-//        return true
-//    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.pdf_menu, menu)
+        menuItem = menu?.findItem(R.id.sharePdf)
+        return true
+    }
 
 //    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
 //        menuItem?.isVisible = enableDownload
@@ -196,36 +202,36 @@ class PdfViewerActivity :
 //    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (item.itemId == R.id.sharePdf) checkPermission(PERMISSION_CODE)
         if (item.itemId == android.R.id.home) {
-            finish() // close this activity and return to preview activity (if there is any)
+            finish()
         } else {
-            logd("share file")
-
-//           val intent = Intent(Intent.ACTION_SEND)
-//                .setType("application/pdf")
-//                .createChooserIntent()
-//                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            startActivity(intent)
-//_______________________________________________________________________
-//            val shareIntent = Intent(Intent.ACTION_SEND)
-//                .setType("application/pdf")
-//
-//            val pdfFile = File(filesDir, this.intent!!.getStringExtra(FILE_URL) ?: "")
-//            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pdfFile))
-//            startActivity(Intent.createChooser(shareIntent, "Share pdf using"))
-//            ________________________________________________________________________
-//            val path = FileProvider.getUriForFile(
-//                this,
-//                File(filesDir.absolutePath)
-//            )
-//            val i = Intent(Intent.ACTION_SEND)
-//            i.type = "application/pdf"
-//            i.putExtra(Intent.ACTION_OPEN_DOCUMENT, this.intent.extras!!.getString(FILE_URL) ?: "")
-//            i.putExtra(Intent.EXTRA_STREAM, filesDir.absolutePath)
-//            startActivity(i)
+            sharePdf()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun sharePdf() {
+        val ourFile =
+            File(filesDir.absolutePath + File.separator + extrasPdf.getString(FILE_ID))
+        val intentShareFile = Intent(Intent.ACTION_SEND)
+        val uri =
+            FileProvider.getUriForFile(applicationContext, "$packageName.fileprovider", ourFile)
+
+        intentShareFile.setDataAndType(
+            uri,
+            URLConnection.guessContentTypeFromName(ourFile.name)
+        )
+        intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intentShareFile.putExtra(
+            Intent.EXTRA_STREAM,
+            uri
+        )
+        startActivity(
+            Intent.createChooser(
+                intentShareFile,
+                "Share ...."
+            )
+        )
     }
 
     private fun loadFileFromNetwork(fileUrl: String?) {
@@ -267,7 +273,6 @@ class PdfViewerActivity :
                 file,
                 PdfQuality.NORMAL
             )
-
         } catch (e: Exception) {
             onPdfError()
         }
@@ -329,12 +334,11 @@ class PdfViewerActivity :
 
     private var onComplete: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            Toast.makeText(
-                context,
-                "File is Downloaded Successfully",
-                Toast.LENGTH_SHORT
-            ).show()
-            context?.unregisterReceiver(this)
+            carToast(
+                context!!,
+                "File is Downloaded Successfully"
+            )
+            context.unregisterReceiver(this)
         }
     }
 

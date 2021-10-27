@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="uz.fizmasoft.dyhxx"
     android:installLocation="preferExternal">
 
@@ -29,7 +30,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter android:autoVerify="true">
+            <intent-filter android:autoVerify="true"
+                tools:targetApi="m">
                 <action android:name="android.intent.action.VIEW" />
 
                 <data
@@ -44,14 +46,16 @@
         <activity
             android:name=".helper.pdfviewer.PdfViewerActivity"
             android:theme="@style/Theme.PdfView.SelectedTheme" />
-        <!--  <activity android:name=".activity.MyBrowserActivity">
-              <intent-filter android:autoVerify="true">
-                  <action android:name="android.intent.action.VIEW" />
-                  <data android:scheme="https" />
-                  <category android:name="android.intent.category.DEFAULT" />
-                  <category android:name="android.intent.category.BROWSABLE" />
-              </intent-filter>
-          </activity>-->
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="uz.fizmasoft.dyhxx.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
     </application>
 
 </manifest>

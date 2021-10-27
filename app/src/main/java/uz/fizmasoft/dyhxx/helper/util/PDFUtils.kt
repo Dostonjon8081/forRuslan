@@ -60,10 +60,6 @@ object PDFUtils {
 
         val dir = File(dirPath)
         val idPdf = File(dir, "$id.pdf")
-//        val scopeComplete = CoroutineScope(Dispatchers.IO).launch {
-//            val dir = File("$dirPath")
-//            val idPdf = File(dir, "$id.pdf")
-
             if (!idPdf.exists()) {
                 idPdf.createNewFile()
 
@@ -79,25 +75,17 @@ object PDFUtils {
 
                 } catch (e: Exception) {
                 }
-            } else {
-//                openPDF(activity, dirPath, id)
             }
-//        }
-//        if (scopeComplete.isCompleted) {
-//            scopeComplete.cancel()
-//        }
+
     }
 
     fun openPDF(activity: Activity, dirPath: String, id: String, qaror: String = "DYHXX") {
-      //        val executors = Executors.newFixedThreadPool(1)
-//        executors.submit(Runnable {
+
         activity.startActivity(
             PdfViewerActivity.launchPdfFromPath(
-                activity, "$dirPath/$id.pdf", qaror, "files", true
+                activity, dirPath,"$id.pdf", qaror, "files", true
             )
         )
-//        })
-//        executors.shutdown()
     }
 
 }
