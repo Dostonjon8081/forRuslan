@@ -31,6 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter android:autoVerify="true"
+
                 tools:targetApi="m">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -43,6 +44,7 @@
             </intent-filter>
 
         </activity>
+
         <activity
             android:name=".helper.pdfviewer.PdfViewerActivity"
             android:theme="@style/Theme.PdfView.SelectedTheme" />

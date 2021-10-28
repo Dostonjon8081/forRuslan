@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Handler().postDelayed({
-        (activity as uz.fizmasoft.dyhxx.activity.MainActivity).apply {
+        (activity as MainActivity).apply {
             if (!this.binding.idBottomNavigation.isVisible) {
 
                     binding.idBottomNavigation.visibility = View.VISIBLE
@@ -150,7 +150,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun clickedItem(position: Int) {
-        (activity as uz.fizmasoft.dyhxx.activity.MainActivity).navController?.navigate(
+        (activity as MainActivity).navController?.navigate(
             HomeFragmentDirections.actionHomeFragmentToViolationFragment(
                 listCarEntity[position]
             )

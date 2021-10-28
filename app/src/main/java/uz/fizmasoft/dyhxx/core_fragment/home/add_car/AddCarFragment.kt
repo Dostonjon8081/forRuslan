@@ -104,7 +104,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
-        val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString()
+        val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
 
         if (!binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
             carModel = binding.addCarFragmentEditTextCarModels.text.toString()

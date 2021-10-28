@@ -142,7 +142,7 @@
                 android:background="@drawable/background_white_gray_stoke"
                 android:drawableEnd="@drawable/ic_about"
                 android:fontFamily="@font/gilroy_medium"
-                android:hint="01234567"
+                android:hint="1234567"
                 android:inputType="number"
                 android:maxLines="1"
                 android:textColor="@color/black"
