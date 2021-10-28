@@ -104,7 +104,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
-        val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString()
+        val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
 
         if (!binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
             carModel = binding.addCarFragmentEditTextCarModels.text.toString()
@@ -141,7 +141,10 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                             (activity as MainActivity).onBackPressed()
                             adapter.addCar(carEntity)
                         }
-                        401 -> carToast(requireContext(), getString(R.string.car_exist))
+                        401 -> {
+                            if (it.data?.message=="Car already exists")carToast(requireContext(), getString(R.string.car_exist))
+                            else carToast(requireContext(),getString(R.string.wrong))
+                        }
                         400 -> carToast(requireContext(), getString(R.string.bad_request))
                     }
                 }

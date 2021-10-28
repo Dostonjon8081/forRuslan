@@ -64,6 +64,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         if (getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
             && isOnline(this)
         ) {
+
             val editPref = getPref(this@MainActivity).edit()
 //            CoroutineScope(Dispatchers.IO).async {
                 editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(22))
@@ -79,6 +80,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         viewModel.responseUserIdApi.observe(this) {
             try {
                 editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).commit()
+
 
                 viewModel.allCarsApi(AllCars(getPref(this).getString(PREF_USER_ID_KEY, "")!!))
                 viewModel.responseAllCarsApi.observe(this, EventObserver { data ->
@@ -123,11 +125,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     this,
                     IN_APP_UPDATE_REQUEST_CODE)
             } else {
-                logd("No Update available")
+//                logd("No Update available")
             }
         }
         appUpdateInfoTask?.addOnFailureListener {
-            carToast(this, "No updated")
+//            carToast(this, "No updated")
         }
     }
     private fun updateInProgress(){

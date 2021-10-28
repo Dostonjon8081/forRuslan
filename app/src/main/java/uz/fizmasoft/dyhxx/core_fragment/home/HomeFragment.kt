@@ -37,9 +37,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         Handler(Looper.getMainLooper()).postDelayed({
         (activity as? MainActivity)?.let {
             if (!it.binding.idBottomNavigation.isVisible) {
+
 
                     it.binding.idBottomNavigation.visibility = View.VISIBLE
                 }
