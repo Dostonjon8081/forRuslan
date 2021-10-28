@@ -1,6 +1,9 @@
 package uz.fizmasoft.dyhxx.core_fragment.account
 
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -11,6 +14,9 @@ import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentAccountBinding
 import uz.fizmasoft.dyhxx.helper.util.getPref
 import dagger.hilt.android.AndroidEntryPoint
+import uz.fizmasoft.dyhxx.BuildConfig
+import uz.fizmasoft.dyhxx.helper.util.TELEGRAM_AUTH_URL
+import uz.fizmasoft.dyhxx.helper.util.TELEGRAM_FEEDBACK_URL
 
 
 @AndroidEntryPoint
@@ -28,6 +34,15 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
     private fun setViews() {
         binding.accountFragmentLanguage.setOnClickListener { showLanguages() }
         binding.accountFragmentLogout.setOnClickListener { logOutAlert() }
+        binding.aboutApp.setOnClickListener { aboutApp() }
+        binding.accountFeedBack.setOnClickListener { feedBack() }
+        binding.accountAppVersion.text = "version: ${BuildConfig.VERSION_NAME}"
+    }
+
+    private fun aboutApp() {
+        getBaseActivity {
+            it.navController?.navigate(AccountFragmentDirections.actionAccountFragmentToAboutFragment())
+        }
     }
 
     private fun logOutAlert() {
@@ -54,4 +69,9 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
     private fun showLanguages() {
         AccountLanguageFragment().show(requireActivity().supportFragmentManager, "language")
     }
+
+    private fun feedBack() {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_FEEDBACK_URL)))
+    }
+
 }

@@ -3,6 +3,7 @@ package uz.fizmasoft.dyhxx.core_fragment.home
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -36,11 +37,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Handler().postDelayed({
-        (activity as MainActivity).apply {
-            if (!this.binding.idBottomNavigation.isVisible) {
 
-                    binding.idBottomNavigation.visibility = View.VISIBLE
+        Handler(Looper.getMainLooper()).postDelayed({
+        (activity as? MainActivity)?.let {
+            if (!it.binding.idBottomNavigation.isVisible) {
+
+
+                    it.binding.idBottomNavigation.visibility = View.VISIBLE
                 }
             }
         }, 400)

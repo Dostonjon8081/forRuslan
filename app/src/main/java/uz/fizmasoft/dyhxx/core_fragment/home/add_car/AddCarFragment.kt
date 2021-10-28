@@ -141,7 +141,10 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                             (activity as MainActivity).onBackPressed()
                             adapter.addCar(carEntity)
                         }
-                        401 -> carToast(requireContext(), getString(R.string.car_exist))
+                        401 -> {
+                            if (it.data?.message=="Car already exists")carToast(requireContext(), getString(R.string.car_exist))
+                            else carToast(requireContext(),getString(R.string.wrong))
+                        }
                         400 -> carToast(requireContext(), getString(R.string.bad_request))
                     }
                 }

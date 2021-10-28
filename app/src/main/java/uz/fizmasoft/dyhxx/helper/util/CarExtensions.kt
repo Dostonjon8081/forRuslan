@@ -10,10 +10,10 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 
 fun Fragment.carToast(context: Context, string: String){
-    Toast.makeText(context,string, Toast.LENGTH_LONG).show()
+    Toast.makeText(context,string, Toast.LENGTH_SHORT).show()
 }
 fun Activity.carToast(context: Context, string: String){
-    Toast.makeText(context,string, Toast.LENGTH_LONG).show()
+    Toast.makeText(context,string, Toast.LENGTH_SHORT).show()
 }
 
 fun isOnline(context: Context): Boolean {

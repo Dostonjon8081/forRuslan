@@ -64,7 +64,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         if (getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
             && isOnline(this)
         ) {
-            logd(intent.data.toString())
+
             val editPref = getPref(this@MainActivity).edit()
 //            CoroutineScope(Dispatchers.IO).async {
                 editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(22))
@@ -80,11 +80,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         viewModel.responseUserIdApi.observe(this) {
             try {
                 editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).commit()
-                logd(getPref(this).getString(PREF_USER_ID_KEY,""))
+
 
                 viewModel.allCarsApi(AllCars(getPref(this).getString(PREF_USER_ID_KEY, "")!!))
                 viewModel.responseAllCarsApi.observe(this, EventObserver { data ->
-logd(data)
+
                     if (data.data?.data != null && data.data.status != 404) {
                         for (item in data.data.data) {
                             viewModel.insertCarDB(
@@ -129,7 +129,7 @@ logd(data)
             }
         }
         appUpdateInfoTask?.addOnFailureListener {
-            carToast(this, "No updated")
+//            carToast(this, "No updated")
         }
     }
     private fun updateInProgress(){

@@ -9,16 +9,16 @@
     <string name="russian" translatable="false">Русский</string>
     <string name="english" translatable="false">English</string>
 
-    <string name="look" >look</string>
+    <string name="look">look</string>
     <string name="check_fine">DYHXX check the fine</string>
     <string name="auth_description">To take full advantage of the program, sign up by telegram.</string>
     <string name="auth_by_telegram">Auth by telegram</string>
     <string name="add_car">Add Car</string>
 
     <string name="car_number">Car number</string>
-    <string name="tex_pas_series">Tex.pas. series</string>
-    <string name="tex_pass_number">Tex.pass number</string>
-    <string name="car_mark">Car marks</string>
+    <string name="tex_pas_series">Tech.pas. series</string>
+    <string name="tex_pass_number">Tech.pass number</string>
+    <string name="car_mark">Car brand</string>
     <string name="car_models">Car models</string>
     <string name="select">Select</string>
     <string name="save">Save</string>
@@ -28,7 +28,7 @@
     <string name="my_profile">My profile</string>
     <string name="language">Language</string>
     <string name="about_app">About</string>
-    <string name = "will_be_soon_notification"> This section will be up and running soon </string>
+    <string name="will_be_soon_notification"> This section will be up and running soon </string>
 
     <string name="car_model">Model:</string>
     <string name="car_marks">Brand:</string>
@@ -58,5 +58,8 @@
     <string name="we_happy">We are happy</string>
     <string name="inconvenience">Sorry for the inconvenience</string>
     <string name="save_file">save file</string>
+    <string name="account_bugs_to_bot">Bugs in application</string>
+    <string name="about_app_text">Application for checking fines</string>
+
 
 </resources>
