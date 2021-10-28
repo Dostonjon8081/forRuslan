@@ -134,9 +134,10 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                     )
                 )
 
-                viewModel.responseSaveCarApi.observe(viewLifecycleOwner) {
+                viewModel.responseSaveCarApi.observe(viewLifecycleOwner,EventObserver{
                     when (it.data?.status) {
                         200 -> {
+                            logd("success add")
                             viewModel.insertCarDB(carEntity)
                             (activity as MainActivity).onBackPressed()
                             adapter.addCar(carEntity)
@@ -147,7 +148,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                         }
                         400 -> carToast(requireContext(), getString(R.string.bad_request))
                     }
-                }
+                })
 
 
             } else {

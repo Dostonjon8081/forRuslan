@@ -13,6 +13,7 @@ import uz.fizmasoft.dyhxx.helper.network.repository.ICarApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import uz.fizmasoft.dyhxx.helper.util.Event
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,12 +41,12 @@ class AddCarViewModel @Inject constructor(
         }
     }
 
-    private val _responseSaveCarApi: MutableLiveData<NetworkResult<SaveCarResponse>> =
+    private val _responseSaveCarApi: MutableLiveData<Event<NetworkResult<SaveCarResponse>>> =
         MutableLiveData()
-    val responseSaveCarApi: LiveData<NetworkResult<SaveCarResponse>> = _responseSaveCarApi
+    val responseSaveCarApi: LiveData<Event<NetworkResult<SaveCarResponse>>> = _responseSaveCarApi
     fun saveCarApi(saveCarModel: SaveCarModel) = viewModelScope.launch {
         apiRepository.saveCar(saveCarModel).collect { values ->
-            _responseSaveCarApi.postValue(values)
+            _responseSaveCarApi.postValue(Event(values))
         }
     }
 
