@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/gilroy_semibold"
             android:paddingTop="16dp"
-            android:text="@string/fine_time"
+            android:text="@string/violation_sum"
             android:textColor="@color/violation_text_gray_color"
             android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="@id/violation_type"
