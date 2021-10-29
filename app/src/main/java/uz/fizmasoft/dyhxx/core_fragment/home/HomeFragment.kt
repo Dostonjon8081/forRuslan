@@ -165,8 +165,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!,
             carNumber
         )
-
-        loge(carNumber)
         viewModel.removeCarApi(removeCarModel)
         viewModel.responseRemoveCarApi.observe(viewLifecycleOwner, EventObserver {
 //            if (it.data != null) {

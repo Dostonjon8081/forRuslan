@@ -100,7 +100,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun saveCar() {
-        Log.d("TAGTAG", "saveCar: ")
 
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
@@ -137,7 +136,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                 viewModel.responseSaveCarApi.observe(viewLifecycleOwner,EventObserver{
                     when (it.data?.status) {
                         200 -> {
-                            logd("success add")
                             viewModel.insertCarDB(carEntity)
                             (activity as MainActivity).onBackPressed()
                             adapter.addCar(carEntity)
