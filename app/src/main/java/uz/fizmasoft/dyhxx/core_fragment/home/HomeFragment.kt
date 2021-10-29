@@ -41,8 +41,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         Handler(Looper.getMainLooper()).postDelayed({
         (activity as? MainActivity)?.let {
             if (!it.binding.idBottomNavigation.isVisible) {
-
-
                     it.binding.idBottomNavigation.visibility = View.VISIBLE
                 }
             }

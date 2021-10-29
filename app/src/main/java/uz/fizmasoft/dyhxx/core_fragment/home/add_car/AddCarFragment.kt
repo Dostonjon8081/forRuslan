@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -114,12 +113,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             && carTexPasSeries.length >= 3
             && carMark.isNotEmpty()
         ) {
-            val carEntity =
-                CarEntity(
-                    0, carNumber,
-                    carTexPasSeries + carTexPasNumber,
-                    carMark, carModel
-                )
+
 
             if (isOnline(requireContext())) {
 
@@ -131,22 +125,32 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                 )
 
                 viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
-                    when (it.data?.status) {
-                        200 -> {
+                    when (it.data?.message) {
+                        "OK" -> {
+                            val carEntity =
+                                CarEntity(
+                                    0, carNumber,
+                                    carTexPasSeries + carTexPasNumber,
+                                    carMark, carModel
+                                )
                             viewModel.insertCarDB(carEntity)
-                            carToast(requireContext(), getString(R.string.save))
+//                            carToast(requireContext(), getString(R.string.save))
                             (activity as MainActivity).onBackPressed()
                             adapter.addCar(carEntity)
                         }
-                        401 -> {
-                            if (it.data?.message == "Car already exists") carToast(
+                        "Car already exists" -> {
+                            carToast(
                                 requireContext(),
                                 getString(R.string.car_exist)
                             )
-                            else carToast(requireContext(), getString(R.string.wrong))
                         }
-                        400 -> carToast(requireContext(), getString(R.string.bad_request))
-                        500 -> carToast(requireContext(), getString(R.string.bug_server))
+                        "Car not found" -> carToast(
+                            requireContext(),
+                            getString(R.string.car_not_found)
+                        )
+
+                        "Bad request" -> carToast(requireContext(), getString(R.string.bad_request))
+                        else -> carToast(requireContext(), getString(R.string.bug_server))
                     }
 
                 })
@@ -236,7 +240,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             binding.addCarFragmentEditTextCarModels.visibility = View.VISIBLE
         }
     }
-
 
 
 }
