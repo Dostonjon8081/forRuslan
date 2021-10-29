@@ -35,6 +35,7 @@
     <string name="country_number">Davlat raqami:</string>
     <string name="not_ethernet">Tarmoqqa ulanmagan</string>
     <string name="wrong">Qatorlarda xatolik</string>
+    <string name="bug_server">Serverda xatolin</string>
     <string name="car_exist">Avval ro\'yxatga olingan</string>
     <string name="bad_request">Ro\'yhatdan o\'tmagan foydalanuvchi</string>
     <string name="delete_dialog_title">Siz rostan ham ushbu avtomobilni o\'chirmoqchisiz?</string>

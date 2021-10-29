@@ -2,14 +2,16 @@ package uz.fizmasoft.dyhxx.core_fragment.home.add_car
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.R
+import uz.fizmasoft.dyhxx.activity.MainActivity
 import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.core_fragment.home.CarRvAdapter
 import uz.fizmasoft.dyhxx.core_fragment.home.SpinnerItemClick
@@ -17,8 +19,6 @@ import uz.fizmasoft.dyhxx.databinding.FragmentAddCarBinding
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.model.SaveCarModel
 import uz.fizmasoft.dyhxx.helper.util.*
-import dagger.hilt.android.AndroidEntryPoint
-import uz.fizmasoft.dyhxx.activity.MainActivity
 
 @AndroidEntryPoint
 class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
@@ -116,12 +116,9 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         ) {
             val carEntity =
                 CarEntity(
-                    0,
-                    carNumber,
-                    carTexPasSeries +
-                            carTexPasNumber,
-                    carMark,
-                    carModel
+                    0, carNumber,
+                    carTexPasSeries + carTexPasNumber,
+                    carMark, carModel
                 )
 
             if (isOnline(requireContext())) {
@@ -133,19 +130,25 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                     )
                 )
 
-                viewModel.responseSaveCarApi.observe(viewLifecycleOwner,EventObserver{
+                viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
                     when (it.data?.status) {
                         200 -> {
                             viewModel.insertCarDB(carEntity)
+                            carToast(requireContext(), getString(R.string.save))
                             (activity as MainActivity).onBackPressed()
                             adapter.addCar(carEntity)
                         }
                         401 -> {
-                            if (it.data?.message=="Car already exists")carToast(requireContext(), getString(R.string.car_exist))
-                            else carToast(requireContext(),getString(R.string.wrong))
+                            if (it.data?.message == "Car already exists") carToast(
+                                requireContext(),
+                                getString(R.string.car_exist)
+                            )
+                            else carToast(requireContext(), getString(R.string.wrong))
                         }
                         400 -> carToast(requireContext(), getString(R.string.bad_request))
+                        500 -> carToast(requireContext(), getString(R.string.bug_server))
                     }
+
                 })
 
 
@@ -155,6 +158,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         } else {
             carToast(requireContext(), getString(R.string.wrong))
         }
+//        toast?.show()
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -232,6 +236,8 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             binding.addCarFragmentEditTextCarModels.visibility = View.VISIBLE
         }
     }
+
+
 
 }
 

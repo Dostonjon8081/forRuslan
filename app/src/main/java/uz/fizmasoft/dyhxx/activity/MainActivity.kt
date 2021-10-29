@@ -69,10 +69,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
             val editPref = getPref(this@MainActivity).edit()
             CoroutineScope(Dispatchers.IO).launch {
-                editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(22))
+                editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(19))
                     .apply()
             }
-            loadDataFromApi(intent.data.toString().substring(22))
+            loadDataFromApi(intent.data.toString().substring(19))
         }
     }
 

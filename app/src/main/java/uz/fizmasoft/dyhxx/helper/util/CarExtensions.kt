@@ -9,9 +9,15 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 
+private var toast:Toast?=null
 fun Fragment.carToast(context: Context, string: String){
-    Toast.makeText(context,string, Toast.LENGTH_SHORT).show()
+    if (toast!=null){
+        toast?.cancel()
+    }
+    toast=  Toast.makeText(context,string, Toast.LENGTH_SHORT)
+    toast?.show()
 }
+
 fun Activity.carToast(context: Context, string: String){
     Toast.makeText(context,string, Toast.LENGTH_SHORT).show()
 }
