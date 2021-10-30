@@ -104,4 +104,5 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
             itemView.layoutParams = params;
         }
     }
+
 }
