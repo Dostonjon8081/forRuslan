@@ -43,6 +43,20 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
 
+            <intent-filter android:autoVerify="true"
+                tools:targetApi="m">
+
+                <action android:name="android.intent.action.VIEW" />
+<!--                <data-->
+<!--                    android:scheme="dyhxx" />-->
+                <data
+                    android:host="abc.xyz"
+                    android:scheme="https" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
         </activity>
 
         <activity

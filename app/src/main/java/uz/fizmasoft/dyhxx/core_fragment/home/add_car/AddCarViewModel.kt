@@ -57,6 +57,7 @@ class AddCarViewModel @Inject constructor(
     fun allCarsApi(allCars: AllCars) = viewModelScope.launch {
         apiRepository.allCars(allCars).collect { values ->
             _responseAllCarsApi.postValue(values)
+
         }
     }
 
