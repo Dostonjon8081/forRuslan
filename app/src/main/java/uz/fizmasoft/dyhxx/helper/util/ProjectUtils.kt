@@ -8,9 +8,20 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import uz.fizmasoft.dyhxx.activity.MainActivity
 
+lateinit var activity: Activity
 
-fun getPref(activity: Activity): SharedPreferences {
+fun Any.setActivity(mainActivity: Activity){
+    activity = mainActivity
+}
+
+fun getPref(activity: Activity ): SharedPreferences {
+    val pref by lazy { activity.getPreferences(Context.MODE_PRIVATE) }
+    return pref
+}
+
+fun getPrefActive(): SharedPreferences {
     val pref by lazy { activity.getPreferences(Context.MODE_PRIVATE) }
     return pref
 }

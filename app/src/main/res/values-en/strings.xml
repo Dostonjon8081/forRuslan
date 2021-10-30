@@ -35,7 +35,8 @@
     <string name="text_pass_series_numbers">Tex.pass. series and number:</string>
     <string name="country_number">Country number:</string>
     <string name="not_ethernet">No connection</string>
-    <string name="wrong">something wrong</string>
+    <string name="wrong_lines">Please, fill all fields.</string>
+    <string name="car_not_found">Incorrect data, please check one more time.</string>
     <string name="car_exist">Already  registered</string>
     <string name="bad_request">Unregistered user</string>
     <string name="delete_dialog_title">Do you really want to delete this car?</string>

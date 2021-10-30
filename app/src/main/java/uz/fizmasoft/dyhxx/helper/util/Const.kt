@@ -14,7 +14,8 @@ const val FIRST_INIT = "FIRST_INIT"
  * URL
  */
 const val BASE_URL = "https://api.fizmasoft.uz/dyhxxuz/"
-const val TELEGRAM_AUTH_URL = "https://t.me/dyhxxuz_auth_bot"
+//const val TELEGRAM_AUTH_URL = "https://t.me/dyhxxuz_auth_bot"
+const val TELEGRAM_AUTH_URL = "tg://resolve?domain=dyhxxuz_bot&start=android"
 const val TELEGRAM_FEEDBACK_URL = "https://t.me/dyhxxuz_feedback_bot"
 
 /**

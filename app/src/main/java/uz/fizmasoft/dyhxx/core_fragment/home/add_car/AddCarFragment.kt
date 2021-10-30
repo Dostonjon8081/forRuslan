@@ -2,23 +2,21 @@ package uz.fizmasoft.dyhxx.core_fragment.home.add_car
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseFragment
-import uz.fizmasoft.dyhxx.core_fragment.home.CarRvAdapter
 import uz.fizmasoft.dyhxx.core_fragment.home.SpinnerItemClick
 import uz.fizmasoft.dyhxx.databinding.FragmentAddCarBinding
-import uz.fizmasoft.dyhxx.helper.db.CarEntity
-import uz.fizmasoft.dyhxx.helper.network.model.SaveCarModel
-import uz.fizmasoft.dyhxx.helper.util.*
-import dagger.hilt.android.AndroidEntryPoint
-import uz.fizmasoft.dyhxx.activity.MainActivity
+import uz.fizmasoft.dyhxx.helper.network.NetworkResult
+import uz.fizmasoft.dyhxx.helper.util.EventObserver
+import uz.fizmasoft.dyhxx.helper.util.carToast
+import uz.fizmasoft.dyhxx.helper.util.isOnline
 
 @AndroidEntryPoint
 class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
@@ -27,7 +25,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     private val viewModel: AddCarViewModel by activityViewModels()
 
     private val args: AddCarFragmentArgs by navArgs()
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) { CarRvAdapter() }
 
     private var carMark = ""
     private var carModel = ""
@@ -105,46 +102,56 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
         val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
 
-        if (!binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
-            carModel = binding.addCarFragmentEditTextCarModels.text.toString()
-        }
+        carModel = if (!binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
+            binding.addCarFragmentEditTextCarModels.text.toString()
+        } else ""
 
         if (carNumber.length >= 8
             && carTexPasNumber.length == 7
             && carTexPasSeries.length >= 3
             && carMark.isNotEmpty()
         ) {
-            val carEntity =
-                CarEntity(
-                    0,
-                    carNumber,
-                    carTexPasSeries +
-                            carTexPasNumber,
-                    carMark,
-                    carModel
-                )
 
             if (isOnline(requireContext())) {
 
-                viewModel.saveCarApi(
-                    SaveCarModel(
-                        getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!, carNumber,
-                        carTexPasSeries + carTexPasNumber
-                    )
+                viewModel.saveCarApi(requireActivity(),
+                    carNumber,
+                    carTexPasSeries + carTexPasNumber, carMark, carModel
                 )
 
-                viewModel.responseSaveCarApi.observe(viewLifecycleOwner,EventObserver{
-                    when (it.data?.status) {
-                        200 -> {
-                            viewModel.insertCarDB(carEntity)
-                            (activity as MainActivity).onBackPressed()
-                            adapter.addCar(carEntity)
+                viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
+
+                    when (it) {
+                        is NetworkResult.Loading -> {
                         }
-                        401 -> {
-                            if (it.data?.message=="Car already exists")carToast(requireContext(), getString(R.string.car_exist))
-                            else carToast(requireContext(),getString(R.string.wrong))
+                        is NetworkResult.Success -> {
+                            when (it.data?.message) {
+                                "OK" -> {
+                                    getBaseActivity { activity ->
+                                        activity.navController?.popBackStack()
+                                    }
+                                }
+                                "Car already exists" -> {
+                                    carToast(
+                                        requireContext(),
+                                        getString(R.string.car_exist)
+                                    )
+                                }
+                                "Car not found" -> carToast(
+                                    requireContext(),
+                                    getString(R.string.car_not_found)
+                                )
+
+                                "Bad request" -> carToast(
+                                    requireContext(),
+                                    getString(R.string.bad_request)
+                                )
+                                else -> carToast(requireContext(), getString(R.string.bug_server))
+                            }
+
                         }
-                        400 -> carToast(requireContext(), getString(R.string.bad_request))
+                        is NetworkResult.Error -> {
+                        }
                     }
                 })
 
@@ -153,8 +160,9 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                 carToast(requireContext(), getString(R.string.not_ethernet))
             }
         } else {
-            carToast(requireContext(), getString(R.string.wrong))
+            carToast(requireContext(), getString(R.string.wrong_lines))
         }
+//        toast?.show()
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -232,6 +240,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             binding.addCarFragmentEditTextCarModels.visibility = View.VISIBLE
         }
     }
+
 
 }
 

@@ -30,14 +30,16 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <intent-filter android:autoVerify="true"
-
                 tools:targetApi="m">
-                <action android:name="android.intent.action.VIEW" />
 
+                <action android:name="android.intent.action.VIEW" />
                 <data
-                    android:host="abc.xyz"
-                    android:scheme="https" />
+                    android:scheme="dyhxx" />
+<!--                <data-->
+<!--                    android:host="abc.xyz"-->
+<!--                    android:scheme="https" />-->
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
