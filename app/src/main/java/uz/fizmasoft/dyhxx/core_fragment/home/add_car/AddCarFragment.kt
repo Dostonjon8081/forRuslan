@@ -59,7 +59,11 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 //                addCarFragmentEtCarNumber.setText(carArgs.carNumber)
 //                addCarFragmentTexPassSeries.setText(carArgs.texPass.substring(0, 3))
 //                addCarFragmentTexPassNumber.setText(carArgs.texPass.substring(3))
+//                addCarFragmentEtCarNumber.isEnabled = false
+//                addCarFragmentTexPassSeries.isEnabled = false
+//                addCarFragmentTexPassNumber.isEnabled = false
 //            }
+//
 //        }
     }
 
@@ -96,75 +100,79 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
     private fun saveCar() {
 //        binding.wp7progressBar.show()
-        val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
-        val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
-        val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
 
-        carModel = if (!binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
-            binding.addCarFragmentEditTextCarModels.text.toString()
-        } else ""
+            val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
+            val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
+            val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
 
-        if (
-            carNumber.length >= 8
-            && carTexPasNumber.length == 7
-            && carTexPasSeries.length >= 3
-            && carMark.isNotEmpty()
-        ) {
+            carModel = if (!binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
+                binding.addCarFragmentEditTextCarModels.text.toString()
+            } else ""
 
-            if (isOnline(requireContext())) {
+            if (
+                carNumber.length >= 8
+                && carTexPasNumber.length == 7
+                && carTexPasSeries.length >= 3
+                && carMark.isNotEmpty()
+            ) {
 
-                viewModel.saveCarApi(
-                    requireActivity(),
-                    carNumber,
-                    carTexPasSeries + carTexPasNumber, carMark, carModel
-                )
+                if (isOnline(requireContext())) {
 
-                viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
+                    viewModel.saveCarApi(
+                        requireActivity(),
+                        carNumber,
+                        carTexPasSeries + carTexPasNumber, carMark, carModel
+                    )
 
-                    when (it) {
-                        is NetworkResult.Loading -> {
-                            binding.wp7progressBar.show()
-                        }
-                        is NetworkResult.Success -> {
-                            binding.wp7progressBar.hide()
-                            when (it.data?.message) {
-                                "OK" -> {
-                                    getBaseActivity { activity ->
-                                        activity.navController?.popBackStack()
+                    viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
+
+                        when (it) {
+                            is NetworkResult.Loading -> {
+                                binding.wp7progressBar.show()
+                            }
+                            is NetworkResult.Success -> {
+                                binding.wp7progressBar.hide()
+                                when (it.data?.message) {
+                                    "OK" -> {
+                                        getBaseActivity { activity ->
+                                            activity.navController?.popBackStack()
+                                        }
                                     }
-                                }
-                                "Car already exists" -> {
-                                    carToast(
+                                    "Car already exists" -> {
+                                        carToast(
+                                            requireContext(),
+                                            getString(R.string.car_exist)
+                                        )
+                                    }
+                                    "Car not found" -> carToast(
                                         requireContext(),
-                                        getString(R.string.car_exist)
+                                        getString(R.string.car_not_found)
+                                    )
+
+                                    "Bad request" -> carToast(
+                                        requireContext(),
+                                        getString(R.string.bad_request)
+                                    )
+                                    else -> carToast(
+                                        requireContext(),
+                                        getString(R.string.bug_server)
                                     )
                                 }
-                                "Car not found" -> carToast(
-                                    requireContext(),
-                                    getString(R.string.car_not_found)
-                                )
 
-                                "Bad request" -> carToast(
-                                    requireContext(),
-                                    getString(R.string.bad_request)
-                                )
-                                else -> carToast(requireContext(), getString(R.string.bug_server))
                             }
-
+                            is NetworkResult.Error -> {
+                                binding.wp7progressBar.hide()
+                            }
                         }
-                        is NetworkResult.Error -> {
-                            binding.wp7progressBar.hide()
-                        }
-                    }
-                })
+                    })
 
-
+                } else {
+                    carToast(requireContext(), getString(R.string.not_ethernet))
+                }
             } else {
-                carToast(requireContext(), getString(R.string.not_ethernet))
+                carToast(requireContext(), getString(R.string.wrong_lines))
             }
-        } else {
-            carToast(requireContext(), getString(R.string.wrong_lines))
-        }
+
 //        toast?.show()
     }
 

@@ -98,7 +98,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         viewModel.responseAllCarsApi.observe(this, EventObserver { result ->
 
             when (result) {
-                is NetworkResult.Loading -> {}
+                is NetworkResult.Loading -> {
+                }
                 is NetworkResult.Success -> {
                     binding.homeFragmentSwipeRefresh.isRefreshing = false
                     Executors.newSingleThreadExecutor().execute {
@@ -127,7 +128,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         }
                     }
                 }
-                is NetworkResult.Error -> {}
+                is NetworkResult.Error -> {
+                }
             }
             navigateToHome()
         })
@@ -154,13 +156,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun clickedItem(position: Int) {
-        (activity as? MainActivity)?.let {
+        getBaseActivity {
             it.navController?.navigate(
                 HomeFragmentDirections.actionHomeFragmentToViolationFragment(
                     listCarEntity[position]
                 )
             )
         }
+    }
+
+
+    override fun clickedItemEdit(carEntity: CarEntity) {
+//        getBaseActivity {
+//            it.navController?.navigate(
+//                HomeFragmentDirections.actionHomeFragmentToAddCarFragment(
+//                    carEntity
+//                )
+//            )
+//        }
     }
 
     private fun deleteCar(carNumber: String) {
@@ -191,5 +204,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             it.navController!!.navigate(R.id.home_fragment)
         }
     }
+
 
 }

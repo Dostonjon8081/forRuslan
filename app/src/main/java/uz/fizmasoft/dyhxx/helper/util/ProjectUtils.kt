@@ -16,8 +16,8 @@ fun Any.setActivity(mainActivity: Activity){
     activity = mainActivity
 }
 
-fun getPref(activity: Activity ): SharedPreferences {
-    val pref by lazy { activity.getPreferences(Context.MODE_PRIVATE) }
+fun getPref(activityFrom: Activity ): SharedPreferences {
+    val pref by lazy { activityFrom.getPreferences(Context.MODE_PRIVATE) }
     return pref
 }
 
