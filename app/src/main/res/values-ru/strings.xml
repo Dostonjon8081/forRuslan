@@ -37,7 +37,8 @@
     <string name="text_pass_series_numbers">Тех. пасс. серия и номер:</string>
     <string name="country_number">Гос номер:</string>
     <string name="not_ethernet">Нет связи</string>
-    <string name="wrong">Что-то не так</string>
+    <string name="wrong_lines">Пожалуйста заполните все поля.</string>
+    <string name="car_not_found">Неверные данные, проверьте еще раз.</string>
     <string name="car_exist">Ранее зарегистрированный</string>
     <string name="bad_request">Незарегистрированный пользователь</string>
     <string name="delete_dialog_title">Вы действительно хотите удалить эту машину?</string>

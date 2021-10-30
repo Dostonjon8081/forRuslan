@@ -2,6 +2,7 @@ package uz.fizmasoft.dyhxx.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -12,6 +13,9 @@ import com.google.android.play.core.install.model.ActivityResult
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +34,7 @@ import uz.fizmasoft.dyhxx.helper.util.*
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
     private val viewModel: HomeViewModel by viewModels()
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var appUpdateManager: AppUpdateManager
     private val listener: InstallStateUpdatedListener? =
         InstallStateUpdatedListener { installState ->
@@ -39,8 +44,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
 
     override fun setupItems() {
+        fireBaseAnalytics()
+
+        setActivity(this)
+//        logd(getPrefActive().getString(PREF_USER_ID_KEY,""))
         appUpdateManager = AppUpdateManagerFactory.create(this)
         checkUpdate()
+
         if (listener != null) {
             appUpdateManager.registerListener(listener)
         }
@@ -51,9 +61,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         val navView = binding.idBottomNavigation
         navController?.let { navView.setupWithNavController(it) }
 
-        if (intent.data != null) {
+        if (intent?.data != null) {
             authentication(intent)
         }
+
+    }
+
+    private fun fireBaseAnalytics() {
+        firebaseAnalytics = Firebase.analytics
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "MainActivity")
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "MainActivity")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
     }
 
@@ -69,10 +88,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
             val editPref = getPref(this@MainActivity).edit()
             CoroutineScope(Dispatchers.IO).launch {
-                editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(22))
+                editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(19))
                     .apply()
             }
-            loadDataFromApi(intent.data.toString().substring(22))
+            loadDataFromApi(intent.data.toString().substring(19))
         }
     }
 
@@ -100,8 +119,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
                                     }
                                 }
-                                is NetworkResult.Error -> {}
-                                is NetworkResult.Loading -> {}
+                                is NetworkResult.Error -> {
+                                }
+                                is NetworkResult.Loading -> {
+                                }
                             }
 
                         })

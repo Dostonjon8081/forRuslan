@@ -1,6 +1,5 @@
 package uz.fizmasoft.dyhxx.core_fragment.home
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,7 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.activity.MainActivity
 import uz.fizmasoft.dyhxx.base.BaseFragment
@@ -19,7 +18,6 @@ import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.network.model.AllCars
 import uz.fizmasoft.dyhxx.helper.network.model.RemoveCarModel
 import uz.fizmasoft.dyhxx.helper.util.*
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 
 
@@ -30,19 +28,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private var listCarEntity = mutableListOf<CarEntity>()
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { CarRvAdapter() }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        viewModel.allCarsDB()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.allCarsDB()
 
         Handler(Looper.getMainLooper()).postDelayed({
-        (activity as? MainActivity)?.let {
-            if (!it.binding.idBottomNavigation.isVisible) {
-
-
+            (activity as? MainActivity)?.let {
+                if (!it.binding.idBottomNavigation.isVisible) {
                     it.binding.idBottomNavigation.visibility = View.VISIBLE
                 }
             }
@@ -50,48 +42,59 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         binding.homeFragmentButtonAddCar.setOnClickListener { addCar() }
         binding.homeFragmentButtonAddCarBtn.setOnClickListener { addCar() }
-        binding.homeFragmentSwipeRefresh.setColorSchemeColors(ContextCompat.getColor(requireContext(),R.color.toolbar_color))
+        binding.homeFragmentSwipeRefresh.setColorSchemeColors(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.toolbar_color
+            )
+        )
         binding.homeFragmentSwipeRefresh.setOnRefreshListener(this::swipeRefresh)
 
         loadData()
     }
 
     private fun loadData() {
-        viewModel.allCarDB.observe(viewLifecycleOwner, object : Observer<MutableList<CarEntity>> {
-            override fun onChanged(t: MutableList<CarEntity>?) {
-                if (t?.size!! > 0) {
-                    binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
-                    if (t.size >= 8) {
-                        binding.homeFragmentButtonAddCar.visibility = View.GONE
-                    } else {
-                        binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
-                    }
-                    adapter.rvClickListener(this@HomeFragment)
-                    listCarEntity.clear()
-                    listCarEntity.addAll(t)
-//                    logd(t)
-                    binding.homeFragmentRv.visibility = View.VISIBLE
-                    binding.homeFragmentNoCarContainer.visibility = View.GONE
-                    binding.homeFragmentRv.adapter = adapter
-                    adapter.submitList(t)
-                    binding.homeFragmentButtonAddCar.visibility = if (t.size >= 8) {
-                        View.GONE
-                    } else {
-                        View.VISIBLE
-                    }
-                } else {
-                    binding.homeFragmentNoCarContainer.visibility = View.VISIBLE
+        viewModel.allCarDB.observe(viewLifecycleOwner, { t ->
+            if (t?.size!! > 0) {
+                binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
+                if (t.size >= 8) {
                     binding.homeFragmentButtonAddCar.visibility = View.GONE
-                    binding.homeFragmentRv.visibility = View.GONE
+                } else {
+                    binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
                 }
+                adapter.rvClickListener(this@HomeFragment)
+                listCarEntity.clear()
+                listCarEntity.addAll(t)
+                //                    logd(t)
+                binding.homeFragmentRv.visibility = View.VISIBLE
+                binding.homeFragmentNoCarContainer.visibility = View.GONE
+                binding.homeFragmentRv.adapter = adapter
+                adapter.submitList(t)
+                binding.homeFragmentButtonAddCar.visibility = if (t.size >= 8) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
+            } else {
+                binding.homeFragmentNoCarContainer.visibility = View.VISIBLE
+                binding.homeFragmentButtonAddCar.visibility = View.GONE
+                binding.homeFragmentRv.visibility = View.GONE
             }
         })
     }
 
     private fun swipeRefresh() {
 
-        if (requireActivity().intent.data==null){
-        viewModel.allCarsApi(AllCars(getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!))}
+        if (requireActivity().intent.data == null) {
+            viewModel.allCarsApi(
+                AllCars(
+                    getPref(requireActivity()).getString(
+                        PREF_USER_ID_KEY,
+                        ""
+                    )!!
+                )
+            )
+        }
         viewModel.responseAllCarsApi.observe(this, EventObserver { result ->
 
             when (result) {
@@ -115,9 +118,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                                 }
                             }
 
-                            if (result.data.data.size<listCarEntity.size){
+                            if (result.data.data.size < listCarEntity.size) {
                                 for (listItem in listCarEntity) {
-                                    if (result.data.data.all { it.passport!=listItem.carNumber }){
+                                    if (result.data.data.all { it.passport != listItem.carNumber }) {
                                         viewModel.removeCarDB(listItem.carNumber)
                                     }
                                 }
@@ -153,11 +156,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun clickedItem(position: Int) {
-        (activity as MainActivity).navController?.navigate(
-            HomeFragmentDirections.actionHomeFragmentToViolationFragment(
-                listCarEntity[position]
+        getBaseActivity {
+            it.navController?.navigate(
+                HomeFragmentDirections.actionHomeFragmentToViolationFragment(
+                    listCarEntity[position]
+                )
             )
-        )
+        }
+    }
+
+
+    override fun clickedItemEdit(carEntity: CarEntity) {
+//        getBaseActivity {
+//            it.navController?.navigate(
+//                HomeFragmentDirections.actionHomeFragmentToAddCarFragment(
+//                    carEntity
+//                )
+//            )
+//        }
     }
 
     private fun deleteCar(carNumber: String) {
@@ -188,5 +204,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             it.navController!!.navigate(R.id.home_fragment)
         }
     }
+
 
 }

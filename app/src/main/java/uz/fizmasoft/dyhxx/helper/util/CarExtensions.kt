@@ -7,13 +7,31 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import ir.alirezabdn.wp7progress.WP7ProgressBar
 
-fun Fragment.carToast(context: Context, string: String){
-    Toast.makeText(context,string, Toast.LENGTH_SHORT).show()
+private var toast: Toast? = null
+fun Fragment.carToast(context: Context, string: String) {
+    if (toast != null) {
+        toast?.cancel()
+    }
+    toast = Toast.makeText(context, string, Toast.LENGTH_SHORT)
+    toast?.show()
 }
-fun Activity.carToast(context: Context, string: String){
-    Toast.makeText(context,string, Toast.LENGTH_SHORT).show()
+
+fun Activity.carToast(context: Context, string: String) {
+    Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
+}
+
+fun WP7ProgressBar.show() {
+    this.isVisible = true
+    this.showProgressBar()
+}
+
+fun WP7ProgressBar.hide() {
+    this.hideProgressBar()
+    this.isVisible = false
 }
 
 fun isOnline(context: Context): Boolean {

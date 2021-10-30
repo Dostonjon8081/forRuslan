@@ -51,7 +51,8 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
         //        var texPasSer: TextView = view.findViewById(R.id.rv_item_car_tex_pass)
         var number: TextView = view.findViewById(R.id.rv_item_car_number)
         var numbe: TextView = view.findViewById(R.id.rv_item_car_numbe)
-        var rvItemEdit: AppCompatImageView = view.findViewById(R.id.rv_item_edit)
+        var rvItemDelete: AppCompatImageView = view.findViewById(R.id.rv_item_delete)
+//        var rvItemEdit: AppCompatImageView = view.findViewById(R.id.rv_item_edit)
 
         fun onBind(model: CarEntity, position: Int) {
             //car number
@@ -60,17 +61,15 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
             if (numberIsPersonal(numberText.substring(5, 6))) {
                 numbe.text = "${numberText.substring(0, 2)}"
                 number.text = "${numberText.substring(2, 3)} ${
-                    numberText.substring(
-                        3,
-                        6
-                    )
+                    numberText.substring(3, 6)
                 } ${numberText.substring(6)}"
             } else {
                 numbe.text = "${numberText.substring(0, 2)}"
                 number.text = "${numberText.substring(2, 5)} ${numberText.substring(5)}"
             }
 
-            rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
+            rvItemDelete.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
+//            rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemEdit(list[position]) }
             view.setOnClickListener { rvItemClick!!.clickedItem(position) }
 
             if (model.carMark.isNotEmpty()) mark.text = model.carMark
@@ -101,10 +100,11 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
     }
 
     fun bottomMargin(position: Int, itemView: View) {
-        if (position == list.size - 1) {
+        if (position == list.size - 1 && position<7) {
             val params = itemView.layoutParams as RecyclerView.LayoutParams
             params.bottomMargin = 200
             itemView.layoutParams = params;
         }
     }
+
 }

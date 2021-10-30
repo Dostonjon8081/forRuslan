@@ -114,9 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroy_semibold"
-                android:lineSpacingExtra="6dp"
                 android:paddingTop="6dp"
-                android:text="854 578,00 so'm"
+                tools:text="854 578,00 so'm"
                 android:textColor="@color/red"
                 android:textSize="14sp"
                 android:textStyle="bold" />
