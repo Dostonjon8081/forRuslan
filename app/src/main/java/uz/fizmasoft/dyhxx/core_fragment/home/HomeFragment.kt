@@ -1,6 +1,5 @@
 package uz.fizmasoft.dyhxx.core_fragment.home
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -157,11 +156,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun clickedItem(position: Int) {
-        (activity as MainActivity).navController?.navigate(
-            HomeFragmentDirections.actionHomeFragmentToViolationFragment(
-                listCarEntity[position]
+        getBaseActivity {
+            it.navController?.navigate(
+                HomeFragmentDirections.actionHomeFragmentToViolationFragment(
+                    listCarEntity[position]
+                )
             )
-        )
+        }
+    }
+
+
+    override fun clickedItemEdit(carEntity: CarEntity) {
+//        getBaseActivity {
+//            it.navController?.navigate(
+//                HomeFragmentDirections.actionHomeFragmentToAddCarFragment(
+//                    carEntity
+//                )
+//            )
+//        }
     }
 
     private fun deleteCar(carNumber: String) {
@@ -192,5 +204,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             it.navController!!.navigate(R.id.home_fragment)
         }
     }
+
 
 }

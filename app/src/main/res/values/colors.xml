@@ -23,6 +23,7 @@
     <color name="home_text_color">#022172</color>
 
     <color name="violation_text_color">#022172</color>
+    <color name="transparent_white">#A8FFFFFF</color>
     <color name="violation_text_gray_color">#889DAF</color>
 
 </resources>

@@ -61,7 +61,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         val navView = binding.idBottomNavigation
         navController?.let { navView.setupWithNavController(it) }
 
-        if (intent.data != null) {
+        if (intent?.data != null) {
             authentication(intent)
         }
 

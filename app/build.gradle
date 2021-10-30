@@ -106,10 +106,6 @@ dependencies {
     def fragment_version = "1.4.0-alpha10"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
-//    //navigation
-//    def navVersion = "2.3.5"
-//    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
-//    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
     //navigation
     def navigation_version = "2.4.0-alpha10"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation_version"
@@ -118,8 +114,8 @@ dependencies {
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.8'
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
 
     //firebase crash

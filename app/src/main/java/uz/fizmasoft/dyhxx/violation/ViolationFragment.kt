@@ -30,7 +30,6 @@ class ViolationFragment :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 getBaseActivity {
@@ -38,26 +37,27 @@ class ViolationFragment :
                 }
             }
         })
-
         arg = args.violationArgs
         requestData()
     }
 
     private fun requestData() {
-        viewModel.getViolationApi(
-            ViolationCarApiModel(
-                getPref(requireActivity())
-                    .getString(PREF_USER_ID_KEY, "")!!,
-                arg!!.carNumber,
-                arg!!.texPass
+        arg?.let {
+            viewModel.getViolationApi(
+                ViolationCarApiModel(
+                    getPref(requireActivity())
+                        .getString(PREF_USER_ID_KEY, "")!!,
+                    it.carNumber,
+                    it.texPass
+                )
             )
-        )
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.wp7progressBar.showProgressBar()
+        binding.wp7progressBar.show()
         binding.violationFragmentArrowBack.setOnClickListener { activity?.onBackPressed() }
 
         binding.violationFragmentSwipeRefresh.setColorSchemeColors(
@@ -72,7 +72,7 @@ class ViolationFragment :
     }
 
     private fun swipeRefresh() {
-        binding.wp7progressBar.showProgressBar()
+        binding.wp7progressBar.show()
         binding.violationFragmentRv.visibility = View.GONE
         binding.violationsContainerTotalSum.visibility = View.GONE
         binding.violationFragmentContainerNoConnect.visibility = View.GONE
@@ -85,7 +85,7 @@ class ViolationFragment :
     private fun loadData() {
 
         binding.violationFragmentTitle.text =
-            arg!!.carNumber.substring(0, 2) + " " + arg!!.carNumber.substring(2)
+            arg?.carNumber?.substring(0, 2) + " " + arg?.carNumber?.substring(2)
 
         viewModel.responseViolationApiApi.observe(viewLifecycleOwner, EventObserver {
             when (it) {
@@ -93,21 +93,18 @@ class ViolationFragment :
                     if (it.data?.status == 200) {
                         initDataToRv(it.data.data)
                         binding.violationFragmentCountFines.text = it.data.data.size.toString()
-                        binding.wp7progressBar.hideProgressBar()
-                        binding.wp7progressBar.visibility = View.GONE
-
+                        binding.wp7progressBar.hide()
                     } else {
-                        binding.wp7progressBar.hideProgressBar()
-                        binding.wp7progressBar.visibility = View.GONE
+                        binding.wp7progressBar.hide()
                         binding.violationFragmentContainerNoViolation.visibility = View.VISIBLE
                     }
                 }
                 is NetworkResult.Error -> {
-                    binding.wp7progressBar.hideProgressBar()
-                    binding.wp7progressBar.visibility = View.GONE
+                    binding.wp7progressBar.hide()
                     binding.violationFragmentContainerNoConnect.visibility = View.VISIBLE
                 }
                 is NetworkResult.Loading -> {
+                    binding.wp7progressBar.show()
                 }
             }
         })
@@ -117,10 +114,9 @@ class ViolationFragment :
 
         val list: List<ViolationCarModel> = data.map {
             ViolationCarModel(
-                it.id,
-                it.drb, it.qarorSery, it.qarorNumber,
-                it.violationTime, it.violationType,
-                it.sum, it.location
+                it.id, it.drb, it.qarorSery,
+                it.qarorNumber, it.violationTime,
+                it.violationType, it.sum, it.location
             )
         }
 
@@ -165,25 +161,22 @@ class ViolationFragment :
 
     override fun violationFileID(id: String, qaror: String) {
 
-        binding.wp7progressBar.visibility = View.VISIBLE
-        binding.wp7progressBar.showProgressBar()
+        binding.wp7progressBar.show()
 
         violationPDFModel = ViolationPDFModel(id)
         violationPDFQaror = ViolationPDFQaror(qaror)
 
-        viewModel.getPdfFile(violationPDFModel!!)
+        violationPDFModel?.let { viewModel.getPdfFile(it) }
         viewModel.responseViolationPDF.observe(viewLifecycleOwner, EventObserver {
 
             when (it) {
                 is NetworkResult.Success -> {
-
                     PDFUtils.createPdf(
                         requireActivity(),
                         requireActivity().filesDir.absolutePath,
                         it.data!!.pdf,
                         violationPDFModel!!.id
                     )
-
                     PDFUtils.openPDF(
                         requireActivity(),
                         requireActivity().filesDir.absolutePath,
@@ -192,13 +185,13 @@ class ViolationFragment :
                     )
 
                     violationPDFModel = null
-                    binding.wp7progressBar.visibility = View.GONE
+                    binding.wp7progressBar.hide()
                 }
                 is NetworkResult.Error -> {
-
+                    binding.wp7progressBar.hide()
                 }
                 is NetworkResult.Loading -> {
-
+                    binding.wp7progressBar.show()
                 }
             }
 
