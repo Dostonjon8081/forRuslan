@@ -23,7 +23,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
         Handler(Looper.getMainLooper()).postDelayed({
             try {
                 getBaseActivity {
-getPref(requireActivity()).edit().putString(PREF_USER_ID_KEY,"1638094110").commit()
+//getPref(requireActivity()).edit().putString(PREF_USER_ID_KEY,"1638094110").commit()
                     if (getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")
                             .isNullOrEmpty()
                     ) {

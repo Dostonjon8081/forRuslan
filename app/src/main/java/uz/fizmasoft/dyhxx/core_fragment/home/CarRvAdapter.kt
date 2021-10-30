@@ -60,10 +60,7 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
             if (numberIsPersonal(numberText.substring(5, 6))) {
                 numbe.text = "${numberText.substring(0, 2)}"
                 number.text = "${numberText.substring(2, 3)} ${
-                    numberText.substring(
-                        3,
-                        6
-                    )
+                    numberText.substring(3, 6)
                 } ${numberText.substring(6)}"
             } else {
                 numbe.text = "${numberText.substring(0, 2)}"
@@ -101,7 +98,7 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
     }
 
     fun bottomMargin(position: Int, itemView: View) {
-        if (position == list.size - 1) {
+        if (position == list.size - 1 && position<7) {
             val params = itemView.layoutParams as RecyclerView.LayoutParams
             params.bottomMargin = 200
             itemView.layoutParams = params;
