@@ -1,6 +1,5 @@
 package uz.fizmasoft.dyhxx.core_fragment.home
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -157,11 +156,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun clickedItem(position: Int) {
-        (activity as MainActivity).navController?.navigate(
-            HomeFragmentDirections.actionHomeFragmentToViolationFragment(
-                listCarEntity[position]
+        (activity as? MainActivity)?.let {
+            it.navController?.navigate(
+                HomeFragmentDirections.actionHomeFragmentToViolationFragment(
+                    listCarEntity[position]
+                )
             )
-        )
+        }
     }
 
     private fun deleteCar(carNumber: String) {

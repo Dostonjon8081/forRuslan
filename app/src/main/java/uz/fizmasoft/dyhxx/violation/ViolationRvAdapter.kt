@@ -4,10 +4,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import uz.fizmasoft.dyhxx.R
+import uz.fizmasoft.dyhxx.databinding.ItemRvViolationBinding
 
 class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
 
@@ -15,10 +14,9 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
     private var violationRvClick: ClickViolationRv? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        return VH(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_rv_violation, parent, false)
-        )
+        val binding = ItemRvViolationBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
+        return VH(binding)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
@@ -43,21 +41,11 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
         this.violationRvClick = clickViolationRv
     }
 
-    inner class VH(val view: View) : RecyclerView.ViewHolder(view) {
-
-        private var violationTimeTitle: TextView = view.findViewById(R.id.violation_time_title)
-        private var violationTime: TextView = view.findViewById(R.id.violation_time)
-        private var violationAct: TextView = view.findViewById(R.id.violation_act)
-        private var violationType: TextView = view.findViewById(R.id.violation_type)
-        private var violationLocationTitle: TextView =
-            view.findViewById(R.id.violation_location_title)
-        private var violationLocation: TextView = view.findViewById(R.id.violation_location)
-        private var violationSum: TextView = view.findViewById(R.id.violation_sum)
-        private var violationImg: ImageView = view.findViewById(R.id.violation_img)
-        private var violationSaveFile: ImageView = view.findViewById(R.id.violation_save_file)
+    inner class VH(private val binding: ItemRvViolationBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
-        fun onBind(model: ViolationCarModel) {
+        fun onBind(model: ViolationCarModel) = with(binding) {
             violationTime.text = model.violationTime
             violationAct.text = model.qarorSery + " " + model.qarorNumber
             violationType.text = model.violationType
@@ -77,9 +65,14 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
                     else -> R.drawable.ic_radar
                 }
             )
-             if (model.qarorSery != "KV") {
-                 violationSaveFile.visibility = View.VISIBLE
-                 view.setOnClickListener { violationRvClick!!.violationFileID(model.id,model.qarorSery+model.qarorNumber) }
+            if (model.qarorSery != "KV") {
+                violationSaveFile.visibility = View.VISIBLE
+                root.setOnClickListener {
+                    violationRvClick?.violationFileID(
+                        model.id,
+                        model.qarorSery + model.qarorNumber
+                    )
+                }
             }
         }
 
@@ -105,7 +98,7 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
             }
 
             sumString.append(",00 ")
-            sumString.append(view.context.getString(R.string.sum))
+            sumString.append(binding.root.context.getString(R.string.sum))
             return sumString.toString()
         }
     }

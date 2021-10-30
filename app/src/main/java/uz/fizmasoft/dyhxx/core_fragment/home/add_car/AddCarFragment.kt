@@ -14,9 +14,7 @@ import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.core_fragment.home.SpinnerItemClick
 import uz.fizmasoft.dyhxx.databinding.FragmentAddCarBinding
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
-import uz.fizmasoft.dyhxx.helper.util.EventObserver
-import uz.fizmasoft.dyhxx.helper.util.carToast
-import uz.fizmasoft.dyhxx.helper.util.isOnline
+import uz.fizmasoft.dyhxx.helper.util.*
 
 @AndroidEntryPoint
 class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
@@ -97,7 +95,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun saveCar() {
-
+        binding.wp7progressBar.show()
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
         val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
@@ -106,7 +104,8 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             binding.addCarFragmentEditTextCarModels.text.toString()
         } else ""
 
-        if (carNumber.length >= 8
+        if (
+            carNumber.length >= 8
             && carTexPasNumber.length == 7
             && carTexPasSeries.length >= 3
             && carMark.isNotEmpty()
@@ -114,7 +113,8 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
             if (isOnline(requireContext())) {
 
-                viewModel.saveCarApi(requireActivity(),
+                viewModel.saveCarApi(
+                    requireActivity(),
                     carNumber,
                     carTexPasSeries + carTexPasNumber, carMark, carModel
                 )
@@ -123,8 +123,10 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
                     when (it) {
                         is NetworkResult.Loading -> {
+                            binding.wp7progressBar.show()
                         }
                         is NetworkResult.Success -> {
+                            binding.wp7progressBar.hide()
                             when (it.data?.message) {
                                 "OK" -> {
                                     getBaseActivity { activity ->
@@ -151,6 +153,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
                         }
                         is NetworkResult.Error -> {
+                            binding.wp7progressBar.hide()
                         }
                     }
                 })
