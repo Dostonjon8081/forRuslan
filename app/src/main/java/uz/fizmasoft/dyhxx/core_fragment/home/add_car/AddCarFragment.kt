@@ -11,14 +11,12 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseFragment
-import uz.fizmasoft.dyhxx.core_fragment.home.CarRvAdapter
 import uz.fizmasoft.dyhxx.core_fragment.home.SpinnerItemClick
 import uz.fizmasoft.dyhxx.databinding.FragmentAddCarBinding
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.util.EventObserver
 import uz.fizmasoft.dyhxx.helper.util.carToast
 import uz.fizmasoft.dyhxx.helper.util.isOnline
-import uz.fizmasoft.dyhxx.helper.util.logd
 
 @AndroidEntryPoint
 class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
@@ -103,7 +101,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
         val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
-        logd(carNumber)
+
         carModel = if (!binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
             binding.addCarFragmentEditTextCarModels.text.toString()
         } else ""
@@ -122,8 +120,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                 )
 
                 viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
-                    logd(" in save " + carNumber)
-                    logd(" in save 2" + it.data?.message)
+
                     when (it) {
                         is NetworkResult.Loading -> {
                         }
@@ -163,7 +160,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                 carToast(requireContext(), getString(R.string.not_ethernet))
             }
         } else {
-            carToast(requireContext(), getString(R.string.wrong))
+            carToast(requireContext(), getString(R.string.wrong_lines))
         }
 //        toast?.show()
     }

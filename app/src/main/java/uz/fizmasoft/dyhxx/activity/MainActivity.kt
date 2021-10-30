@@ -46,7 +46,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun setupItems() {
         fireBaseAnalytics()
 
-
+        setActivity(this)
+//        logd(getPrefActive().getString(PREF_USER_ID_KEY,""))
         appUpdateManager = AppUpdateManagerFactory.create(this)
         checkUpdate()
 
@@ -118,8 +119,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
                                     }
                                 }
-                                is NetworkResult.Error -> {}
-                                is NetworkResult.Loading -> {}
+                                is NetworkResult.Error -> {
+                                }
+                                is NetworkResult.Loading -> {
+                                }
                             }
 
                         })
