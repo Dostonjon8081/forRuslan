@@ -3,20 +3,18 @@ package uz.fizmasoft.dyhxx.core_fragment.account
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
-import uz.fizmasoft.dyhxx.R
-import uz.fizmasoft.dyhxx.activity.MainActivity
-import uz.fizmasoft.dyhxx.base.BaseFragment
-import uz.fizmasoft.dyhxx.databinding.FragmentAccountBinding
-import uz.fizmasoft.dyhxx.helper.util.getPref
 import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.BuildConfig
-import uz.fizmasoft.dyhxx.helper.util.TELEGRAM_AUTH_URL
+import uz.fizmasoft.dyhxx.R
+import uz.fizmasoft.dyhxx.base.BaseFragment
+import uz.fizmasoft.dyhxx.databinding.FragmentAccountBinding
 import uz.fizmasoft.dyhxx.helper.util.TELEGRAM_FEEDBACK_URL
+import uz.fizmasoft.dyhxx.helper.util.TELEGRAM_FEEDBACK_URL_CHROME
+import uz.fizmasoft.dyhxx.helper.util.getPref
 
 
 @AndroidEntryPoint
@@ -62,7 +60,8 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
             getPref(it).edit().clear().apply()
             viewModel.deleteAll()
             it.navController?.navigate(R.id.select_language_fragment)
-            (it as uz.fizmasoft.dyhxx.activity.MainActivity).binding.idBottomNavigation.visibility = View.GONE
+            (it as uz.fizmasoft.dyhxx.activity.MainActivity).binding.idBottomNavigation.visibility =
+                View.GONE
         }
     }
 
@@ -71,7 +70,11 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
     }
 
     private fun feedBack() {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_FEEDBACK_URL)))
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_FEEDBACK_URL)))
+        } catch (e: Exception) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_FEEDBACK_URL_CHROME)))
+        }
     }
 
 }

@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gilroy_semibold"
-            android:text="Chevrolet"
+            android:text="- - -"
             android:textColor="@color/home_text_color"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@id/rv_item_car_model_title"

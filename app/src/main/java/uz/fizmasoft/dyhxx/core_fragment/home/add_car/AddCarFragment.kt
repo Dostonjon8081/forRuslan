@@ -95,7 +95,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun saveCar() {
-        binding.wp7progressBar.show()
+//        binding.wp7progressBar.show()
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
         val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()

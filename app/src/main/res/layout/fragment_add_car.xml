@@ -269,7 +269,7 @@
         android:layout_height="0dp"
         android:visibility="gone"
         android:layout_centerVertical="true"
-        android:background="@color/white"
+        android:background="@color/transparent_white"
         android:elevation="2dp"
         android:focusable="true"
         android:clickable="true"

@@ -98,8 +98,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         viewModel.responseAllCarsApi.observe(this, EventObserver { result ->
 
             when (result) {
-                is NetworkResult.Loading -> {
-                }
+                is NetworkResult.Loading -> {}
                 is NetworkResult.Success -> {
                     binding.homeFragmentSwipeRefresh.isRefreshing = false
                     Executors.newSingleThreadExecutor().execute {
@@ -128,8 +127,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         }
                     }
                 }
-                is NetworkResult.Error -> {
-                }
+                is NetworkResult.Error -> {}
             }
             navigateToHome()
         })
