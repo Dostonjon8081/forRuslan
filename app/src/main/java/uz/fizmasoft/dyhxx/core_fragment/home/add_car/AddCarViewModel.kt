@@ -58,6 +58,7 @@ class AddCarViewModel @Inject constructor(
         carModel: String
     ) =
         viewModelScope.launch {
+            _responseSaveCarApi.postValue(Event(NetworkResult.Loading()))
             getPref(activity).getString(PREF_USER_ID_KEY, "")?.let {
                 apiRepository.saveCar(SaveCarModel(it, carNumber, texPass)).collect { values ->
                     if (values.data?.message == "OK") insertCarDB(
