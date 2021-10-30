@@ -5,16 +5,16 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.db.dataRepository.ICarRepository
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.network.model.*
 import uz.fizmasoft.dyhxx.helper.network.repository.ICarApiRepository
 import uz.fizmasoft.dyhxx.helper.util.Event
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,7 +24,8 @@ class HomeViewModel @Inject constructor(
     private val dbRepository: ICarRepository
 ) : AndroidViewModel(application) {
 
-    private val _responseUserIdApi: MutableLiveData<NetworkResult<UserAuthIDModel>> = MutableLiveData()
+    private val _responseUserIdApi: MutableLiveData<NetworkResult<UserAuthIDModel>> =
+        MutableLiveData()
     val responseUserIdApi: LiveData<NetworkResult<UserAuthIDModel>> = _responseUserIdApi
     fun getUserIdApi(token: String) = viewModelScope.launch {
         apiRepository.getUserId(token).collect { values ->
@@ -34,10 +35,11 @@ class HomeViewModel @Inject constructor(
 
     private val _responseCheckLimitApi: MutableLiveData<NetworkResult<CheckLimitModelResponse>> =
         MutableLiveData()
-    val responseCheckLimitApi: LiveData<NetworkResult<CheckLimitModelResponse>> = _responseCheckLimitApi
+    val responseCheckLimitApi: LiveData<NetworkResult<CheckLimitModelResponse>> =
+        _responseCheckLimitApi
+
     fun checkLimitApi(checkLimitModel: CheckLimitModel) = viewModelScope.launch {
         apiRepository.checkLimit(checkLimitModel).collect { values ->
-
             _responseCheckLimitApi.postValue(values)
         }
     }
@@ -64,7 +66,9 @@ class HomeViewModel @Inject constructor(
 
     private val _responseRemoveCarApi: MutableLiveData<Event<NetworkResult<RemoveCarModelResponse>>> =
         MutableLiveData()
-    val responseRemoveCarApi: LiveData<Event<NetworkResult<RemoveCarModelResponse>>> = _responseRemoveCarApi
+    val responseRemoveCarApi: LiveData<Event<NetworkResult<RemoveCarModelResponse>>> =
+        _responseRemoveCarApi
+
     fun removeCarApi(removeCarModel: RemoveCarModel) = viewModelScope.launch(Dispatchers.IO) {
         apiRepository.removeCar(removeCarModel).collect { values ->
             _responseRemoveCarApi.postValue(Event(values))
@@ -86,7 +90,6 @@ class HomeViewModel @Inject constructor(
     val getCarDB: LiveData<CarEntity> = _getCarDB
     fun getCarDB(id: Long) {
         viewModelScope.launch {
-
             dbRepository.getCar(id).collect {
                 _getCarDB.postValue(it)
             }
@@ -105,10 +108,9 @@ class HomeViewModel @Inject constructor(
 
     private val _removeCarDB = MutableLiveData<String>()
     val removeCarDB: LiveData<String> = _removeCarDB
-    fun removeCarDB(carNumber:String) {
+    fun removeCarDB(carNumber: String) {
         viewModelScope.launch(Dispatchers.IO) {
             dbRepository.deleteCar(carNumber)
-//            allCars()
         }
     }
 
