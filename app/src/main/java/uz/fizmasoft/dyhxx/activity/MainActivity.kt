@@ -62,8 +62,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         navController?.let { navView.setupWithNavController(it) }
 
         if (intent?.data != null) {
+
             authentication(intent)
         }
+
 
     }
 
@@ -82,16 +84,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     private fun authentication(intent: Intent) {
-        if (!getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
-            && isOnline(this)
+        if (
+//            !getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
+//            &&
+            isOnline(this)
         ) {
 
             val editPref = getPref(this@MainActivity).edit()
+            val number = if (intent?.data.toString().substring(0, 5) == "https") 22
+            else 19
             CoroutineScope(Dispatchers.IO).launch {
-                editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(19))
+                editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(number))
                     .apply()
             }
-            loadDataFromApi(intent.data.toString().substring(19))
+
+            logd(intent.data.toString())
+            loadDataFromApi(intent.data.toString().substring(number))
         }
     }
 
