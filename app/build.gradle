@@ -12,17 +12,29 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
+            storeFile file('C:\\Users\\User\\Downloads\\project\\SOFTDATA\\dyhxx\\dyhxx.jks')
             storePassword '987654321'
             keyAlias 'key0'
             keyPassword '987654321'
         }
         release {
-            storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
+            storeFile file('C:\\Users\\User\\Downloads\\project\\SOFTDATA\\dyhxx\\dyhxx.jks')
             storePassword '987654321'
             keyAlias 'key0'
             keyPassword '987654321'
         }
+//        debug {
+//            storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
+//            storePassword '987654321'
+//            keyAlias 'key0'
+//            keyPassword '987654321'
+//        }
+//        release {
+//            storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
+//            storePassword '987654321'
+//            keyAlias 'key0'
+//            keyPassword '987654321'
+//        }
     }
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
