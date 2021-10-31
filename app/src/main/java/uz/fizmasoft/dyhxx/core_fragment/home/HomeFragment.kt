@@ -65,7 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 adapter.rvClickListener(this@HomeFragment)
                 listCarEntity.clear()
                 listCarEntity.addAll(t)
-                //                    logd(t)
+
                 binding.homeFragmentRv.visibility = View.VISIBLE
                 binding.homeFragmentNoCarContainer.visibility = View.GONE
                 binding.homeFragmentRv.adapter = adapter

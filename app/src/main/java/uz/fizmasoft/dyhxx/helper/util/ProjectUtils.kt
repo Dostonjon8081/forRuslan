@@ -10,21 +10,21 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import uz.fizmasoft.dyhxx.activity.MainActivity
 
-lateinit var activity: Activity
+//lateinit var activity: Activity
 
-fun Any.setActivity(mainActivity: Activity){
-    activity = mainActivity
-}
+//fun Any.setActivity(mainActivity: Activity){
+//    activity = mainActivity
+//}
 
 fun getPref(activityFrom: Activity ): SharedPreferences {
     val pref by lazy { activityFrom.getPreferences(Context.MODE_PRIVATE) }
     return pref
 }
 
-fun getPrefActive(): SharedPreferences {
-    val pref by lazy { activity.getPreferences(Context.MODE_PRIVATE) }
-    return pref
-}
+//fun getPrefActive(): SharedPreferences {
+//    val pref by lazy { activity.getPreferences(Context.MODE_PRIVATE) }
+//    return pref
+//}
 
 fun Any.loge(message: Any?) = message?.let {
     val messageText =

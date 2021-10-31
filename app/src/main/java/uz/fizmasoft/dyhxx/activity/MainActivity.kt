@@ -46,7 +46,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun setupItems() {
         fireBaseAnalytics()
 
-        setActivity(this)
+//        setActivity(this)
 //        logd(getPrefActive().getString(PREF_USER_ID_KEY,""))
         appUpdateManager = AppUpdateManagerFactory.create(this)
         checkUpdate()
@@ -65,8 +65,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
             authentication(intent)
         }
-
-
     }
 
     private fun fireBaseAnalytics() {
@@ -91,14 +89,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         ) {
 
             val editPref = getPref(this@MainActivity).edit()
-            val number = if (intent?.data.toString().substring(0, 5) == "https") 22
+            val number = if (intent?.data.toString().startsWith("https://abc.xyz")) 22
             else 19
             CoroutineScope(Dispatchers.IO).launch {
                 editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(number))
                     .apply()
             }
 
-            logd(intent.data.toString())
+//            logd(intent.data.toString())
             loadDataFromApi(intent.data.toString().substring(number))
         }
     }

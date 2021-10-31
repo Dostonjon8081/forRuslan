@@ -27,7 +27,7 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     fun getBaseActivity(run: (BaseActivity<*>) -> Unit) {
         (activity as? BaseActivity<*>)?.let {
-            it.let {
+            it?.let {
                 run(it)
             }
         }
