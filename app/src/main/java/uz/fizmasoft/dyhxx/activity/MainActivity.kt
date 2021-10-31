@@ -82,7 +82,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     private fun authentication(intent: Intent) {
-        if (getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
+        if (!getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
             && isOnline(this)
         ) {
 
