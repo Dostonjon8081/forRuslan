@@ -175,7 +175,7 @@ class ViolationFragment :
                         requireActivity(),
                         requireActivity().filesDir.absolutePath,
                         it.data!!.pdf,
-                        violationPDFModel!!.id
+                        violationPDFModel?.id?:""
                     )
                     PDFUtils.openPDF(
                         requireActivity(),
