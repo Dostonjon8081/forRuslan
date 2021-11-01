@@ -13,4 +13,5 @@ interface ICarRepository {
     fun getCar(id: Long): Flow<CarEntity>
 
     fun allCar(): Flow<MutableList<CarEntity>>
+    suspend fun editCar(carNumber: String, carMark: String, carModel: String)
 }

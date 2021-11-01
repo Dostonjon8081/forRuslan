@@ -36,6 +36,7 @@
     <string name="not_ethernet">Tarmoqqa ulanmagan</string>
     <string name="wrong_lines">Iltimos qatorlarni to\'ldiring.</string>
     <string name="bug_server">Serverda xatolik</string>
+    <string name="limit_full">Limit to\'lgan</string>
     <string name="car_not_found">Noto\'g\'ri ma\'lumotlar, iltimos tekshiring.</string>
     <string name="car_exist">Avval ro\'yxatga olingan</string>
     <string name="bad_request">Ro\'yhatdan o\'tmagan foydalanuvchi</string>
