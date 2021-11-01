@@ -46,8 +46,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun setupItems() {
         fireBaseAnalytics()
 
-//        setActivity(this)
-//        logd(getPrefActive().getString(PREF_USER_ID_KEY,""))
         appUpdateManager = AppUpdateManagerFactory.create(this)
         checkUpdate()
 
@@ -96,7 +94,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     .apply()
             }
 
-//            logd(intent.data.toString())
             loadDataFromApi(intent.data.toString().substring(number))
         }
     }
@@ -154,18 +151,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
 
     private fun checkUpdate() {
-        // Returns an intent object that you use to check for an update.
+//        logd("in check update")
         val appUpdateInfoTask = appUpdateManager?.appUpdateInfo
-        // Checks that the platform will allow the specified type of update.
 
         appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
             ) {
+//                logd(avialable update)
 
                 appUpdateManager.startUpdateFlowForResult(
                     appUpdateInfo,
-                    AppUpdateType.IMMEDIATE,
+                    AppUpdateType.FLEXIBLE,
                     this,
                     IN_APP_UPDATE_REQUEST_CODE
                 )
@@ -174,7 +171,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
         }
         appUpdateInfoTask?.addOnFailureListener {
-//            carToast(this, "No updated")
+
         }
     }
 
@@ -182,7 +179,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         appUpdateManager?.appUpdateInfo?.addOnSuccessListener { updateInfo ->
             if (updateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
                 appUpdateManager?.startUpdateFlowForResult(
-                    updateInfo, AppUpdateType.IMMEDIATE, this,
+                    updateInfo, AppUpdateType.FLEXIBLE, this,
                     IN_APP_UPDATE_REQUEST_CODE
                 )
             }

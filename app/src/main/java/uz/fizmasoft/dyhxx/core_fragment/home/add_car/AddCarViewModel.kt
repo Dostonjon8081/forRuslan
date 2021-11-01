@@ -74,66 +74,17 @@ class AddCarViewModel @Inject constructor(
             }
         }
 
-
-    private val _responseAllCarsApi: MutableLiveData<NetworkResult<AllCarsResponse>> =
-        MutableLiveData()
-    val responseAllCarsApi: LiveData<NetworkResult<AllCarsResponse>> = _responseAllCarsApi
-    fun allCarsApi(allCars: AllCars) = viewModelScope.launch {
-        apiRepository.allCars(allCars).collect { values ->
-            _responseAllCarsApi.postValue(values)
-        }
-    }
-
-
-    private val _responseRemoveCarApi: MutableLiveData<NetworkResult<RemoveCarModelResponse>> =
-        MutableLiveData()
-    val responseRemoveCarApi: LiveData<NetworkResult<RemoveCarModelResponse>> =
-        _responseRemoveCarApi
-
-    fun removeCarApi(removeCarModel: RemoveCarModel) = viewModelScope.launch {
-        apiRepository.removeCar(removeCarModel).collect { values ->
-            _responseRemoveCarApi.postValue(values)
-        }
-    }
-
-
-    private val _allCarDB = MutableLiveData<List<CarEntity>>()
-    val allCarDB: LiveData<List<CarEntity>> = _allCarDB
-    fun allCarsDB() {
-        viewModelScope.launch {
-            dbRepository.allCar().collect {
-                _allCarDB.postValue(it)
-            }
-        }
-    }
-
-    private val _getCarDB = MutableLiveData<CarEntity>()
-    val getCarDB: LiveData<CarEntity> = _getCarDB
-    fun getCarDB(id: Long) {
-        viewModelScope.launch {
-
-            dbRepository.getCar(id).collect {
-                _getCarDB.postValue(it)
-            }
-        }
-    }
-
-
     private val _insertCarDB = MutableLiveData<Long>()
     val insertCarDB: LiveData<Long> = _insertCarDB
-    private fun insertCarDB(carEntity: CarEntity) {
-        viewModelScope.launch {
-            dbRepository.insertCar(carEntity)
-        }
+    private fun insertCarDB(carEntity: CarEntity) = viewModelScope.launch {
+        dbRepository.insertCar(carEntity)
     }
 
+    private val _editCarDB = MutableLiveData<Long>()
+    val editCarDB: LiveData<Long> = _insertCarDB
+     fun editCarDB(carNumber: String, carMark: String, carModel: String) = viewModelScope.launch {
 
-    private val _removeCarDB = MutableLiveData<String>()
-    val removeCarDB: LiveData<String> = _removeCarDB
-    fun removeCarDB(carNumber: String) {
-        viewModelScope.launch {
-            dbRepository.deleteCar(carNumber)
-//            allCars()
-        }
+        dbRepository.editCar(carNumber,carMark,carModel)
     }
+
 }

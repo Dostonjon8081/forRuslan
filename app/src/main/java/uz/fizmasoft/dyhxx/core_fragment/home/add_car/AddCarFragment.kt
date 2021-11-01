@@ -1,11 +1,14 @@
 package uz.fizmasoft.dyhxx.core_fragment.home.add_car
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,18 +56,18 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun setup() {
-//        val carArgs = args.carArgs
-//        if (carArgs != null) {
-//            with(binding) {
-//                addCarFragmentEtCarNumber.setText(carArgs.carNumber)
-//                addCarFragmentTexPassSeries.setText(carArgs.texPass.substring(0, 3))
-//                addCarFragmentTexPassNumber.setText(carArgs.texPass.substring(3))
-//                addCarFragmentEtCarNumber.isEnabled = false
-//                addCarFragmentTexPassSeries.isEnabled = false
-//                addCarFragmentTexPassNumber.isEnabled = false
-//            }
-//
-//        }
+        val carArgs = args.carArgs
+        if (carArgs != null) {
+            with(binding) {
+                addCarFragmentEtCarNumber.setText(carArgs.carNumber)
+                addCarFragmentTexPassSeries.setText(carArgs.texPass.substring(0, 3))
+                addCarFragmentTexPassNumber.setText(carArgs.texPass.substring(3))
+                addCarFragmentEtCarNumber.isEnabled = false
+                addCarFragmentTexPassSeries.isEnabled = false
+                addCarFragmentTexPassNumber.isEnabled = false
+            }
+
+        }
     }
 
     private fun setupSpinner() {
@@ -92,88 +95,121 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         getBaseActivity {
             when (id) {
                 R.id.add_car_fragment_button_cancel -> it.onBackPressed()
-                R.id.add_car_fragment_button_save -> saveCar()
+                R.id.add_car_fragment_button_save -> saveOrEditCar()
                 R.id.add_car_fragment_arrow_back -> it.onBackPressed()
             }
         }
     }
 
-    private fun saveCar() {
-//        binding.wp7progressBar.show()
+    private fun saveOrEditCar() {
+        if (args?.carArgs == null) {
+            saveCar()
+        } else {
+            editCar()
+        }
+//        toast?.show()
+    }
 
-            val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase()
-            val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase()
-            val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
+    private fun editCar() {
 
-            carModel = if (!binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
-                binding.addCarFragmentEditTextCarModels.text.toString()
-            } else ""
-
-            if (
-                carNumber.length >= 8
-                && carTexPasNumber.length == 7
-                && carTexPasSeries.length >= 3
-                && carMark.isNotEmpty()
-            ) {
-
-                if (isOnline(requireContext())) {
-
-                    viewModel.saveCarApi(
-                        requireActivity(),
-                        carNumber,
-                        carTexPasSeries + carTexPasNumber, carMark, carModel
-                    )
-
-                    viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
-
-                        when (it) {
-                            is NetworkResult.Loading -> {
-                                binding.wp7progressBar.show()
-                            }
-                            is NetworkResult.Success -> {
-                                binding.wp7progressBar.hide()
-                                when (it.data?.message) {
-                                    "OK" -> {
-                                        getBaseActivity { activity ->
-                                            activity.navController?.popBackStack()
-                                        }
-                                    }
-                                    "Car already exists" -> {
-                                        carToast(
-                                            requireContext(),
-                                            getString(R.string.car_exist)
-                                        )
-                                    }
-                                    "Car not found" -> carToast(
-                                        requireContext(),
-                                        getString(R.string.car_not_found)
-                                    )
-
-                                    "Bad request" -> carToast(
-                                        requireContext(),
-                                        getString(R.string.bad_request)
-                                    )
-                                    else -> carToast(
-                                        requireContext(),
-                                        getString(R.string.bug_server)
-                                    )
-                                }
-
-                            }
-                            is NetworkResult.Error -> {
-                                binding.wp7progressBar.hide()
-                            }
-                        }
-                    })
-
-                } else {
-                    carToast(requireContext(), getString(R.string.not_ethernet))
-                }
-            } else {
-                carToast(requireContext(), getString(R.string.wrong_lines))
+        val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase().trim()
+        if (carMark.isNotEmpty()) {
+            if (binding.addCarFragmentEditTextCarModels.isVisible) {
+                carModel = binding.addCarFragmentEditTextCarModels.toString().trim()
             }
 
-//        toast?.show()
+            viewModel.editCarDB(carNumber, carMark, carModel)
+            getBaseActivity { activity ->
+                activity.navController?.popBackStack()
+            }
+        }
+    }
+
+    private fun saveCar() {
+        val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase().trim()
+        val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase().trim()
+        val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
+
+        if (binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
+            carModel = binding.addCarFragmentEditTextCarModels.text.toString()
+        }
+
+        if (
+            carNumber.length >= 8
+            && carTexPasNumber.length == 7
+            && carTexPasSeries.length >= 3
+            && carMark.isNotEmpty()
+        ) {
+
+            if (isOnline(requireContext())) {
+
+                viewModel.saveCarApi(
+                    requireActivity(),
+                    carNumber,
+                    carTexPasSeries + carTexPasNumber, carMark, carModel
+                )
+
+                viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
+
+                    when (it) {
+                        is NetworkResult.Loading -> {
+                            binding.wp7progressBar.show()
+                        }
+                        is NetworkResult.Success -> {
+                            binding.wp7progressBar.hide()
+                            when (it.data?.message) {
+                                "OK" -> {
+                                    getBaseActivity { activity ->
+                                        activity.navController?.popBackStack()
+                                    }
+                                }
+                                "Car already exists" -> {
+                                    carToast(
+                                        requireContext(),
+                                        getString(R.string.car_exist)
+                                    )
+                                }
+                                "Car not found" -> carToast(
+                                    requireContext(),
+                                    getString(R.string.car_not_found)
+                                )
+
+                                "Bad request" -> carToast(
+                                    requireContext(),
+                                    getString(R.string.bad_request)
+                                )
+                                "Limit reached" -> {
+                                    carToast(requireContext(), getString(R.string.limit_full))
+                                }
+                                "Internal server error" -> {
+                                    carToast(requireContext(), getString(R.string.bug_server))
+                                }
+                                else -> {
+//                                    val myIntent =  Intent(
+//                                        Intent.ACTION_SEND,
+//                                        Uri.parse(TELEGRAM_FEEDBACK_URL)
+//                                    )
+//                                    myIntent.type = "text/plain"
+//                                    myIntent.putExtra(Intent.EXTRA_TEXT, "msg")
+//                                    startActivity(
+//                                       myIntent
+//                                    )
+                                }
+                            }
+
+                        }
+                        is NetworkResult.Error -> {
+                            binding.wp7progressBar.hide()
+                        }
+                    }
+                })
+
+            } else {
+                carToast(requireContext(), getString(R.string.not_ethernet))
+            }
+        } else {
+            carToast(requireContext(), getString(R.string.wrong_lines))
+        }
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

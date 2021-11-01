@@ -29,4 +29,8 @@ class CarDataSourceImpl @Inject constructor(val db: CarDataBase) : ICarDataSourc
         return dao.allCars()
     }
 
+    override suspend fun editCar(carNumber: String, carMark: String, carModel: String) {
+        dao.editCar(carNumber,carMark,carModel)
+    }
+
 }

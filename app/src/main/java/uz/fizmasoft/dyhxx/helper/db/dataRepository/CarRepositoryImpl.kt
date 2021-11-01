@@ -29,20 +29,8 @@ class CarRepositoryImpl @Inject constructor(private val sourceImpl: CarDataSourc
     override fun allCar(): Flow<MutableList<CarEntity>> {
         return sourceImpl.allCar()
     }
-//
-//    override suspend fun insertCar(carEntity: CarEntity): Long {
-//        return CarDataBase.getDatabase(carApp).dao().insertCar(carEntity)
-//    }
-//
-//    override suspend fun deleteCar(id: Long): Int {
-//        return CarDataBase.getDatabase(carApp).dao().deleteCar(id)
-//    }
-//
-//    override suspend fun getCar(id: Long): CarEntity {
-//        return CarDataBase.getDatabase(carApp).dao().getCar(id)
-//    }
-//
-//    override suspend fun allCar(): List<CarEntity> {
-//        return CarDataBase.getDatabase(carApp).dao().allCars()
-//    }
+
+    override suspend fun editCar(carNumber: String, carMark: String, carModel: String) {
+        return sourceImpl.editCar(carNumber,carMark,carModel)
+    }
 }

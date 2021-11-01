@@ -167,13 +167,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
 
     override fun clickedItemEdit(carEntity: CarEntity) {
-//        getBaseActivity {
-//            it.navController?.navigate(
-//                HomeFragmentDirections.actionHomeFragmentToAddCarFragment(
-//                    carEntity
-//                )
-//            )
-//        }
+        getBaseActivity {
+            it.navController?.navigate(
+                HomeFragmentDirections.actionHomeFragmentToAddCarFragment(
+                    carEntity
+                )
+            )
+        }
     }
 
     private fun deleteCar(carNumber: String) {
