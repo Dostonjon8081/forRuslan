@@ -1,6 +1,9 @@
 package uz.fizmasoft.dyhxx.helper.db
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,7 +17,7 @@ interface CarDao {
 
 
     @Query("DELETE FROM car_entities  WHERE car_number=:carNumber")
-    suspend fun deleteCar(carNumber:String): Int
+    suspend fun deleteCar(carNumber: String): Int
 
     @Query("select * from car_entities")
     fun allCars(): Flow<MutableList<CarEntity>>
@@ -22,4 +25,7 @@ interface CarDao {
 
     @Query("delete from car_entities")
     fun deleteAll()
+
+    @Query("UPDATE car_entities SET car_mark =:carMark, car_model =:carModel WHERE car_number = :carNumber")
+    fun editCar(carNumber: String, carMark: String, carModel: String)
 }

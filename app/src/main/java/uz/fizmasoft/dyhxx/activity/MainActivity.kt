@@ -1,5 +1,8 @@
 package uz.fizmasoft.dyhxx.activity
 
+//import com.google.firebase.analytics.FirebaseAnalytics
+//import com.google.firebase.analytics.ktx.analytics
+//import com.google.firebase.ktx.Firebase
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +18,7 @@ import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -46,8 +50,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun setupItems() {
         fireBaseAnalytics()
 
-        setActivity(this)
-//        logd(getPrefActive().getString(PREF_USER_ID_KEY,""))
         appUpdateManager = AppUpdateManagerFactory.create(this)
         checkUpdate()
 
@@ -62,9 +64,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         navController?.let { navView.setupWithNavController(it) }
 
         if (intent?.data != null) {
+
             authentication(intent)
         }
-
     }
 
     private fun fireBaseAnalytics() {
@@ -79,19 +81,25 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun onResume() {
         super.onResume()
         updateInProgress()
+        FirebaseCrashlytics.getInstance().log("Salom Boooy") // Force a crash
     }
 
     private fun authentication(intent: Intent) {
-        if (getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
-            && isOnline(this)
+        if (
+//            !getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
+//            &&
+            isOnline(this)
         ) {
 
             val editPref = getPref(this@MainActivity).edit()
+            val number = if (intent?.data.toString().startsWith("https://abc.xyz")) 22
+            else 19
             CoroutineScope(Dispatchers.IO).launch {
-                editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(19))
+                editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(number))
                     .apply()
             }
-            loadDataFromApi(intent.data.toString().substring(19))
+
+            loadDataFromApi(intent.data.toString().substring(number))
         }
     }
 
@@ -148,18 +156,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
 
     private fun checkUpdate() {
-        // Returns an intent object that you use to check for an update.
+//        logd("in check update")
         val appUpdateInfoTask = appUpdateManager?.appUpdateInfo
-        // Checks that the platform will allow the specified type of update.
 
         appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
             ) {
+//                logd(avialable update)
 
                 appUpdateManager.startUpdateFlowForResult(
                     appUpdateInfo,
-                    AppUpdateType.IMMEDIATE,
+                    AppUpdateType.FLEXIBLE,
                     this,
                     IN_APP_UPDATE_REQUEST_CODE
                 )
@@ -168,7 +176,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
         }
         appUpdateInfoTask?.addOnFailureListener {
-//            carToast(this, "No updated")
+
         }
     }
 
@@ -176,7 +184,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         appUpdateManager?.appUpdateInfo?.addOnSuccessListener { updateInfo ->
             if (updateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
                 appUpdateManager?.startUpdateFlowForResult(
-                    updateInfo, AppUpdateType.IMMEDIATE, this,
+                    updateInfo, AppUpdateType.FLEXIBLE, this,
                     IN_APP_UPDATE_REQUEST_CODE
                 )
             }

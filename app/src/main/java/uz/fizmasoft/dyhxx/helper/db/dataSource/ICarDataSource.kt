@@ -14,4 +14,6 @@ interface ICarDataSource {
 
     fun allCar(): Flow<List<CarEntity>>
 
+    suspend fun editCar(carNumber: String, carMark: String, carModel: String)
+
 }

@@ -2,9 +2,12 @@ package uz.fizmasoft.dyhxx.di
 
 import android.content.Context
 import androidx.room.Room
+//import com.chuckerteam.chucker.api.Chucker
+//import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -31,14 +34,15 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideHttpClient(): OkHttpClient {
+    fun provideHttpClient(@ApplicationContext context: Context): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.HEADERS)
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient
             .Builder()
             .readTimeout(15, TimeUnit.SECONDS)
-            .addInterceptor(logging)
+//            .addInterceptor(logging)
+//            .addInterceptor(ChuckerInterceptor(context))
             .connectTimeout(15, TimeUnit.SECONDS)
             .build()
     }

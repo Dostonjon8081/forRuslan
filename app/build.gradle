@@ -11,7 +11,19 @@ plugins {
 
 android {
     signingConfigs {
-        debug {
+//        debug {
+//            storeFile file('C:\\Users\\User\\Downloads\\project\\SOFTDATA\\dyhxx\\dyhxx.jks')
+//            storePassword '987654321'
+//            keyAlias 'key0'
+//            keyPassword '987654321'
+//        }
+//        release {
+//            storeFile file('C:\\Users\\User\\Downloads\\project\\SOFTDATA\\dyhxx\\dyhxx.jks')
+//            storePassword '987654321'
+//            keyAlias 'key0'
+//            keyPassword '987654321'
+//        }
+        /*debug {
             storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
             storePassword '987654321'
             keyAlias 'key0'
@@ -19,6 +31,18 @@ android {
         }
         release {
             storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
+            storePassword '987654321'
+            keyAlias 'key0'
+            keyPassword '987654321'
+        }*/
+        debug {
+            storeFile file('D:\\for android\\dyhxx\\dyhxx.jks')
+            storePassword '987654321'
+            keyAlias 'key0'
+            keyPassword '987654321'
+        }
+        release {
+            storeFile file('D:\\for android\\dyhxx\\dyhxx.jks')
             storePassword '987654321'
             keyAlias 'key0'
             keyPassword '987654321'
@@ -31,8 +55,8 @@ android {
         applicationId "uz.fizmasoft.dyhxx"
         minSdkVersion 22
         targetSdkVersion 31
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 5
+        versionName "1.0.4"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -77,11 +101,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-    implementation 'com.google.firebase:firebase-crashlytics:18.0.0'
-    implementation 'com.google.firebase:firebase-analytics:19.0.0'
-    testImplementation 'junit:junit:4.+'
+ testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
@@ -122,11 +142,10 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-analytics:19.0.2'
-    implementation 'com.google.firebase:firebase-crash:16.2.1'
+//    implementation 'com.google.firebase:firebase-crash:16.2.1'
 
-    //firebase crash
-    implementation 'com.google.firebase:firebase-database-ktx'
+//    //firebase crash
+//    implementation 'com.google.firebase:firebase-database-ktx'
 
     //firebase deep link
 //    implementation 'com.google.firebase:firebase-dynamic-links-ktx'
@@ -145,4 +164,8 @@ dependencies {
     def in_app_update_version
     implementation 'com.google.android.play:core:1.10.2'
     implementation 'com.google.android.play:core-ktx:1.8.1'
+
+    //chucker
+//    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+//    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 }
