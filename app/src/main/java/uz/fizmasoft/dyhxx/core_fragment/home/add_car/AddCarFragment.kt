@@ -213,7 +213,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                     }
                 })
 
-
             } else {
                 carToast(requireContext(), getString(R.string.not_ethernet))
             }
