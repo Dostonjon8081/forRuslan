@@ -115,7 +115,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase().trim()
         if (carMark.isNotEmpty()) {
             if (binding.addCarFragmentEditTextCarModels.isVisible) {
-                carModel = binding.addCarFragmentEditTextCarModels.toString().trim()
+                carModel = binding.addCarFragmentEditTextCarModels.text.toString().trim()
             }
 
             viewModel.editCarDB(carNumber, carMark, carModel)
