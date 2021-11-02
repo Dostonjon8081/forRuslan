@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:735511020282:android:93be4b053097d9c0ff3f43",
+        "mobilesdk_app_id": "1:735511020282:android:b903424ed1281d36ff3f43",
         "android_client_info": {
           "package_name": "uz.fizmasoft.dyhxx"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "735511020282-5f2b52o4ddpmje72av39c0210vn4vogf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.fizmasoft.dyhxx",
+            "certificate_hash": "783d40fdc5cc1279eea307bcfa897dc9e7145cb1"
+          }
+        },
         {
           "client_id": "735511020282-e5osfepm7sp6ijhc610eo1nk4bcomp95.apps.googleusercontent.com",
           "client_type": 3
