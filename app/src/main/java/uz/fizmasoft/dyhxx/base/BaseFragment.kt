@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
@@ -15,6 +17,8 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     private var _binding: VB? = null
     val binding get() = _binding!!
+
+    protected val crashlytics by lazy { Firebase.crashlytics }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,11 +31,12 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     fun getBaseActivity(run: (BaseActivity<*>) -> Unit) {
         (activity as? BaseActivity<*>)?.let {
-            it?.let {
+            it.let {
                 run(it)
             }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
