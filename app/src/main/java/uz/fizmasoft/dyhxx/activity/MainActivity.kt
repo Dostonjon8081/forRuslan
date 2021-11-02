@@ -81,7 +81,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun onResume() {
         super.onResume()
         updateInProgress()
-        FirebaseCrashlytics.getInstance().log("Salom Boooy") // Force a crash
+//        FirebaseCrashlytics.getInstance().log("Salom Boooy")
     }
 
     private fun authentication(intent: Intent) {
