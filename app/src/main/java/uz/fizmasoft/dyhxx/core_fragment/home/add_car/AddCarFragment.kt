@@ -32,7 +32,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        FirebaseCrashlytics.getInstance().log("Alhamdulillah Alloh")
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 getBaseActivity {
@@ -126,9 +125,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun saveCar() {
-//        throw RuntimeException("Test Crash")
-//        FirebaseCrashlytics.getInstance()
-//            .log("message {it.data?.message}" + "status {it.data?.status}")
 
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase().trim()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase().trim()
@@ -191,19 +187,13 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                                     carToast(requireContext(), getString(R.string.bug_server))
                                 }
                                 else -> {
+
+                                    carToast(requireContext(),"Xatolik tuzatilmoqda. Iltimos qaytadan kirib urunib ko'ring")
+
                                     FirebaseCrashlytics.getInstance()
                                         .log("message ${it.data?.message}" + "status ${it.data?.status}")
-                                    throw RuntimeException("message ${it.data?.message}" + "status ${it.data?.status}")
-//                                    val myIntent =  Intent(
-//                                        Intent.ACTION_SEND,
-//                                        Uri.parse(TELEGRAM_FEEDBACK_URL)
-//                                    )
-//                                    myIntent.type = "text/plain"
-//                                    myIntent.putExtra(Intent.EXTRA_TEXT, "msg")
-//                                    startActivity(
-//                                       myIntent
-//                                    )
                                 }
+
                             }
 
                         }

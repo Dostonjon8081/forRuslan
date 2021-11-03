@@ -61,6 +61,8 @@
     <string name="save_file">save file</string>
     <string name="account_bugs_to_bot">Bugs in application</string>
     <string name="about_app_text">Application for checking fines</string>
+    <string name="rate">Rate</string>
+
 
 
 </resources>

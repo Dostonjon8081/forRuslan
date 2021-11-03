@@ -64,5 +64,6 @@
     <string name="content_des" translatable="false">PDF PAGE</string>
     <string name="account_bugs_to_bot">Ilovadagi xatoliklar</string>
     <string name="about_app_text">Jarimalarni tekshirish uchun dastur</string>
+    <string name="rate">Baholash</string>
 
 </resources>
