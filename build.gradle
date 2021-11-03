@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext{
+    ext {
         kotlin_version = "1.5.30"
     }
     repositories {
@@ -21,7 +21,7 @@ buildscript {
         //gms service
         classpath 'com.google.gms:google-services:4.3.10'
         //firebase crash
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.0'
 
 
     }

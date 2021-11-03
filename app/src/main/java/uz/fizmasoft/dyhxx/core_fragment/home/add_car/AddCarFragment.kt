@@ -1,8 +1,6 @@
 package uz.fizmasoft.dyhxx.core_fragment.home.add_car
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -11,6 +9,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.crashlytics.ktx.setCustomKeys
 import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseFragment
@@ -102,7 +101,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun saveOrEditCar() {
-        if (args?.carArgs == null) {
+        if (args.carArgs == null) {
             saveCar()
         } else {
             editCar()
@@ -185,15 +184,12 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                                     carToast(requireContext(), getString(R.string.bug_server))
                                 }
                                 else -> {
-//                                    val myIntent =  Intent(
-//                                        Intent.ACTION_SEND,
-//                                        Uri.parse(TELEGRAM_FEEDBACK_URL)
-//                                    )
-//                                    myIntent.type = "text/plain"
-//                                    myIntent.putExtra(Intent.EXTRA_TEXT, "msg")
-//                                    startActivity(
-//                                       myIntent
-//                                    )
+                                    crashlytics.setCustomKeys {
+                                        key("status", it.data?.status ?: 0)
+                                        key("message", it.data?.message ?: "")
+                                        key("user_id",getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")?:"")
+                                    }
+                                    crashlytics.recordException(Throwable())
                                 }
                             }
 
