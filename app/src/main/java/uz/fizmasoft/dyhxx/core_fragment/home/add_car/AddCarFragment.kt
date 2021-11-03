@@ -9,12 +9,11 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
-<<<<<<< HEAD
-import com.google.firebase.crashlytics.ktx.setCustomKeys
-=======
 import com.google.firebase.crashlytics.FirebaseCrashlytics
->>>>>>> 942319c485ca2a2a8aaf1a33e8201c21a7a6a07a
+import com.google.firebase.crashlytics.ktx.setCustomKeys
+
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.Cache.Companion.key
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.core_fragment.home.SpinnerItemClick
@@ -191,20 +190,20 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                                     carToast(requireContext(), getString(R.string.bug_server))
                                 }
                                 else -> {
-<<<<<<< HEAD
+
                                     crashlytics.setCustomKeys {
                                         key("status", it.data?.status ?: 0)
                                         key("message", it.data?.message ?: "")
                                         key("user_id",getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")?:"")
                                     }
                                     crashlytics.recordException(Throwable())
-=======
+
 
                                     carToast(requireContext(),"Xatolik tuzatilmoqda. Iltimos qaytadan kirib urunib ko'ring")
 
                                     FirebaseCrashlytics.getInstance()
                                         .log("message ${it.data?.message}" + "status ${it.data?.status}")
->>>>>>> 942319c485ca2a2a8aaf1a33e8201c21a7a6a07a
+
                                 }
 
                             }
