@@ -40,10 +40,10 @@ class RepositoryModule {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient
             .Builder()
-            .readTimeout(15, TimeUnit.SECONDS)
+//            .readTimeout(15, TimeUnit.SECONDS)
 //            .addInterceptor(logging)
 //            .addInterceptor(ChuckerInterceptor(context))
-            .connectTimeout(15, TimeUnit.SECONDS)
+//            .connectTimeout(15, TimeUnit.SECONDS)
             .build()
     }
 

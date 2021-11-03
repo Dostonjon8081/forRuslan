@@ -9,7 +9,11 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+<<<<<<< HEAD
 import com.google.firebase.crashlytics.ktx.setCustomKeys
+=======
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+>>>>>>> 942319c485ca2a2a8aaf1a33e8201c21a7a6a07a
 import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseFragment
@@ -17,6 +21,7 @@ import uz.fizmasoft.dyhxx.core_fragment.home.SpinnerItemClick
 import uz.fizmasoft.dyhxx.databinding.FragmentAddCarBinding
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.util.*
+import java.lang.RuntimeException
 
 @AndroidEntryPoint
 class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
@@ -31,7 +36,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 getBaseActivity {
@@ -125,6 +129,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     private fun saveCar() {
+
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase().trim()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase().trim()
         val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
@@ -150,7 +155,9 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
                 viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
 
+
                     when (it) {
+
                         is NetworkResult.Loading -> {
                             binding.wp7progressBar.show()
                         }
@@ -184,13 +191,22 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                                     carToast(requireContext(), getString(R.string.bug_server))
                                 }
                                 else -> {
+<<<<<<< HEAD
                                     crashlytics.setCustomKeys {
                                         key("status", it.data?.status ?: 0)
                                         key("message", it.data?.message ?: "")
                                         key("user_id",getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")?:"")
                                     }
                                     crashlytics.recordException(Throwable())
+=======
+
+                                    carToast(requireContext(),"Xatolik tuzatilmoqda. Iltimos qaytadan kirib urunib ko'ring")
+
+                                    FirebaseCrashlytics.getInstance()
+                                        .log("message ${it.data?.message}" + "status ${it.data?.status}")
+>>>>>>> 942319c485ca2a2a8aaf1a33e8201c21a7a6a07a
                                 }
+
                             }
 
                         }

@@ -64,4 +64,6 @@
     <string name="save_file">Загрузит</string>
     <string name="account_bugs_to_bot">Ошибки в приложении</string>
     <string name="about_app_text">Приложение для проверки штрафов</string>
+    <string name="rate">Оценить</string>
+
 </resources>
