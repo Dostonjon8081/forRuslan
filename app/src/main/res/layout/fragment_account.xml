@@ -35,19 +35,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/account_fragment_img"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/account_card_image_view"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:padding="10dp"
-                android:src="@drawable/ic_person"
+                app:cardCornerRadius="40dp"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toStartOf="@id/account_fragment_welcome"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/account_fragment_img"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_person" />
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatTextView
 
                 android:layout_width="0dp"
+                android:id="@+id/account_fragment_welcome"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroy_semibold"
                 android:maxLines="1"
@@ -56,41 +66,41 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/account_fragment_logout"
-                app:layout_constraintStart_toEndOf="@id/account_fragment_img"
+                app:layout_constraintStart_toEndOf="@id/account_card_image_view"
                 app:layout_constraintTop_toTopOf="parent"
-                 app:layout_constraintVertical_weight="0.6" />
-
-          <!--  <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/account_fragment_welcome"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:fontFamily="@font/gilroy_semibold"
-                android:gravity="bottom"
-                android:maxLines="1"
-                android:text="@string/welcome"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@id/account_fragment_name"
-                app:layout_constraintEnd_toStartOf="@id/account_fragment_logout"
-                app:layout_constraintStart_toEndOf="@id/account_fragment_img"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_weight="0.40" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/account_fragment_name"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:fontFamily="@font/gilroy_semibold"
-                android:maxLines="1"
-                android:text="@string/we_happy"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/account_fragment_logout"
-                app:layout_constraintStart_toEndOf="@id/account_fragment_img"
-                app:layout_constraintTop_toBottomOf="@id/account_fragment_welcome"
                 app:layout_constraintVertical_weight="0.6" />
 
--->
+            <!--  <androidx.appcompat.widget.AppCompatTextView
+                  android:id="@+id/account_fragment_welcome"
+                  android:layout_width="0dp"
+                  android:layout_height="0dp"
+                  android:fontFamily="@font/gilroy_semibold"
+                  android:gravity="bottom"
+                  android:maxLines="1"
+                  android:text="@string/welcome"
+                  android:textSize="12sp"
+                  app:layout_constraintBottom_toTopOf="@id/account_fragment_name"
+                  app:layout_constraintEnd_toStartOf="@id/account_fragment_logout"
+                  app:layout_constraintStart_toEndOf="@id/account_fragment_img"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintVertical_weight="0.40" />
+
+              <androidx.appcompat.widget.AppCompatTextView
+                  android:id="@+id/account_fragment_name"
+                  android:layout_width="0dp"
+                  android:layout_height="0dp"
+                  android:fontFamily="@font/gilroy_semibold"
+                  android:maxLines="1"
+                  android:text="@string/we_happy"
+                  android:textColor="@color/black"
+                  android:textSize="20sp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toStartOf="@id/account_fragment_logout"
+                  app:layout_constraintStart_toEndOf="@id/account_fragment_img"
+                  app:layout_constraintTop_toBottomOf="@id/account_fragment_welcome"
+                  app:layout_constraintVertical_weight="0.6" />
+
+  -->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/account_fragment_logout"
                 android:layout_width="wrap_content"
@@ -130,8 +140,8 @@
             android:text="@string/language"
             android:textColor="@color/dark_blue" />
 
-
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/about_app"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -139,7 +149,6 @@
             android:drawableEnd="@drawable/ic_arrow_right"
             android:drawablePadding="14dp"
             android:padding="10dp"
-            android:id="@+id/about_app"
             android:text="@string/about_app"
             android:textColor="@color/dark_blue" />
 
@@ -166,7 +175,6 @@
             android:padding="10dp"
             android:text="@string/rate"
             android:textColor="@color/red" />
-
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

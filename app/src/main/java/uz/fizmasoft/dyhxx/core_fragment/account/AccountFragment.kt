@@ -52,19 +52,18 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
         binding.accountAppVersion.text = "version: ${BuildConfig.VERSION_NAME}"
     }
 
-
     private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                // There are no request codes
                 val data: Intent? = result.data
-                logd(data?.data.toString())
+                binding.accountFragmentImg.setImageURI(data?.data)
             }
-
         }
 
     private fun openSomeActivityForResult() {
-        val intent = Intent(Intent.ACTION_PICK)
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
         resultLauncher.launch(intent)
     }
 
@@ -161,7 +160,6 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
     private fun redirectToPlayStore() {
         val appPackageName: String = requireActivity().packageName
         try {
-            logd("toto")
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
