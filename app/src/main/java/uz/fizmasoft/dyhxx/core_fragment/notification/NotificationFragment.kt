@@ -10,8 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class Notification : Fragment() {
-
+class NotificationFragment : Fragment() {
+/*
     private var _binding: FragmentNotificationBinding? = null
     private val binding get() = _binding!!
 
@@ -28,5 +28,5 @@ class Notification : Fragment() {
     override fun onDetach() {
         super.onDetach()
         _binding = null
-    }
+    }*/
 }

@@ -8,7 +8,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.InstallStateUpdatedListener
@@ -29,8 +28,8 @@ import uz.fizmasoft.dyhxx.core_fragment.home.HomeViewModel
 import uz.fizmasoft.dyhxx.databinding.ActivityMainBinding
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
-import uz.fizmasoft.dyhxx.helper.network.model.AllCars
 import uz.fizmasoft.dyhxx.helper.util.*
+import java.util.concurrent.Executors
 
 
 @AndroidEntryPoint
@@ -59,11 +58,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         setLocale(LocaleHelper.getLanguage(this))
 
         navController = findNavController(R.id.container_main_navigation)
-        val navView = binding.idBottomNavigation
-        navController?.let { navView.setupWithNavController(it) }
 
         if (intent?.data != null) {
-
             authentication(intent)
         }
     }
@@ -102,49 +98,80 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     private fun loadDataFromApi(token: String) {
-        val editPref = getPref(this@MainActivity).edit()
-        viewModel.getUserIdApi(token)
-        viewModel.responseUserIdApi.observe(this) {
-            try {
-
-                when (it) {
-                    is NetworkResult.Success -> {
-
-                        editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).apply()
-                        viewModel.allCarsApi(AllCars(it.data?.user_id.toString()))
-                        viewModel.responseAllCarsApi.observe(this, EventObserver { data ->
-
-                            when (data) {
-                                is NetworkResult.Success -> {
-                                    if (data.data?.data != null && data.data.status != 404) {
-                                        for (item in data.data.data) {
-                                            viewModel.insertCarDB(
-                                                CarEntity(0, item.passport, item.tex_passport)
+        viewModel.allCarsApi(token)
+        viewModel.responseAllCarsApi.observe(this, EventObserver { result ->
+            when (result) {
+                is NetworkResult.Loading -> {
+                }
+                is NetworkResult.Success -> {
+                    viewModel.allCarsDB()
+                    viewModel.allCarDB.observe(this) { dbList ->
+                        if (dbList.isEmpty()) {
+                            Executors.newSingleThreadExecutor().execute {
+                                if (result.data?.isNotEmpty()!!) {
+                                    for (resultItem in result.data) {
+                                        viewModel.insertCarDB(
+                                            CarEntity(
+                                                0,
+                                                resultItem.car_number,
+                                                resultItem.tex_passport
                                             )
-                                        }
-
+                                        )
                                     }
                                 }
-                                is NetworkResult.Error -> {
-                                }
-                                is NetworkResult.Loading -> {
-                                }
                             }
-
-                        })
-                    }
-                    is NetworkResult.Error -> {
-                        carToast(this, "Ro'yhatdan o'tish amalga oshmadi. Iltimos qaytadan o'ting")
-                    }
-                    is NetworkResult.Loading -> {
-                        carToast(this, "Loading...")
+                        }
                     }
                 }
-
-            } catch (e: Exception) {
-                carToast(this, e.toString())
+                is NetworkResult.Error -> {
+                }
             }
-        }
+        })
+
+//        logd(token)
+//         val editPref = getPref(this@MainActivity).edit()
+//        viewModel.getUserIdApi(token)
+        /*   viewModel.responseUserIdApi.observe(this) {
+               try {
+
+                   when (it) {
+                       is NetworkResult.Success -> {
+
+                           editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).apply()
+                           viewModel.allCarsApi(token)
+                           viewModel.responseAllCarsApi.observe(this, EventObserver { data ->
+
+                               when (data) {
+                                   is NetworkResult.Success -> {
+                                       if (data.data?.isNotEmpty()!!) {
+                                           for (item in data.data) {
+                                               viewModel.insertCarDB(
+                                                   CarEntity(0, item.car_number, item.tex_passport)
+                                               )
+                                           }
+
+                                       }
+                                   }
+                                   is NetworkResult.Error -> {
+                                   }
+                                   is NetworkResult.Loading -> {
+                                   }
+                               }
+
+                           })
+                       }
+                       is NetworkResult.Error -> {
+                           carToast(this, "Ro'yhatdan o'tish amalga oshmadi. Iltimos qaytadan o'ting")
+                       }
+                       is NetworkResult.Loading -> {
+                           carToast(this, "Loading...")
+                       }
+                   }
+
+               } catch (e: Exception) {
+                   carToast(this, e.toString())
+               }
+           }*/
 
     }
 
@@ -152,16 +179,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         LocaleHelper.setLocale(this, language)
     }
 
-
     private fun checkUpdate() {
-//        logd("in check update")
         val appUpdateInfoTask = appUpdateManager?.appUpdateInfo
 
         appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
                 && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
             ) {
-//                logd(avialable update)
 
                 appUpdateManager.startUpdateFlowForResult(
                     appUpdateInfo,
@@ -170,7 +194,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     IN_APP_UPDATE_REQUEST_CODE
                 )
             } else {
-//                logd("No Update available")
             }
         }
         appUpdateInfoTask?.addOnFailureListener {

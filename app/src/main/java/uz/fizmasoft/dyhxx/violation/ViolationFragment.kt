@@ -19,6 +19,8 @@ import java.util.*
 
 
 class ViolationFragment :
+    BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate){
+/*class ViolationFragment :
     BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate), ClickViolationRv {
 
     private val viewModel: ViolationViewModel by activityViewModels()
@@ -180,8 +182,8 @@ class ViolationFragment :
                     PDFUtils.openPDF(
                         requireActivity(),
                         requireActivity().filesDir.absolutePath,
-                        violationPDFModel!!.id,
-                        violationPDFQaror!!.qaror
+                        violationPDFModel?.id?:"",
+                        violationPDFQaror?.qaror?:""
                     )
 
                     violationPDFModel = null
@@ -196,6 +198,6 @@ class ViolationFragment :
             }
 
         })
-    }
+    }*/
 
 }

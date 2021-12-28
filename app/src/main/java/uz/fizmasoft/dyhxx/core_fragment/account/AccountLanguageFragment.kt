@@ -39,7 +39,7 @@ class AccountLanguageFragment :
                 R.id.english -> this.setLocale("en")
                 R.id.uzbek -> this.setLocale("uz")
             }
-            navController!!.navigate(R.id.account_fragment)
+//            navController!!.navigate(R.id.account_fragment)
         }
 
 //        when (view.id) {

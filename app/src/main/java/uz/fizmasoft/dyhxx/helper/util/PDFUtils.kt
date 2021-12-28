@@ -11,7 +11,6 @@ import android.os.Environment
 import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import kotlinx.coroutines.*
 import uz.fizmasoft.dyhxx.helper.pdfviewer.PdfViewerActivity
 import java.io.File
 import java.io.FileOutputStream
@@ -60,30 +59,35 @@ object PDFUtils {
 
         val dir = File(dirPath)
         val idPdf = File(dir, "$id.pdf")
-            if (!idPdf.exists()) {
-                idPdf.createNewFile()
+        if (!idPdf.exists()) {
+            idPdf.createNewFile()
 
-                try {
-                    val pdfAsBytes: ByteArray? =
-                        android.util.Base64.decode(pdf, android.util.Base64.DEFAULT)
-                    val os = FileOutputStream(idPdf, false)
+            try {
+                val pdfAsBytes: ByteArray? =
+                    android.util.Base64.decode(pdf, android.util.Base64.DEFAULT)
+                val os = FileOutputStream(idPdf, false)
 
-                    os.write(pdfAsBytes)
-                    os.flush()
-                    os.close()
-                    // openPDF(activity,dirPath,id)
+                os.write(pdfAsBytes)
+                os.flush()
+                os.close()
+                // openPDF(activity,dirPath,id)
 
-                } catch (e: Exception) {
-                }
+            } catch (e: Exception) {
             }
+        }
 
     }
 
-    fun openPDF(activity: Activity, dirPath: String, id: String, qaror: String = "DYHXX") {
+    fun openPDF(
+        activity: Activity,
+        dirPath: String = "",
+        id: String = "",
+        qaror: String = "DYHXX"
+    ) {
 
         activity.startActivity(
             PdfViewerActivity.launchPdfFromPath(
-                activity, dirPath,"$id.pdf", qaror, "files", true
+                activity, dirPath, "$id.pdf", qaror, "files", true
             )
         )
     }

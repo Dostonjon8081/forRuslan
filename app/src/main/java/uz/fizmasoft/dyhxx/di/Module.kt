@@ -18,7 +18,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class Module {
 
-
     @Singleton
     @Binds
     abstract fun bindCarDataSource(carDataSourceImpl: CarDataSourceImpl): ICarDataSource

@@ -27,8 +27,8 @@ import uz.fizmasoft.dyhxx.helper.util.logd
 
 
 @AndroidEntryPoint
-class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBinding::inflate) {
-
+class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBinding::inflate){
+/*
     private val viewModel: AccountViewModel by activityViewModels()
     private var pref: SharedPreferences? = null
 
@@ -88,7 +88,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
 
     private fun aboutApp() {
         getBaseActivity {
-            it.navController?.navigate(AccountFragmentDirections.actionAccountFragmentToAboutFragment())
+//            it.navController?.navigate(AccountFragmentDirections.actionAccountFragmentToAboutFragment())
         }
     }
 
@@ -109,8 +109,8 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
             getPref(it).edit().clear().apply()
             viewModel.deleteAll()
             it.navController?.navigate(R.id.select_language_fragment)
-            (it as uz.fizmasoft.dyhxx.activity.MainActivity).binding.idBottomNavigation.visibility =
-                View.GONE
+//            (it as uz.fizmasoft.dyhxx.activity.MainActivity).binding.idBottomNavigation.visibility =
+//                View.GONE
         }
     }
 
@@ -175,5 +175,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
             )
         }
     }
+    */
+ */
 
 }

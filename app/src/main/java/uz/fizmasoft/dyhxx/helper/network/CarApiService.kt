@@ -6,6 +6,7 @@ import uz.fizmasoft.dyhxx.violation.ViolationCarApiModel
 import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import uz.fizmasoft.dyhxx.violation.ViolationPDFModel
@@ -22,8 +23,8 @@ interface CarApiService {
     @POST("carlist/save")
     suspend fun saveCar(@Body saveCarModel: SaveCarModel): Response<SaveCarResponse>
 
-    @POST("carlist/")
-    suspend fun allCars(@Body allCars: AllCars): Response<AllCarsResponse>
+    @GET("cars/")
+    suspend fun allCars(@Header("authorization") token: String): Response<List<AllCarsData>>
 
     @POST("carlist/remove")
     suspend fun removeCar(@Body removeCarModel: RemoveCarModel): Response<RemoveCarModelResponse>

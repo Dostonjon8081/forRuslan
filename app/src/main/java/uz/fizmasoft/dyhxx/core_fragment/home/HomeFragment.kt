@@ -1,21 +1,16 @@
 package uz.fizmasoft.dyhxx.core_fragment.home
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.R
-import uz.fizmasoft.dyhxx.activity.MainActivity
 import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentHomeBinding
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
-import uz.fizmasoft.dyhxx.helper.network.model.AllCars
 import uz.fizmasoft.dyhxx.helper.network.model.RemoveCarModel
 import uz.fizmasoft.dyhxx.helper.util.*
 import java.util.concurrent.Executors
@@ -32,22 +27,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         super.onViewCreated(view, savedInstanceState)
         viewModel.allCarsDB()
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            (activity as? MainActivity)?.let {
-                if (!it.binding.idBottomNavigation.isVisible) {
-                    it.binding.idBottomNavigation.visibility = View.VISIBLE
-                }
-            }
-        }, 400)
+//        binding.homeFragmentButtonAddCar.setOnClickListener { addCar() }
+//        binding.homeFragmentButtonAddCarBtn.setOnClickListener { addCar() }
 
-        binding.homeFragmentButtonAddCar.setOnClickListener { addCar() }
-        binding.homeFragmentButtonAddCarBtn.setOnClickListener { addCar() }
         binding.homeFragmentSwipeRefresh.setColorSchemeColors(
             ContextCompat.getColor(
                 requireContext(),
-                R.color.toolbar_color
+                R.color.button_blue_color
             )
         )
+
         binding.homeFragmentSwipeRefresh.setOnRefreshListener(this::swipeRefresh)
 
         loadData()
@@ -55,13 +44,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun loadData() {
         viewModel.allCarDB.observe(viewLifecycleOwner, { t ->
+            logd(t)
             if (t?.size!! > 0) {
-                binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
-                if (t.size >= 8) {
-                    binding.homeFragmentButtonAddCar.visibility = View.GONE
-                } else {
-                    binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
-                }
+//                binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
+                /* if (t.size >= 8) {
+ //                    binding.homeFragmentButtonAddCar.visibility = View.GONE
+                 } else {
+ //                    binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
+                 }*/
                 adapter.rvClickListener(this@HomeFragment)
                 listCarEntity.clear()
                 listCarEntity.addAll(t)
@@ -70,14 +60,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 binding.homeFragmentNoCarContainer.visibility = View.GONE
                 binding.homeFragmentRv.adapter = adapter
                 adapter.submitList(t)
-                binding.homeFragmentButtonAddCar.visibility = if (t.size >= 8) {
-                    View.GONE
-                } else {
-                    View.VISIBLE
-                }
+//                binding.homeFragmentButtonAddCar.visibility = if (t.size >= 8) {
+//                    View.GONE
+//                } else {
+//                    View.VISIBLE
+//                }
             } else {
+                swipeRefresh()
                 binding.homeFragmentNoCarContainer.visibility = View.VISIBLE
-                binding.homeFragmentButtonAddCar.visibility = View.GONE
+//                binding.homeFragmentButtonAddCar.visibility = View.GONE
                 binding.homeFragmentRv.visibility = View.GONE
             }
         })
@@ -87,12 +78,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         if (requireActivity().intent.data == null) {
             viewModel.allCarsApi(
-                AllCars(
-                    getPref(requireActivity()).getString(
-                        PREF_USER_ID_KEY,
-                        ""
-                    )!!
-                )
+                getPref(requireActivity()).getString(
+                    PREF_TOKEN_KEY,
+                    ""
+                )!!
             )
         }
         viewModel.responseAllCarsApi.observe(this, EventObserver { result ->
@@ -100,27 +89,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             when (result) {
                 is NetworkResult.Loading -> {
                 }
+
                 is NetworkResult.Success -> {
                     binding.homeFragmentSwipeRefresh.isRefreshing = false
                     Executors.newSingleThreadExecutor().execute {
-                        if (result.data?.status == 200) {
-                            for (resultItem in result.data.data) {
+                        if (result.data?.isNotEmpty()!!) {
+                            for (resultItem in result.data) {
 
-                                if (listCarEntity.all { it.carNumber != resultItem.passport }) {
+//                                if (listCarEntity.isNotEmpty())
+                                if (listCarEntity.all { it.carNumber != resultItem.car_number }) {
 
                                     viewModel.insertCarDB(
                                         CarEntity(
                                             0,
-                                            resultItem.passport,
+                                            resultItem.car_number,
                                             resultItem.tex_passport
                                         )
                                     )
                                 }
                             }
 
-                            if (result.data.data.size < listCarEntity.size) {
+                            if (result.data.size < listCarEntity.size) {
                                 for (listItem in listCarEntity) {
-                                    if (result.data.data.all { it.passport != listItem.carNumber }) {
+                                    if (result.data.all { it.car_number != listItem.carNumber }) {
                                         viewModel.removeCarDB(listItem.carNumber)
                                     }
                                 }
@@ -128,17 +119,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         }
                     }
                 }
+
                 is NetworkResult.Error -> {
                 }
             }
-            navigateToHome()
+//            navigateToHome()
         })
         binding.homeFragmentSwipeRefresh.isRefreshing = false
     }
 
     private fun addCar() {
         getBaseActivity {
-            it.navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment())
+//            it.navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment())
         }
     }
 
@@ -157,22 +149,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun clickedItem(position: Int) {
         getBaseActivity {
-            it.navController?.navigate(
-                HomeFragmentDirections.actionHomeFragmentToViolationFragment(
-                    listCarEntity[position]
-                )
-            )
+            /* it.navController?.navigate(
+                 HomeFragmentDirections.actionHomeFragmentToViolationFragment(
+                     listCarEntity[position]
+                 )
+             )*/
         }
     }
 
 
     override fun clickedItemEdit(carEntity: CarEntity) {
         getBaseActivity {
-            it.navController?.navigate(
-                HomeFragmentDirections.actionHomeFragmentToAddCarFragment(
-                    carEntity
-                )
-            )
+            /* it.navController?.navigate(
+                 HomeFragmentDirections.actionHomeFragmentToAddCarFragment(
+                     carEntity
+                 )
+             )*/
         }
     }
 
@@ -194,16 +186,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
 //                }
             }
-            navigateToHome()
+//            navigateToHome()
         })
 
     }
 
-    private fun navigateToHome() {
-        getBaseActivity {
-            it.navController!!.navigate(R.id.home_fragment)
-        }
-    }
+    /*  private fun navigateToHome() {
+          getBaseActivity {
+              it.navController!!.navigate(R.id.home_fragment)
+          }
+      }*/
 
 
 }

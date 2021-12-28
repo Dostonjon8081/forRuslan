@@ -13,7 +13,7 @@ interface ICarApiRepository {
     suspend fun getUserId(token: String): Flow<NetworkResult<UserAuthIDModel>>
     suspend fun checkLimit(checkLimitModel: CheckLimitModel): Flow<NetworkResult<CheckLimitModelResponse>>
     suspend fun saveCar(saveCarModel: SaveCarModel): Flow<NetworkResult<SaveCarResponse>>
-    suspend fun allCars(allCars: AllCars): Flow<NetworkResult<AllCarsResponse>>
+    suspend fun allCars(token: String): Flow<NetworkResult<List<AllCarsData>>>
     suspend fun removeCar(removeCarModel: RemoveCarModel): Flow<NetworkResult<RemoveCarModelResponse>>
     suspend fun getViolation(model: ViolationCarApiModel): Flow<NetworkResult<ViolationCarApiModelResponse>>
     suspend fun getPdfFile(violationPDFModel: ViolationPDFModel):Flow<NetworkResult<ViolationPDFResponseModel>>

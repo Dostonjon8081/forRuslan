@@ -23,6 +23,8 @@ import uz.fizmasoft.dyhxx.helper.util.*
 import java.lang.RuntimeException
 
 @AndroidEntryPoint
+class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate) {
+/*
 class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
     SpinnerItemClick {
 
@@ -299,6 +301,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         }
     }
 
+*/
 
 }
 

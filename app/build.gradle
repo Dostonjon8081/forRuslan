@@ -11,18 +11,18 @@ plugins {
 
 android {
     signingConfigs {
-//        debug {
-//            storeFile file('C:\\Users\\User\\Downloads\\project\\SOFTDATA\\dyhxx\\dyhxx.jks')
-//            storePassword '987654321'
-//            keyAlias 'key0'
-//            keyPassword '987654321'
-//        }
-//        release {
-//            storeFile file('C:\\Users\\User\\Downloads\\project\\SOFTDATA\\dyhxx\\dyhxx.jks')
-//            storePassword '987654321'
-//            keyAlias 'key0'
-//            keyPassword '987654321'
-//        }
+        /*debug {
+            storeFile file('C:\\Users\\User\\Downloads\\project\\SOFTDATA\\dyhxx\\dyhxx.jks')
+            storePassword '987654321'
+            keyAlias 'key0'
+            keyPassword '987654321'
+        }
+        release {
+            storeFile file('C:\\Users\\User\\Downloads\\project\\SOFTDATA\\dyhxx\\dyhxx.jks')
+            storePassword '987654321'
+            keyAlias 'key0'
+            keyPassword '987654321'
+        }*/
         debug {
             storeFile file('C:\\Users\\User\\Downloads\\projects\\forSoftData\\dyhxx\\dyhxx.jks')
             storePassword '987654321'
@@ -71,10 +71,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -82,6 +84,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
     kapt {
         correctErrorTypes true
     }

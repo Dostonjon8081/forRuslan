@@ -57,7 +57,6 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/add_car_fragment_et_car_number"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:background="@drawable/background_white_gray_stoke"
             android:drawableEnd="@drawable/ic_about"
@@ -244,7 +243,7 @@
             style="@style/ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_background"
+            android:background="@drawable/language_button_background"
             android:fontFamily="@font/gilroy_semibold"
             android:gravity="center"
             android:text="@string/save"

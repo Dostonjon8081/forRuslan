@@ -15,22 +15,22 @@
             app:enterAnim="@anim/slide_in_bottom"
             app:exitAnim="@anim/slide_out_bottom"
             app:popExitAnim="@anim/slide_out_bottom" />
+
         <action
-            android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/home_fragment"
-            app:enterAnim="@anim/coming"
-            app:exitAnim="@anim/out" />
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popExitAnim="@anim/slide_out_bottom"
+            android:id="@+id/action_splash_fragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+
+
     </fragment>
 
     <fragment
         android:id="@+id/auth_fragment"
         android:name="uz.fizmasoft.dyhxx.init.AuthFragment"
         android:label="AuthFragment"
-        tools:layout="@layout/fragment_auth">
-        <action
-            android:id="@+id/action_authFragment_to_homeFragment"
-            app:destination="@id/home_fragment" />
-    </fragment>
+        tools:layout="@layout/fragment_auth"/>
 
     <fragment
         android:id="@+id/select_language_fragment"
@@ -41,66 +41,11 @@
             android:id="@+id/action_selectLanguageFragment_to_authFragment"
             app:destination="@id/auth_fragment" />
     </fragment>
-
     <fragment
-        android:id="@+id/home_fragment"
-        android:name="uz.fizmasoft.dyhxx.core_fragment.home.HomeFragment"
-        android:label="@string/home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_home_fragment_to_addCarFragment"
-            app:destination="@id/add_car_fragment" />
-        <action
-            android:id="@+id/action_home_fragment_to_violationFragment"
-            app:destination="@id/violationFragment" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/notification_fragment"
-        android:name="uz.fizmasoft.dyhxx.core_fragment.notification.Notification"
-        android:label="@string/notification"
-        tools:layout="@layout/fragment_notification" />
-
-    <fragment
-        android:id="@+id/account_fragment"
-        android:name="uz.fizmasoft.dyhxx.core_fragment.account.AccountFragment"
-        android:label="@string/account"
-        tools:layout="@layout/fragment_account">
-        <action
-            android:id="@+id/action_account_fragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
-    </fragment>
-
-
-    <fragment
-        tools:layout="@layout/fragment_about"
-        android:id="@+id/aboutFragment"
-        android:name="uz.fizmasoft.dyhxx.core_fragment.account.about_app.AboutFragment"
-        android:label="AboutFragment" />
-
-    <fragment
-        android:id="@+id/add_car_fragment"
-        android:name="uz.fizmasoft.dyhxx.core_fragment.home.add_car.AddCarFragment"
-        android:label="AddCarFragment"
-        tools:layout="@layout/fragment_add_car">
-        <argument
-            android:name="carArgs"
-            app:argType="uz.fizmasoft.dyhxx.helper.db.CarEntity"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </fragment>
-
-    <fragment
-        tools:layout="@layout/fragment_violation"
-        android:id="@+id/violationFragment"
-        android:name="uz.fizmasoft.dyhxx.violation.ViolationFragment"
-        android:label="ViolationFragment" >
-        <argument
-            android:name="violationArgs"
-            app:argType="uz.fizmasoft.dyhxx.helper.db.CarEntity"
-            app:nullable="false" />
-    </fragment>
+        tools:layout="@layout/fragment_main"
+        android:id="@+id/mainFragment"
+        android:name="uz.fizmasoft.dyhxx.main_fragment.MainFragment"
+        android:label="MainFragment" />
 
 
 </navigation>

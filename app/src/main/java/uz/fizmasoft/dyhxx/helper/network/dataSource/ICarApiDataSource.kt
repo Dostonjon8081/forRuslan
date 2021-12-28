@@ -14,7 +14,7 @@ interface ICarApiDataSource {
 
     suspend fun checkLimit(checkLimitModel: CheckLimitModel): Response<CheckLimitModelResponse>
     suspend fun saveCar(saveCarModel: SaveCarModel): Response<SaveCarResponse>
-    suspend fun allCars(allCars: AllCars): Response<AllCarsResponse>
+    suspend fun allCars(token: String): Response<List<AllCarsData>>
     suspend fun removeCar(removeCarModel: RemoveCarModel): Response<RemoveCarModelResponse>
     suspend fun getViolation(model: ViolationCarApiModel): Response<ViolationCarApiModelResponse>
     suspend fun getPdfFile(violationPDFModel: ViolationPDFModel): Response<ViolationPDFResponseModel>

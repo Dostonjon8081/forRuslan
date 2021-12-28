@@ -66,4 +66,7 @@
     <string name="about_app_text">Приложение для проверки штрафов</string>
     <string name="rate">Оценить</string>
 
+
+    <string name="select_language">Выберите язык</string>
+
 </resources>

@@ -63,6 +63,7 @@
     <string name="about_app_text">Application for checking fines</string>
     <string name="rate">Rate</string>
 
+    <string name="select_language">Select a language</string>
 
 
 </resources>

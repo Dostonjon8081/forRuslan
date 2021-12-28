@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate) {
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.idAuthFragmentButtonTelegram.setOnClickListener {
@@ -28,7 +27,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
     override fun onStart() {
         super.onStart()
         if (!getPref(requireActivity()).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()) {
-            (activity as uz.fizmasoft.dyhxx.activity.MainActivity).navController?.navigate(R.id.action_authFragment_to_homeFragment)
+//            (activity as MainActivity).navController?.navigate(R.id.action_authFragment_to_homeFragment)
         }
     }
 

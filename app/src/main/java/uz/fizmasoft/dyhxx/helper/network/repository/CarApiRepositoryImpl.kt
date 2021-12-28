@@ -41,10 +41,10 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
         }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun allCars(allCars: AllCars): Flow<NetworkResult<AllCarsResponse>> {
+    override suspend fun allCars(token: String): Flow<NetworkResult<List<AllCarsData>>> {
         return flow {
             emit(safeApiCall {
-                iCarApiDataSource.allCars(allCars)
+                iCarApiDataSource.allCars(token)
             })
         }.flowOn(Dispatchers.IO)
     }
