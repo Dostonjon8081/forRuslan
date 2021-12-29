@@ -54,9 +54,9 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private val _responseAllCarsApi: MutableLiveData<Event<NetworkResult<List<AllCarsData>>>> =
+    private val _responseAllCarsApi: MutableLiveData<Event<NetworkResult<List<AllCarsResponseModel>>>> =
         MutableLiveData()
-    val responseAllCarsApi: LiveData<Event<NetworkResult<List<AllCarsData>>>> = _responseAllCarsApi
+    val responseAllCarsApi: LiveData<Event<NetworkResult<List<AllCarsResponseModel>>>> = _responseAllCarsApi
     fun allCarsApi(token: String) = viewModelScope.launch {
         apiRepository.allCars(token).collect { values ->
             _responseAllCarsApi.postValue(Event(values))

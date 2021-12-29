@@ -41,11 +41,28 @@
             android:id="@+id/action_selectLanguageFragment_to_authFragment"
             app:destination="@id/auth_fragment" />
     </fragment>
+
     <fragment
         tools:layout="@layout/fragment_main"
         android:id="@+id/mainFragment"
         android:name="uz.fizmasoft.dyhxx.main_fragment.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+         <action
+            android:id="@+id/action_mainFragment_to_addCarFragment"
+            app:destination="@id/addCarFragment" />
+    </fragment>
 
+    <fragment
+        tools:layout="@layout/fragment_add_car"
+        android:id="@+id/addCarFragment"
+        android:name="uz.fizmasoft.dyhxx.core_fragment.home.add_car.AddCarFragment"
+        android:label="AddCarFragment" >
+        <argument
+            android:name="carArgs"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="uz.fizmasoft.dyhxx.helper.db.CarEntity"/>
+
+    </fragment>
 
 </navigation>

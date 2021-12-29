@@ -2,6 +2,7 @@ package uz.fizmasoft.dyhxx.helper.network.model
 
 import com.google.gson.annotations.SerializedName
 
+/*
 data class AllCars(
     val token: String
 )
@@ -10,8 +11,9 @@ data class AllCarsResponse(
     @SerializedName("status") val status: Int,
     @SerializedName("data") val data: List<AllCarsData>
 )
+*/
 
-class AllCarsData(
+class AllCarsResponseModel(
     @SerializedName("id") val id: String,
     @SerializedName("user_id") val user_id: String,
     @SerializedName("car_number") val car_number: String,

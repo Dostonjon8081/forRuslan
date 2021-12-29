@@ -1,4 +1,4 @@
-package uz.fizmasoft.dyhxx.core_fragment.home
+package uz.fizmasoft.dyhxx.core_fragment.home.add_car
 
 import android.widget.AdapterView
 

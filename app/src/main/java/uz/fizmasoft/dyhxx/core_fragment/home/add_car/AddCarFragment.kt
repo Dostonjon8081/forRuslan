@@ -10,23 +10,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.google.firebase.crashlytics.ktx.setCustomKeys
-
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.Cache.Companion.key
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseFragment
-import uz.fizmasoft.dyhxx.core_fragment.home.SpinnerItemClick
 import uz.fizmasoft.dyhxx.databinding.FragmentAddCarBinding
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.util.*
 import java.lang.RuntimeException
 
 @AndroidEntryPoint
-class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate) {
-/*
-class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
-    SpinnerItemClick {
+
+class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate), SpinnerItemClick {
 
     private val viewModel: AddCarViewModel by activityViewModels()
 
@@ -193,11 +188,11 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                                 }
                                 else -> {
 
-                                    crashlytics.setCustomKeys {
-                                        key("status", it.data?.status ?: 0)
-                                        key("message", it.data?.message ?: "")
-                                        key("user_id",getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")?:"")
-                                    }
+//                                    crashlytics.setCustomKeys {
+//                                        key("status", it.data?.status ?: 0)
+//                                        key("message", it.data?.message ?: "")
+//                                        key("user_id",getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")?:"")
+//                                    }
                                     crashlytics.recordException(Throwable())
 
 
@@ -300,8 +295,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             binding.addCarFragmentEditTextCarModels.visibility = View.VISIBLE
         }
     }
-
-*/
 
 }
 

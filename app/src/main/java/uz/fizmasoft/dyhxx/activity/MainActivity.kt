@@ -28,6 +28,7 @@ import uz.fizmasoft.dyhxx.core_fragment.home.HomeViewModel
 import uz.fizmasoft.dyhxx.databinding.ActivityMainBinding
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
+import uz.fizmasoft.dyhxx.helper.network.model.AllCarsResponseModel
 import uz.fizmasoft.dyhxx.helper.util.*
 import java.util.concurrent.Executors
 
@@ -80,8 +81,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     private fun authentication(intent: Intent) {
         if (
-//            !getPref(this).getString(PREF_TOKEN_KEY, "").isNullOrEmpty()
-//            &&
             isOnline(this)
         ) {
 
@@ -104,75 +103,35 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 is NetworkResult.Loading -> {
                 }
                 is NetworkResult.Success -> {
-                    viewModel.allCarsDB()
-                    viewModel.allCarDB.observe(this) { dbList ->
-                        if (dbList.isEmpty()) {
-                            Executors.newSingleThreadExecutor().execute {
-                                if (result.data?.isNotEmpty()!!) {
-                                    for (resultItem in result.data) {
-                                        viewModel.insertCarDB(
-                                            CarEntity(
-                                                0,
-                                                resultItem.car_number,
-                                                resultItem.tex_passport
-                                            )
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    insertToDb(result)
+
                 }
                 is NetworkResult.Error -> {
                 }
             }
         })
 
-//        logd(token)
-//         val editPref = getPref(this@MainActivity).edit()
-//        viewModel.getUserIdApi(token)
-        /*   viewModel.responseUserIdApi.observe(this) {
-               try {
+    }
 
-                   when (it) {
-                       is NetworkResult.Success -> {
-
-                           editPref.putString(PREF_USER_ID_KEY, it.data?.user_id.toString()).apply()
-                           viewModel.allCarsApi(token)
-                           viewModel.responseAllCarsApi.observe(this, EventObserver { data ->
-
-                               when (data) {
-                                   is NetworkResult.Success -> {
-                                       if (data.data?.isNotEmpty()!!) {
-                                           for (item in data.data) {
-                                               viewModel.insertCarDB(
-                                                   CarEntity(0, item.car_number, item.tex_passport)
-                                               )
-                                           }
-
-                                       }
-                                   }
-                                   is NetworkResult.Error -> {
-                                   }
-                                   is NetworkResult.Loading -> {
-                                   }
-                               }
-
-                           })
-                       }
-                       is NetworkResult.Error -> {
-                           carToast(this, "Ro'yhatdan o'tish amalga oshmadi. Iltimos qaytadan o'ting")
-                       }
-                       is NetworkResult.Loading -> {
-                           carToast(this, "Loading...")
-                       }
-                   }
-
-               } catch (e: Exception) {
-                   carToast(this, e.toString())
-               }
-           }*/
-
+    private fun insertToDb(result: NetworkResult.Success<List<AllCarsResponseModel>>) {
+        viewModel.allCarsDB()
+        viewModel.allCarDB.observe(this) { dbList ->
+            if (dbList.isEmpty()) {
+                Executors.newSingleThreadExecutor().execute {
+                    if (result.data?.isNotEmpty()!!) {
+                        for (resultItem in result.data) {
+                            viewModel.insertCarDB(
+                                CarEntity(
+                                    0,
+                                    resultItem.car_number,
+                                    resultItem.tex_passport
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 
     fun setLocale(language: String = "uz") {
@@ -184,12 +143,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
         appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
             ) {
 
                 appUpdateManager.startUpdateFlowForResult(
                     appUpdateInfo,
-                    AppUpdateType.FLEXIBLE,
+                    AppUpdateType.IMMEDIATE,
                     this,
                     IN_APP_UPDATE_REQUEST_CODE
                 )
@@ -205,7 +164,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         appUpdateManager?.appUpdateInfo?.addOnSuccessListener { updateInfo ->
             if (updateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
                 appUpdateManager?.startUpdateFlowForResult(
-                    updateInfo, AppUpdateType.FLEXIBLE, this,
+                    updateInfo, AppUpdateType.IMMEDIATE, this,
                     IN_APP_UPDATE_REQUEST_CODE
                 )
             }

@@ -1,6 +1,5 @@
 package uz.fizmasoft.dyhxx.helper.network
 
-import okhttp3.ResponseBody
 import uz.fizmasoft.dyhxx.helper.network.model.*
 import uz.fizmasoft.dyhxx.violation.ViolationCarApiModel
 import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
@@ -24,7 +23,7 @@ interface CarApiService {
     suspend fun saveCar(@Body saveCarModel: SaveCarModel): Response<SaveCarResponse>
 
     @GET("cars/")
-    suspend fun allCars(@Header("authorization") token: String): Response<List<AllCarsData>>
+    suspend fun allCars(@Header("authorization") token: String): Response<List<AllCarsResponseModel>>
 
     @POST("carlist/remove")
     suspend fun removeCar(@Body removeCarModel: RemoveCarModel): Response<RemoveCarModelResponse>

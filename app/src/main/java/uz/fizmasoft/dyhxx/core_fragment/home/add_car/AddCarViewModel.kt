@@ -83,7 +83,6 @@ class AddCarViewModel @Inject constructor(
     private val _editCarDB = MutableLiveData<Long>()
     val editCarDB: LiveData<Long> = _insertCarDB
      fun editCarDB(carNumber: String, carMark: String, carModel: String) = viewModelScope.launch {
-
         dbRepository.editCar(carNumber,carMark,carModel)
     }
 

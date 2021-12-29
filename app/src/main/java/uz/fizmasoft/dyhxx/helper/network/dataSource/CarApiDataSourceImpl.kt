@@ -25,7 +25,7 @@ class CarApiDataSourceImpl @Inject constructor(private val carApiService: CarApi
         return carApiService.saveCar(saveCarModel)
     }
 
-    override suspend fun allCars(token: String): Response<List<AllCarsData>> {
+    override suspend fun allCars(token: String): Response<List<AllCarsResponseModel>> {
         return carApiService.allCars(token)
     }
 

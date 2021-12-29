@@ -13,6 +13,7 @@ import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.network.model.RemoveCarModel
 import uz.fizmasoft.dyhxx.helper.util.*
+import uz.fizmasoft.dyhxx.main_fragment.MainFragmentDirections
 import java.util.concurrent.Executors
 
 
@@ -26,9 +27,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.allCarsDB()
-
-//        binding.homeFragmentButtonAddCar.setOnClickListener { addCar() }
-//        binding.homeFragmentButtonAddCarBtn.setOnClickListener { addCar() }
 
         binding.homeFragmentSwipeRefresh.setColorSchemeColors(
             ContextCompat.getColor(
@@ -96,7 +94,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         if (result.data?.isNotEmpty()!!) {
                             for (resultItem in result.data) {
 
-//                                if (listCarEntity.isNotEmpty())
                                 if (listCarEntity.all { it.carNumber != resultItem.car_number }) {
 
                                     viewModel.insertCarDB(
@@ -123,7 +120,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 is NetworkResult.Error -> {
                 }
             }
-//            navigateToHome()
         })
         binding.homeFragmentSwipeRefresh.isRefreshing = false
     }
@@ -149,7 +145,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun clickedItem(position: Int) {
         getBaseActivity {
-            /* it.navController?.navigate(
+            /* *//* it.navController?.navigate(
                  HomeFragmentDirections.actionHomeFragmentToViolationFragment(
                      listCarEntity[position]
                  )
@@ -157,14 +153,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-
     override fun clickedItemEdit(carEntity: CarEntity) {
         getBaseActivity {
-            /* it.navController?.navigate(
-                 HomeFragmentDirections.actionHomeFragmentToAddCarFragment(
-                     carEntity
-                 )
-             )*/
+            it.navController?.navigate(
+                MainFragmentDirections.actionMainFragmentToAddCarFragment(carEntity)
+            )
         }
     }
 
@@ -196,6 +189,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
               it.navController!!.navigate(R.id.home_fragment)
           }
       }*/
-
 
 }
