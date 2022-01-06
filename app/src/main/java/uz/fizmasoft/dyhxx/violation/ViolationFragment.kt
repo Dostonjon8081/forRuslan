@@ -19,8 +19,6 @@ import java.util.*
 
 
 class ViolationFragment :
-    BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate){
-/*class ViolationFragment :
     BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate), ClickViolationRv {
 
     private val viewModel: ViolationViewModel by activityViewModels()
@@ -40,8 +38,9 @@ class ViolationFragment :
             }
         })
         arg = args.violationArgs
-        requestData()
+//        requestData()
     }
+/*
 
     private fun requestData() {
         arg?.let {
@@ -161,6 +160,8 @@ class ViolationFragment :
         binding.violationTotalSum.text = totalSumString.toString()
     }
 
+*/
+
     override fun violationFileID(id: String, qaror: String) {
 
         binding.wp7progressBar.show()
@@ -198,6 +199,6 @@ class ViolationFragment :
             }
 
         })
-    }*/
+    }
 
 }

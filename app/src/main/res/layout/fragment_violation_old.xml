@@ -4,37 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/violation_fragment_swipe_refresh"
     android:layout_width="match_parent"
-    android:background="@color/app_background_color"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <androidx.appcompat.widget.Toolbar
-            android:layout_marginTop="4dp"
             android:id="@+id/violation_fragment_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/toolbar_color"
             android:elevation="2dp"
-            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <RelativeLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/violation_fragment_arrow_back"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-
-                    android:src="@drawable/ic_arrow_left_in_rectangle" />
+                    android:padding="8dp"
+                    android:src="@drawable/ic_arrow_left" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/violation_fragment_title"
@@ -46,25 +44,25 @@
                     android:fontFamily="@font/gilroy_bold"
                     android:gravity="center"
                     android:paddingEnd="32dp"
-                    android:textColor="@color/violation_text_blue_color"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
-                    tools:text="Jarimalar" />
+                    tools:text="75 F 453 DA" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/violation_fragment_count_fines"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/white_rectangle_with_small_radius"
+                    android:background="@drawable/white_circle"
+                    android:elevation="2dp"
                     android:fontFamily="@font/gilroy_bold"
                     android:gravity="center"
                     android:text="0"
-                    android:textColor="@color/violation_text_blue_color"
+                    android:textColor="@color/toolbar_color"
                     android:textSize="14sp" />
             </RelativeLayout>
-
         </androidx.appcompat.widget.Toolbar>
 
         <ir.alirezabdn.wp7progress.WP7ProgressBar
@@ -81,7 +79,6 @@
             app:indicatorColor="@color/progressbar_color"
             app:indicatorHeight="7"
             app:indicatorRadius="5"
-            android:visibility="gone"
             app:interval="100"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -124,10 +121,14 @@
                 android:textStyle="bold" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/violation_fragment_rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@color/white"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

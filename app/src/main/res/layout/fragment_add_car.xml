@@ -1,287 +1,364 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:orientation="horizontal"
-        android:id="@+id/add_car_fragment_toolBar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:background="@color/toolbar_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/add_car_fragment_arrow_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_arrow_left" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/gilroy_bold"
-            android:gravity="center_horizontal"
-            android:text="@string/add_car"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            tools:ignore="RtlSymmetry" />
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/add_car_fragment_container_add_car"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="14dp"
-        app:layout_constraintTop_toBottomOf="@id/add_car_fragment_toolBar">
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/add_car_fragment_toolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gilroy_medium"
-            android:paddingBottom="4dp"
-            android:text="@string/car_number"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
+            android:background="@color/app_background_color"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:weightSum="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/add_car_fragment_et_car_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_white_gray_stoke"
-            android:drawableEnd="@drawable/ic_about"
-            android:fontFamily="@font/gilroy_medium"
-            android:hint="00 A 000 AA"
-            android:inputType="textCapCharacters"
-            android:maxLength="9"
-            android:textColor="@color/black"
-            android:maxLines="1"
-            android:padding="12dp"
-            android:textColorHint="@color/pale_text" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/add_car_fragment_arrow_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_arrow_left_in_rectangle" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/gilroy_bold"
+                android:gravity="center_horizontal"
+                android:paddingStart="10dp"
+                android:text="@string/add_car"
+                android:textColor="@color/select_language_text_color"
+                android:textSize="18sp" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/add_car_fragment_container_tex_passport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="14dp"
-        android:weightSum="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/add_car_fragment_container_add_car"
-        app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_add_car">
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <!--
+            <androidx.appcompat.widget.Toolbar
+                android:orientation="horizontal"
+                android:id="@+id/add_car_fragment_toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="@android:dimen/app_icon_size"
+                android:background="@color/toolbar_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/add_car_fragment_arrow_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_arrow_left" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/gilroy_bold"
+                    android:gravity="center_horizontal"
+                    android:text="@string/add_car"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    tools:ignore="RtlSymmetry" />
+
+            </androidx.appcompat.widget.Toolbar>-->
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/add_car_fragment_container_add_car"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
+            android:padding="18dp"
             app:layout_constraintTop_toBottomOf="@id/add_car_fragment_toolBar">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
                 android:fontFamily="@font/gilroy_medium"
-                android:maxLines="1"
-                android:paddingBottom="4dp"
-                android:text="@string/tex_pas_series"
+                android:paddingBottom="9dp"
+                android:text="@string/car_number"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/add_car_fragment_tex_pass_series"
+                android:id="@+id/add_car_fragment_et_car_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_white_gray_stoke"
+                android:background="@drawable/white_rectangle_with_radius"
+                android:drawableEnd="@drawable/ic_warning"
                 android:fontFamily="@font/gilroy_medium"
-                android:hint="AAA"
-                android:textColor="@color/black"
+                android:hint="00 A 000 AA"
                 android:inputType="textCapCharacters"
-                android:maxLength="3"
+                android:maxLength="9"
                 android:maxLines="1"
                 android:padding="12dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
                 android:textColorHint="@color/pale_text" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/add_car_fragment_container_tex_passport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="14dp"
+            android:layout_marginTop="-10dp"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/add_car_fragment_container_add_car"
+            app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_add_car">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/add_car_fragment_toolBar">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:maxLines="1"
+                    android:paddingBottom="9dp"
+                    android:text="@string/tex_pas_series"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/add_car_fragment_tex_pass_series"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_rectangle_with_radius"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:hint="AAA"
+                    android:textSize="14sp"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="3"
+                    android:maxLines="1"
+                    android:padding="12dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/pale_text" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/add_car_fragment_toolBar">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:lines="1"
+                    android:paddingBottom="9dp"
+                    android:text="@string/tex_pass_number"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/add_car_fragment_tex_pass_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_rectangle_with_radius"
+                    android:drawableEnd="@drawable/ic_warning"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:hint="1234567"
+                    android:textSize="14sp"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="12dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/pale_text" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/add_car_fragment_container_car_mark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="14dp"
+            android:layout_marginTop="-10dp"
+            app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_tex_passport">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroy_medium"
+                android:paddingBottom="9dp"
+                android:text="@string/car_mark"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/add_car_fragment_spinner_car_marks"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/white_rectangle_with_radius"
+                android:fontFamily="@font/gilroy_medium"
+                android:padding="12dp"
+                android:scrollbarSize="14sp"
+                android:prompt="@string/select"
+                android:textColor="@color/pale_text" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/add_car_fragment_container_car_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="-10dp"
+            android:padding="14dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_car_mark">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroy_medium"
+                android:paddingBottom="4dp"
+                android:text="@string/car_models"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/add_car_fragment_spinner_car_models"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/white_rectangle_with_radius"
+                android:fontFamily="@font/gilroy_medium"
+                android:hint="@string/select"
+                android:scrollbarSize="14sp"
+                android:padding="12dp"
+                android:textColor="@color/pale_text"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/add_car_fragment_edit_text_car_models"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/white_rectangle_with_radius"
+                android:fontFamily="@font/gilroy_medium"
+                android:hint="@string/typing_model"
+                android:padding="12dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/pale_text"
+                android:visibility="gone" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_weight="0.5"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/add_car_fragment_toolBar">
+            android:paddingStart="80dp"
+            android:id="@+id/add_car_fragment_container_save"
+            android:paddingTop="20dp"
+            android:paddingEnd="80dp"
+            app:layout_constraintEnd_toEndOf="@id/add_car_fragment_container_car_model"
+            app:layout_constraintStart_toStartOf="@id/add_car_fragment_container_car_model"
+            app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_car_model">
 
-            <androidx.appcompat.widget.AppCompatTextView
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/add_car_fragment_button_save"
+                style="@style/ButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroy_medium"
-                android:lines="1"
-                android:paddingBottom="4dp"
-                android:text="@string/tex_pass_number"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:background="@drawable/blue_circle_background"
+                android:fontFamily="@font/gilroy_semibold"
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/add_car_fragment_tex_pass_number"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/add_car_fragment_button_cancel"
+                style="@style/ButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_white_gray_stoke"
-                android:drawableEnd="@drawable/ic_about"
-                android:fontFamily="@font/gilroy_medium"
-                android:hint="1234567"
-                android:inputType="number"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                android:padding="12dp"
-                android:textColorHint="@color/pale_text" />
+                android:background="@null"
+                android:fontFamily="@font/gilroy_semibold"
+                android:gravity="center"
+                android:text="@string/close"
+                android:textColor="@color/pale_text"
+                android:textSize="14sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/add_car_fragment_container_car_mark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="14dp"
-        app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_tex_passport">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/gilroy_medium"
-            android:paddingBottom="4dp"
-            android:text="@string/car_mark"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/add_car_fragment_spinner_car_marks"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/background_white_gray_stoke"
-            android:fontFamily="@font/gilroy_medium"
-            android:padding="12dp"
-            android:prompt="@string/select"
-            android:textColor="@color/pale_text" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/add_car_fragment_container_car_model"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="14dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_car_mark">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/gilroy_medium"
-            android:paddingBottom="4dp"
-            android:text="@string/car_models"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/add_car_fragment_spinner_car_models"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/background_white_gray_stoke"
-            android:fontFamily="@font/gilroy_medium"
-            android:hint="@string/select"
-            android:padding="12dp"
-            android:textColor="@color/pale_text"
-            android:visibility="gone" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/add_car_fragment_edit_text_car_models"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/background_white_gray_stoke"
-            android:fontFamily="@font/gilroy_medium"
-            android:hint="@string/typing_model"
-            android:padding="12dp"
-            android:textColorHint="@color/pale_text"
-            android:textColor="@color/black"
-            android:visibility="gone" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="60dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="60dp"
-        app:layout_constraintEnd_toEndOf="@id/add_car_fragment_container_car_model"
-        app:layout_constraintStart_toStartOf="@id/add_car_fragment_container_car_model"
-        app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_car_model">
+        <ir.alirezabdn.wp7progress.WP7ProgressBar
+            android:id="@+id/wp7progressBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent_white"
+            android:clickable="true"
+            android:elevation="2dp"
+            android:focusable="true"
+            android:touchscreenBlocksFocus="true"
+            android:visibility="gone"
+            app:animationDuration="2300"
+            app:indicatorColor="@color/progressbar_color"
+            app:indicatorHeight="7"
+            app:indicatorRadius="5"
+            app:interval="100"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_car_fragment_toolBar" />
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_car_fragment_button_save"
+            android:id="@+id/add_car_fragment_button_delete"
             style="@style/ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/language_button_background"
+            android:layout_marginStart="120dp"
+            android:layout_marginEnd="120dp"
+            android:layout_marginBottom="46dp"
+            android:background="@drawable/white_rectangle_with_radius"
+            android:drawableStart="@drawable/ic_delete"
+            android:drawablePadding="-48dp"
+            android:duplicateParentState="true"
             android:fontFamily="@font/gilroy_semibold"
+            android:foregroundGravity="center"
             android:gravity="center"
-            android:text="@string/save"
-            android:textSize="14sp" />
+            android:minHeight="40dp"
+            android:paddingStart="40dp"
+            android:text="@string/delete"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:layout_marginTop="100dp"
+            app:layout_constraintTop_toBottomOf="@id/add_car_fragment_container_save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_car_fragment_button_cancel"
-            style="@style/ButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:fontFamily="@font/gilroy_semibold"
-            android:gravity="center"
-            android:text="@string/close"
-            android:textColor="@color/pale_text"
-            android:textSize="14sp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <ir.alirezabdn.wp7progress.WP7ProgressBar
-        android:id="@+id/wp7progressBar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        android:layout_centerVertical="true"
-        android:background="@color/transparent_white"
-        android:elevation="2dp"
-        android:focusable="true"
-        android:clickable="true"
-        android:touchscreenBlocksFocus="true"
-        app:animationDuration="2300"
-        app:indicatorColor="@color/progressbar_color"
-        app:indicatorHeight="7"
-        app:indicatorRadius="5"
-        app:interval="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_car_fragment_toolBar" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

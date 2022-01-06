@@ -49,7 +49,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     private fun checkAutoCount() {
         viewModel.allCarsDB()
         viewModel.allCarDB.observe(this){
-            fabState((it.size)<=8)
+            fabState((it.size)<8)
         }
     }
 

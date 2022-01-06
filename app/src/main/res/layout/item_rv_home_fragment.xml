@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="14dp"
             app:layout_constraintEnd_toEndOf="@id/rv_item_image"
-            android:src="@drawable/ic_arrow_in_rectangle"
+            android:src="@drawable/ic_arrow_right_in_rectangle"
             app:layout_constraintTop_toTopOf="@id/rv_item_car_model"
             app:layout_constraintBottom_toBottomOf="@id/rv_item_car_number_container"/>
 

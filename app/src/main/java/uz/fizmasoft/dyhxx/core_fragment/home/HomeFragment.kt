@@ -2,7 +2,6 @@ package uz.fizmasoft.dyhxx.core_fragment.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,7 +10,6 @@ import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentHomeBinding
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
-import uz.fizmasoft.dyhxx.helper.network.model.RemoveCarModel
 import uz.fizmasoft.dyhxx.helper.util.*
 import uz.fizmasoft.dyhxx.main_fragment.MainFragmentDirections
 import java.util.concurrent.Executors
@@ -124,32 +122,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.homeFragmentSwipeRefresh.isRefreshing = false
     }
 
-    private fun addCar() {
+
+
+    override fun clickedItem(carEntity: CarEntity) {
         getBaseActivity {
-//            it.navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment())
-        }
-    }
-
-    override fun clickedItemDelete(carNumber: String) {
-        val builder = AlertDialog.Builder(requireContext())
-            .setMessage(R.string.delete_dialog_title)
-            .setPositiveButton(R.string.yes) { _, _ ->
-                deleteCar(carNumber)
-            }
-            .setNegativeButton(R.string.no) { _, _ ->
-            }
-        builder.create()
-        builder.show()
-
-    }
-
-    override fun clickedItem(position: Int) {
-        getBaseActivity {
-            /* *//* it.navController?.navigate(
-                 HomeFragmentDirections.actionHomeFragmentToViolationFragment(
-                     listCarEntity[position]
-                 )
-             )*/
+            it.navController?.navigate(MainFragmentDirections.actionMainFragmentToViolationFragment())
         }
     }
 
@@ -161,28 +138,48 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun deleteCar(carNumber: String) {
-        val removeCarModel = RemoveCarModel(
-            getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!,
-            carNumber
-        )
-        viewModel.removeCarApi(removeCarModel)
-        viewModel.responseRemoveCarApi.observe(viewLifecycleOwner, EventObserver {
-//            if (it.data != null) {
-            when (it) {
-                is NetworkResult.Loading -> {
-                }
-                is NetworkResult.Success -> {
-                    viewModel.removeCarDB(carNumber)
-                }
-                is NetworkResult.Error -> {
-                }
-//                }
+    /*    private fun addCar() {
+            getBaseActivity {
+    //            it.navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment())
             }
-//            navigateToHome()
-        })
+        }*/
 
-    }
+/* fun clickedItemDelete(carNumber: String) {
+     val builder = AlertDialog.Builder(requireContext())
+         .setMessage(R.string.delete_dialog_title)
+         .setPositiveButton(R.string.yes) { _, _ ->
+             deleteCar(carNumber)
+         }
+         .setNegativeButton(R.string.no) { _, _ ->
+         }
+     builder.create()
+     builder.show()
+
+ }*/
+
+    /*
+        private fun deleteCar(carNumber: String) {
+            val removeCarModel = RemoveCarModel(
+                getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!,
+                carNumber
+            )
+            viewModel.removeCarApi(removeCarModel)
+            viewModel.responseRemoveCarApi.observe(viewLifecycleOwner, EventObserver {
+    //            if (it.data != null) {
+                when (it) {
+                    is NetworkResult.Loading -> {
+                    }
+                    is NetworkResult.Success -> {
+                        viewModel.removeCarDB(carNumber)
+                    }
+                    is NetworkResult.Error -> {
+                    }
+    //                }
+                }
+    //            navigateToHome()
+            })
+
+        }*/
 
     /*  private fun navigateToHome() {
           getBaseActivity {

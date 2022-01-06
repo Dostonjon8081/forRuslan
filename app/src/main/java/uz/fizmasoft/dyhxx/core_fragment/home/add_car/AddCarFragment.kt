@@ -96,8 +96,13 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                 R.id.add_car_fragment_button_cancel -> it.onBackPressed()
                 R.id.add_car_fragment_button_save -> saveOrEditCar()
                 R.id.add_car_fragment_arrow_back -> it.onBackPressed()
+                R.id.add_car_fragment_button_delete -> deleteCar()
             }
         }
+    }
+
+    private fun deleteCar() {
+
     }
 
     private fun saveOrEditCar() {
@@ -153,7 +158,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
 
                     when (it) {
-
                         is NetworkResult.Loading -> {
                             binding.wp7progressBar.show()
                         }

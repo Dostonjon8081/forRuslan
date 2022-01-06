@@ -9,8 +9,6 @@ import uz.fizmasoft.dyhxx.violation.ViolationPDFResponseModel
 
 interface ICarApiDataSource {
 
-    suspend fun getUserId(token: String): Response<UserAuthIDModel>
-
     suspend fun checkLimit(checkLimitModel: CheckLimitModel): Response<CheckLimitModelResponse>
     suspend fun saveCar(saveCarModel: SaveCarModel): Response<SaveCarResponse>
     suspend fun allCars(token: String): Response<List<AllCarsResponseModel>>

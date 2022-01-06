@@ -16,14 +16,6 @@ import javax.inject.Inject
 class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: ICarApiDataSource) :
     BaseApiResponse(), ICarApiRepository {
 
-    override suspend fun getUserId(token: String): Flow<NetworkResult<UserAuthIDModel>> {
-        return flow<NetworkResult<UserAuthIDModel>> {
-            emit(safeApiCall {
-                iCarApiDataSource.getUserId(token)
-            })
-        }.flowOn(Dispatchers.IO)
-    }
-
     override suspend fun checkLimit(checkLimitModel: CheckLimitModel): Flow<NetworkResult<CheckLimitModelResponse>> {
         return flow {
             emit(safeApiCall {

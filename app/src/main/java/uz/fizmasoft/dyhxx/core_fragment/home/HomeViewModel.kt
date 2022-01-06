@@ -24,7 +24,7 @@ class HomeViewModel @Inject constructor(
     private val dbRepository: ICarRepository
 ) : AndroidViewModel(application) {
 
-    private val _responseUserIdApi: MutableLiveData<NetworkResult<UserAuthIDModel>> =
+  /*  private val _responseUserIdApi: MutableLiveData<NetworkResult<UserAuthIDModel>> =
         MutableLiveData()
     val responseUserIdApi: LiveData<NetworkResult<UserAuthIDModel>> = _responseUserIdApi
     fun getUserIdApi(token: String) = viewModelScope.launch {
@@ -42,7 +42,7 @@ class HomeViewModel @Inject constructor(
         apiRepository.checkLimit(checkLimitModel).collect { values ->
             _responseCheckLimitApi.postValue(values)
         }
-    }
+    }*/
 
     private val _responseSaveCarApi: MutableLiveData<NetworkResult<SaveCarResponse>> =
         MutableLiveData()

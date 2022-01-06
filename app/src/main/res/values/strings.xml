@@ -68,5 +68,6 @@
 
 
     <string name="select_language">Tilni tanlang</string>
+    <string name="delete">Delete</string>
 
 </resources>

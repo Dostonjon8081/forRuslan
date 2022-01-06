@@ -20,7 +20,7 @@
     <color name="dark_blue">#023047</color>
     <color name="home_text_color">#022172</color>
 
-    <color name="violation_text_color">#022172</color>
+    <color name="violation_text_blue_color">#023047</color>
     <color name="transparent_white">#A8FFFFFF</color>
     <color name="violation_text_gray_color">#889DAF</color>
 
@@ -36,5 +36,7 @@
 
     <color name="app_background_color">#F7F7F9</color>
     <color name="select_language_text_color">#023047</color>
+
+    <color name="light_gray">#EEEEEEEE</color>
 
 </resources>

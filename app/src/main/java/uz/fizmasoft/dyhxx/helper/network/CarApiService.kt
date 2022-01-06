@@ -12,9 +12,11 @@ import uz.fizmasoft.dyhxx.violation.ViolationPDFModel
 import uz.fizmasoft.dyhxx.violation.ViolationPDFResponseModel
 
 interface CarApiService {
+/*
 
     @POST("user/auth")
     suspend fun getUserID(@Header("token") token: String): Response<UserAuthIDModel>
+*/
 
     @POST("carlist/checklimit")
     suspend fun checkLimit(@Body checkLimitModel: CheckLimitModel): Response<CheckLimitModelResponse>

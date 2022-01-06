@@ -25,7 +25,7 @@ class AddCarViewModel @Inject constructor(
     private val apiRepository: ICarApiRepository,
     private val dbRepository: ICarRepository
 ) : AndroidViewModel(application) {
-
+/*
     private val _responseUserIdApi: MutableLiveData<NetworkResult<UserAuthIDModel>> =
         MutableLiveData()
     val responseUserIdApi: LiveData<NetworkResult<UserAuthIDModel>> = _responseUserIdApi
@@ -33,7 +33,7 @@ class AddCarViewModel @Inject constructor(
         apiRepository.getUserId(token).collect { values ->
             _responseUserIdApi.postValue(values)
         }
-    }
+    }*/
 
     private val _responseCheckLimitApi: MutableLiveData<NetworkResult<CheckLimitModelResponse>> =
         MutableLiveData()

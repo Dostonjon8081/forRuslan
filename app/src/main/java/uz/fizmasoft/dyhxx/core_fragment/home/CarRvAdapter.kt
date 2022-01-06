@@ -49,11 +49,12 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 //        var modelTitle: TextView = view.findViewById(R.id.rv_item_car_model_title)
 
         //        var texPasSer: TextView = view.findViewById(R.id.rv_item_car_tex_pass)
-        var number: TextView = view.findViewById(R.id.rv_item_car_number)
-        var numbe: TextView = view.findViewById(R.id.rv_item_car_numbe)
+        private var number: TextView = view.findViewById(R.id.rv_item_car_number)
+        private var numbe: TextView = view.findViewById(R.id.rv_item_car_numbe)
 
         //        var rvItemDelete: AppCompatImageView = view.findViewById(R.id.rv_item_delete)
-        var rvItemEdit: AppCompatImageView = view.findViewById(R.id.rv_item_edit)
+        private var rvItemEdit: AppCompatImageView = view.findViewById(R.id.rv_item_edit)
+        private var rvItemArrowFine: AppCompatImageView = view.findViewById(R.id.rv_item_arrow_fine)
 
         fun onBind(model: CarEntity, position: Int) {
             //car number
@@ -72,6 +73,7 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
 //            rvItemDelete.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
             rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemEdit(list[position]) }
+            rvItemArrowFine.setOnClickListener { rvItemClick!!.clickedItem(list[position]) }
 //            view.setOnClickListener { rvItemClick!!.clickedItem(position) }
 
 //            if (model.carMark.isNotEmpty()) mark.text = model.carMark
@@ -86,7 +88,6 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
         if (model.isNotEmpty()) {
             this.VH(view).apply {
                 this.model.visibility = View.VISIBLE
-//                modelTitle.visibility = View.VISIBLE
                 this.model.text = model
             }
 

@@ -50,6 +50,9 @@
          <action
             android:id="@+id/action_mainFragment_to_addCarFragment"
             app:destination="@id/addCarFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_violationFragment"
+            app:destination="@id/violationFragment" />
     </fragment>
 
     <fragment
@@ -59,6 +62,19 @@
         android:label="AddCarFragment" >
         <argument
             android:name="carArgs"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="uz.fizmasoft.dyhxx.helper.db.CarEntity"/>
+
+    </fragment>
+
+    <fragment
+        tools:layout="@layout/fragment_violation"
+        android:id="@+id/violationFragment"
+        android:name="uz.fizmasoft.dyhxx.violation.ViolationFragment"
+        android:label="ViolationFragment" >
+        <argument
+            android:name="violationArgs"
             android:defaultValue="@null"
             app:nullable="true"
             app:argType="uz.fizmasoft.dyhxx.helper.db.CarEntity"/>
