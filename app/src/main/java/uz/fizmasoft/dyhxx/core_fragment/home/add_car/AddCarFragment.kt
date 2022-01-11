@@ -61,6 +61,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     private fun setup() {
 
         if (args.carArgs != null) {
+            binding.addCarFragmentButtonDelete.visibility = View.VISIBLE
             carArgs = args.carArgs!!
             with(binding) {
                 addCarFragmentEtCarNumber.setText(carArgs.carNumber)
@@ -131,7 +132,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                     carToast(requireContext(), resources.getString(R.string.loading))
                 }
                 is NetworkResult.Success -> {
-                    carToast(requireContext(), resources.getString(R.string.delete))
                     activity?.onBackPressed()
                 }
             }
