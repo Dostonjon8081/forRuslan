@@ -86,6 +86,4 @@ class AddCarViewModel @Inject constructor(
             dbRepository.deleteCar(carNumber)
         }
     }
-
-
 }
