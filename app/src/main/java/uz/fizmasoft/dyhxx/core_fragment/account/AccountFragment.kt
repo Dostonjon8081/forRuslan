@@ -23,7 +23,6 @@ import uz.fizmasoft.dyhxx.databinding.FragmentAccountBinding
 import uz.fizmasoft.dyhxx.helper.util.TELEGRAM_FEEDBACK_URL
 import uz.fizmasoft.dyhxx.helper.util.TELEGRAM_FEEDBACK_URL_CHROME
 import uz.fizmasoft.dyhxx.helper.util.getPref
-import uz.fizmasoft.dyhxx.helper.util.logd
 
 
 @AndroidEntryPoint

@@ -4,8 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import uz.fizmasoft.dyhxx.R
-import uz.fizmasoft.dyhxx.activity.MainActivity
 import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentAuthBinding
 import uz.fizmasoft.dyhxx.helper.util.PREF_TOKEN_KEY

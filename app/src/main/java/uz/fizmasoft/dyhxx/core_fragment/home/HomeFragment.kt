@@ -40,7 +40,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun loadData() {
         viewModel.allCarDB.observe(viewLifecycleOwner, { t ->
-            logd(t)
             if (t?.size!! > 0) {
 //                binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
                 /* if (t.size >= 8) {
@@ -107,7 +106,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                             if (result.data.size < listCarEntity.size) {
                                 for (listItem in listCarEntity) {
                                     if (result.data.all { it.car_number != listItem.carNumber }) {
-                                        viewModel.removeCarDB(listItem.carNumber)
+                                        viewModel.deleteCarDB(listItem.carNumber)
                                     }
                                 }
                             }
@@ -126,7 +125,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun clickedItem(carEntity: CarEntity) {
         getBaseActivity {
-            it.navController?.navigate(MainFragmentDirections.actionMainFragmentToViolationFragment())
+            it.navController?.navigate(MainFragmentDirections.actionMainFragmentToViolationFragment(carEntity))
         }
     }
 

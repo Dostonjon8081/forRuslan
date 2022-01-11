@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
     android:layout_marginStart="20dp"
+    android:layout_marginTop="20dp"
     android:layout_marginEnd="20dp"
     app:cardCornerRadius="14dp"
     app:cardElevation="0dp">
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="10dp"
-            app:layout_constraintBottom_toTopOf="@id/violation_location_title"
+            app:layout_constraintBottom_toTopOf="@id/violation_location_line"
             app:layout_constraintEnd_toStartOf="@id/violation_type"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,12 +39,12 @@
             android:fontFamily="@font/gilroy_semibold"
             android:textColor="@color/violation_text_blue_color"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@id/violation_save_file"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/violation_img"
             app:layout_constraintTop_toTopOf="@id/violation_img"
             tools:text="AA 123456789" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+   <!--     <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/violation_save_file"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,17 +53,17 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/violation_act"
-            app:layout_constraintTop_toTopOf="@id/violation_act" />
+            app:layout_constraintTop_toTopOf="@id/violation_act" />-->
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/violation_type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/gilroy_semibold"
             android:lineSpacingExtra="4dp"
             android:textColor="@color/violation_text_gray_color"
             android:textSize="10sp"
-            android:layout_marginTop="4dp"
             app:fontFamily="@font/inter"
             app:layout_constraintBottom_toBottomOf="@id/violation_img"
             app:layout_constraintEnd_toEndOf="@id/violation_act"
@@ -73,60 +73,43 @@
 
 
         <View
-            android:id="@+id/violation_location_title"
+            android:id="@+id/violation_location_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:background="@color/light_gray"
-            app:layout_constraintBottom_toTopOf="@id/violation_location"
+            app:layout_constraintBottom_toTopOf="@id/violation_wallet_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/violation_type" />
 
+        <!--
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/violation_location"
-            android:layout_width="0dp"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/violation_location"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gilroy_semibold"
+                    android:lineSpacingExtra="6dp"
+                    android:paddingTop="6dp"
+                    android:textColor="@color/violation_text_blue_color"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@id/violation_time_title"
+                    app:layout_constraintEnd_toEndOf="@id/violation_location_title"
+                    app:layout_constraintStart_toStartOf="@id/violation_location_title"
+                    app:layout_constraintTop_toBottomOf="@id/violation_location_title"
+                    tools:text="Toshkent shahri, Olmazor tumani, Bunyodkor shox ko’chasi, Adiblar hiyoboni qarshisi" />
+        -->
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/violation_wallet_icon"
+            android:layout_marginTop="22dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gilroy_semibold"
-            android:lineSpacingExtra="6dp"
-            android:paddingTop="6dp"
-            android:textColor="@color/violation_text_blue_color"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@id/violation_time_title"
-            app:layout_constraintEnd_toEndOf="@id/violation_location_title"
-            app:layout_constraintStart_toStartOf="@id/violation_location_title"
-            app:layout_constraintTop_toBottomOf="@id/violation_location_title"
-            tools:text="Toshkent shahri, Olmazor tumani, Bunyodkor shox ko’chasi, Adiblar hiyoboni qarshisi" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/violation_time_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/gilroy_semibold"
-            android:paddingTop="16dp"
-            android:text="@string/fine_time"
-            android:textColor="@color/violation_text_gray_color"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toStartOf="@id/violation_sum_title"
-            app:layout_constraintHorizontal_weight="0.7"
-            app:layout_constraintStart_toStartOf="@id/violation_img"
-            app:layout_constraintTop_toBottomOf="@id/violation_location" />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/violation_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/gilroy_semibold"
-            android:lineSpacingExtra="6dp"
-            android:paddingTop="6dp"
-            android:textColor="@color/violation_text_blue_color"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/violation_time_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/violation_time_title"
-            tools:text="22.09.2021 14:52:04" />
+            android:src="@drawable/ic_wallet"
+            app:layout_constraintBottom_toTopOf="@id/violation_sum_title"
+            app:layout_constraintStart_toStartOf="@id/violation_location_line"
+            app:layout_constraintTop_toBottomOf="@id/violation_location_line" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/violation_sum_title"
@@ -137,11 +120,10 @@
             android:text="@string/violation_sum"
             android:textColor="@color/violation_text_gray_color"
             android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="@id/violation_type"
+            app:layout_constraintEnd_toStartOf="@id/violation_time_title"
             app:layout_constraintHorizontal_weight="0.4"
-            app:layout_constraintStart_toEndOf="@id/violation_time_title"
-            app:layout_constraintTop_toBottomOf="@id/violation_time_title"
-            app:layout_constraintTop_toTopOf="@id/violation_time_title" />
+            app:layout_constraintStart_toStartOf="@id/violation_wallet_icon"
+            app:layout_constraintTop_toBottomOf="@id/violation_wallet_icon" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -151,13 +133,79 @@
             android:fontFamily="@font/gilroy_semibold"
             android:lineSpacingExtra="6dp"
             android:paddingTop="6dp"
-            android:textColor="@color/green"
-            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/violation_text_blue_color"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@id/violation_sum_title"
             app:layout_constraintStart_toStartOf="@id/violation_sum_title"
             app:layout_constraintTop_toBottomOf="@id/violation_sum_title"
-            tools:text="250 000 so'm" />
+            tools:text="250 000" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/violation_sum_small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:lineSpacingExtra="6dp"
+            android:textStyle="bold"
+            android:textColor="@color/violation_text_blue_color"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/violation_sum_title"
+            app:layout_constraintStart_toStartOf="@id/violation_sum_title"
+            app:layout_constraintTop_toBottomOf="@id/violation_sum"
+            android:text="@string/sum" />
 
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/violation_calendar_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_calendar"
+            app:layout_constraintBottom_toBottomOf="@id/violation_wallet_icon"
+            app:layout_constraintStart_toStartOf="@id/violation_time_title"
+            app:layout_constraintTop_toTopOf="@id/violation_wallet_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/violation_time_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_semibold"
+            android:paddingTop="16dp"
+            android:text="@string/fine_time"
+            android:textColor="@color/violation_text_gray_color"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toEndOf="@id/violation_sum_title"
+            app:layout_constraintTop_toTopOf="@id/violation_sum_title" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/violation_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_semibold"
+            android:lineSpacingExtra="6dp"
+            android:paddingTop="6dp"
+            android:textColor="@color/violation_text_blue_color"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@id/violation_time_title"
+            app:layout_constraintStart_toStartOf="@id/violation_time_title"
+            app:layout_constraintTop_toBottomOf="@id/violation_time_title"
+            tools:text="22.09.2021" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/violation_time_hour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_semibold"
+            android:lineSpacingExtra="6dp"
+            android:paddingTop="6dp"
+            android:textColor="@color/violation_text_blue_color"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/violation_time_title"
+            app:layout_constraintStart_toStartOf="@id/violation_time_title"
+            app:layout_constraintTop_toBottomOf="@id/violation_time"
+            tools:text="14:52:04" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

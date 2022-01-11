@@ -64,7 +64,7 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private val _responseRemoveCarApi: MutableLiveData<Event<NetworkResult<RemoveCarModelResponse>>> =
+    /*private val _responseRemoveCarApi: MutableLiveData<Event<NetworkResult<RemoveCarModelResponse>>> =
         MutableLiveData()
     val responseRemoveCarApi: LiveData<Event<NetworkResult<RemoveCarModelResponse>>> =
         _responseRemoveCarApi
@@ -73,7 +73,7 @@ class HomeViewModel @Inject constructor(
         apiRepository.removeCar(removeCarModel).collect { values ->
             _responseRemoveCarApi.postValue(Event(values))
         }
-    }
+    }*/
 
 
     private val _allCarDB = MutableLiveData<MutableList<CarEntity>>()
@@ -106,12 +106,22 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private val _removeCarDB = MutableLiveData<String>()
+    private val _deleteCarDB = MutableLiveData<String>()
+    val deleteCarDB: LiveData<String> = _deleteCarDB
+    fun deleteCarDB(carNumber:String) {
+        viewModelScope.launch (Dispatchers.IO){
+            dbRepository.deleteCar(carNumber)
+        }
+    }
+
+
+
+   /* private val _removeCarDB = MutableLiveData<String>()
     val removeCarDB: LiveData<String> = _removeCarDB
     fun removeCarDB(carNumber: String) {
         viewModelScope.launch(Dispatchers.IO) {
             dbRepository.deleteCar(carNumber)
         }
-    }
+    }*/
 
 }

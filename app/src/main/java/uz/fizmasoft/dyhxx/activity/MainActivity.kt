@@ -104,7 +104,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 }
                 is NetworkResult.Success -> {
                     insertToDb(result)
-
                 }
                 is NetworkResult.Error -> {
                 }

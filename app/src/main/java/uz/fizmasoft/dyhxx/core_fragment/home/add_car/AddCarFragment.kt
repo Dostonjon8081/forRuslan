@@ -6,26 +6,29 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.Cache.Companion.key
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentAddCarBinding
+import uz.fizmasoft.dyhxx.helper.db.CarEntity
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.util.*
-import java.lang.RuntimeException
 
 @AndroidEntryPoint
 
-class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate), SpinnerItemClick {
+class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
+    SpinnerItemClick {
 
     private val viewModel: AddCarViewModel by activityViewModels()
 
     private val args: AddCarFragmentArgs by navArgs()
+
+    private lateinit var carArgs: CarEntity
 
     private var carMark = ""
     private var carModel = ""
@@ -51,12 +54,14 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             addCarFragmentButtonCancel.setOnClickListener { clickButton(binding.addCarFragmentButtonCancel.id) }
             addCarFragmentButtonSave.setOnClickListener { clickButton(binding.addCarFragmentButtonSave.id) }
             addCarFragmentArrowBack.setOnClickListener { clickButton(binding.addCarFragmentArrowBack.id) }
+            addCarFragmentButtonDelete.setOnClickListener { clickButton(binding.addCarFragmentButtonDelete.id) }
         }
     }
 
     private fun setup() {
-        val carArgs = args.carArgs
-        if (carArgs != null) {
+
+        if (args.carArgs != null) {
+            carArgs = args.carArgs!!
             with(binding) {
                 addCarFragmentEtCarNumber.setText(carArgs.carNumber)
                 addCarFragmentTexPassSeries.setText(carArgs.texPass.substring(0, 3))
@@ -96,13 +101,41 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                 R.id.add_car_fragment_button_cancel -> it.onBackPressed()
                 R.id.add_car_fragment_button_save -> saveOrEditCar()
                 R.id.add_car_fragment_arrow_back -> it.onBackPressed()
-                R.id.add_car_fragment_button_delete -> deleteCar()
+                R.id.add_car_fragment_button_delete -> alertDeleteCar()
             }
         }
     }
 
-    private fun deleteCar() {
+    private fun alertDeleteCar() {
+        val builder = AlertDialog.Builder(requireContext())
+            .setMessage(R.string.delete_dialog_title)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                deleteCar(carArgs.carNumber)
+            }
+            .setNegativeButton(R.string.no) { _, _ ->
+            }
+        builder.create()
+        builder.show()
 
+    }
+
+    private fun deleteCar(carNumber: String) {
+        viewModel.deleteCarApi(carNumber)
+        viewModel.deleteCarApi.observe(this, EventObserver {
+
+            when (it) {
+                is NetworkResult.Error -> {
+                    carToast(requireContext(), "Not Success")
+                }
+                is NetworkResult.Loading -> {
+                    carToast(requireContext(), resources.getString(R.string.loading))
+                }
+                is NetworkResult.Success -> {
+                    carToast(requireContext(), resources.getString(R.string.delete))
+                    activity?.onBackPressed()
+                }
+            }
+        })
     }
 
     private fun saveOrEditCar() {
@@ -200,7 +233,10 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                                     crashlytics.recordException(Throwable())
 
 
-                                    carToast(requireContext(),"Xatolik tuzatilmoqda. Iltimos qaytadan kirib urunib ko'ring")
+                                    carToast(
+                                        requireContext(),
+                                        "Xatolik tuzatilmoqda. Iltimos qaytadan kirib urunib ko'ring"
+                                    )
 
                                     FirebaseCrashlytics.getInstance()
                                         .log("message ${it.data?.message}" + "status ${it.data?.status}")

@@ -14,10 +14,12 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import uz.fizmasoft.dyhxx.helper.db.CarDataBase
 import uz.fizmasoft.dyhxx.helper.network.CarApiService
 import uz.fizmasoft.dyhxx.helper.util.BASE_URL
-import java.util.concurrent.TimeUnit
+import uz.fizmasoft.dyhxx.helper.util.PREF_TOKEN_KEY
+import uz.fizmasoft.dyhxx.helper.util.getPref
 import javax.inject.Singleton
 
 @Module
@@ -41,10 +43,20 @@ class RepositoryModule {
         return OkHttpClient
             .Builder()
 //            .readTimeout(15, TimeUnit.SECONDS)
-//            .addInterceptor(logging)
+            .addInterceptor(logging)
+            .addInterceptor {
+                chain ->
+                val original = chain.request()
+                val requestBulder = original.newBuilder()
+//                    .addHeader("authorization", "1638094110:479914aa8c9afbb1e27f7a716488ae85")
+                    .addHeader("authorization", getPref(context).getString(PREF_TOKEN_KEY,"")!!)
+                val request = requestBulder.build()
+                chain.proceed(request)
+            }
 //            .addInterceptor(ChuckerInterceptor(context))
 //            .connectTimeout(15, TimeUnit.SECONDS)
             .build()
+
     }
 
     @Singleton
@@ -60,8 +72,10 @@ class RepositoryModule {
     ): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(okHttpClient)
+        .addConverterFactory(ScalarsConverterFactory.create())
         .addConverterFactory(gsonConverterFactory)
         .build()
+
 
 
     @Singleton

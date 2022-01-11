@@ -3,11 +3,10 @@ package uz.fizmasoft.dyhxx.helper.util
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import dagger.hilt.android.qualifiers.ActivityContext
 import uz.fizmasoft.dyhxx.activity.MainActivity
 
 //lateinit var activity: Activity
@@ -16,8 +15,8 @@ import uz.fizmasoft.dyhxx.activity.MainActivity
 //    activity = mainActivity
 //}
 
-fun getPref(activityFrom: Activity ): SharedPreferences {
-    val pref by lazy { activityFrom.getPreferences(Context.MODE_PRIVATE) }
+fun getPref(context: Context): SharedPreferences {
+    val pref by lazy { context.getSharedPreferences("autoInfo",Context.MODE_PRIVATE) }
     return pref
 }
 

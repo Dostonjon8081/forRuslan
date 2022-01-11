@@ -1,28 +1,20 @@
 package uz.fizmasoft.dyhxx.helper.network.repository
 
-import uz.fizmasoft.dyhxx.helper.network.NetworkResult
-import uz.fizmasoft.dyhxx.helper.network.dataSource.ICarApiDataSource
-import uz.fizmasoft.dyhxx.helper.network.model.*
-import uz.fizmasoft.dyhxx.violation.ViolationCarApiModel
-import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import uz.fizmasoft.dyhxx.helper.network.NetworkResult
+import uz.fizmasoft.dyhxx.helper.network.dataSource.ICarApiDataSource
+import uz.fizmasoft.dyhxx.helper.network.model.*
+import uz.fizmasoft.dyhxx.helper.util.logd
+import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
 import uz.fizmasoft.dyhxx.violation.ViolationPDFModel
 import uz.fizmasoft.dyhxx.violation.ViolationPDFResponseModel
 import javax.inject.Inject
 
 class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: ICarApiDataSource) :
     BaseApiResponse(), ICarApiRepository {
-
-    override suspend fun checkLimit(checkLimitModel: CheckLimitModel): Flow<NetworkResult<CheckLimitModelResponse>> {
-        return flow {
-            emit(safeApiCall {
-                iCarApiDataSource.checkLimit(checkLimitModel)
-            })
-        }.flowOn(Dispatchers.IO)
-    }
 
     override suspend fun saveCar(saveCarModel: SaveCarModel): Flow<NetworkResult<SaveCarResponse>> {
         return flow {
@@ -40,18 +32,21 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
         }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun removeCar(removeCarModel: RemoveCarModel): Flow<NetworkResult<RemoveCarModelResponse>> {
+    override suspend fun deleteCar(carNumber: String): Flow<NetworkResult<String>> {
         return flow {
             emit(safeApiCall {
-                iCarApiDataSource.removeCar(removeCarModel)
+                iCarApiDataSource.deleteCar(carNumber)
             })
         }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun getViolation(model: ViolationCarApiModel): Flow<NetworkResult<ViolationCarApiModelResponse>> {
+    override suspend fun getViolation(
+        carNumber: String,
+        texPass: String
+    ): Flow<NetworkResult<List<ViolationCarApiModelResponse>>> {
         return flow {
             emit(safeApiCall {
-                iCarApiDataSource.getViolation(model)
+                iCarApiDataSource.getViolation(carNumber, texPass)
             })
         }.flowOn(Dispatchers.IO)
     }

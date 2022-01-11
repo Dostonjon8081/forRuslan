@@ -68,6 +68,8 @@
 
 
     <string name="select_language">Tilni tanlang</string>
-    <string name="delete">Delete</string>
+    <string name="delete">O\'chirish</string>
+    <string name="violation">Jarimalar</string>
+    <string name="loading">Yuklanmoqda...</string>
 
 </resources>

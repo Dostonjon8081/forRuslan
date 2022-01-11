@@ -54,7 +54,7 @@
     <string name="typing_model">Введите модель</string>
     <string name="other">Другой</string>
     <string name="no_connect">Произошла ошибка при подключении к Интернету</string>
-    <string name="total_violation">Штрафы на сум:</string>
+    <string name="total_violation">Штрафов на сум:</string>
     <string name="sum">сум</string>
     <string name="log_out_massege">Вы действительно хотите выйти?</string>
     <string name="you_no_cars">У вас нет машины</string>
@@ -68,5 +68,6 @@
 
 
     <string name="select_language">Выберите язык</string>
+    <string name="violation">Штрафов</string>
 
 </resources>

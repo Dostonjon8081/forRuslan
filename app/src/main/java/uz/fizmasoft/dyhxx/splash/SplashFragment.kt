@@ -6,7 +6,6 @@ import android.view.WindowManager
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentSplashBinding
-import uz.fizmasoft.dyhxx.helper.util.PREF_USER_ID_KEY
 import uz.fizmasoft.dyhxx.helper.util.getPref
 import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.helper.util.PREF_TOKEN_KEY

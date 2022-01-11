@@ -2,11 +2,12 @@ package uz.fizmasoft.dyhxx.violation
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.databinding.ItemRvViolationBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
 
@@ -44,17 +45,21 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
     inner class VH(private val binding: ItemRvViolationBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        private val dateFormatter by lazy { SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH) }
+
         @SuppressLint("SetTextI18n")
         fun onBind(model: ViolationCarModel) = with(binding) {
-            violationTime.text = model.violationTime
+//            violationTime.text = dateFormatter.parse(model.violationTime.split("T").toString()).toString()
+            violationTime.text = swapDate(model.violationTime.split("T")[0])
+            violationTimeHour.text = cutViolationHour(model.violationTime.split("T")[1])
             violationAct.text = model.qarorSery + " " + model.qarorNumber
             violationType.text = model.violationType
 
-            violationLocation.text = model.location
-            if (model.location.isEmpty()) {
-                violationLocation.visibility = View.GONE
-                violationLocationTitle.visibility = View.GONE
-            }
+//            violationLocation.text = model.location
+//            if (model.location.isEmpty()) {
+//                violationLocation.visibility = View.GONE
+//                violationLocationTitle.visibility = View.GONE
+//            }
 
             violationSum.text = getSum(model.sum.toInt())
 
@@ -66,16 +71,25 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
                 }
             )
             if (model.qarorSery != "KV") {
-                violationSaveFile.visibility = View.VISIBLE
+//                violationSaveFile.visibility = View.VISIBLE
                 root.setOnClickListener {
                     violationRvClick?.violationFileID(
-                        model.id,
+                        model.id.toString(),
                         model.qarorSery + model.qarorNumber
                     )
                 }
             }
         }
 
+        private fun cutViolationHour(hour: String): String {
+            val splitHour = hour.split(":")
+            return "${splitHour[0]}:${splitHour[1]}:00"
+        }
+
+        private fun swapDate(date: String): String {
+            val splitDate = date.split("-")
+            return "${splitDate[2]}.${splitDate[1]}.${splitDate[0]}"
+        }
 
         private fun getSum(sum: Int): String {
             var suma = sum
@@ -98,7 +112,7 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
             }
 
             sumString.append(",00 ")
-            sumString.append(binding.root.context.getString(R.string.sum))
+//            sumString.append(binding.root.context.getString(R.string.sum))
             return sumString.toString()
         }
     }

@@ -43,7 +43,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         }
         checkAutoCount()
 
-
     }
 
     private fun checkAutoCount() {

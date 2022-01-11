@@ -12,7 +12,6 @@ import uz.fizmasoft.dyhxx.helper.db.dataRepository.ICarRepository
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.network.repository.ICarApiRepository
 import uz.fizmasoft.dyhxx.helper.util.Event
-import uz.fizmasoft.dyhxx.helper.util.logd
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,13 +21,13 @@ class ViolationViewModel @Inject constructor(
     private val dbRepository: ICarRepository
 ) : AndroidViewModel(application) {
 
-    private val _responseViolationApiApi: MutableLiveData<Event<NetworkResult<ViolationCarApiModelResponse>>> =
+    private val _responseViolationApiApi: MutableLiveData<Event<NetworkResult<List<ViolationCarApiModelResponse>>>> =
         MutableLiveData()
-    val responseViolationApiApi: LiveData<Event<NetworkResult<ViolationCarApiModelResponse>>> =
+    val responseViolationApiApi: LiveData<Event<NetworkResult<List<ViolationCarApiModelResponse>>>> =
         _responseViolationApiApi
 
-    fun getViolationApi(model: ViolationCarApiModel) = viewModelScope.launch {
-        apiRepository.getViolation(model).collect { values ->
+    fun getViolationApi( carNumber:String,texPass:String) = viewModelScope.launch {
+        apiRepository.getViolation(carNumber,texPass).collect { values ->
             _responseViolationApiApi.postValue(Event(values))
         }
     }
