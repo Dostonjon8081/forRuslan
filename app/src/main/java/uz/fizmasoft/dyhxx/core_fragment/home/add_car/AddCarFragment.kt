@@ -1,11 +1,9 @@
 package uz.fizmasoft.dyhxx.core_fragment.home.add_car
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -20,7 +18,6 @@ import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.util.*
 
 @AndroidEntryPoint
-
 class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding::inflate),
     SpinnerItemClick {
 
@@ -33,7 +30,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     private var carMark = ""
     private var carModel = ""
 
-    override fun onAttach(context: Context) {
+    /*override fun onAttach(context: Context) {
         super.onAttach(context)
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -42,7 +39,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                 }
             }
         })
-    }
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -144,7 +141,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         } else {
             editCar()
         }
-//        toast?.show()
     }
 
     private fun editCar() {
@@ -182,74 +178,12 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             if (isOnline(requireContext())) {
 
                 viewModel.saveCarApi(
-                    requireActivity(),
                     carNumber,
                     carTexPasSeries + carTexPasNumber, carMark, carModel
                 )
 
                 viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
-
-
-                    when (it) {
-                        is NetworkResult.Loading -> {
-                            binding.wp7progressBar.show()
-                        }
-                        is NetworkResult.Success -> {
-                            binding.wp7progressBar.hide()
-                            when (it.data?.message) {
-                                "OK" -> {
-                                    getBaseActivity { activity ->
-                                        activity.navController?.popBackStack()
-                                    }
-                                }
-                                "Car already exists" -> {
-                                    carToast(
-                                        requireContext(),
-                                        getString(R.string.car_exist)
-                                    )
-                                }
-                                "Car not found" -> carToast(
-                                    requireContext(),
-                                    getString(R.string.car_not_found)
-                                )
-
-                                "Bad request" -> carToast(
-                                    requireContext(),
-                                    getString(R.string.bad_request)
-                                )
-                                "Limit reached" -> {
-                                    carToast(requireContext(), getString(R.string.limit_full))
-                                }
-                                "Internal server error" -> {
-                                    carToast(requireContext(), getString(R.string.bug_server))
-                                }
-                                else -> {
-
-//                                    crashlytics.setCustomKeys {
-//                                        key("status", it.data?.status ?: 0)
-//                                        key("message", it.data?.message ?: "")
-//                                        key("user_id",getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")?:"")
-//                                    }
-                                    crashlytics.recordException(Throwable())
-
-
-                                    carToast(
-                                        requireContext(),
-                                        "Xatolik tuzatilmoqda. Iltimos qaytadan kirib urunib ko'ring"
-                                    )
-
-                                    FirebaseCrashlytics.getInstance()
-                                        .log("message ${it.data?.message}" + "status ${it.data?.status}")
-
-                                }
-
-                            }
-
-                        }
-                        is NetworkResult.Error -> {
-                            binding.wp7progressBar.hide()
-                        }
-                    }
+                    successCarApiResult(it)
                 })
 
             } else {
@@ -257,6 +191,63 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             }
         } else {
             carToast(requireContext(), getString(R.string.wrong_lines))
+        }
+    }
+
+    private fun successCarApiResult(data: NetworkResult<String>?) {
+        getBaseActivity { activity ->
+            when (data) {
+                is NetworkResult.Loading ->
+                    binding.wp7progressBar.show()
+
+                is NetworkResult.Success -> {
+                    binding.wp7progressBar.hide()
+
+                    when (data.data) {
+                        "Created" ->
+                            activity.navController?.popBackStack()
+
+                        "Conflict" ->
+                            carToast(requireContext(), getString(R.string.car_exist))
+
+                        "Not Found" ->
+                            carToast(requireContext(), getString(R.string.car_not_found))
+
+                        "Bad request" -> carToast(requireContext(), getString(R.string.bad_request))
+
+                        "Unauthorized" ->
+                            carToast(requireContext(), getString(R.string.unauthorized))
+
+                        "Internal server error" ->
+                            carToast(requireContext(), getString(R.string.bug_server))
+
+                        "Too Many Requests" -> {
+                            carToast(requireContext(), getString(R.string.too_many_requests))
+                            activity.navController?.popBackStack()
+                        }
+                        else -> {
+
+//                                    crashlytics.setCustomKeys {
+//                                        key("status", it.data?.status ?: 0)
+//                                        key("message", it.data?.message ?: "")
+//                                        key("user_id",getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")?:"")
+//                                    }
+                            crashlytics.recordException(Throwable())
+
+                            carToast(
+                                requireContext(),
+                                "Xatolik tuzatilmoqda. Iltimos qaytadan kirib urunib ko'ring"
+                            )
+
+                            FirebaseCrashlytics.getInstance()
+                                .log("message $data" + "status $data")
+                        }
+                    }
+                }
+                is NetworkResult.Error ->
+                    binding.wp7progressBar.hide()
+
+            }
         }
     }
 

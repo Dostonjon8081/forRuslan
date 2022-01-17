@@ -16,7 +16,7 @@ class CarApiDataSourceImpl @Inject constructor(private val carApiService: CarApi
 //        return carApiService.checkLimit(checkLimitModel)
 //    }
 
-    override suspend fun saveCar(saveCarModel: SaveCarModel): Response<SaveCarResponse> {
+    override suspend fun saveCar(saveCarModel: SaveCarModel): Response<String> {
         return carApiService.saveCar(saveCarModel)
     }
 

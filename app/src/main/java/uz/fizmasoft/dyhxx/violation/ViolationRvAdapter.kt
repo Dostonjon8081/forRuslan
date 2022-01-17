@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.databinding.ItemRvViolationBinding
-import java.text.SimpleDateFormat
-import java.util.*
 
 class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
 
@@ -45,8 +43,6 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
     inner class VH(private val binding: ItemRvViolationBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val dateFormatter by lazy { SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH) }
-
         @SuppressLint("SetTextI18n")
         fun onBind(model: ViolationCarModel) = with(binding) {
 //            violationTime.text = dateFormatter.parse(model.violationTime.split("T").toString()).toString()
@@ -70,15 +66,19 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
                     else -> R.drawable.ic_radar
                 }
             )
-            if (model.qarorSery != "KV") {
-//                violationSaveFile.visibility = View.VISIBLE
-                root.setOnClickListener {
-                    violationRvClick?.violationFileID(
-                        model.id.toString(),
-                        model.qarorSery + model.qarorNumber
-                    )
-                }
+
+            root.setOnClickListener {
+                violationRvClick?.violationDetail(model)
             }
+            /* if (model.qarorSery != "KV") {
+ //                violationSaveFile.visibility = View.VISIBLE
+                 root.setOnClickListener {
+                     violationRvClick?.violationFileID(
+                         model.id.toString(),
+                         model.qarorSery + model.qarorNumber
+                     )
+                 }
+             }*/
         }
 
         private fun cutViolationHour(hour: String): String {
@@ -97,7 +97,6 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
             val sumString = StringBuilder()
 
             while (suma > 1000) {
-//            logd(totalSum)
                 sumStringList.add(
                     (if ((suma % 1000) == 0) "000"
                     else suma % 1000).toString()

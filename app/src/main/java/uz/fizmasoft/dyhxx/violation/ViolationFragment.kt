@@ -1,13 +1,14 @@
 package uz.fizmasoft.dyhxx.violation
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentViolationBinding
@@ -16,6 +17,7 @@ import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.util.*
 
 
+@AndroidEntryPoint
 class ViolationFragment :
     BaseFragment<FragmentViolationBinding>(FragmentViolationBinding::inflate), ClickViolationRv {
 
@@ -28,13 +30,13 @@ class ViolationFragment :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                getBaseActivity {
-                    it.navController?.popBackStack()
-                }
-            }
-        })
+//        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                getBaseActivity {
+//                    it.navController?.popBackStack()
+//                }
+//            }
+//        })
         arg = args.violationArgs
 
         requestData()
@@ -43,6 +45,12 @@ class ViolationFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val decor: View = requireActivity().window.decorView
+            requireActivity().window.statusBarColor =
+                resources.getColor(R.color.app_background_color, null)
+            decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
         binding.wp7progressBar.show()
         binding.violationFragmentArrowBack.setOnClickListener { activity?.onBackPressed() }
 
@@ -78,8 +86,8 @@ class ViolationFragment :
                 is NetworkResult.Success -> {
 
                     if (it.data != null)
-                        if (it.data!!.isNotEmpty()) {
-                            initDataToRv(it.data!!)
+                        if (it.data.isNotEmpty()) {
+                            initDataToRv(it.data)
                             binding.violationFragmentCountFines.text = it.data?.size.toString()
                             binding.wp7progressBar.hide()
                         } else {
@@ -276,6 +284,12 @@ class ViolationFragment :
             }
 
         })
+    }
+
+    override fun violationDetail(violationCarModel: ViolationCarModel) {
+        getBaseActivity {
+            it.navController?.navigate(ViolationFragmentDirections.actionViolationFragmentToViolationDetailFragment())
+        }
     }
 
 }

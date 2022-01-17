@@ -28,11 +28,10 @@ class AddCarViewModel @Inject constructor(
     private val dbRepository: ICarRepository
 ) : AndroidViewModel(application) {
 
-    private val _responseSaveCarApi: MutableLiveData<Event<NetworkResult<SaveCarResponse>>> =
+    private val _responseSaveCarApi: MutableLiveData<Event<NetworkResult<String>>> =
         MutableLiveData()
-    val responseSaveCarApi: LiveData<Event<NetworkResult<SaveCarResponse>>> = _responseSaveCarApi
+    val responseSaveCarApi: LiveData<Event<NetworkResult<String>>> = _responseSaveCarApi
     fun saveCarApi(
-        activity: Activity,
         carNumber: String,
         texPass: String,
         carMark: String,
@@ -40,9 +39,10 @@ class AddCarViewModel @Inject constructor(
     ) =
         viewModelScope.launch {
             _responseSaveCarApi.postValue(Event(NetworkResult.Loading()))
-            getPref(activity).getString(PREF_USER_ID_KEY, "")?.let {
-                apiRepository.saveCar(SaveCarModel(it, carNumber, texPass)).collect { values ->
-                    if (values.data?.message == "OK") insertCarDB(
+                apiRepository.saveCar(SaveCarModel(carNumber, texPass)).collect { values ->
+                    logd("carMark: $carMark")
+                    logd("carModel: $carModel")
+                    if (values.data == "Created") insertCarDB(
                         CarEntity(
                             carNumber = carNumber,
                             texPass = texPass,
@@ -52,7 +52,6 @@ class AddCarViewModel @Inject constructor(
                     )
                     _responseSaveCarApi.postValue(Event(values))
                 }
-            }
         }
 
 
@@ -81,7 +80,7 @@ class AddCarViewModel @Inject constructor(
 
     private val _deleteCarDB = MutableLiveData<String>()
     val deleteCarDB: LiveData<String> = _deleteCarDB
-    fun deleteCarDB(carNumber:String) {
+    private fun deleteCarDB(carNumber:String) {
         viewModelScope.launch (Dispatchers.IO){
             dbRepository.deleteCar(carNumber)
         }

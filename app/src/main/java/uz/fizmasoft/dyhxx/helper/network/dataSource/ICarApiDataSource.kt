@@ -9,7 +9,7 @@ import uz.fizmasoft.dyhxx.violation.ViolationPDFResponseModel
 interface ICarApiDataSource {
 
 //    suspend fun checkLimit(checkLimitModel: CheckLimitModel): Response<CheckLimitModelResponse>
-    suspend fun saveCar(saveCarModel: SaveCarModel): Response<SaveCarResponse>
+    suspend fun saveCar(saveCarModel: SaveCarModel): Response<String>
     suspend fun allCars(token: String): Response<List<AllCarsResponseModel>>
 //    suspend fun removeCar(removeCarModel: RemoveCarModel): Response<RemoveCarModelResponse>
     suspend fun deleteCar(carNumber: String): Response<String>

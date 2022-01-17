@@ -1,9 +1,11 @@
 package uz.fizmasoft.dyhxx.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.google.firebase.crashlytics.ktx.crashlytics
@@ -20,6 +22,16 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     protected val crashlytics by lazy { Firebase.crashlytics }
 
+    override fun onAttach(context: Context) {
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                getBaseActivity {
+                    it.navController?.popBackStack()
+                }
+            }
+        })
+        super.onAttach(context)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

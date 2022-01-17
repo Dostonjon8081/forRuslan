@@ -1,5 +1,9 @@
 package uz.fizmasoft.dyhxx.violation
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 class ViolationCarModel(
      val id: Long,
 //     val drb: String,
@@ -9,5 +13,5 @@ class ViolationCarModel(
      val violationType: String,
      val sum: String,
      val location: String,
-)
+):Parcelable
 

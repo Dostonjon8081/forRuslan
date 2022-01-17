@@ -17,11 +17,11 @@
             app:popExitAnim="@anim/slide_out_bottom" />
 
         <action
+            android:id="@+id/action_splash_fragment_to_mainFragment"
+            app:destination="@id/mainFragment"
             app:enterAnim="@anim/slide_in_bottom"
             app:exitAnim="@anim/slide_out_bottom"
-            app:popExitAnim="@anim/slide_out_bottom"
-            android:id="@+id/action_splash_fragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:popExitAnim="@anim/slide_out_bottom" />
 
 
     </fragment>
@@ -30,7 +30,7 @@
         android:id="@+id/auth_fragment"
         android:name="uz.fizmasoft.dyhxx.init.AuthFragment"
         android:label="AuthFragment"
-        tools:layout="@layout/fragment_auth"/>
+        tools:layout="@layout/fragment_auth" />
 
     <fragment
         android:id="@+id/select_language_fragment"
@@ -43,11 +43,11 @@
     </fragment>
 
     <fragment
-        tools:layout="@layout/fragment_main"
         android:id="@+id/mainFragment"
         android:name="uz.fizmasoft.dyhxx.main_fragment.MainFragment"
-        android:label="MainFragment" >
-         <action
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
             android:id="@+id/action_mainFragment_to_addCarFragment"
             app:destination="@id/addCarFragment" />
         <action
@@ -56,28 +56,44 @@
     </fragment>
 
     <fragment
-        tools:layout="@layout/fragment_add_car"
         android:id="@+id/addCarFragment"
         android:name="uz.fizmasoft.dyhxx.core_fragment.home.add_car.AddCarFragment"
-        android:label="AddCarFragment" >
+        android:label="AddCarFragment"
+        tools:layout="@layout/fragment_add_car">
         <argument
             android:name="carArgs"
             android:defaultValue="@null"
-            app:nullable="true"
-            app:argType="uz.fizmasoft.dyhxx.helper.db.CarEntity"/>
+            app:argType="uz.fizmasoft.dyhxx.helper.db.CarEntity"
+            app:nullable="true" />
 
     </fragment>
 
     <fragment
-        tools:layout="@layout/fragment_violation"
         android:id="@+id/violationFragment"
         android:name="uz.fizmasoft.dyhxx.violation.ViolationFragment"
-        android:label="ViolationFragment" >
+        android:label="ViolationFragment"
+        tools:layout="@layout/fragment_violation">
         <argument
             android:name="violationArgs"
             android:defaultValue="@null"
-            app:nullable="true"
-            app:argType="uz.fizmasoft.dyhxx.helper.db.CarEntity"/>
+            app:argType="uz.fizmasoft.dyhxx.helper.db.CarEntity"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_violationFragment_to_violationDetailFragment"
+            app:destination="@id/violationDetailFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/violationDetailFragment"
+        android:name="uz.fizmasoft.dyhxx.violation.violation_detail.ViolationDetailFragment"
+        android:label="ViolationDetailFragment"
+        tools:layout="@layout/fragment_violation_detail">
+
+        <argument
+            android:name="violationDetailArgs"
+            android:defaultValue="@null"
+            app:argType="uz.fizmasoft.dyhxx.violation.ViolationCarModel"
+            app:nullable="true" />
 
     </fragment>
 

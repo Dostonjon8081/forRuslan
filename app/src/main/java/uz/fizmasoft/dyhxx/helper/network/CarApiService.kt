@@ -15,8 +15,8 @@ interface CarApiService {
 //    @POST("carlist/checklimit")
 //    suspend fun checkLimit(@Body checkLimitModel: CheckLimitModel): Response<CheckLimitModelResponse>
 
-    @POST("carlist/save")
-    suspend fun saveCar(@Body saveCarModel: SaveCarModel): Response<SaveCarResponse>
+    @POST("/cars")
+    suspend fun saveCar(@Body saveCarModel: SaveCarModel): Response<String>
 
     @GET("cars/")
     suspend fun allCars(): Response<List<AllCarsResponseModel>>

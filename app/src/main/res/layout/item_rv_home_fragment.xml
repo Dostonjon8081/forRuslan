@@ -58,13 +58,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/gilroy_bold"
+                android:fontFamily="@font/inter"
                 android:gravity="center"
                 android:paddingStart="8dp"
                 android:paddingEnd="4dp"
+                android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 app:autoSizeTextType="uniform"
                 tools:text="50" />
 
@@ -81,17 +82,17 @@
                 android:fontFamily="@font/gilroy_bold"
                 android:gravity="start|center_vertical"
                 android:maxLines="1"
+                android:textStyle="bold"
                 android:paddingStart="4dp"
                 android:paddingEnd="6dp"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="12dp"
                 app:autoSizeTextType="uniform"
-                app:fontFamily="@font/cargo2"
+                app:fontFamily="@font/inter"
                 tools:text="S 577 JA" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 
         <androidx.appcompat.widget.AppCompatImageView

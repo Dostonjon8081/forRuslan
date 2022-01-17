@@ -16,7 +16,7 @@ import javax.inject.Inject
 class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: ICarApiDataSource) :
     BaseApiResponse(), ICarApiRepository {
 
-    override suspend fun saveCar(saveCarModel: SaveCarModel): Flow<NetworkResult<SaveCarResponse>> {
+    override suspend fun saveCar(saveCarModel: SaveCarModel): Flow<NetworkResult<String>> {
         return flow {
             emit(safeApiCall {
                 iCarApiDataSource.saveCar(saveCarModel)

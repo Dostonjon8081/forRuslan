@@ -28,6 +28,7 @@ class ViolationViewModel @Inject constructor(
 
     fun getViolationApi( carNumber:String,texPass:String) = viewModelScope.launch {
         apiRepository.getViolation(carNumber,texPass).collect { values ->
+
             _responseViolationApiApi.postValue(Event(values))
         }
     }

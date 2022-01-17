@@ -71,5 +71,7 @@
     <string name="delete">O\'chirish</string>
     <string name="violation">Jarimalar</string>
     <string name="loading">Yuklanmoqda...</string>
+    <string name="unauthorized">Unauthorized</string>
+    <string name="too_many_requests">Too Many Requests</string>
 
 </resources>
