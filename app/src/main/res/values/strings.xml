@@ -45,7 +45,7 @@
     <string name="no">yo\'q</string>
     <string name="fine_time">Jarima vaqti:</string>
     <string name="violation_act">Qaror:</string>
-    <string name="violation_type">Jarima:</string>
+    <string name="violation_type">Jarima turi:</string>
     <string name="violation_location">Qayd etilgan hudud:</string>
     <string name="violation_sum">To\'lov miqdori:</string>
     <string name="no_violation">Jarimalar mavjud emas!</string>
@@ -73,5 +73,7 @@
     <string name="loading">Yuklanmoqda...</string>
     <string name="unauthorized">Unauthorized</string>
     <string name="too_many_requests">Too Many Requests</string>
+    <string name="see_decision">Qarorni ko\'rish</string>
+    <string name="violation_video">Video ma\'lumot</string>
 
 </resources>
