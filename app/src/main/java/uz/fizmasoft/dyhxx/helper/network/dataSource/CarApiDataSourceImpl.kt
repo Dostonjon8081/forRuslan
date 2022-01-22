@@ -1,11 +1,16 @@
 package uz.fizmasoft.dyhxx.helper.network.dataSource
 
+import okhttp3.ResponseBody
 import retrofit2.Response
+import retrofit2.http.Body
 import uz.fizmasoft.dyhxx.helper.network.CarApiService
 import uz.fizmasoft.dyhxx.helper.network.model.*
+import uz.fizmasoft.dyhxx.helper.util.logd
 import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
-import uz.fizmasoft.dyhxx.violation.ViolationPDFModel
-import uz.fizmasoft.dyhxx.violation.ViolationPDFResponseModel
+import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPDFResponseModel
+import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPDFResponseModelFile
+import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPayModelResponse
+import uz.fizmasoft.dyhxx.violation.violation_detail.maps.ViolationMapApiResponseModel
 import javax.inject.Inject
 
 
@@ -32,8 +37,20 @@ class CarApiDataSourceImpl @Inject constructor(private val carApiService: CarApi
                 return  carApiService.getViolation(carNumber,texPass)
     }
 
-    override suspend fun getPdfFile(violationPDFModel: ViolationPDFModel): Response<ViolationPDFResponseModel> {
+   /* override suspend fun getPdfFile(violationPDFModel: ViolationPDFModel): Response<ViolationPDFResponseModel> {
         return carApiService.getPdfFile(violationPDFModel)
+    }*/
+
+    override suspend fun violationPay(act: String): Response<ViolationPayModelResponse> {
+        return carApiService.violationPay(act)
+    }
+
+    override suspend fun violationPdf(violationId: Long): Response<ViolationPDFResponseModel> {
+        return carApiService.getViolationPdf(violationId.toString())
+    }
+
+    override suspend fun violationMap(eventId: String): Response<ViolationMapApiResponseModel> {
+        return carApiService.violationMap(eventId)
     }
 
 

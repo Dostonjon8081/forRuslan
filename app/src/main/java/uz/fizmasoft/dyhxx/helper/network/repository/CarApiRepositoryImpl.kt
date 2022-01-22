@@ -1,6 +1,6 @@
 package uz.fizmasoft.dyhxx.helper.network.repository
 
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -9,8 +9,9 @@ import uz.fizmasoft.dyhxx.helper.network.dataSource.ICarApiDataSource
 import uz.fizmasoft.dyhxx.helper.network.model.*
 import uz.fizmasoft.dyhxx.helper.util.logd
 import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
-import uz.fizmasoft.dyhxx.violation.ViolationPDFModel
-import uz.fizmasoft.dyhxx.violation.ViolationPDFResponseModel
+import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPDFResponseModel
+import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPayModelResponse
+import uz.fizmasoft.dyhxx.violation.violation_detail.maps.ViolationMapApiResponseModel
 import javax.inject.Inject
 
 class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: ICarApiDataSource) :
@@ -21,7 +22,15 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
             emit(safeApiCall {
                 iCarApiDataSource.saveCar(saveCarModel)
             })
-        }.flowOn(Dispatchers.IO)
+        }.flowOn(IO)
+    }
+
+    override suspend fun violationPay(act: String): Flow<NetworkResult<ViolationPayModelResponse>> {
+        return flow {
+            emit(safeApiCall {
+                iCarApiDataSource.violationPay(act)
+            })
+        }
     }
 
     override suspend fun allCars(token: String): Flow<NetworkResult<List<AllCarsResponseModel>>> {
@@ -29,7 +38,7 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
             emit(safeApiCall {
                 iCarApiDataSource.allCars(token)
             })
-        }.flowOn(Dispatchers.IO)
+        }.flowOn(IO)
     }
 
     override suspend fun deleteCar(carNumber: String): Flow<NetworkResult<String>> {
@@ -37,7 +46,7 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
             emit(safeApiCall {
                 iCarApiDataSource.deleteCar(carNumber)
             })
-        }.flowOn(Dispatchers.IO)
+        }.flowOn(IO)
     }
 
     override suspend fun getViolation(
@@ -48,14 +57,25 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
             emit(safeApiCall {
                 iCarApiDataSource.getViolation(carNumber, texPass)
             })
-        }.flowOn(Dispatchers.IO)
+        }.flowOn(IO)
     }
 
-    override suspend fun getPdfFile(violationPDFModel: ViolationPDFModel): Flow<NetworkResult<ViolationPDFResponseModel>> {
+    override suspend fun violationPdf(violationId: Long): Flow<NetworkResult<ViolationPDFResponseModel>> {
         return flow {
             emit(safeApiCall {
-                iCarApiDataSource.getPdfFile(violationPDFModel)
+                iCarApiDataSource.violationPdf(violationId)
             })
-        }.flowOn(Dispatchers.IO)
+        }.flowOn(IO)
     }
+
+    override suspend fun violationMap(eventId: String): Flow<NetworkResult<ViolationMapApiResponseModel>> {
+        return flow {
+            emit(
+                safeApiCall {
+                iCarApiDataSource.violationMap(eventId)
+            }
+        )
+        }.flowOn(IO)
+    }
+
 }

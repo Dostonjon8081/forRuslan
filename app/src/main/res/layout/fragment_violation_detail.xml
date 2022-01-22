@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/app_background_color">
 
     <androidx.appcompat.widget.Toolbar
@@ -17,7 +18,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -99,6 +99,8 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                   android:visibility="gone"
+                    android:id="@+id/violation_detail_fragment_pdf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -124,14 +126,14 @@
                     app:layout_constraintTop_toBottomOf="@id/violation_detail_fragment_type_image" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/violation_detail_fragment_type"
+                    android:id="@+id/violation_detail_fragment_type_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="@font/inter"
                     android:paddingStart="16dp"
-                    android:text="Belgilangan tezlikni oshirganlik uchun"
+                    tools:text="Belgilangan tezlikni oshirganlik uchun"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -169,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter"
                         android:paddingStart="16dp"
-                        android:text="@string/see_decision"
+                        android:text="@string/violation_sum"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -180,7 +182,7 @@
                         android:fontFamily="@font/gilroy_semibold"
                         android:lineSpacingExtra="6dp"
                         android:paddingStart="16dp"
-                        android:text="250 000"
+                        tools:text="250 000"
                         android:textColor="@color/black"
                         android:textSize="24sp"
                         android:textStyle="bold"
@@ -267,9 +269,11 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/white_rectangle_with_small_radius"
-                android:paddingBottom="10dp">
+                >
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/violation_detail_fragment_discount_icon"
@@ -329,8 +333,10 @@
                 android:id="@+id/violation_detail_fragment_location_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="visible"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/white_rectangle_with_small_radius"
                 android:orientation="vertical">
 
@@ -373,6 +379,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                android:visibility="gone"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/white_rectangle_with_small_radius"
                 android:orientation="vertical"
@@ -385,6 +392,7 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/inter"
                     android:paddingStart="16dp"
+                    android:paddingBottom="12dp"
                     android:text="@string/violation_video"
                     android:textSize="14sp" />
 
@@ -428,6 +436,11 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/background_white_gray_stoke"
                     android:src="@drawable/ic_click"
+                    android:layout_marginStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/violation_detail_fragment_pay_payme"
                     app:layout_constraintStart_toStartOf="@id/violation_detail_fragment_pay_title"
@@ -435,6 +448,14 @@
 
 
                 <androidx.appcompat.widget.AppCompatImageView
+
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingBottom="16dp"
+                    android:layout_marginBottom="20dp"
                     android:id="@+id/violation_detail_fragment_pay_payme"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -447,14 +468,23 @@
 
 
                 <androidx.appcompat.widget.AppCompatImageView
+
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingBottom="16dp"
+                    android:layout_marginBottom="20dp"
                     android:id="@+id/violation_detail_fragment_pay_upay"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/background_white_gray_stoke"
                     android:src="@drawable/ic_upay"
+                    android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="@id/violation_detail_fragment_pay_click"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/violation_detail_fragment_pay_upay"
+                    app:layout_constraintStart_toEndOf="@id/violation_detail_fragment_pay_payme"
                     app:layout_constraintTop_toTopOf="@id/violation_detail_fragment_pay_click" />
 
 

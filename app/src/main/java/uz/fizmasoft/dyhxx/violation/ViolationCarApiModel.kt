@@ -42,18 +42,14 @@ data class ViolationCarApiProtocol(
     @SerializedName("number") val number:Long
 )
 
-class ViolationPDFModel(
+/*class ViolationPDFModel(
     @SerializedName("id") val id: String
-)
+)*/
 
-class ViolationPDFResponseModel(
-    @SerializedName("status") val status: Int,
-    @SerializedName("pdf") val pdf: String,
-    @SerializedName("id") val id: String
-)
-
+/*
 class ViolationPDFQaror(
     val qaror:String
 )
+*/
 
 

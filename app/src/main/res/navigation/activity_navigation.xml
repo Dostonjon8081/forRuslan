@@ -94,7 +94,21 @@
             android:defaultValue="@null"
             app:argType="uz.fizmasoft.dyhxx.violation.ViolationCarModel"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_violationDetailFragment_to_violationMapsFragment"
+            app:destination="@id/violationMapsFragment" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/violationMapsFragment"
+        android:name="uz.fizmasoft.dyhxx.violation.violation_detail.maps.ViolationMapsFragment"
+        android:label="fragment_violation_maps"
+        tools:layout="@layout/fragment_violation_maps">
+        <argument
+            android:name="eventId"
+            app:argType="string"
+            app:nullable="false" />
     </fragment>
 
 </navigation>

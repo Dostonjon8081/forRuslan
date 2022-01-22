@@ -22,7 +22,7 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     protected val crashlytics by lazy { Firebase.crashlytics }
 
-    override fun onAttach(context: Context) {
+  /*  override fun onAttach(context: Context) {
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 getBaseActivity {
@@ -31,7 +31,7 @@ abstract class BaseFragment<VB : ViewBinding>(
             }
         })
         super.onAttach(context)
-    }
+    }*/
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

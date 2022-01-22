@@ -40,8 +40,7 @@ class AddCarViewModel @Inject constructor(
         viewModelScope.launch {
             _responseSaveCarApi.postValue(Event(NetworkResult.Loading()))
                 apiRepository.saveCar(SaveCarModel(carNumber, texPass)).collect { values ->
-                    logd("carMark: $carMark")
-                    logd("carModel: $carModel")
+
                     if (values.data == "Created") insertCarDB(
                         CarEntity(
                             carNumber = carNumber,

@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -25,18 +26,18 @@ class ViolationFragment :
     private val args: ViolationFragmentArgs by navArgs()
     private var arg: CarEntity? = null
     private val violationRvAdapter by lazy(LazyThreadSafetyMode.NONE) { ViolationRvAdapter() }
-    private var violationPDFModel: ViolationPDFModel? = null
-    private var violationPDFQaror: ViolationPDFQaror? = null
+//    private var violationPDFModel: ViolationPDFModel? = null
+//    private var violationPDFQaror: ViolationPDFQaror? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-//        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                getBaseActivity {
-//                    it.navController?.popBackStack()
-//                }
-//            }
-//        })
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                getBaseActivity {
+                    it.navController?.popBackStack()
+                }
+            }
+        })
         arg = args.violationArgs
 
         requestData()
@@ -112,7 +113,7 @@ class ViolationFragment :
             ViolationCarModel(
                 it.id, it.protocol.series,
                 it.protocol.number.toString(), it.time,
-                it.type, it.sum.toString(), it.location
+                it.type, it.sum, it.location
             )
         }
 
@@ -250,7 +251,7 @@ class ViolationFragment :
     override fun violationFileID(id: String, qaror: String) {
 
         binding.wp7progressBar.show()
-
+/*
         violationPDFModel = ViolationPDFModel(id)
         violationPDFQaror = ViolationPDFQaror(qaror)
 
@@ -283,12 +284,12 @@ class ViolationFragment :
                 }
             }
 
-        })
+        })*/
     }
 
     override fun violationDetail(violationCarModel: ViolationCarModel) {
         getBaseActivity {
-            it.navController?.navigate(ViolationFragmentDirections.actionViolationFragmentToViolationDetailFragment())
+            it.navController?.navigate(ViolationFragmentDirections.actionViolationFragmentToViolationDetailFragment(violationCarModel))
         }
     }
 

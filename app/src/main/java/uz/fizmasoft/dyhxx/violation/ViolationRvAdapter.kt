@@ -57,7 +57,7 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
 //                violationLocationTitle.visibility = View.GONE
 //            }
 
-            violationSum.text = getSum(model.sum.toInt())
+            violationSum.text = getSum(model.sum)
 
             violationImg.setImageResource(
                 when (model.qarorSery) {
@@ -91,14 +91,14 @@ class ViolationRvAdapter : RecyclerView.Adapter<ViolationRvAdapter.VH>() {
             return "${splitDate[2]}.${splitDate[1]}.${splitDate[0]}"
         }
 
-        private fun getSum(sum: Int): String {
+        private fun getSum(sum: Long): String {
             var suma = sum
             val sumStringList = mutableListOf<String>()
             val sumString = StringBuilder()
 
             while (suma > 1000) {
                 sumStringList.add(
-                    (if ((suma % 1000) == 0) "000"
+                    (if ((suma % 1000) == 0L) "000"
                     else suma % 1000).toString()
                 )
                 sumStringList.add(" ")

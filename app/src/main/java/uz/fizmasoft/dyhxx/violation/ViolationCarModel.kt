@@ -11,7 +11,7 @@ class ViolationCarModel(
      val qarorNumber: String,
      val violationTime: String,
      val violationType: String,
-     val sum: String,
+     val sum: Long,
      val location: String,
 ):Parcelable
 

@@ -1,11 +1,13 @@
 package uz.fizmasoft.dyhxx.helper.network
 
-import uz.fizmasoft.dyhxx.helper.network.model.*
-import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
 import retrofit2.Response
 import retrofit2.http.*
-import uz.fizmasoft.dyhxx.violation.ViolationPDFModel
-import uz.fizmasoft.dyhxx.violation.ViolationPDFResponseModel
+import uz.fizmasoft.dyhxx.helper.network.model.AllCarsResponseModel
+import uz.fizmasoft.dyhxx.helper.network.model.SaveCarModel
+import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
+import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPDFResponseModel
+import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPayModelResponse
+import uz.fizmasoft.dyhxx.violation.violation_detail.maps.ViolationMapApiResponseModel
 
 interface CarApiService {
 
@@ -25,12 +27,26 @@ interface CarApiService {
 //    suspend fun removeCar(@Body removeCarModel: RemoveCarModel): Response<RemoveCarModelResponse>
 
     @DELETE("cars/{car_number}")
-    suspend fun deleteCar(@Path("car_number") carNumber: String):Response<String>
+    suspend fun deleteCar(@Path("car_number") carNumber: String): Response<String>
 
     @GET("violations/list/{car_number}/{tex_pass}")
-    suspend fun getViolation( @Path("car_number") carNumber: String,@Path("tex_pass") texPass: String): Response<List<ViolationCarApiModelResponse>>
+    suspend fun getViolation(
+        @Path("car_number") carNumber: String,
+        @Path("tex_pass") texPass: String
+    ): Response<List<ViolationCarApiModelResponse>>
 
-    @POST("violation/pdf")
-    suspend fun getPdfFile(@Body violationPDFModel: ViolationPDFModel): Response<ViolationPDFResponseModel>
+//    @POST("violation/pdf")
+//    suspend fun getPdfFile(@Body violationPDFModel: ViolationPDFModel): Response<ViolationPDFResponseModel>
+
+    @GET("violations/pdf/{violationId}")
+    suspend fun getViolationPdf(@Path("violationId") violationId:String): Response<ViolationPDFResponseModel>
+
+
+    @GET("violations/payment/{act}")
+    suspend fun violationPay(@Path("act")act: String): Response<ViolationPayModelResponse>
+
+
+    @GET("violations/location/{eventId}")
+    suspend fun violationMap(@Path("eventId") eventId: String): Response<ViolationMapApiResponseModel>
 
 }

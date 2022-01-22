@@ -33,7 +33,7 @@ class ViolationViewModel @Inject constructor(
         }
     }
 
-
+/*
     private val _responseViolationPdf: MutableLiveData<Event<NetworkResult<ViolationPDFResponseModel>>> =
         MutableLiveData()
     val responseViolationPDF: LiveData<Event<NetworkResult<ViolationPDFResponseModel>>> =
@@ -43,7 +43,7 @@ class ViolationViewModel @Inject constructor(
         apiRepository.getPdfFile(violationPDFModel).collect { value ->
             _responseViolationPdf.postValue(Event(value))
         }
-    }
+    }*/
 
 
 }
