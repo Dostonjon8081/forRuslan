@@ -85,7 +85,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         ) {
 
             val editPref = getPref(this@MainActivity).edit()
-            val number = if (intent?.data.toString().startsWith("https://abc.xyz")) 22
+            val number = if (intent?.data.toString().startsWith("https://autoinfo.uz")) 26
             else 19
             CoroutineScope(Dispatchers.IO).launch {
                 editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(number))

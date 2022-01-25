@@ -43,7 +43,7 @@ class ViolationMapsFragment :
             }
         })
 
-        viewModel.violationMap(arg.eventId)
+        viewModel.violationMap(arg.eventId?:"")
         super.onAttach(context)
     }
 
@@ -63,13 +63,11 @@ class ViolationMapsFragment :
         }
 
         viewModel.responseViolationMap.observe(viewLifecycleOwner, EventObserver {
-            logd(it)
+
             if (it is NetworkResult.Success) {
 
                 latitude = it.data?.lat ?: 0.0
                 longitude = it.data?.lng ?: 0.0
-                logd("lat: $latitude")
-                logd("long: $longitude")
                 mMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         LatLng(latitude, longitude),
@@ -84,7 +82,5 @@ class ViolationMapsFragment :
 
     override fun onMapReady(p0: GoogleMap) {
         mMap = p0
-//        p0.clear()
-//        p0.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(41.0,69.3),12f))
     }
 }

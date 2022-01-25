@@ -83,6 +83,7 @@
             app:destination="@id/violationDetailFragment" />
 
     </fragment>
+
     <fragment
         android:id="@+id/violationDetailFragment"
         android:name="uz.fizmasoft.dyhxx.violation.violation_detail.ViolationDetailFragment"
@@ -94,9 +95,13 @@
             android:defaultValue="@null"
             app:argType="uz.fizmasoft.dyhxx.violation.ViolationCarModel"
             app:nullable="true" />
+
         <action
             android:id="@+id/action_violationDetailFragment_to_violationMapsFragment"
             app:destination="@id/violationMapsFragment" />
+        <action
+            android:id="@+id/action_violationDetailFragment_to_violationVideoFragment"
+            app:destination="@id/violationVideoFragment" />
 
     </fragment>
 
@@ -105,10 +110,23 @@
         android:name="uz.fizmasoft.dyhxx.violation.violation_detail.maps.ViolationMapsFragment"
         android:label="fragment_violation_maps"
         tools:layout="@layout/fragment_violation_maps">
+
         <argument
             android:name="eventId"
             app:argType="string"
-            app:nullable="false" />
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        tools:layout="@layout/fragment_violation_video"
+        android:id="@+id/violationVideoFragment"
+        android:name="uz.fizmasoft.dyhxx.violation.violation_detail.video.ViolationVideoFragment"
+        android:label="ViolationVideoFragment" >
+
+        <argument
+            android:name="eventId"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
 </navigation>

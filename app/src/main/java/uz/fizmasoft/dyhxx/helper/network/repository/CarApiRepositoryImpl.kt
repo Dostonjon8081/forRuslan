@@ -12,6 +12,7 @@ import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
 import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPDFResponseModel
 import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPayModelResponse
 import uz.fizmasoft.dyhxx.violation.violation_detail.maps.ViolationMapApiResponseModel
+import uz.fizmasoft.dyhxx.violation.violation_detail.video.ViolationVideoApiModel
 import javax.inject.Inject
 
 class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: ICarApiDataSource) :
@@ -75,6 +76,16 @@ class CarApiRepositoryImpl @Inject constructor(private val iCarApiDataSource: IC
                 iCarApiDataSource.violationMap(eventId)
             }
         )
+        }.flowOn(IO)
+    }
+
+    override suspend fun violationVideo(eventId: String): Flow<NetworkResult<ViolationVideoApiModel>> {
+        return flow {
+            emit(
+                safeApiCall {
+                    iCarApiDataSource.violationVideo(eventId)
+                }
+            )
         }.flowOn(IO)
     }
 

@@ -7,6 +7,7 @@ import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
 import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPDFResponseModel
 import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPayModelResponse
 import uz.fizmasoft.dyhxx.violation.violation_detail.maps.ViolationMapApiResponseModel
+import uz.fizmasoft.dyhxx.violation.violation_detail.video.ViolationVideoApiModel
 
 interface ICarApiDataSource {
 
@@ -22,4 +23,5 @@ interface ICarApiDataSource {
     suspend fun violationPay(act: String): Response<ViolationPayModelResponse>
     suspend fun violationPdf(violationId: Long): Response<ViolationPDFResponseModel>
     suspend fun violationMap(eventId: String): Response<ViolationMapApiResponseModel>
+    suspend fun violationVideo(eventId: String):Response<ViolationVideoApiModel>
 }

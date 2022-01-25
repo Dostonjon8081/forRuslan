@@ -1,4 +1,4 @@
-package uz.fizmasoft.dyhxx.violation.violation_detail.maps
+package uz.fizmasoft.dyhxx.violation.violation_detail.video
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -15,19 +15,19 @@ import uz.fizmasoft.dyhxx.helper.util.logd
 import javax.inject.Inject
 
 @HiltViewModel
-class ViolationMapsViewModel @Inject constructor(
+class ViolationVideoViewModel @Inject constructor(
     application: Application,
     private val apiRepository: ICarApiRepository
 ) : AndroidViewModel(application) {
 
-    private val _responseViolationMap: MutableLiveData<Event<NetworkResult<ViolationMapApiResponseModel>>> =
+    private val _responseViolationVideo: MutableLiveData<Event<NetworkResult<ViolationVideoApiModel>>> =
         MutableLiveData()
-    val responseViolationMap: LiveData<Event<NetworkResult<ViolationMapApiResponseModel>>> =
-        _responseViolationMap
+    val responseViolationVideo: LiveData<Event<NetworkResult<ViolationVideoApiModel>>> =
+        _responseViolationVideo
 
-    fun violationMap(eventId: String) = viewModelScope.launch {
-        apiRepository.violationMap(eventId).collect { value ->
-            _responseViolationMap.postValue(Event(value))
+    fun violationVideo(eventId: String) = viewModelScope.launch {
+        apiRepository.violationVideo(eventId).collect { value ->
+            _responseViolationVideo.postValue(Event(value))
         }
     }
 

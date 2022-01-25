@@ -8,6 +8,7 @@ import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
 import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPDFResponseModel
 import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPayModelResponse
 import uz.fizmasoft.dyhxx.violation.violation_detail.maps.ViolationMapApiResponseModel
+import uz.fizmasoft.dyhxx.violation.violation_detail.video.ViolationVideoApiModel
 
 interface CarApiService {
 
@@ -48,5 +49,8 @@ interface CarApiService {
 
     @GET("violations/location/{eventId}")
     suspend fun violationMap(@Path("eventId") eventId: String): Response<ViolationMapApiResponseModel>
+
+    @GET("violations/video/{eventId}")
+    suspend fun violationVideo(@Path("eventId") eventId: String): Response<ViolationVideoApiModel>
 
 }

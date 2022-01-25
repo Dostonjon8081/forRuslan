@@ -66,7 +66,7 @@
                 <!-- <data -->
                 <!-- android:scheme="dyhxx" /> -->
                 <data
-                    android:host="abc.xyz"
+                    android:host="autoinfo.uz"
                     android:scheme="https" />
 
                 <category android:name="android.intent.category.DEFAULT" />

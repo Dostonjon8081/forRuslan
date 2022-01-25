@@ -96,7 +96,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/violation_fragment_tool_bar"
-            tools:listitem="@layout/item_rv_violation" />
+            tools:listitem="@layout/item_rv_violation"
+            android:paddingBottom="20dp"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/violation_fragment_container_no_violation"

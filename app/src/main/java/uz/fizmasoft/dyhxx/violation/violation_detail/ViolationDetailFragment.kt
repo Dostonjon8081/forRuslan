@@ -2,11 +2,15 @@ package uz.fizmasoft.dyhxx.violation.violation_detail
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -16,6 +20,7 @@ import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentViolationDetailBinding
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.util.EventObserver
+import uz.fizmasoft.dyhxx.helper.util.TELEGRAM_AUTH_URL
 import uz.fizmasoft.dyhxx.helper.util.logd
 import uz.fizmasoft.dyhxx.violation.ViolationCarModel
 
@@ -31,10 +36,10 @@ class ViolationDetailFragment :
     private var clickUrl = ""
     private var uPayUrl = ""
     private var payMe = ""
-//    private var pdfEventId = ""
+
+    private var pdfEventId = ""
 
     override fun onAttach(context: Context) {
-
         if (arg.violationDetailArgs != null) {
             argModel = arg.violationDetailArgs!!
             viewModel.violationPay(argModel?.qarorSery + argModel?.qarorNumber)
@@ -66,11 +71,21 @@ class ViolationDetailFragment :
 
         initData()
 
+        initItems()
 
+    }
+
+    private fun initItems() {
+        binding.apply {
+            violationDetailFragmentPayClick.setOnClickListener { goToPay(clickUrl) }
+            violationDetailFragmentPayPayme.setOnClickListener { goToPay(payMe) }
+            violationDetailFragmentPayUpay.setOnClickListener { goToPay(uPayUrl) }
+        }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun initData() {
+
 
         binding.apply {
 
@@ -121,22 +136,27 @@ class ViolationDetailFragment :
     }
 
     private fun protocolRR() {
+        getBaseActivity { base ->
+            binding.violationDetailFragmentLocationContainer.setOnClickListener { _ ->
+                base.navController?.navigate(
+                    ViolationDetailFragmentDirections
+                        .actionViolationDetailFragmentToViolationMapsFragment(
+                            pdfEventId
+                        )
+                )
+            }
+            binding.violationDetailFragmentVideoContainer.setOnClickListener {
+                base.navController?.navigate(ViolationDetailFragmentDirections.actionViolationDetailFragmentToViolationVideoFragment(pdfEventId))
+            }
+        }
+
+
         controlMediaVisibility(true, true, true)
         viewModel.responseViolationPdf.observe(viewLifecycleOwner, EventObserver {
-//           logd(it.data?.file?.pdfData.toString())
-//            pdfEventId = it.data?.eventId ?: ""
-            binding.violationDetailFragmentLocationContainer.setOnClickListener {_->
-                getBaseActivity { base ->
-                    base.navController?.navigate(
-                        ViolationDetailFragmentDirections
-                            .actionViolationDetailFragmentToViolationMapsFragment(it.data?.eventId?:"")
-                    )
-                }
-            }
 
             when (it) {
                 is NetworkResult.Success -> {
-
+                    pdfEventId = it.data?.eventId ?: ""
                     /* PDFUtils.createPdf(
                          requireActivity(),
                          requireActivity().filesDir.absolutePath,
@@ -171,6 +191,7 @@ class ViolationDetailFragment :
                         payMe = it.data.payme
                         uPayUrl = it.data.uPay
                     }
+//                    logd("loadPayLink")
                 }
                 is NetworkResult.Error -> {
                 }
@@ -230,8 +251,9 @@ class ViolationDetailFragment :
         }
     }
 
-    override fun setInitialSavedState(state: SavedState?) {
+    private fun goToPay(url:String){
 
-        super.setInitialSavedState(state)
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+//        requireActivity().startActivity(Intent(url))
     }
 }
