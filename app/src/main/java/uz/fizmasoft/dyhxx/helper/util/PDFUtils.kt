@@ -56,7 +56,7 @@ object PDFUtils {
     }
 
 
-    fun createPdf(activity: Activity, dirPath: String, byteArray: ByteArray, id: String) {
+    fun createPdf(activity: Activity, dirPath: String, byteArray: String, id: String) {
 
         val dir = File(dirPath)
         val idPdf = File(dir, "$id.pdf")
@@ -64,11 +64,11 @@ object PDFUtils {
             idPdf.createNewFile()
 
             try {
-//                val pdfAsBytes: ByteArray? =
-//                    android.util.Base64.decode(byteArray, android.util.Base64.DEFAULT)
+                val pdfAsBytes: ByteArray? =
+                    android.util.Base64.decode(byteArray, android.util.Base64.DEFAULT)
                 val os = FileOutputStream(idPdf, false)
 
-                os.write(byteArray)
+                os.write(pdfAsBytes)
                 os.flush()
                 os.close()
                 // openPDF(activity,dirPath,id)

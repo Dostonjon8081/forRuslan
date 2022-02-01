@@ -6,11 +6,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -20,8 +18,8 @@ import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentViolationDetailBinding
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.util.EventObserver
-import uz.fizmasoft.dyhxx.helper.util.TELEGRAM_AUTH_URL
-import uz.fizmasoft.dyhxx.helper.util.logd
+import uz.fizmasoft.dyhxx.helper.util.PDFUtils
+import uz.fizmasoft.dyhxx.helper.util.carToast
 import uz.fizmasoft.dyhxx.violation.ViolationCarModel
 
 @AndroidEntryPoint
@@ -43,8 +41,13 @@ class ViolationDetailFragment :
         if (arg.violationDetailArgs != null) {
             argModel = arg.violationDetailArgs!!
             viewModel.violationPay(argModel?.qarorSery + argModel?.qarorNumber)
-            if (argModel?.qarorSery != "KV")
-                viewModel.violationPDF(argModel?.id ?: 0)
+            try {
+                argModel?.qarorSery?.toInt()
+            } catch (e: Exception) {
+                if (argModel?.qarorSery != "KV")
+                    viewModel.violationPDF(argModel?.id ?: 0)
+//            logd(argModel?.id)
+            }
         }
 
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
@@ -77,6 +80,7 @@ class ViolationDetailFragment :
 
     private fun initItems() {
         binding.apply {
+            violationDetailFragmentPdfButton.setOnClickListener { openPdf() }
             violationDetailFragmentPayClick.setOnClickListener { goToPay(clickUrl) }
             violationDetailFragmentPayPayme.setOnClickListener { goToPay(payMe) }
             violationDetailFragmentPayUpay.setOnClickListener { goToPay(uPayUrl) }
@@ -85,7 +89,6 @@ class ViolationDetailFragment :
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun initData() {
-
 
         binding.apply {
 
@@ -115,13 +118,23 @@ class ViolationDetailFragment :
         viewModel.responseViolationPdf.observe(viewLifecycleOwner, EventObserver {
             when (it) {
                 is NetworkResult.Success -> {
-//                    pdfEventId = it.data?.eventId ?: ""
+                    pdfEventId = it.data?.eventId ?: ""
+                    PDFUtils.createPdf(
+                        requireActivity(),
+                        requireActivity().filesDir.absolutePath,
+                        it.data!!.file,
+                        argModel?.id.toString() ?: ""
+                    )
                 }
             }
         })
-        controlMediaVisibility(true)
+        try {
+            argModel?.qarorSery?.toInt()
+        } catch (e: Exception) {
+            controlMediaVisibility(true)
+        }
         binding.apply {
-            violationDetailFragmentPdf.setOnClickListener { }
+//            violationDetailFragmentPdfButton.setOnClickListener{openPdf()}
             violationDetailFragmentTypeImage
                 .setImageDrawable(resources.getDrawable(R.drawable.ic_radar, null))
         }
@@ -146,7 +159,11 @@ class ViolationDetailFragment :
                 )
             }
             binding.violationDetailFragmentVideoContainer.setOnClickListener {
-                base.navController?.navigate(ViolationDetailFragmentDirections.actionViolationDetailFragmentToViolationVideoFragment(pdfEventId))
+                base.navController?.navigate(
+                    ViolationDetailFragmentDirections.actionViolationDetailFragmentToViolationVideoFragment(
+                        pdfEventId
+                    )
+                )
             }
         }
 
@@ -156,25 +173,20 @@ class ViolationDetailFragment :
 
             when (it) {
                 is NetworkResult.Success -> {
+
+//                    logd(it.data?.eventId)
                     pdfEventId = it.data?.eventId ?: ""
-                    /* PDFUtils.createPdf(
-                         requireActivity(),
-                         requireActivity().filesDir.absolutePath,
-                         it.data!!.file.pdfData,
-                         argModel?.id.toString() ?: ""
-                     )
-                      PDFUtils.openPDF(
-                          requireActivity(),
-                          requireActivity().filesDir.absolutePath,
-                          argModel?.id.toString() ?: ""
-  //                        violationPDFQaror?.qaror ?: ""
-                      )*/
+                    PDFUtils.createPdf(
+                        requireActivity(),
+                        requireActivity().filesDir.absolutePath,
+                        it.data!!.file,
+                        argModel?.id.toString() ?: ""
+                    )
                 }
             }
         })
         binding.violationDetailFragmentTypeImage
             .setImageDrawable(resources.getDrawable(R.drawable.ic_artist, null))
-
     }
 
     private fun loadPayLink() {
@@ -240,7 +252,7 @@ class ViolationDetailFragment :
         videoVisibility: Boolean = false
     ) {
         binding.apply {
-            violationDetailFragmentPdf.visibility =
+            violationDetailFragmentPdfButton.visibility =
                 if (pdfVisibility) VISIBLE else GONE
 
             violationDetailFragmentLocationContainer.visibility =
@@ -251,9 +263,20 @@ class ViolationDetailFragment :
         }
     }
 
-    private fun goToPay(url:String){
+    private fun goToPay(url: String) {
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        } catch (e: Exception) {
+            carToast(requireContext(), "no data from server")
+        }
+    }
 
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-//        requireActivity().startActivity(Intent(url))
+    private fun openPdf() {
+        PDFUtils.openPDF(
+            requireActivity(),
+            requireActivity().filesDir.absolutePath,
+            argModel?.id.toString() ?: ""
+//                        violationPDFQaror?.qaror ?: ""
+        )
     }
 }

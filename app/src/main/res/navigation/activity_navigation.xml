@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_mainFragment_to_violationFragment"
             app:destination="@id/violationFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
 
     <fragment
@@ -128,5 +131,9 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="uz.fizmasoft.dyhxx.core_fragment.account.about_app.AboutFragment"
+        android:label="AboutFragment" />
 
 </navigation>

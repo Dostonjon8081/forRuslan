@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">DYHXX</string>
-    <string name="home" translatable="false">Home</string>
+    <string name="home">Home</string>
     <string name="notification" translatable="false">Notification</string>
     <string name="account" translatable="false">Account</string>
 
@@ -65,6 +65,8 @@
 
     <string name="select_language">Select a language</string>
     <string name="violation">Violation</string>
+    <string name="settings">Settings</string>
+
 
 
 </resources>

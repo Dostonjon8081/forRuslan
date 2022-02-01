@@ -8,7 +8,6 @@ import uz.fizmasoft.dyhxx.helper.network.model.*
 import uz.fizmasoft.dyhxx.helper.util.logd
 import uz.fizmasoft.dyhxx.violation.ViolationCarApiModelResponse
 import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPDFResponseModel
-import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPDFResponseModelFile
 import uz.fizmasoft.dyhxx.violation.violation_detail.ViolationPayModelResponse
 import uz.fizmasoft.dyhxx.violation.violation_detail.maps.ViolationMapApiResponseModel
 import uz.fizmasoft.dyhxx.violation.violation_detail.video.ViolationVideoApiModel

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DYHXX</string>
-    <string name="home" translatable="false">Home</string>
+    <string name="home">Asosiy</string>
     <string name="notification" translatable="false">Notification</string>
     <string name="account" translatable="false">Account</string>
 
@@ -66,5 +66,6 @@
 
     <string name="select_language">Tilni tanlang</string>
     <string name="violation">Jarimalar</string>
+    <string name="settings">Sozlamalar</string>
 
 </resources>

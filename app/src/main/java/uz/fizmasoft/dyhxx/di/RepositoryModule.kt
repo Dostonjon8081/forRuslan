@@ -50,6 +50,7 @@ class RepositoryModule {
                 val requestBulder = original.newBuilder()
 //                    .addHeader("authorization", "1638094110:479914aa8c9afbb1e27f7a716488ae85")
                     .addHeader("authorization", getPref(context).getString(PREF_TOKEN_KEY,"")!!)
+//                    .addHeader("type", "base64")
                 val request = requestBulder.build()
                 chain.proceed(request)
             }

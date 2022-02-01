@@ -40,6 +40,7 @@ interface CarApiService {
 //    suspend fun getPdfFile(@Body violationPDFModel: ViolationPDFModel): Response<ViolationPDFResponseModel>
 
     @GET("violations/pdf/{violationId}")
+    @Headers("type:base64")
     suspend fun getViolationPdf(@Path("violationId") violationId:String): Response<ViolationPDFResponseModel>
 
 

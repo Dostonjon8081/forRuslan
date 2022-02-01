@@ -18,8 +18,8 @@ const val BASE_URL = "https://api.autoinfo.uz/"
 //const val TELEGRAM_AUTH_URL = "https://t.me/dyhxxuz_auth_bot"
 //const val TELEGRAM_AUTH_URL = "tg://resolve?domain=dyhxxuz_bot&start=android"
 const val TELEGRAM_AUTH_URL = "tg://resolve?domain=autoinfouz_bot&start=android"
-const val TELEGRAM_FEEDBACK_URL = "tg://resolve?domain=dyhxxuz_feedback_bot"
-const val TELEGRAM_FEEDBACK_URL_CHROME = "https://t.me/dyhxxuz_feedback_bot"
+const val TELEGRAM_FEEDBACK_URL = "tg://resolve?domain=autoinfouz_feedback_bot"
+const val TELEGRAM_FEEDBACK_URL_CHROME = "https://t.me/@autoinfouz_feedback_bot"
 
 /**
  * permission request code

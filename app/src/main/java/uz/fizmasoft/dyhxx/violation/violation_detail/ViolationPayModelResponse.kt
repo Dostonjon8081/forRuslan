@@ -16,7 +16,7 @@ data class ViolationPayModelResponse(
 data class ViolationPayModelCheck(
     @SerializedName("amount")
     val amount: Long,
-    @SerializedName("fuul_name")
+    @SerializedName("full_name")
     val fullName: String,
     @SerializedName("type")
     val violationType: String

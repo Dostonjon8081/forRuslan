@@ -33,13 +33,14 @@ class AccountLanguageFragment :
     }
 
     private fun selectLanguage(view: View) {
-        (requireActivity() as uz.fizmasoft.dyhxx.activity.MainActivity).apply {
+        (requireActivity() as MainActivity).apply {
             when (view.id) {
                 R.id.rus -> this.setLocale("ru")
                 R.id.english -> this.setLocale("en")
                 R.id.uzbek -> this.setLocale("uz")
             }
-//            navController!!.navigate(R.id.account_fragment)
+//            this.navController!!.navigate(R.id.mainFragment)
+            this.bottomNavController!!.navigate(R.id.setting)
         }
 
 //        when (view.id) {
