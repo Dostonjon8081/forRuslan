@@ -41,8 +41,8 @@ class AccountLanguageFragment :
                 R.id.english -> this.setLocale("en")
                 R.id.uzbek -> this.setLocale("uz")
             }
+
             this.bottomNavController!!.navigate(R.id.setting)
-//            this.navController!!.navigate(R.id.mainFragment)
 
             val bottomView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
             bottomView?.menu?.get(0)?.title = resources.getString(R.string.home)
