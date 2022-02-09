@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.activity.MainActivity
@@ -39,8 +41,13 @@ class AccountLanguageFragment :
                 R.id.english -> this.setLocale("en")
                 R.id.uzbek -> this.setLocale("uz")
             }
-//            this.navController!!.navigate(R.id.mainFragment)
-            this.bottomNavController!!.navigate(R.id.setting)
+//            this.bottomNavController!!.navigate(R.id.setting)
+            this.navController!!.navigate(R.id.mainFragment)
+
+            val bottomView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+            bottomView?.menu?.get(0)?.title = resources.getString(R.string.home)
+            bottomView?.menu?.get(2)?.title = resources.getString(R.string.settings)
+
         }
 
 //        when (view.id) {

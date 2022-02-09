@@ -87,6 +87,7 @@ android {
 
     kapt {
         correctErrorTypes true
+//        generateStubs = true
     }
 
     lintOptions {
