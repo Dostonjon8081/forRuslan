@@ -1,48 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color">
 
-    <androidx.appcompat.widget.Toolbar
-        android:orientation="horizontal"
-        android:id="@+id/about_fragment_toolBar"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/about_fragment_arrow_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="12sp"
+        android:src="@drawable/ic_arrow_left_in_rectangle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/account_fragment_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:background="@color/toolbar_color"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:fontFamily="@font/gilroy_bold"
+        android:gravity="center"
+        android:paddingTop="12dp"
+        android:src="@drawable/ic_blue_logo_text"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/white_rectangle_with_small_radius"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/account_fragment_toolbar">
+
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/about_fragment_arrow_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_arrow_left" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/about_img_wallpaper"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/gilroy_bold"
-            android:gravity="start"
-            android:text="@string/about_app"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            tools:ignore="RtlSymmetry" />
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio nisl amet consectetur urna eget maecenas tellus. Eleifend scelerisque malesuada mauris ultricies. Morbi sagittis, elit fermentum in. Bibendum in sit sit a dolor netus nulla phasellus iaculis. Tincidunt tellus bibendum fringilla ut. Massa suspendisse bibendum egestas nisi netus. Et bibendum amet diam interdum ornare velit aliquam et eros."
+            android:fontFamily="@font/gilroy_regular"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:lineHeight="26sp"/>
 
-    </androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/about_app_text"
-        android:gravity="center"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

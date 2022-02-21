@@ -17,8 +17,8 @@
 
     <fragment
         android:id="@+id/setting"
-        android:name="uz.fizmasoft.dyhxx.core_fragment.account.AccountFragment"
-        tools:layout="@layout/fragment_account" >
+        android:name="uz.fizmasoft.dyhxx.core_fragment.account.SettingsFragment"
+        tools:layout="@layout/fragment_settings" >
       <!--  <action
             android:id="@+id/action_setting_to_aboutFragment"
             app:destination="@id/aboutFragment" />-->
