@@ -68,6 +68,8 @@ class ViolationMapsFragment :
 
                 latitude = it.data?.lat ?: 0.0
                 longitude = it.data?.lng ?: 0.0
+                logd(latitude)
+                logd(longitude)
                 mMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         LatLng(latitude, longitude),

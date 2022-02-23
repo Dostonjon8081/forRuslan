@@ -41,5 +41,6 @@
 
     <color name="violation_detail_light_blue_color">#0562EE</color>
     <color name="violation_detail_light_green_color">#47B602</color>
+    <color name="violation_detail_light_red_color">#FF0000</color>
 
 </resources>

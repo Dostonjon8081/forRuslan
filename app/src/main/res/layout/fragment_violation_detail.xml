@@ -281,36 +281,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:src="@drawable/ic_warning_blue"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/violation_detail_fragment_discount_time"
+                    android:id="@+id/violation_detail_fragment_discount_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/gilroy_semibold"
                     android:lineSpacingExtra="6dp"
                     android:paddingStart="12dp"
-                    tools:text="15.12.2021"
+                    android:text="@string/violation_sum"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/violation_detail_fragment_discount_icon"
                     app:layout_constraintTop_toTopOf="@id/violation_detail_fragment_discount_icon" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/violation_detail_fragment_discount_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
-                    android:paddingStart="12dp"
-                    android:text="@string/violation_sum"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toEndOf="@id/violation_detail_fragment_discount_icon"
-                    app:layout_constraintTop_toBottomOf="@id/violation_detail_fragment_discount_time" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -321,7 +310,7 @@
                     android:paddingStart="12dp"
                     android:paddingTop="4dp"
                     tools:text="1,135,500,00 sum"
-                    android:textColor="@color/violation_detail_light_green_color"
+                    android:textColor="@color/violation_detail_light_red_color"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/violation_detail_fragment_discount_icon"
