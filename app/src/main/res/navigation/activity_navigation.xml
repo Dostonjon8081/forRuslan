@@ -133,7 +133,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="uz.fizmasoft.dyhxx.core_fragment.account.about_app.AboutFragment"
+        android:name="uz.fizmasoft.dyhxx.core_fragment.settings.about_app.AboutFragment"
         android:label="AboutFragment" />
 
 </navigation>

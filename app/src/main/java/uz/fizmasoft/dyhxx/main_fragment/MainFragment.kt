@@ -54,10 +54,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
     fun fabState(isPlus: Boolean) {
         if (isPlus) {
-            binding.fab.setImageDrawable(resources.getDrawable(R.drawable.ic_plus, null))
-            binding.fab.setOnClickListener { addCar() }
+            binding.fabAddCar.setImageDrawable(resources.getDrawable(R.drawable.ic_plus, null))
+            binding.fabAddCar.setOnClickListener { addCar() }
         } else {
-            binding.fab.setImageDrawable(resources.getDrawable(R.drawable.ic_qver, null))
+            binding.fabAddCar.setImageDrawable(resources.getDrawable(R.drawable.ic_qver, null))
         }
     }
 

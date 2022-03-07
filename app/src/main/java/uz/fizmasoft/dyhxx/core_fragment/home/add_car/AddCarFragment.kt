@@ -46,7 +46,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupSpinner()
+        setupMarkSpinner()
         setup()
 
         binding.apply {
@@ -74,26 +74,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         }
     }
 
-    private fun setupSpinner() {
-        val mutableListMarks = mutableListOf<String>()
-        mutableListMarks.apply {
-            addAll(resources.getStringArray(R.array.car_marks))
-            sort()
-            add(getString(R.string.other))
-        }
-
-        ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            mutableListMarks
-        ).also { adapter ->
-
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-            binding.addCarFragmentSpinnerCarMarks.adapter = adapter
-            binding.addCarFragmentSpinnerCarMarks.onItemSelectedListener = this
-        }
-    }
 
     private fun clickButton(id: Int) {
         getBaseActivity {
@@ -165,23 +145,31 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase().trim()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase().trim()
         val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
-
-        if (binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
-            carModel = binding.addCarFragmentEditTextCarModels.text.toString()
+        if (carMark.isNotEmpty()) {
+            if (binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
+                carModel = binding.addCarFragmentEditTextCarModels.text.toString().trim()
+            }
         }
 
         if (
             carNumber.length >= 8
             && carTexPasNumber.length == 7
             && carTexPasSeries.length >= 3
-            && carMark.isNotEmpty()
+//            && carMark.isNotEmpty()
         ) {
 
             if (isOnline(requireContext())) {
+                if (carMark.isNotEmpty()) {
+                    if (binding.addCarFragmentEditTextCarModels.isVisible) {
+                        carModel = binding.addCarFragmentEditTextCarModels.text.toString().trim()
+                    }
+                }
 
+                logd(carMark)
+                logd(carModel)
                 viewModel.saveCarApi(
                     carNumber,
-                    carTexPasSeries + carTexPasNumber, carMark, carModel
+                    carTexPasSeries + carTexPasNumber, carMark, carMark
                 )
 
                 viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
@@ -206,9 +194,9 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                     binding.wp7progressBar.hide()
 
                     when (data.data) {
-                        "Created" ->
+                        "Created" -> {
                             activity.navController?.popBackStack()
-
+                        }
                         "Conflict" ->
                             carToast(requireContext(), getString(R.string.car_exist))
 
@@ -254,6 +242,7 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        logd(parent?.id)
         if (parent?.id == R.id.add_car_fragment_spinner_car_marks) {
             carMark = parent.selectedItem.toString()
             if (carMark.isNotEmpty()) {
@@ -261,6 +250,27 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
             }
         } else {
             carModel = parent?.selectedItem.toString()
+        }
+    }
+
+    private fun setupMarkSpinner() {
+        val mutableListMarks = mutableListOf<String>()
+        mutableListMarks.apply {
+            addAll(resources.getStringArray(R.array.car_marks))
+            sort()
+            add(getString(R.string.other))
+        }
+
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            mutableListMarks
+        ).also { adapter ->
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+            binding.addCarFragmentSpinnerCarMarks.adapter = adapter
+            binding.addCarFragmentSpinnerCarMarks.onItemSelectedListener = this
         }
     }
 
@@ -302,10 +312,11 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
 
             val arrayModels = resources.getStringArray(arrayRes)
             val mutableListModels = mutableListOf<String>()
-            mutableListModels.addAll(arrayModels)
-            mutableListModels.sort()
-            mutableListModels.add(getString(R.string.other))
-
+            mutableListModels.apply {
+                addAll(arrayModels)
+                sort()
+                add(getString(R.string.other))
+            }
             ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_spinner_item,

@@ -52,8 +52,6 @@ class ViolationMapsFragment :
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
-
-
         requireActivity().window.apply {
             clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -65,11 +63,8 @@ class ViolationMapsFragment :
         viewModel.responseViolationMap.observe(viewLifecycleOwner, EventObserver {
 
             if (it is NetworkResult.Success) {
-
                 latitude = it.data?.lat ?: 0.0
                 longitude = it.data?.lng ?: 0.0
-                logd(latitude)
-                logd(longitude)
                 mMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         LatLng(latitude, longitude),

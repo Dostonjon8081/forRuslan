@@ -24,36 +24,6 @@ class HomeViewModel @Inject constructor(
     private val dbRepository: ICarRepository
 ) : AndroidViewModel(application) {
 
-  /*  private val _responseUserIdApi: MutableLiveData<NetworkResult<UserAuthIDModel>> =
-        MutableLiveData()
-    val responseUserIdApi: LiveData<NetworkResult<UserAuthIDModel>> = _responseUserIdApi
-    fun getUserIdApi(token: String) = viewModelScope.launch {
-        apiRepository.getUserId(token).collect { values ->
-            _responseUserIdApi.postValue(values)
-        }
-    }
-
-    private val _responseCheckLimitApi: MutableLiveData<NetworkResult<CheckLimitModelResponse>> =
-        MutableLiveData()
-    val responseCheckLimitApi: LiveData<NetworkResult<CheckLimitModelResponse>> =
-        _responseCheckLimitApi
-
-    fun checkLimitApi(checkLimitModel: CheckLimitModel) = viewModelScope.launch {
-        apiRepository.checkLimit(checkLimitModel).collect { values ->
-            _responseCheckLimitApi.postValue(values)
-        }
-    }*/
-
-/*    private val _responseSaveCarApi: MutableLiveData<NetworkResult<SaveCarResponse>> =
-        MutableLiveData()
-    val responseSaveCarApi: LiveData<NetworkResult<SaveCarResponse>> = _responseSaveCarApi
-    fun saveCarApi(saveCarModel: SaveCarModel) = viewModelScope.launch {
-        apiRepository.saveCar(saveCarModel).collect { values ->
-            _responseSaveCarApi.postValue(values)
-        }
-    }*/
-
-
     private val _responseAllCarsApi: MutableLiveData<Event<NetworkResult<List<AllCarsResponseModel>>>> =
         MutableLiveData()
     val responseAllCarsApi: LiveData<Event<NetworkResult<List<AllCarsResponseModel>>>> = _responseAllCarsApi
@@ -62,19 +32,6 @@ class HomeViewModel @Inject constructor(
             _responseAllCarsApi.postValue(Event(values))
         }
     }
-
-
-    /*private val _responseRemoveCarApi: MutableLiveData<Event<NetworkResult<RemoveCarModelResponse>>> =
-        MutableLiveData()
-    val responseRemoveCarApi: LiveData<Event<NetworkResult<RemoveCarModelResponse>>> =
-        _responseRemoveCarApi
-
-    fun removeCarApi(removeCarModel: RemoveCarModel) = viewModelScope.launch(Dispatchers.IO) {
-        apiRepository.removeCar(removeCarModel).collect { values ->
-            _responseRemoveCarApi.postValue(Event(values))
-        }
-    }*/
-
 
     private val _allCarDB = MutableLiveData<MutableList<CarEntity>>()
     val allCarDB: LiveData<MutableList<CarEntity>> = _allCarDB

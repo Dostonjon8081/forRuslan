@@ -197,6 +197,7 @@
                         android:fontFamily="@font/inter"
                         android:lineSpacingExtra="6dp"
                         android:paddingStart="16dp"
+                        android:paddingBottom="10dp"
                         android:text="@string/sum"
                         android:textColor="@color/black"
                         android:textSize="14sp"
@@ -259,6 +260,7 @@
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         android:textStyle="bold"
+                        android:paddingBottom="10dp"
                         app:layout_constraintEnd_toEndOf="@id/violation_sum_title"
                         app:layout_constraintStart_toStartOf="@id/violation_sum_title"
                         app:layout_constraintTop_toBottomOf="@id/violation_sum" />
@@ -293,7 +295,7 @@
                     android:fontFamily="@font/gilroy_semibold"
                     android:lineSpacingExtra="6dp"
                     android:paddingStart="12dp"
-                    android:text="@string/violation_sum"
+                    android:text="@string/violation_owing"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -415,7 +417,7 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/inter"
                     android:paddingStart="16dp"
-                    android:text="Jarimani To'lash"
+                    android:text="@string/pay_violation"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

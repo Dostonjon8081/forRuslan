@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DYHXX</string>
+    <string name="app_name">AutoInfo</string>
     <string name="home">Asosiy</string>
     <string name="notification" translatable="false">Notification</string>
     <string name="account" translatable="false">Account</string>
@@ -45,7 +45,7 @@
     <string name="violation_act">Qaror:</string>
     <string name="violation_type">Jarima:</string>
     <string name="violation_location">Qayd etilgan hudud:</string>
-    <string name="violation_sum">To\'lov miqdori:</string>
+    <string name="violation_sum">Jarima miqdori</string>
     <string name="no_violation">Jarimalar mavjud emas!</string>
     <string name="will_be_soon_notification">Ushbu bo’lim tez orada ishga tushadi</string>
     <string name="typing_model">Modelni kiriting</string>
@@ -67,5 +67,12 @@
     <string name="select_language">Tilni tanlang</string>
     <string name="violation">Jarimalar</string>
     <string name="settings">Sozlamalar</string>
+    <string name="see_decision">Qarorni ko\'rish</string>
+    <string name="pay_violation">Jarimani to\'lash</string>
+    <string name="violation_owing">To\'lanmagan</string>
+    <string name="loading">Yuklanmoqda…</string>
+    <string name="delete">O\'chirish</string>
+    <string name="violation_video">Video ma\'lumot</string>
+
 
 </resources>

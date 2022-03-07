@@ -18,7 +18,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/rv_item_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:paddingTop="18dp"
             android:src="@drawable/malibu"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 app:autoSizeTextType="uniform"
                 tools:text="50" />
 
@@ -76,7 +76,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/rv_item_car_number"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:fontFamily="@font/gilroy_bold"
@@ -87,7 +87,7 @@
                 android:paddingEnd="6dp"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 app:autoSizeTextType="uniform"
                 app:fontFamily="@font/inter"
                 tools:text="S 577 JA" />
@@ -99,12 +99,13 @@
             android:id="@+id/rv_item_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="14dp"
             android:src="@drawable/ic_edit"
-            app:layout_constraintEnd_toStartOf="@id/rv_item_arrow_fine"
-            app:layout_constraintTop_toTopOf="@id/rv_item_arrow_fine"
-            app:layout_constraintBottom_toBottomOf="@id/rv_item_arrow_fine"
+            app:layout_constraintEnd_toEndOf="@id/rv_item_image"
+            app:layout_constraintTop_toTopOf="@id/rv_item_car_model"
+            app:layout_constraintBottom_toBottomOf="@id/rv_item_car_number_container"
             />
+<!--
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/rv_item_arrow_fine"
@@ -115,6 +116,7 @@
             android:src="@drawable/ic_arrow_right_in_rectangle"
             app:layout_constraintTop_toTopOf="@id/rv_item_car_model"
             app:layout_constraintBottom_toBottomOf="@id/rv_item_car_number_container"/>
+-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

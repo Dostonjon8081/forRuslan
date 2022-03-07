@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DYHXX</string>
+    <string name="app_name">AutoInfo</string>
     <string name="home">Основной</string>
     <string name="notification" translatable="false">Notification</string>
     <string name="account" translatable="false">Account</string>
@@ -44,11 +44,11 @@
     <string name="delete_dialog_title">Вы действительно хотите удалить эту машину?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
-    <string name="fine_time">Штрафное время:</string>
-    <string name="violation_act">Решение:</string>
-    <string name="violation_type">Штраф:</string>
-    <string name="violation_location">Место штраф:</string>
-    <string name="violation_sum">Сумма оплаты:</string>
+    <string name="fine_time">Bремя нарушения</string>
+    <string name="violation_act">Решение</string>
+    <string name="violation_type">Штраф</string>
+    <string name="violation_location">Место нарушения</string>
+    <string name="violation_sum">Cумма штрафа</string>
     <string name="no_violation">Нет штрафов</string>
 
     <string name="typing_model">Введите модель</string>
@@ -70,6 +70,12 @@
     <string name="select_language">Выберите язык</string>
     <string name="violation">Штрафов</string>
     <string name="settings">Настройки</string>
+    <string name="see_decision">Показать акт</string>
+    <string name="pay_violation">Оплатить штраф </string>
+    <string name="violation_owing">Hевыплаченная</string>
+    <string name="loading">Загрузка…</string>
+    <string name="delete">Удалить</string>
+    <string name="violation_video">Видеозапись нарушения</string>
 
 
 </resources>

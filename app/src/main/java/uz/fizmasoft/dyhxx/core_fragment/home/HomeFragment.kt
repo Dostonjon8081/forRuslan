@@ -40,13 +40,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun loadData() {
         viewModel.allCarDB.observe(viewLifecycleOwner, { t ->
+
             if (t?.size!! > 0) {
-//                binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
-                /* if (t.size >= 8) {
- //                    binding.homeFragmentButtonAddCar.visibility = View.GONE
-                 } else {
- //                    binding.homeFragmentButtonAddCar.visibility = View.VISIBLE
-                 }*/
                 adapter.rvClickListener(this@HomeFragment)
                 listCarEntity.clear()
                 listCarEntity.addAll(t)
@@ -55,11 +50,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 binding.homeFragmentNoCarContainer.visibility = View.GONE
                 binding.homeFragmentRv.adapter = adapter
                 adapter.submitList(t)
-//                binding.homeFragmentButtonAddCar.visibility = if (t.size >= 8) {
-//                    View.GONE
-//                } else {
-//                    View.VISIBLE
-//                }
             } else {
                 swipeRefresh()
                 binding.homeFragmentNoCarContainer.visibility = View.VISIBLE
@@ -121,8 +111,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.homeFragmentSwipeRefresh.isRefreshing = false
     }
 
-
-
     override fun clickedItem(carEntity: CarEntity) {
         getBaseActivity {
             it.navController?.navigate(MainFragmentDirections.actionMainFragmentToViolationFragment(carEntity))
@@ -136,54 +124,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             )
         }
     }
-
-    /*    private fun addCar() {
-            getBaseActivity {
-    //            it.navController?.navigate(HomeFragmentDirections.actionHomeFragmentToAddCarFragment())
-            }
-        }*/
-
-/* fun clickedItemDelete(carNumber: String) {
-     val builder = AlertDialog.Builder(requireContext())
-         .setMessage(R.string.delete_dialog_title)
-         .setPositiveButton(R.string.yes) { _, _ ->
-             deleteCar(carNumber)
-         }
-         .setNegativeButton(R.string.no) { _, _ ->
-         }
-     builder.create()
-     builder.show()
-
- }*/
-
-    /*
-        private fun deleteCar(carNumber: String) {
-            val removeCarModel = RemoveCarModel(
-                getPref(requireActivity()).getString(PREF_USER_ID_KEY, "")!!,
-                carNumber
-            )
-            viewModel.removeCarApi(removeCarModel)
-            viewModel.responseRemoveCarApi.observe(viewLifecycleOwner, EventObserver {
-    //            if (it.data != null) {
-                when (it) {
-                    is NetworkResult.Loading -> {
-                    }
-                    is NetworkResult.Success -> {
-                        viewModel.removeCarDB(carNumber)
-                    }
-                    is NetworkResult.Error -> {
-                    }
-    //                }
-                }
-    //            navigateToHome()
-            })
-
-        }*/
-
-    /*  private fun navigateToHome() {
-          getBaseActivity {
-              it.navController!!.navigate(R.id.home_fragment)
-          }
-      }*/
 
 }

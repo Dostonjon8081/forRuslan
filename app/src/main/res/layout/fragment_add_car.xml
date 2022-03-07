@@ -105,7 +105,7 @@
                 android:padding="12dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/pale_text"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -152,14 +152,14 @@
                     android:padding="12dp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/pale_text"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="20dp"
                 android:layout_weight="0.5"
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/add_car_fragment_toolBar">
@@ -187,7 +187,7 @@
                     android:padding="12dp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/pale_text"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -54,7 +54,7 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
         //        var rvItemDelete: AppCompatImageView = view.findViewById(R.id.rv_item_delete)
         private var rvItemEdit: AppCompatImageView = view.findViewById(R.id.rv_item_edit)
-        private var rvItemArrowFine: AppCompatImageView = view.findViewById(R.id.rv_item_arrow_fine)
+//        private var rvItemArrowFine: AppCompatImageView = view.findViewById(R.id.rv_item_arrow_fine)
 
         fun onBind(model: CarEntity, position: Int) {
             //car number
@@ -73,7 +73,8 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
 //            rvItemDelete.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
             rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemEdit(list[position]) }
-            rvItemArrowFine.setOnClickListener { rvItemClick!!.clickedItem(list[position]) }
+//            rvItemArrowFine.setOnClickListener { rvItemClick!!.clickedItem(list[position]) }
+            view.rootView.setOnClickListener { rvItemClick!!.clickedItem(list[position]) }
 //            view.setOnClickListener { rvItemClick!!.clickedItem(position) }
 
 //            if (model.carMark.isNotEmpty()) mark.text = model.carMark
