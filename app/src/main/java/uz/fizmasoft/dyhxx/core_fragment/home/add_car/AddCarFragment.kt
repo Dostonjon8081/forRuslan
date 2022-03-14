@@ -150,7 +150,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
                 carModel = binding.addCarFragmentEditTextCarModels.text.toString().trim()
             }
         }
-        logd(carModel)
 
         if (
             carNumber.length >= 8
@@ -161,12 +160,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         ) {
 
             if (isOnline(requireContext())) {
-//                if (binding.addCarFragmentEditTextCarModels.isVisible) {
-//                    if (binding.addCarFragmentEditTextCarModels.isVisible) {
-//                        carModel = binding.addCarFragmentEditTextCarModels.text.toString().trim()
-//                    }
-//                }
-                logd(carModel)
                 viewModel.saveCarApi(
                     carNumber,
                     carTexPasSeries + carTexPasNumber, carMark, carModel
@@ -244,15 +237,12 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
         if (parent?.id == R.id.add_car_fragment_spinner_car_marks) {
-            logd(" selected carMark")
             carMark = parent.selectedItem.toString()
             if (carMark.isNotEmpty()) {
                 setupModelSpinner()
             }
         } else {
-            logd("selected carModel")
             carModel = parent?.selectedItem.toString()
-            logd(carModel)
         }
     }
 

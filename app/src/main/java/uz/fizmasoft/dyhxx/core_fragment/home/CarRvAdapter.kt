@@ -1,13 +1,16 @@
 package uz.fizmasoft.dyhxx.core_fragment.home
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
+import uz.fizmasoft.dyhxx.helper.util.logd
 
 class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
@@ -45,27 +48,26 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
     inner class VH(val view: View) : RecyclerView.ViewHolder(view) {
 
         var model: TextView = view.findViewById(R.id.rv_item_car_model)
+        val carImage: ImageView = view.findViewById(R.id.rv_item_image)
 //        var mark: TextView = view.findViewById(R.id.rv_item_car_mark)
 
         //        var texPasSer: TextView = view.findViewById(R.id.rv_item_car_tex_pass)
         private var number: TextView = view.findViewById(R.id.rv_item_car_number)
         private var numbe: TextView = view.findViewById(R.id.rv_item_car_numbe)
 
-        //        var rvItemDelete: AppCompatImageView = view.findViewById(R.id.rv_item_delete)
         private var rvItemEdit: AppCompatImageView = view.findViewById(R.id.rv_item_edit)
-//        private var rvItemArrowFine: AppCompatImageView = view.findViewById(R.id.rv_item_arrow_fine)
 
         fun onBind(model: CarEntity, position: Int) {
             //car number
             val numberText = model.carNumber
 
             if (numberIsPersonal(numberText.substring(5, 6))) {
-                numbe.text = "${numberText.substring(0, 2)}"
+                numbe.text = numberText.substring(0, 2)
                 number.text = "${numberText.substring(2, 3)} " +
                         "${numberText.substring(3, 6)}" +
                         " ${numberText.substring(6)}"
             } else {
-                numbe.text = "${numberText.substring(0, 2)}"
+                numbe.text = numberText.substring(0, 2)
                 number.text = "${numberText.substring(2, 5)} " +
                         "${numberText.substring(5)}"
             }
@@ -74,22 +76,25 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
             view.rootView.setOnClickListener { rvItemClick!!.clickedItem(list[position]) }
 //            addCarModel(model.carModel, this.itemView)
             if (model.carModel.isNotEmpty()) {
-                this.model.text = model.carModel ?: "_ _ _ _ _ _ _ _ _ "
+            this.model.text = model.carModel ?: "_ _ _ _ _ _ _ _ _ "
+                addCarImg(view, model)
             }
+
+
             bottomMargin(position, this.itemView)
         }
-    }
-/*
-    private fun addCarModel(model: String, view: View) {
 
-        if (model.isNotEmpty()) {
-            this.VH(view).apply {
-//                this.model.visibility = View.VISIBLE
-                this.model.text = model
+        private fun addCarImg(view: View, model: CarEntity) {
+            try {
+                logd("in try")
+                val drawableImg = view.resources.getIdentifier(model.carModel.lowercase(), "drawable", view.context.packageName)
+                carImage.setImageResource(drawableImg)
+            } catch (e: Exception) {
+                logd("in catch")
+                carImage.setImageDrawable(view.resources.getDrawable(R.drawable.malibu,null))
             }
-
         }
-    }*/
+    }
 
     fun numberIsPersonal(substring: String): Boolean {
         return try {
