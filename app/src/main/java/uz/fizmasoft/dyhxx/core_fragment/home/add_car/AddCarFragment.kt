@@ -74,7 +74,6 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         }
     }
 
-
     private fun clickButton(id: Int) {
         getBaseActivity {
             when (id) {
@@ -145,31 +144,32 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
         val carNumber = binding.addCarFragmentEtCarNumber.text.toString().uppercase().trim()
         val carTexPasSeries = binding.addCarFragmentTexPassSeries.text.toString().uppercase().trim()
         val carTexPasNumber = binding.addCarFragmentTexPassNumber.text.toString().trim()
+
         if (carMark.isNotEmpty()) {
-            if (binding.addCarFragmentEditTextCarModels.text.isNullOrEmpty()) {
+            if (binding.addCarFragmentEditTextCarModels.isVisible) {
                 carModel = binding.addCarFragmentEditTextCarModels.text.toString().trim()
             }
         }
+        logd(carModel)
 
         if (
             carNumber.length >= 8
             && carTexPasNumber.length == 7
             && carTexPasSeries.length >= 3
-//            && carMark.isNotEmpty()
+            && carMark.isNotEmpty()
+            && carModel.isNotEmpty()
         ) {
 
             if (isOnline(requireContext())) {
-                if (carMark.isNotEmpty()) {
-                    if (binding.addCarFragmentEditTextCarModels.isVisible) {
-                        carModel = binding.addCarFragmentEditTextCarModels.text.toString().trim()
-                    }
-                }
-
-                logd(carMark)
+//                if (binding.addCarFragmentEditTextCarModels.isVisible) {
+//                    if (binding.addCarFragmentEditTextCarModels.isVisible) {
+//                        carModel = binding.addCarFragmentEditTextCarModels.text.toString().trim()
+//                    }
+//                }
                 logd(carModel)
                 viewModel.saveCarApi(
                     carNumber,
-                    carTexPasSeries + carTexPasNumber, carMark, carMark
+                    carTexPasSeries + carTexPasNumber, carMark, carModel
                 )
 
                 viewModel.responseSaveCarApi.observe(viewLifecycleOwner, EventObserver {
@@ -242,14 +242,17 @@ class AddCarFragment : BaseFragment<FragmentAddCarBinding>(FragmentAddCarBinding
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        logd(parent?.id)
+
         if (parent?.id == R.id.add_car_fragment_spinner_car_marks) {
+            logd(" selected carMark")
             carMark = parent.selectedItem.toString()
             if (carMark.isNotEmpty()) {
                 setupModelSpinner()
             }
         } else {
+            logd("selected carModel")
             carModel = parent?.selectedItem.toString()
+            logd(carModel)
         }
     }
 

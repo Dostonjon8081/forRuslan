@@ -46,7 +46,6 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
         var model: TextView = view.findViewById(R.id.rv_item_car_model)
 //        var mark: TextView = view.findViewById(R.id.rv_item_car_mark)
-//        var modelTitle: TextView = view.findViewById(R.id.rv_item_car_model_title)
 
         //        var texPasSer: TextView = view.findViewById(R.id.rv_item_car_tex_pass)
         private var number: TextView = view.findViewById(R.id.rv_item_car_number)
@@ -71,29 +70,26 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
                         "${numberText.substring(5)}"
             }
 
-//            rvItemDelete.setOnClickListener { rvItemClick!!.clickedItemDelete(list[position].carNumber) }
             rvItemEdit.setOnClickListener { rvItemClick!!.clickedItemEdit(list[position]) }
-//            rvItemArrowFine.setOnClickListener { rvItemClick!!.clickedItem(list[position]) }
             view.rootView.setOnClickListener { rvItemClick!!.clickedItem(list[position]) }
-//            view.setOnClickListener { rvItemClick!!.clickedItem(position) }
-
-//            if (model.carMark.isNotEmpty()) mark.text = model.carMark
-            addCarModel(model.carModel, this.itemView)
-
+//            addCarModel(model.carModel, this.itemView)
+            if (model.carModel.isNotEmpty()) {
+                this.model.text = model.carModel ?: "_ _ _ _ _ _ _ _ _ "
+            }
             bottomMargin(position, this.itemView)
         }
     }
-
+/*
     private fun addCarModel(model: String, view: View) {
 
         if (model.isNotEmpty()) {
             this.VH(view).apply {
-                this.model.visibility = View.VISIBLE
+//                this.model.visibility = View.VISIBLE
                 this.model.text = model
             }
 
         }
-    }
+    }*/
 
     fun numberIsPersonal(substring: String): Boolean {
         return try {

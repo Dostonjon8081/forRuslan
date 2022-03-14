@@ -47,18 +47,22 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/about_img_wallpaper"/>
+            android:src="@drawable/about_img_wallpaper" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+        <ScrollView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio nisl amet consectetur urna eget maecenas tellus. Eleifend scelerisque malesuada mauris ultricies. Morbi sagittis, elit fermentum in. Bibendum in sit sit a dolor netus nulla phasellus iaculis. Tincidunt tellus bibendum fringilla ut. Massa suspendisse bibendum egestas nisi netus. Et bibendum amet diam interdum ornare velit aliquam et eros."
-            android:fontFamily="@font/gilroy_regular"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:lineHeight="26sp"/>
+            android:layout_marginTop="10dp">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroy_regular"
+                android:lineHeight="26sp"
+                android:text="@string/about_app_text"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </ScrollView>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
