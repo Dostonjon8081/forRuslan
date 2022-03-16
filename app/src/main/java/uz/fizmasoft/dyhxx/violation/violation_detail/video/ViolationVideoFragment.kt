@@ -1,7 +1,6 @@
 package uz.fizmasoft.dyhxx.violation.violation_detail.video
 
 import android.content.Context
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -16,7 +15,6 @@ import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.databinding.FragmentViolationVideoBinding
 import uz.fizmasoft.dyhxx.helper.network.NetworkResult
 import uz.fizmasoft.dyhxx.helper.util.EventObserver
-import uz.fizmasoft.dyhxx.helper.util.logd
 
 @AndroidEntryPoint
 class ViolationVideoFragment :
@@ -25,9 +23,9 @@ class ViolationVideoFragment :
     private val viewModel: ViolationVideoViewModel by activityViewModels()
     private val args: ViolationVideoFragmentArgs by navArgs()
     private val mediaController by lazy {
-        object :MediaController(requireContext()){
+        object : MediaController(requireContext()) {
             override fun hide() {
-                binding.violationVideoFragmentProgressBar.hide()
+//                binding.violationVideoFragmentProgressBar.hide()
                 super.hide()
             }
         }
@@ -60,7 +58,11 @@ class ViolationVideoFragment :
         }
 
 
-        binding.violationVideoFragmentBackArrow.setOnClickListener { requireActivity().onBackPressed() }
+        binding.violationVideoFragmentBackArrow.setOnClickListener {
+//            binding.violationVideoFragmentProgressBar.hide()
+            requireActivity().onBackPressed()
+        }
+
         viewModel.responseViolationVideo.observe(viewLifecycleOwner, EventObserver {
 
             binding.apply {
@@ -69,7 +71,10 @@ class ViolationVideoFragment :
                     violationVideoFragmentVideo.start()
 
                     violationVideoFragmentVideo.setMediaController(mediaController)
-
+                    violationVideoFragmentVideo.setOnInfoListener { _, _, _ ->
+                        binding.violationVideoFragmentProgressBar.hide()
+                        true
+                    }
                 }
             }
         })

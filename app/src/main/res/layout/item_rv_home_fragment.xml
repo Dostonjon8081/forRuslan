@@ -21,7 +21,7 @@
             android:layout_height="200dp"
             android:paddingTop="18dp"
             android:padding="8dp"
-            android:src="@drawable/epica"
+            android:src="@drawable/malibu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -84,11 +84,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                                 if (listCarEntity.all { it.carNumber != resultItem.car_number }) {
 
                                     viewModel.insertCarDB(
-                                        CarEntity(
-                                            0,
-                                            resultItem.car_number,
-                                            resultItem.tex_passport
-                                        )
+                                        CarEntity(0, resultItem.car_number, resultItem.tex_passport)
                                     )
                                 }
                             }
@@ -113,7 +109,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun clickedItem(carEntity: CarEntity) {
         getBaseActivity {
-            it.navController?.navigate(MainFragmentDirections.actionMainFragmentToViolationFragment(carEntity))
+            it.navController?.navigate(
+                MainFragmentDirections.actionMainFragmentToViolationFragment(
+                    carEntity
+                )
+            )
         }
     }
 

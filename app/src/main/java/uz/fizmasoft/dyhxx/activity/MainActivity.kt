@@ -71,7 +71,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "MainActivity")
         bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "MainActivity")
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
-
     }
 
     override fun onResume() {
@@ -80,9 +79,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     private fun authentication(intent: Intent) {
-        if (
-            isOnline(this)
-        ) {
+        if (isOnline(this)) {
 
             val editPref = getPref(this@MainActivity).edit()
             val number = if (intent?.data.toString().startsWith("https://autoinfo.uz")) 26

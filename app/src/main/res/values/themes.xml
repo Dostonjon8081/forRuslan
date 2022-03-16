@@ -50,10 +50,12 @@
     <!--bottom sheet dialog style-->
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
+<!--        <item name="behavior_peekHeight">20dp</item>-->
+        <item name="android:layout_margin">2dp</item>
     </style>
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/background_white_gray_stoke</item>
+        <item name="android:background">@drawable/white_rectangle_with_small_radius</item>
     </style>
 
 

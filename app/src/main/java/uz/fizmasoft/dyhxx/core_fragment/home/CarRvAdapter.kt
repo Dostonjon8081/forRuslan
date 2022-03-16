@@ -86,12 +86,10 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
         private fun addCarImg(view: View, model: CarEntity) {
             try {
-                logd("in try")
                 val drawableImg = view.resources.getIdentifier(model.carModel.lowercase(), "drawable", view.context.packageName)
                 carImage.setImageResource(drawableImg)
             } catch (e: Exception) {
-                logd("in catch")
-                carImage.setImageDrawable(view.resources.getDrawable(R.drawable.malibu,null))
+//                carImage.setImageDrawable(view.resources.getDrawable(R.drawable.malibu,null))
             }
         }
     }
