@@ -27,7 +27,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
 
-
         binding.bottomNavigationView.background = null
         binding.bottomNavigationView.menu.getItem(1).isEnabled = false
 
