@@ -60,7 +60,6 @@
     <string name="inconvenience">Sorry for the inconvenience</string>
     <string name="save_file">save file</string>
     <string name="account_bugs_to_bot">Bugs in application</string>
-    <string name="about_app_text">Application for checking fines</string>
     <string name="rate">Rate</string>
 
     <string name="select_language">Select a language</string>
@@ -73,5 +72,16 @@
     <string name="delete">Delete</string>
     <string name="violation_video">Video</string>
 
+    <string name="about_app_text">AutoInfo is a reliable and convenient mobile application for checking the availability of fines for traffic violations, awareness of the validity period of the 30% discount and payment of fines without unnecessary paperwork, without contacting banks.\n
+With the "AutoInfo" application you can:\n
+- Very simple and fast registration in the application\n
+- Registration of up to 8 vehicles\n
+- View fines available on each of your cars\n
+- view general information on the amount of unpaid fines\n
+- View and download the decision on the fine in PDF format\n
+- view photos, videos and location (on the map) of fines\n
+- be aware of the availability of a 30% discount on your fines and the duration of the discount\n
+- Pay fines through the applications "Click", "Payme" and "UPay"\n
+- and many other features will be added day by day.</string>
 
 </resources>

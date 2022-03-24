@@ -78,16 +78,16 @@
     <string name="settings">Settings</string>
     <string name="pay_violation">Jarimani to\'lash</string>
 
-    <string name="about_app_text">AutoInfo -  Yo\'l harakati qoidalarini buzganlik uchun jarimalar mavjudligini tekshirish, 30%li chegirma muddatidan xabardor bo\'lish va jarimalarni ortiqcha qog\'ozbozliklarsiz, banklarga bormasdan to\'lash uchun ishonchli va qulay mobil ilova.
-AutoInfo ilovasidan foydalanib, siz:
- - Ilovada juda oson va tez ro\'yxatdan o\'tish
- - 8tagacha avtotransport vositasini ro\'yxatga qo\'shish
- - Har bir avtotransportlaringizda mavjud bo\'lgan jarimalarni ko\'rish
- - To\'lanmagan jarima summasi haqida umumiy ma\'lumotni korib turish
- - Jarima qarorini PDF formatda ko\'rish va yuklab olish
- -  Jarimalarning foto, video va joylashuvini(xaritada) ko\'rish
- - Jarimalaringizda 30\%li chegirmaning mavjudligini hamda chegirma muddatidan xabardor bo\'lish
- - Jarimalarni Click, Payme va UPay ilovalari orqali to\'lash
- -va boshqa yana ko\'plab kundan kun qo\'shilayotgan imkoniyatlarga ega bo\'lasiz.</string>
+    <string name="about_app_text">AutoInfo -  Yo\'l harakati qoidalarini buzganlik uchun jarimalar mavjudligini tekshirish, 30%li chegirma muddatidan xabardor bo\'lish va jarimalarni ortiqcha qog\'ozbozliklarsiz, banklarga bormasdan to\'lash uchun ishonchli va qulay mobil ilova.\n
+AutoInfo ilovasidan foydalanib, siz:\n
+ - Ilovada juda oson va tez ro\'yxatdan o\'tish\n
+ - 8tagacha avtotransport vositasini ro\'yxatga qo\'shish\n
+ - Har bir avtotransportlaringizda mavjud bo\'lgan jarimalarni ko\'rish\n
+ - To\'lanmagan jarima summasi haqida umumiy ma\'lumotni korib turish\n
+ - Jarima qarorini PDF formatda ko\'rish va yuklab olish\n
+ -  Jarimalarning foto, video va joylashuvini(xaritada) ko\'rish\n
+ - Jarimalaringizda 30\%li chegirmaning mavjudligini hamda chegirma muddatidan xabardor bo\'lish\n
+ - Jarimalarni Click, Payme va UPay ilovalari orqali to\'lash\n
+ - va boshqa yana ko\'plab kundan kun qo\'shilayotgan imkoniyatlarga ega bo\'lasiz.</string>
 
 </resources>
