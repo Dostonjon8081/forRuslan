@@ -32,7 +32,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 R.color.button_blue_color
             )
         )
-
         binding.homeFragmentSwipeRefresh.setOnRefreshListener(this::swipeRefresh)
 
         loadData()

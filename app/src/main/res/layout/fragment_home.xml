@@ -48,6 +48,7 @@
             android:padding="12dp"
             android:paddingBottom="100dp"
             android:visibility="gone"
+            android:duplicateParentState="true"
             tools:listitem="@layout/item_rv_home_fragment"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

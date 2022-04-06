@@ -80,7 +80,6 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
                 addCarImg(view, model)
             }
 
-
             bottomMargin(position, this.itemView)
         }
 
@@ -89,7 +88,7 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
                 val drawableImg = view.resources.getIdentifier(model.carModel.lowercase(), "drawable", view.context.packageName)
                 carImage.setImageResource(drawableImg)
             } catch (e: Exception) {
-//                carImage.setImageDrawable(view.resources.getDrawable(R.drawable.malibu,null))
+                carImage.setImageResource(R.drawable.malibu)
             }
         }
     }

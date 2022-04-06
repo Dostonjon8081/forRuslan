@@ -48,6 +48,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
+        android:id="@+id/violation_detail_scroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingBottom="16dp"
@@ -394,7 +395,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:elevation="0dp"
-                    android:foreground="@drawable/video"
+                    android:foreground="@drawable/ic_video"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp" />
 

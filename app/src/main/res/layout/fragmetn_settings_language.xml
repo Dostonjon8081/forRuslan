@@ -1,46 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="8dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="16dp"
+    android:paddingTop="4dp"
     android:layout_height="wrap_content">
 
+    <View
+        android:layout_width="36dp"
+        android:background="@drawable/gray_rectangle_with_radius"
+        android:layout_height="4dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:drawablePadding="14dp"
-        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:drawableStart="@drawable/ic_uz"
         android:id="@+id/uzbek"
+        android:gravity=""
+        android:drawablePadding="12dp"
+        android:background="@drawable/gray_rectangle_with_radius"
+        android:padding="16dp"
         android:textSize="18sp"
         android:text="@string/ozbek"
         android:textColor="@color/dark_blue" />
-
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rus"
+        android:layout_margin="10dp"
+        android:drawableStart="@drawable/ic_ru"
+        android:background="@drawable/gray_rectangle_with_radius"
+        android:padding="16dp"
         android:layout_marginTop="16dp"
-        android:drawablePadding="14dp"
-        android:padding="10dp"
+        android:drawablePadding="12dp"
         android:textSize="18sp"
         android:text="@string/russian"
         android:textColor="@color/dark_blue" />
-
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/english"
+        android:layout_margin="10dp"
+        android:background="@drawable/gray_rectangle_with_radius"
+        android:padding="16dp"
+        android:drawableStart="@drawable/ic_eng"
         android:layout_marginTop="16dp"
-        android:drawablePadding="14dp"
-        android:padding="10dp"
+        android:drawablePadding="12dp"
         android:textSize="18sp"
         android:text="@string/english"
         android:textColor="@color/dark_blue" />
-
-
 
 </androidx.appcompat.widget.LinearLayoutCompat>
