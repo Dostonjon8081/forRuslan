@@ -89,6 +89,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     .apply()
             }
 
+            logd(intent.data.toString().substring(number))
             loadDataFromApi(intent.data.toString().substring(number))
         }
     }

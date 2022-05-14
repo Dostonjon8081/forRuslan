@@ -1,6 +1,5 @@
 package uz.fizmasoft.dyhxx.core_fragment.home
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.helper.db.CarEntity
-import uz.fizmasoft.dyhxx.helper.util.logd
 
 class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
 
@@ -88,7 +86,7 @@ class CarRvAdapter : RecyclerView.Adapter<CarRvAdapter.VH>() {
                 val drawableImg = view.resources.getIdentifier(model.carModel.lowercase(), "drawable", view.context.packageName)
                 carImage.setImageResource(drawableImg)
             } catch (e: Exception) {
-                carImage.setImageResource(R.drawable.malibu)
+                carImage.setImageResource(R.drawable.malibu2)
             }
         }
     }

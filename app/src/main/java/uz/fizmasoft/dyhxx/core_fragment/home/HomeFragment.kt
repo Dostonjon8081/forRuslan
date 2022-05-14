@@ -68,7 +68,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 )!!
             )
         }
-        viewModel.responseAllCarsApi.observe(this, EventObserver { result ->
+        viewModel.responseAllCarsApi.observe(viewLifecycleOwner, EventObserver { result ->
 
             when (result) {
                 is NetworkResult.Loading -> {

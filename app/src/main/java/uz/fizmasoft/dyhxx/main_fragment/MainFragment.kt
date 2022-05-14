@@ -11,6 +11,7 @@ import uz.fizmasoft.dyhxx.R
 import uz.fizmasoft.dyhxx.base.BaseFragment
 import uz.fizmasoft.dyhxx.core_fragment.home.HomeViewModel
 import uz.fizmasoft.dyhxx.databinding.FragmentMainBinding
+import uz.fizmasoft.dyhxx.helper.util.logd
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
@@ -46,17 +47,20 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
     private fun checkAutoCount() {
         viewModel.allCarsDB()
-        viewModel.allCarDB.observe(this){
+        viewModel.allCarDB.observe(viewLifecycleOwner){
             fabState((it.size)<8)
         }
     }
 
-    fun fabState(isPlus: Boolean) {
+    private fun fabState(isPlus: Boolean) {
         if (isPlus) {
+            logd(true)
             binding.fabAddCar.setImageDrawable(resources.getDrawable(R.drawable.ic_plus, null))
             binding.fabAddCar.setOnClickListener { addCar() }
         } else {
+            logd(false)
             binding.fabAddCar.setImageDrawable(resources.getDrawable(R.drawable.ic_qver, null))
+            binding.fabAddCar.isEnabled = false
         }
     }
 

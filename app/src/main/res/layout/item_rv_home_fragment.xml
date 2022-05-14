@@ -19,9 +19,9 @@
             android:id="@+id/rv_item_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:paddingTop="18dp"
             android:padding="8dp"
-            android:src="@drawable/malibu"
+            android:paddingTop="18dp"
+            android:src="@drawable/malibu2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,9 +41,9 @@
             app:layout_constraintTop_toBottomOf="@id/rv_item_image" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/rv_item_car_number_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rv_item_car_number_container"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="17dp"
             android:background="@drawable/ic_number_plate_"
@@ -63,10 +63,10 @@
                 android:gravity="center"
                 android:paddingStart="8dp"
                 android:paddingEnd="4dp"
-                android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                android:textStyle="bold"
                 app:autoSizeTextType="uniform"
                 tools:text="50" />
 
@@ -83,12 +83,12 @@
                 android:fontFamily="@font/gilroy_bold"
                 android:gravity="start|center_vertical"
                 android:maxLines="1"
-                android:textStyle="bold"
                 android:paddingStart="4dp"
                 android:paddingEnd="6dp"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                android:textStyle="bold"
                 app:autoSizeTextType="uniform"
                 app:fontFamily="@font/inter"
                 tools:text="S 577 JA" />
@@ -102,12 +102,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="14dp"
             android:src="@drawable/ic_edit"
-            app:layout_constraintEnd_toEndOf="@id/rv_item_image"
-            app:layout_constraintTop_toTopOf="@id/rv_item_car_model"
             app:layout_constraintBottom_toBottomOf="@id/rv_item_car_number_container"
-            />
-<!--
+            app:layout_constraintEnd_toEndOf="@id/rv_item_image"
+            app:layout_constraintTop_toTopOf="@id/rv_item_car_model" />
 
+
+<!--
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/rv_item_arrow_fine"
             android:layout_width="wrap_content"
