@@ -82,8 +82,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         if (isOnline(this)) {
 
             val editPref = getPref(this@MainActivity).edit()
-            val number = if (intent?.data.toString().startsWith("https://autoinfo.uz")) 26
-            else 19
             CoroutineScope(Dispatchers.IO).launch {
                 editPref.putString(PREF_TOKEN_KEY, intent.data.toString().substring(number))
                     .apply()
