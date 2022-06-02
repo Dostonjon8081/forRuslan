@@ -57,7 +57,6 @@ class RepositoryModule {
 //            .addInterceptor(ChuckerInterceptor(context))
 //            .connectTimeout(15, TimeUnit.SECONDS)
             .build()
-
     }
 
     @Singleton
@@ -83,5 +82,4 @@ class RepositoryModule {
     @Provides
     fun provideCurrencyService(retrofit: Retrofit): CarApiService =
         retrofit.create(CarApiService::class.java)
-
 }
